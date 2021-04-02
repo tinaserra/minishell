@@ -1,6 +1,9 @@
 #include "minishell.h"
 
 char	*ft_strcpy()
+{
+	
+}
 
 char	*ft_realloc(char **line, char c)
 {
