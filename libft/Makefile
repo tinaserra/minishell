@@ -1,17 +1,18 @@
-SRCS		=	ft_putstr_fd.c	\
-				ft_strtrim.c	\
-				ft_bzero.c		\
-				ft_split.c		\
-				ft_strdup.c		\
-				ft_strchr.c		\
-				ft_substr.c		\
-				ft_strlen.c		\
-				get_next_line.c \
-				ft_itoa.c		\
-				ft_strs_tab_size.c \
-				ft_strncmp.c	\
-				ft_isdigit.c	\
-				ft_strjoin.c	\
+SRCS		=	ft_putstr_fd.c		\
+				ft_strtrim.c		\
+				ft_bzero.c			\
+				ft_split.c			\
+				ft_strdup.c			\
+				ft_strchr.c			\
+				ft_substr.c			\
+				ft_strlen.c			\
+				get_next_line.c 	\
+				ft_itoa.c			\
+				ft_strs_tab_size.c	\
+				ft_strncmp.c		\
+				ft_isdigit.c		\
+				ft_strjoin.c		\
+				ft_calloc.c			\
 
 OBJS		=	${SRCS:.c=.o}
 

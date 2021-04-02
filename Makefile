@@ -1,6 +1,14 @@
-SRCS			=	main.c \
+SRCS			=	main.c	\
+
+SRCS_TINA		=	main.c	\
+					tina.c
+
+SRCS_JOHN		=	main.c	\
+					john.c
 
 NAME			=	minishell
+NAME_JOHN		=	minijohn
+NAME_TINA		=	minitina
 
 OBJ_DIR			=	obj
 SRC_DIR			=	src
@@ -12,6 +20,8 @@ LIBFT			=	libft.a
 override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
 
 OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
+OBJ_TINA		=	$(addprefix $(OBJ_DIR)/,$(SRCS_TINA:.c=.o))
+OBJ_JOHN		=	$(addprefix $(OBJ_DIR)/,$(SRCS_JOHN:.c=.o))
 DPD				=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 
 
@@ -23,11 +33,11 @@ all				:
 				@$(MAKE) -j $(NAME)
 
 $(NAME)			:	$(OBJ)
-				@gcc $(FLAGS) -o $(NAME) $(OBJ) -L $(LIBFT_DIR) -ltermcap
+				@gcc $(FLAGS) -o $(NAME) $(OBJ) -L $(LIBFT_DIR) -l ft -ltermcap
 				@echo $(NAME) : Created !
 
 # si le .c est plus recent que le .o on rentre dans la regle
-$(OBJ_DIR)/%.o	:	$(SRC_DIR)/%.c $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT) | .gitignore
+$(OBJ_DIR)/%.o	:	$(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT) | .gitignore
 				@mkdir -p $(OBJ_DIR)
 				@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -c $< -o $@
 
@@ -36,6 +46,14 @@ $(OBJ_DIR)/%.o	:	$(SRC_DIR)/%.c $(MLX_DIR)/$(MLX) $(LIBFT_DIR)/$(LIBFT) | .gitig
 
 debug			:	fclean
 				make all CFLAGS:="-DDEBUG -g"
+
+plumberjohn		:	$(OBJ_JOHN)
+				@gcc -DJOHN $(FLAGS) -o $(NAME_JOHN) $(OBJ_JOHN) -L $(LIBFT_DIR) -l ft -ltermcap
+				@echo $(NAME_JOHN) : Created !
+
+popochedepmu	:	$(OBJ_TINA)
+				@gcc -DTINA $(FLAGS) -o $(NAME_TINA) $(OBJ_TINA) -L $(LIBFT_DIR) -l ft -ltermcap
+				@echo $(NAME_TINA) : Created !
 
 clean			:
 				@$(MAKE) clean -C $(LIBFT_DIR)

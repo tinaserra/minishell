@@ -20,4 +20,5 @@ int		ft_strs_tab_size(char **tab);
 int		ft_strncmp(char *s1, char *s2, size_t n);
 int		ft_isdigit(int c);
 char	*ft_strjoin(char *s1, char *s2);
+void	*ft_calloc(size_t count, size_t size);
 #endif
