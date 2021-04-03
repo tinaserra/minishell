@@ -48,11 +48,13 @@ debug			:	fclean
 				make all CFLAGS:="-DDEBUG -g"
 
 plumberjohn		:	$(OBJ_JOHN)
-				@gcc -DJOHN $(FLAGS) -o $(NAME_JOHN) $(OBJ_JOHN) -L $(LIBFT_DIR) -l ft -ltermcap
+				@$(MAKE) -C $(LIBFT_DIR)
+				@clang $(FLAGS) -o $(NAME_JOHN) $(OBJ_JOHN) -L $(LIBFT_DIR) -l ft -ltermcap
 				@echo $(NAME_JOHN) : Created !
 
 popochedepmu	:	$(OBJ_TINA)
-				@gcc -DTINA $(FLAGS) -o $(NAME_TINA) $(OBJ_TINA) -L $(LIBFT_DIR) -l ft -ltermcap
+				@$(MAKE) -C $(LIBFT_DIR)
+				@gcc $(FLAGS) -o $(NAME_TINA) $(OBJ_TINA) -L $(LIBFT_DIR) -l ft -ltermcap
 				@echo $(NAME_TINA) : Created !
 
 clean			:

@@ -1,5 +1,7 @@
 *.o
 *.a
 minishell
+minijohn
+minitina
 .DS*
 obj
