@@ -1,23 +1,5 @@
 #include "minishell.h"
 
-char	*ft_strcpy()
-{
-	
-}
-
-char	*ft_realloc(char **line, char c)
-{
-	char	*tmp;
-	int		len;
-	int		i;
-
-	len = ft_strlen(*line);
-	tmp = malloc(len + 1);
-	i = -1;
-	ft_strcpy();
-
-}
-
 int		main(int ac, char **av, char **path)
 {
 	(void)ac;
@@ -27,11 +9,24 @@ int		main(int ac, char **av, char **path)
 	char	c;
 	char	*line;
 
-	//fonction();
+
+	ms.close_signal = 1;
 	ft_putstr_fd(1, "\x1B[34mminishell-0.1$>\x1B[0m ");
 	ret = 1;
-	while ((ret = read(0, &c, 1)) != 0)
+	while (ms.close_signal)
 	{
-		line = ft_realloc(&line, c);
+		while ((ret = read(0, &c, 1)) != 0)
+		{
+			free(line);
+			line = ft_realloc(line, ft_strlen(line) + 1);
+			if (c == 10)
+				break;
+			else
+				line[ft_strlen(line)] = c;
+		}
+		printf("%s\n", line);
+		//fonction();
+		ft_bzero(line, ft_strlen(line));
+		ft_putstr_fd(1, "\x1B[34mminishell-0.1$>\x1B[0m ");
 	}
 }
