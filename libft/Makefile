@@ -13,6 +13,8 @@ SRCS		=	ft_putstr_fd.c		\
 				ft_isdigit.c		\
 				ft_strjoin.c		\
 				ft_calloc.c			\
+				ft_memcpy.c			\
+				ft_realloc.c		\
 
 OBJS		=	${SRCS:.c=.o}
 
