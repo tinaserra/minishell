@@ -28,5 +28,11 @@ typedef struct  s_minishell
 }               t_minishell;
 t_minishell     ms;
 
+/*
+** SIGNALS ------------------------------------------------------------------ **
+*/
+void	sig_quit(int c);
+void	sig_int(int c);
+
 void fonction();
 #endif

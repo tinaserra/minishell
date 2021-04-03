@@ -1,10 +1,13 @@
-SRCS			=	main.c	\
+SRCS			=	main.c		\
+					signal.c	\
 
-SRCS_TINA		=	main.c	\
-					tina.c
+SRCS_TINA		=	main.c		\
+					tina.c		\
+					signal.c	\
 
-SRCS_JOHN		=	main.c	\
-					john.c
+SRCS_JOHN		=	main.c		\
+					john.c		\
+					signal.c	\
 
 NAME			=	minishell
 NAME_JOHN		=	minijohn

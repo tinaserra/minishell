@@ -12,8 +12,10 @@ int		main(int ac, char **av, char **path)
 
 	ms.close_signal = 1;
 	ft_putstr_fd(1, "\x1B[34mminishell-0.1$>\x1B[0m ");
+	signal(SIGINT, &sig_int);
+	signal(SIGQUIT, &sig_quit);
 	ret = 1;
-	while (ms.close_signal)
+	while (1)
 	{
 		while ((ret = read(0, &c, 1)) != 0)
 		{
@@ -24,8 +26,13 @@ int		main(int ac, char **av, char **path)
 			else
 				line[ft_strlen(line)] = c;
 		}
-		printf("%s\n", line);
-		//fonction();
+		if (ret == 0)
+		{
+			ft_putstr_fd(1, "exit\n");
+			break;
+		}
+		if (line)
+			fonction();
 		ft_bzero(line, ft_strlen(line));
 		ft_putstr_fd(1, "\x1B[34mminishell-0.1$>\x1B[0m ");
 	}
