@@ -24,9 +24,10 @@
 
 typedef struct  s_minishell
 {
-    int             close_signal;
+    int         close_signal;
+    char        *line;
 }               t_minishell;
-t_minishell     ms;
+t_minishell	ms;
 
 /*
 ** SIGNALS ------------------------------------------------------------------ **
