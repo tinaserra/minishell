@@ -2,5 +2,5 @@
 
 void fonction()
 {
-	printf("truc\n");
+	printf("t moche tina et t'est une popoche de pmu !\n");
 }
