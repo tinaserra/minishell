@@ -14,7 +14,8 @@ int		main(int ac, char **av, char **env)
 	ret = 1;
 	while (1)
 	{
-		ft_putstr_fd(1, "minishell ➜ \x1B[34m");
+		ft_putstr_fd(1, ms.env.user);
+		ft_putstr_fd(1, " ➜ \x1B[34m");
 		ft_putstr_fd(1, ms.env.pwd);
 		ft_putstr_fd(1, "\x1B[0m ");
 		while ((ret = read(0, &c, 1)) != 0)
@@ -31,7 +32,7 @@ int		main(int ac, char **av, char **env)
 			ft_putstr_fd(1, "exit\n");
 			break;
 		}
-		printf("%s\n", ms.line);
+		//printf("%s\n", ms.line);
 		if (ms.line)
 			fonction(&ms, env);
 		ft_bzero(ms.line, ft_strlen(ms.line));

@@ -11,12 +11,15 @@ void init_env(t_minishell *ms, char **env)
 	while (env[++i])
 	{
 		tmp = ft_split(env[i], "=");
-		if (ft_strcmp(tmp[0], "PWD"))
+		if (ft_strncmp(tmp[0], "PWD", 3) == 0)
 		{
 			tmp2 = ft_split(tmp[1], "/");
-			ms->env.pwd = tmp2[ft_strs_tab_size(tmp2) - 3];
-			free(tmp2);
+			ms->env.pwd = tmp2[ft_strs_tab_size(tmp2) - 1];
 		}
+		if (ft_strncmp(tmp[0], "PATH", 4) == 0)
+			ms->env.path = ft_split(tmp[1], ":");
+		if (ft_strncmp(tmp[0], "USER", 4) == 0)
+			ms->env.user = tmp[1];
 		free(tmp);
 	}
 }
