@@ -1,6 +1,10 @@
 #include "minishell.h"
 
-void fonction()
+void fonction(t_minishell *ms, char **path)
 {
-	printf("TA MERE\n");
+	(void)ms;
+	(void)path;
+
+	printf("%s\n", ms->env.path[1]);
+
 }

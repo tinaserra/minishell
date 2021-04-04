@@ -8,6 +8,7 @@ SRCS_TINA		=	main.c		\
 SRCS_JOHN		=	main.c		\
 					john.c		\
 					signal.c	\
+					env.c		\
 
 NAME			=	minishell
 NAME_JOHN		=	minijohn

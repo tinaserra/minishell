@@ -22,10 +22,18 @@
 # include <sys/wait.h>
 # include <term.h>
 
+typedef struct  s_env
+{
+    char        *user;
+    char        **path;
+}               t_env;
+
+
 typedef struct  s_minishell
 {
     int         close_signal;
     char        *line;
+    t_env       env;
 }               t_minishell;
 t_minishell	ms;
 
@@ -35,5 +43,6 @@ t_minishell	ms;
 void	sig_quit(int c);
 void	sig_int(int c);
 
-void fonction();
+void    init_env(t_minishell *ms, char **env);
+void    fonction(t_minishell *ms, char **path);
 #endif
