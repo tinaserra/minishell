@@ -5,12 +5,9 @@ int		main(int ac, char **av, char **path)
 	(void)ac;
 	(void)av;
 	(void)path;
-	int		ret;
-	char	c;
-	char	*line;
+	int			ret;
+	char		c;
 
-
-	ms.close_signal = 1;
 	ft_putstr_fd(1, "\x1B[34mminishell-0.1$>\x1B[0m ");
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
@@ -19,21 +16,22 @@ int		main(int ac, char **av, char **path)
 	{
 		while ((ret = read(0, &c, 1)) != 0)
 		{
-			free(line);
-			line = ft_realloc(line, ft_strlen(line) + 1);
+			free(ms.line);
+			ms.line = ft_realloc(ms.line, ft_strlen(ms.line) + 1);
 			if (c == 10)
 				break;
 			else
-				line[ft_strlen(line)] = c;
+				ms.line[ft_strlen(ms.line)] = c;
 		}
 		if (ret == 0)
 		{
 			ft_putstr_fd(1, "exit\n");
 			break;
 		}
-		if (line)
+		printf("%s\n", ms.line);
+		if (ms.line)
 			fonction();
-		ft_bzero(line, ft_strlen(line));
+		ft_bzero(ms.line, ft_strlen(ms.line));
 		ft_putstr_fd(1, "\x1B[34mminishell-0.1$>\x1B[0m ");
 	}
 }
