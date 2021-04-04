@@ -14,7 +14,9 @@ int		main(int ac, char **av, char **env)
 	ret = 1;
 	while (1)
 	{
-		ft_putstr_fd(1, "\x1B[34mminishell\x1B[0m ➜ ");
+		ft_putstr_fd(1, "minishell ➜ \x1B[34m");
+		ft_putstr_fd(1, ms.env.pwd);
+		ft_putstr_fd(1, "\x1B[0m ");
 		while ((ret = read(0, &c, 1)) != 0)
 		{
 			free(ms.line);

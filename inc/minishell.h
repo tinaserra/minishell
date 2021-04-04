@@ -25,6 +25,7 @@
 typedef struct  s_env
 {
     char        *user;
+    char        *pwd;
     char        **path;
 }               t_env;
 

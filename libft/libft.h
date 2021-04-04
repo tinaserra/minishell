@@ -23,4 +23,5 @@ char	*ft_strjoin(char *s1, char *s2);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memcpy(void *dst, void *src, size_t n);
 void	*ft_realloc(void *ptr, size_t size);
+int     ft_strcmp(char *s1, char *s2);
 #endif

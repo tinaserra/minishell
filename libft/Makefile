@@ -15,6 +15,7 @@ SRCS		=	ft_putstr_fd.c		\
 				ft_calloc.c			\
 				ft_memcpy.c			\
 				ft_realloc.c		\
+				ft_strcmp.c			\
 
 OBJS		=	${SRCS:.c=.o}
 
