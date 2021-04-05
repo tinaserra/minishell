@@ -5,6 +5,7 @@ Aussi mignon qu’un vrai shell
 
 [man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)</br>
 [man erno](http://manpagesfr.free.fr/man/man3/errno.3.html)</br>
+[man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)</br>
 
 # Comment utiliser Git en multi ?
 
