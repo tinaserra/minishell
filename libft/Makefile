@@ -1,22 +1,30 @@
-SRCS			=	ft_putstr_fd.c		\
-					ft_strtrim.c		\
-					ft_bzero.c			\
-					ft_split.c			\
-					ft_strdup.c			\
-					ft_strchr.c			\
-					ft_substr.c			\
-					ft_strlen.c			\
-					get_next_line.c 	\
-					ft_itoa.c			\
-					ft_strs_tab_size.c	\
-					ft_strncmp.c		\
-					ft_isdigit.c		\
-					ft_strjoin.c		\
-					ft_calloc.c			\
-					ft_memcpy.c			\
-					ft_realloc.c		\
-					ft_strcmp.c			\
-					ft_strcpy.c			\
+SRCS			=	ft_putstr_fd.c \
+					ft_strtrim.c \
+					ft_bzero.c \
+					ft_split.c \
+					ft_strdup.c \
+					ft_strchr.c \
+					ft_substr.c \
+					ft_strlen.c \
+					get_next_line.c \
+					ft_itoa.c \
+					ft_strs_tab_size.c \
+					ft_strncmp.c \
+					ft_isdigit.c \
+					ft_strjoin.c \
+					ft_calloc.c \
+					ft_memcpy.c \
+					ft_realloc.c \
+					ft_strcmp.c \
+					ft_strcpy.c \
+					ft_strncpy.c \
+					ft_putnbr_fd.c \
+					ft_swap.c \
+					ft_rev_int_tab.c \
+					ft_sort_int_tab.c \
+					ft_putchar_fd.c \
+					ft_strstr.c \
+					ft_strnstr.c
 
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

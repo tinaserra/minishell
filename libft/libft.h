@@ -23,6 +23,15 @@ char	*ft_strjoin(char *s1, char *s2);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memcpy(void *dst, void *src, size_t n);
 void	*ft_realloc(void *ptr, size_t size);
-int     ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_strcpy(char *dest, char *src);
+
+void	ft_putnbr_fd(int n, int fd);
+void	ft_swap(int *a, int *b);
+void	ft_rev_int_tab(int *tab, int size);
+void	sort_int_tab(int *tab, unsigned int size);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+void	ft_putchar_fd(char c, int fd);
+char	*ft_strstr(char *haystack, char *needle);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 #endif
