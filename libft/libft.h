@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 char	*ft_strtrim(char *s1, char *set);
 void	ft_putstr_fd(int fd, char *s);
@@ -34,4 +35,10 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n);
 void	ft_putchar_fd(char c, int fd);
 char	*ft_strstr(char *haystack, char *needle);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+void	ft_putstr_non_printable(char *str);
+int		ft_check_base(char *base);
+void	ft_putnbr_base(int nbr, char *base);
+int		ft_atoi_base(char *str, char *base);
+char	*ft_itoa_base(int nbr, char *base);
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 #endif

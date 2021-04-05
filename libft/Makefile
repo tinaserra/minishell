@@ -24,7 +24,13 @@ SRCS			=	ft_putstr_fd.c \
 					ft_sort_int_tab.c \
 					ft_putchar_fd.c \
 					ft_strstr.c \
-					ft_strnstr.c
+					ft_strnstr.c \
+					ft_putstr_non_printable.c \
+					ft_check_base.c \
+					ft_putnbr_base.c \
+					ft_atoi_base.c \
+					ft_itoa_base.c \
+					ft_convert_base.c
 
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

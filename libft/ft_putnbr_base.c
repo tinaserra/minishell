@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,8 +12,29 @@
 
 #include "libft.h"
 
-void ft_putchar_fd(char c, int fd)
+void	ft_putnbr_base(int nbr, char *base)
 {
-	if (fd && c)
-		write(fd, &c, 1);
+	int l;
+	int save;
+
+	if (ft_check_base(base) == 0)
+		return ;
+	l = 1;
+	save = nbr;
+	if (nbr < 0)
+	{
+		ft_putchar_fd('-', 1);
+		l = -1;
+	}
+	while (nbr <= (-(ft_strlen(base))) || nbr >= ft_strlen(base))
+	{
+		nbr = nbr / ft_strlen(base);
+		l = l * ft_strlen(base);
+	}
+	while (l != 0)
+	{
+		ft_putchar_fd(base[save / l], 1);
+		save = save - (save / l) * l;
+		l = l / ft_strlen(base);
+	}
 }
