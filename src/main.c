@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+void	print_prompt(t_minishell *ms, char *s)
+{
+	char	**res;
+
+	res = ft_split(s, "./");
+	ft_putstr_fd(1, ms->env.user);
+	ft_putstr_fd(1, " ➜ \x1B[34m");
+	ft_putstr_fd(1, res[0]);
+	ft_putstr_fd(1, "\x1B[0m ");
+	free(res);
+}
+
 int		main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -14,10 +26,7 @@ int		main(int ac, char **av, char **env)
 	ret = 1;
 	while (1)
 	{
-		ft_putstr_fd(1, ms.env.user);
-		ft_putstr_fd(1, " ➜ \x1B[34m");
-		ft_putstr_fd(1, ms.env.pwd);
-		ft_putstr_fd(1, "\x1B[0m ");
+		print_prompt(&ms, av[0]);
 		while ((ret = read(0, &c, 1)) != 0)
 		{
 			free(ms.line);
