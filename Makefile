@@ -1,14 +1,17 @@
 SRCS			=	main.c		\
 					signal.c	\
+					env.c		\
+					merge.c
 
 SRCS_TINA		=	main.c		\
 					tina.c		\
 					signal.c	\
+					env.c
 
 SRCS_JOHN		=	main.c		\
 					john.c		\
 					signal.c	\
-					env.c		\
+					env.c
 
 NAME			=	minishell
 NAME_JOHN		=	minijohn
@@ -21,7 +24,7 @@ LIBFT_DIR		=	libft
 LIBFT			=	libft.a
 
 # override -> permet de reecrire la suite de la variable
-override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 -fsanitize=address
+override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
 
 OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 OBJ_TINA		=	$(addprefix $(OBJ_DIR)/,$(SRCS_TINA:.c=.o))
@@ -51,15 +54,15 @@ $(OBJ_DIR)/%.o	:	$(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT) | .gitignore
 debug			:	fclean
 				make all CFLAGS:="-DDEBUG -g"
 
-plumberjohn		:	$(OBJ_JOHN)
+john			:	$(OBJ_JOHN)
 				@$(MAKE) -C $(LIBFT_DIR)
 				@clang $(FLAGS) -o $(NAME_JOHN) $(OBJ_JOHN) -L $(LIBFT_DIR) -l ft -ltermcap
-				@echo $(NAME_JOHN) : Created !
+				@echo $(NAME_JOHN) : Souris John !!
 
-tina		:	$(OBJ_TINA)
+tina			:	$(OBJ_TINA)
 				@$(MAKE) -C $(LIBFT_DIR)
 				@gcc $(FLAGS) -o $(NAME_TINA) $(OBJ_TINA) -L $(LIBFT_DIR) -l ft -ltermcap
-				@echo $(NAME_TINA) : Created !
+				@echo $(NAME_TINA) : Le temps est bon, le ciel est bleu !
 
 clean			:
 				@$(MAKE) clean -C $(LIBFT_DIR)

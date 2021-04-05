@@ -2,5 +2,7 @@
 
 void fonction(t_minishell *ms)
 {
-	printf("t moche tina et t'est une popoche de pmu !\n");
+	(void)ms;
+	
+	printf("Le temps est bon, le ciel est bleu !\n");
 }

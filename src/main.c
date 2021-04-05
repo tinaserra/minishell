@@ -66,7 +66,10 @@ int		main(int ac, char **av, char **env)
 			break;
 		}
 		if (ms.line)
-			fonction(&ms);
+		{
+			fonction(&ms); // parsing
+			//execute();
+		}
 		ft_bzero(ms.line, ft_strlen(ms.line));
 	}
 }

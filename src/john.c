@@ -2,16 +2,17 @@
 
 void fonction(t_minishell *ms)
 {
-	//pid_t	pid;
-	//int		status;
+	pid_t	pid;
+	int		status;
+	char	**args;
 
-	printf("[%s]\n", ms->line);
-	/*pid = 0;
+	get_cmds(ms);
+	args = NULL;
+	pid = 0;
 	if ((pid == fork()) == 0)
 	{
-		if ((execve(ms->line, NULL, NULL)) == -1)
-			exit(errno);
-	}*/
-	//else
-	//	waitpid(pid, &status, 0);
+		execve(ms->cmds[0], ms->cmds, NULL);
+	}
+	else
+		waitpid(pid, &status, 0);
 }

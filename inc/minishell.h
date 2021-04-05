@@ -34,6 +34,7 @@ typedef struct  s_minishell
 {
     int         close_signal;
     char        *line;
+    char        **cmds;
     t_env       env;
 }               t_minishell;
 t_minishell	ms;
