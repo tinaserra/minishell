@@ -1,6 +1,13 @@
 #include "minishell.h"
 
-void init_env(t_minishell *ms, char **env)
+/**
+ * init_env
+ * * store environment variables in ms.env structure
+ * @param ms minishell structure
+ * @param env environment variables
+ */
+
+void	init_env(t_minishell *ms, char **env)
 {
 	char	**tmp;
 	char	**tmp2;
@@ -15,6 +22,7 @@ void init_env(t_minishell *ms, char **env)
 		{
 			tmp2 = ft_split(tmp[1], "/");
 			ms->env.pwd = tmp2[ft_strs_tab_size(tmp2) - 1];
+			free(tmp2);
 		}
 		if (ft_strncmp(tmp[0], "PATH", 4) == 0)
 			ms->env.path = ft_split(tmp[1], ":");

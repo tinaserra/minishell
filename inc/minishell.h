@@ -41,9 +41,10 @@ t_minishell	ms;
 /*
 ** SIGNALS ------------------------------------------------------------------ **
 */
+
 void	sig_quit(int c);
 void	sig_int(int c);
 
 void    init_env(t_minishell *ms, char **env);
-void    fonction(t_minishell *ms, char **path);
+void    fonction(t_minishell *ms);
 #endif

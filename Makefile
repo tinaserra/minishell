@@ -21,7 +21,7 @@ LIBFT_DIR		=	libft
 LIBFT			=	libft.a
 
 # override -> permet de reecrire la suite de la variable
-override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
+override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 -fsanitize=address
 
 OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 OBJ_TINA		=	$(addprefix $(OBJ_DIR)/,$(SRCS_TINA:.c=.o))
@@ -56,7 +56,7 @@ plumberjohn		:	$(OBJ_JOHN)
 				@clang $(FLAGS) -o $(NAME_JOHN) $(OBJ_JOHN) -L $(LIBFT_DIR) -l ft -ltermcap
 				@echo $(NAME_JOHN) : Created !
 
-popochedepmu	:	$(OBJ_TINA)
+tina		:	$(OBJ_TINA)
 				@$(MAKE) -C $(LIBFT_DIR)
 				@gcc $(FLAGS) -o $(NAME_TINA) $(OBJ_TINA) -L $(LIBFT_DIR) -l ft -ltermcap
 				@echo $(NAME_TINA) : Created !
