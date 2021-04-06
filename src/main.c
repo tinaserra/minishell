@@ -70,6 +70,6 @@ int		main(int ac, char **av, char **env)
 			fonction(&ms); // parsing
 			//execute();
 		}
-		ft_bzero(ms.line, ft_strlen(ms.line));
+		ft_bzero(ms.line, ft_strlen((char *)ms.line));
 	}
 }

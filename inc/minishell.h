@@ -22,21 +22,39 @@
 # include <sys/wait.h>
 # include <term.h>
 
-typedef struct  s_env
-{
-    char        *user;
-    char        *pwd;
-    char        **path;
-}               t_env;
+/*
+** VALUES ------------------------------------------------------------------- **
+*/
 
+# define IS_ECHO	1 << 0
+# define IS_NL		1 << 1
+# define IS_CD		1 << 2
+# define IS_PWD		1 << 3
+# define IS_EXPORT	1 << 4
+# define IS_UNSET	1 << 5
+# define IS_ENV		1 << 6
+# define IS_EXIT	1 << 7
 
-typedef struct  s_minishell
+typedef struct	s_env
 {
-    int         close_signal;
-    char        *line;
-    char        **cmds;
-    t_env       env;
-}               t_minishell;
+	char		*user;
+	char		*pwd;
+	char		**path;
+}				t_env;
+
+//typedef struct	s_data
+//{
+//	char			mask;
+//}				t_data;
+
+typedef struct		s_minishell
+{
+	int				close_signal;
+	unsigned char	*line;
+	char			***cmds;
+	char			mask;
+	t_env			env;
+}					t_minishell;
 t_minishell	ms;
 
 /*
