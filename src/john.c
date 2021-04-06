@@ -94,9 +94,6 @@ void fonction(t_minishell *ms)
 	while (ms->cmds[++i])
 	{
 		if (ft_strcmp(ms->cmds[i][0], "echo") == 0)
-		{
 			echo_builtin(ms, i);
-		}
-
 	}
 }
