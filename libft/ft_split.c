@@ -3,96 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/13 11:25:35 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/02/25 17:19:05 by jode-vri         ###   ########.fr       */
+/*   Created: 2019/08/14 02:30:32 by vserra            #+#    #+#             */
+/*   Updated: 2019/08/18 00:48:16 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		is_charset(char c, char *charset)
+/*
+** ft_len_word compte la longueur de chaque mot.
+** on check si le separateur n'est pas dansn la chaine, et on incremente len.
+** quand on tombe sur un separateur, on arrete de compter
+*/
+
+int		ft_len_word(char *str, char *charset)
 {
-	while (charset && *charset)
+	int		len;
+
+	len = 0;
+	while (str[len])
 	{
-		if (c == *charset)
-			return (1);
-		charset++;
+		if ((ft_strchr(charset, str[len]) == NULL))
+			len++;
+		else
+			break ;
 	}
-	return (0);
+	return (len);
 }
 
-int		count_nb_word(char *str, char *charset)
+char	*ft_dup(char *src, char *charset)
 {
-	int count;
-	int is_word;
-
-	count = 0;
-	is_word = 0;
-	while (str && *str)
-	{
-		if (is_charset(*str, charset))
-			is_word = 0;
-		else if (is_word == 0)
-		{
-			is_word = 1;
-			count++;
-		}
-		str++;
-	}
-	return (count);
-}
-
-int		str_size(char *str, char *charset, int pos)
-{
-	int i;
+	int		i;
+	char	*dest;
+	int		len;
 
 	i = 0;
-	while (str && str[pos])
+	len = ft_len_word(src, charset);
+	if (!(dest = malloc(sizeof(*src) * (len + 1))))
+		return (0);
+	while (src[i] && i < len)
 	{
-		if (!is_charset(str[pos], charset))
-			i++;
-		pos++;
+		dest[i] = src[i];
+		i++;
 	}
-	return (i);
+	dest[i] = '\0';
+	return (dest);
 }
 
-void	ft_split2(char **tab, char *str, char *charset)
-{
-	int i;
-	int j;
-	int k;
+/*
+** 1ere condition : le premier mot s'il existe, on compte un mot
+** 2eme condition : si le caractere n'est pas un charset
+** et que le caractere d'avant est un charset, on compte un mot.
+*/
 
-	i = -1;
-	j = 0;
-	k = 0;
-	while (str && str[++i])
+int		ft_count_word(char *str, char *charset)
+{
+	int		i;
+	int		nbr_word;
+
+	i = 0;
+	nbr_word = 0;
+	while (str[i])
 	{
-		if (!is_charset(str[i], charset))
+		if ((ft_strchr(charset, str[i]) == NULL) && (i == 0))
 		{
-			if (k == 0)
-				if ((tab[j] = malloc(sizeof(char *) * (str_size(str, charset, i)
-					+ 1))) == NULL)
-					return ;
-			tab[j][k] = str[i];
-			tab[j][k + 1] = '\0';
-			k++;
+			nbr_word++;
+			i++;
 		}
-		if ((is_charset(str[i], charset) && !is_charset(str[i + 1], charset)
-				&& k > 0) && (k = 0) == 0)
-			j++;
+		if ((ft_strchr(charset, str[i]) == NULL) &&
+				(ft_strchr(charset, str[i - 1]) != NULL))
+			nbr_word++;
+		i++;
 	}
+	return (nbr_word);
 }
 
 char	**ft_split(char *str, char *charset)
 {
-	char	**result;
+	char	**tab;
+	int		i;
+	int		nbr_word;
 
-	if ((result = malloc(sizeof(char *) *
-			(count_nb_word(str, charset) + 1))) == NULL)
+	nbr_word = ft_count_word(str, charset);
+	if (!(tab = (char **)malloc(sizeof(char*) * (nbr_word + 1))))
 		return (NULL);
-	ft_split2(result, str, charset);
-	result[count_nb_word(str, charset)] = 0;
-	return (result);
+	tab[nbr_word] = NULL;
+	i = 0;
+	while (*str)
+	{
+		if (ft_strchr(charset, *str) == NULL)
+		{
+			tab[i] = ft_dup(str, charset);
+			i++;
+			str += ft_len_word(str, charset);
+		}
+		else
+			str++;
+	}
+	return (tab);
 }
