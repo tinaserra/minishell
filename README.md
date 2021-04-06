@@ -12,6 +12,8 @@ Aussi mignon qu’un vrai shell
 - [ ] Pipe ?? ⚠️ a ```cat```
 - [ ] $? -> retourne le code erreur de la derniere commande
 
+[man echo baby !](http://marionpatrick.free.fr/man_html/html/tuto_shell.html#chp3.3.2.3)
+
 ### ```cd```
 
 - [ ] 1 argument : le path
