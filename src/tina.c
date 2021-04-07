@@ -20,85 +20,150 @@
 	//	i++;
 	//}
 
-int	ft_isalnum(int c)
-{
-	if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
-	|| (c >= 'A' && c <= 'Z')))
-		return (0);
-	return (1);
-}
+//int	ft_isalnum(int c)
+//{
+//	if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
+//	|| (c >= 'A' && c <= 'Z')))
+//		return (0);
+//	return (1);
+//}
 
-void	get_args(ms);
+void	print_list(t_list *args)
 {
-	//ft_lstnew(/* content (void *)*/);
-	while (*(ms->line) != ' ' && *(ms->line) != ';' && *(ms->line != '\0')
+	t_list *list;
+	int i;
+
+	list = args;
+	i = 0;
+	while (list)
 	{
-		if (ft_isalnum(*(ms->line)) == 1)
-		{
+		i++;
+		printf("%d ", i);
+		printf("arg = |%s|\n", list->content);
+		list = list->next;
 
-		}
 	}
 }
 
-void	parse_echo(t_minishell *ms)
+int		get_args(t_minishell *ms, t_list *args)
 {
+
+	printf("GET ARGS\n");
+	int		len;
+	//int i;
+	char	*tmp;
+
+
+	printf("1 |%c|\n", *ms->line);
+	//i = 0;
+	while (*(ms->line)!= '\0')
+	{
+		while (*(ms->line) == ' ')
+			ms->line++;
+		len = 0;
+		while (*(ms->line) != '"' && *(ms->line) != '\0')
+		{
+			if (*(ms->line) == ';' || *(ms->line) == ' ')
+				break ;
+			ms->line++;
+			len++;
+		}
+		ms->line -= len;
+		printf("2 |%c|\n", *ms->line);
+		printf("len = %d\n", len);
+		tmp = ft_calloc(len + 1, 1);
+		printf("1 tmp = |%s|\n", tmp);
+		ft_strncpy(tmp, (char *)ms->line, len);
+		printf("2 tmp = |%s|\n", tmp);
+		//printf("%p\n", args);
+		//if (args)
+		//{
+			//printf("NIQUE TES GRANDS MORTS\n");
+			ft_lstadd_back(&args, ft_lstnew(tmp));
+
+		printf("%s\n", args->content);
+		//}
+		//else
+		//	args = ft_lstnew(tmp);
+		free(tmp);
+		tmp = NULL;
+		ms->line += len;
+		printf("3 |%c|\n", *ms->line);
+	}
+	print_list(args);
+	return (0);
+}
+
+int		parse_echo(t_minishell *ms)
+{
+	t_list	*args;
+	printf("PARSE ECHO\n");
+
+	args = malloc(sizeof(t_list));
+	args = NULL;
 	ms->mask |= IS_ECHO;
 	ms->line += 4;
-	printf("|%c|\n", *ms->line);
 	while (*(ms->line) == ' ')
-		*(ms->line)++;
-	if (ft_strnstr(*(ms->line), "-n", 2) != 0)
+		ms->line++;
+	if (ft_strnstr((char *)ms->line, "-n", 2) != 0)
 	{
 		ms->mask |= IS_NL;
 		ms->line += 2;
 	}
-	get_args(ms);
-	execute_echo(ms); // #john
+	while (*(ms->line) == ' ')
+		ms->line++;
+
+	return(get_args(ms, args));
+	//execute_echo(ms); // #john
 }
 
 
-void	get_cmds(t_minishell *ms)
+int		get_cmds(t_minishell *ms)
 {
+	printf("GET CMDS\n");
 	if (ft_strnstr((char *)ms->line, "echo", 4) != 0)
-		parse_echo(ms);
-	else if (ft_strnstr((char *)ms->line, "cd", 2) != 0)
-		parse_cd(ms);
-	else if (ft_strnstr((char *)ms->line, "pwd", 3) != 0)
-		parse_pwd(ms);
-	else if (ft_strnstr((char *)ms->line, "export", 6) != 0)
-		parse_export(ms);
-	else if (ft_strnstr((char *)ms->line, "unset", 5) != 0)
-		parse_unset(ms);
-	else if (ft_strnstr((char *)ms->line, "env", 3) != 0)
-		parse_env(ms);
-	else if (ft_strnstr((char *)ms->line, "exit", 4) != 0)
-		parse_exit(ms);
-	else
+		return(parse_echo(ms));
+	//else if (ft_strnstr((char *)ms->line, "cd", 2) != 0)
+	//	parse_cd(ms);
+	//else if (ft_strnstr((char *)ms->line, "pwd", 3) != 0)
+	//	parse_pwd(ms);
+	//else if (ft_strnstr((char *)ms->line, "export", 6) != 0)
+	//	parse_export(ms);
+	//else if (ft_strnstr((char *)ms->line, "unset", 5) != 0)
+	//	parse_unset(ms);
+	//else if (ft_strnstr((char *)ms->line, "env", 3) != 0)
+	//	parse_env(ms);
+	//else if (ft_strnstr((char *)ms->line, "exit", 4) != 0)
+	//	parse_exit(ms);
+	//else
 		//execve ou error
+	return (-1);
 }
 
-void		parsing()
+void		parsing(t_minishell *ms)
 {
-	int i;
+	//int i;
 
 	printf("|%s|\n", ms->line);
-	while (*(ms->line))
-	{
-		i = 0;
-		while (ms->line[i] != ';' && ms->line[i])
-		{
-			while (ms->line[i] == ' ')
-				i++;
-			get_cmds(ms);
-			i++;
-		}
-		// reset mask + args
-		*(ms->line)++;
-	}
+	while (*(ms->line) == ' ')
+		ms->line++;
+	if (get_cmds(ms) == -1)
+		ft_putstr_fd(2, "command not found\n");
+	//while (*(ms->line))
+	//{
+		//i = 0;
+	//	while (ms->line[i] != ';' && ms->line[i])
+	//	{
+	//		while (ms->line[i] == ' ')
+	//			i++;
+	//		i++;
+	//	}
+	//	// reset mask + args
+	//	ms->line++;
+	//}
 }
 
-void fonction(t_minishell *ms) // parsing
+void fonction() // parsing
 {
-	printf("Le temps est bon, le ciel est bleu !\n");
 	parsing(ms);
 }
