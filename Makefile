@@ -1,17 +1,20 @@
 SRCS			=	main.c		\
 					signal.c	\
 					env.c		\
-					merge.c
+					merge.c		\
+					termcaps.c
 
 SRCS_TINA		=	main.c		\
 					tina.c		\
 					signal.c	\
-					env.c
+					env.c		\
+					termcaps.c
 
 SRCS_JOHN		=	main.c		\
 					john.c		\
 					signal.c	\
-					env.c
+					env.c		\
+					termcaps.c
 
 NAME			=	minishell
 NAME_JOHN		=	minijohn

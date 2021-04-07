@@ -6,6 +6,7 @@
 */
 
 # include "libft.h"
+# include "keycode_ascii.h"
 
 /*
 ** LIBRARIES ---------------------------------------------------------------- **
@@ -43,14 +44,16 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-//typedef struct	s_data
+//typedef struct	s_args
 //{
-//	char			mask;
-//}				t_data;
+//	char			*arg;
+//	struct s_args	*next;
+//}				t_args;
 
 typedef struct		s_minishell
 {
 	int				close_signal;
+	int				cursor;
 	unsigned char	*line;
 	char			***cmds;
 	char			mask;
@@ -64,6 +67,13 @@ t_minishell *ms;
 
 void	sig_quit(int c);
 void	sig_int(int c);
+
+/*
+** TERMCAPS ----------------------------------------------------------------- **
+*/
+
+void	set_raw();
+int		handle_termcaps(t_minishell *ms, char c);
 
 int	    init_env(char **env);
 char	*find_env(t_env *env, char *name);
