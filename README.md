@@ -3,11 +3,17 @@ Aussi mignon qu’un vrai shell
 
 ## TO DO !!
 
+### ```termcaps```
+
+- [ ] afficher l'historique avec les fleches directionnels
+- [ ] gerer la touche suppr
+- [x] gerer la touche del
+
 ### ```echo```
 
 - [ ] plusieurs arguments (strings)
 - [ ] gerer les guillemets & backslash
-- [ ] les variables d'environnement
+- [x] les variables d'environnement
 - [ ] les redirections (vers un fichier, vers une variable d'env...) ⚠️ a ```cat```
 - [ ] Pipe ?? ⚠️ a ```cat```
 - [ ] $? -> retourne le code erreur de la derniere commande
