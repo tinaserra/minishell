@@ -20,6 +20,7 @@
 # include <termios.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/ioctl.h>
 # include <term.h>
 
 /*
@@ -35,12 +36,12 @@
 # define IS_ENV		1 << 6
 # define IS_EXIT	1 << 7
 
-typedef struct	s_env
+typedef struct		s_env
 {
-	char		*user;
-	char		*pwd;
-	char		**path;
-}				t_env;
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
 //typedef struct	s_data
 //{
@@ -53,9 +54,9 @@ typedef struct		s_minishell
 	unsigned char	*line;
 	char			***cmds;
 	char			mask;
-	t_env			env;
+	t_env			*env;
 }					t_minishell;
-t_minishell	ms;
+t_minishell *ms;
 
 /*
 ** SIGNALS ------------------------------------------------------------------ **
@@ -64,6 +65,8 @@ t_minishell	ms;
 void	sig_quit(int c);
 void	sig_int(int c);
 
-void    init_env(t_minishell *ms, char **env);
-void    fonction(t_minishell *ms);
+int	    init_env(char **env);
+char	*find_env(t_env *env, char *name);
+void	print_prompt();
+void    fonction();
 #endif

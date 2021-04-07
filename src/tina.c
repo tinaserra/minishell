@@ -77,7 +77,7 @@ void	get_cmds(t_minishell *ms)
 		//execve ou error
 }
 
-void		parsing(t_minishell *ms)
+void		parsing()
 {
 	int i;
 

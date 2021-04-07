@@ -1,75 +1,88 @@
 #include "minishell.h"
 
-/**
- * print_prompt
- * * print prompt text
- * @param ms minishell structure
- * @param s executable name
- */
-
-void	print_prompt(t_minishell *ms, char *s)
+void	set_raw()
 {
-	char	**res;
+	struct termios	term;
 
-	res = ft_split(s, "./");
-	ft_putstr_fd(1, ms->env.user);
-	ft_putstr_fd(1, " ➜ \x1B[34m");
-	ft_putstr_fd(1, res[0]);
-	ft_putstr_fd(1, "\x1B[0m ");
-	free(res);
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~(ICANON);
+	term.c_lflag &= ~(ECHO);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 }
 
-/**
- * read_line
- * * read the line in stdin and put it in ms.line
- * @param ret read return value
- */
+void	print_prompt()
+{
+	ft_putstr_fd(1, "\x1b[33m");
+	ft_putstr_fd(1, find_env(ms->env, "USER"));
+	ft_putstr_fd(1, "\x1b[31m ➜");
+	ft_putstr_fd(1, "\x1b[34m minishell \x1b[0m");
+}
 
-void	read_line(int *ret)
+int		handle_termcaps(char c)
+{
+	if (c == 4)
+	{
+		ft_putstr_fd(1, "exit\n");
+		return (-1);
+	}
+	if (c == 65 || c == 66)
+	{
+		//history
+	}
+	return (1);
+}
+
+void	minishell()
 {
 	char	c;
+	int		ret;
 	int		i;
-	
+
 	i = 0;
-	while ((*ret = read(0, &c, 1)) != 0)
+	print_prompt();
+	while (read(0, &c, 1) == 1)
 	{
-		ms.line = ft_realloc(ms.line, i + 2);
-		if (c == 10)
-			break;
+		if ((ret = handle_termcaps(c)) == -1)
+			exit(EXIT_SUCCESS);
 		else
 		{
-			ms.line[i] = c;
-			ms.line[i + 1] = '\0';
-			i++;
+			ms->line = ft_realloc(ms->line, i + 2);
+			if (c == 10)
+			{
+				ft_putstr_fd(1, "\n");
+				if (ms->line)
+					fonction();
+				print_prompt();
+			}
+			else
+			{
+				write(1, &c, 1);
+				ms->line[i] = c;
+				ms->line[i + 1] = '\0';
+				i++;
+			}
 		}
 	}
 }
 
 int		main(int ac, char **av, char **env)
 {
-	(void)ac;
 	(void)av;
-	int		ret;
+	(void)ac;
+	(void)env;
+	//int	ret;
 
-	signal(SIGINT, &sig_int); 
-	signal(SIGQUIT, &sig_quit); 
-	init_env(&ms, env);
-	ms.line = NULL;
-	ret = 1;
-	while (1)
+	ms = malloc(sizeof(t_minishell));
+	ft_bzero(ms, sizeof(t_minishell));
+	signal(SIGINT, &sig_int);
+	signal(SIGQUIT, &sig_quit);
+	if (!init_env(env))
+		exit(EXIT_FAILURE);
+	if (tgetent(NULL, find_env(ms->env, "TERM")) != 1)
 	{
-		print_prompt(&ms, av[0]);
-		read_line(&ret);
-		if (ret == 0)
-		{
-			ft_putstr_fd(1, "exit\n");
-			break;
-		}
-		if (ms.line)
-		{
-			fonction(&ms); // parsing
-			//execute();
-		}
-		ft_bzero(ms.line, ft_strlen((char *)ms.line));
+		printf("Unable to initialize TERM env");
+		exit(EXIT_FAILURE);
 	}
+	set_raw();
+	minishell();
 }

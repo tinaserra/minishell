@@ -25,7 +25,8 @@ void	get_cmds(t_minishell *ms)
 	}
 }
 
-void fonction(t_minishell *ms) // parsing
+void fonction() // parsing
 {
-	get_cmds(ms);
+	printf("[%s]\n", ms->line);
+	//get_cmds(ms);
 }
