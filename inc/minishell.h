@@ -20,6 +20,8 @@
 # include <errno.h>
 # include <termios.h>
 # include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 # include <term.h>
@@ -54,6 +56,10 @@ typedef struct		s_minishell
 {
 	int				close_signal;
 	int				cursor;
+	int				prompt_size;
+	t_list			*history;
+	int				history_pos;
+	int				cursor_pos;
 	unsigned char	*line;
 	char			***cmds;
 	char			mask;
@@ -73,10 +79,15 @@ void	sig_int(int c);
 */
 
 void	set_raw();
-int		handle_termcaps(t_minishell *ms, char c);
+int		handle_termcaps(t_minishell *ms, char **line, char c);
+void	print_term(char *c);
+int		termputs(int c);
 
 int	    init_env(char **env);
 char	*find_env(t_env *env, char *name);
+int     get_history(t_minishell *ms);
+void    add_history(char *line);
+void	set_history(char c, char **line);
 void	print_prompt();
 void    fonction();
 #endif

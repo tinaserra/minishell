@@ -2,7 +2,7 @@
 
 /**
  * sig_quit
- * * handle CTRL + C
+ * * handle CTRL + \ 
  * @param c exit code
  */
 
@@ -16,7 +16,7 @@ void	sig_quit(int c)
 
 /**
  * sig_int
- * * handle CTRL + \
+ * * handle CTRL + C
  * @param c exit code
  */
 
