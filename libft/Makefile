@@ -40,7 +40,8 @@ SRCS			=	ft_putstr_fd.c \
 					ft_lstmap.c \
 					ft_lstnew.c \
 					ft_lstsize.c \
-					ft_free_tab.c 
+					ft_free_tab.c \
+					ft_lst_find.c \
 
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
