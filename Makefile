@@ -1,23 +1,26 @@
-SRCS			=	main.c		\
-					signal.c	\
-					env.c		\
-					merge.c		\
-					history.c	\
-					termcaps.c
+SRCS			=	main.c			\
+					john.c			\
+					signal.c		\
+					env.c			\
+					history.c		\
+					termcaps.c		\
+					echo.c
 
-SRCS_TINA		=	main.c		\
-					tina.c		\
-					signal.c	\
-					env.c		\
-					history.c	\
-					termcaps.c
+SRCS_TINA		=	main.c			\
+					john.c			\
+					signal.c		\
+					env.c			\
+					history.c		\
+					termcaps.c		\
+					echo.c
 
-SRCS_JOHN		=	main.c		\
-					john.c		\
-					signal.c	\
-					env.c		\
-					history.c	\
-					termcaps.c
+SRCS_JOHN		=	main.c			\
+					john.c			\
+					signal.c		\
+					env.c			\
+					history.c		\
+					termcaps.c		\
+					echo.c
 
 NAME			=	minishell
 NAME_JOHN		=	minijohn
@@ -30,7 +33,7 @@ LIBFT_DIR		=	libft
 LIBFT			=	libft.a
 
 # override -> permet de reecrire la suite de la variable
-override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
+override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 -fsanitize=address
 
 OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 OBJ_TINA		=	$(addprefix $(OBJ_DIR)/,$(SRCS_TINA:.c=.o))

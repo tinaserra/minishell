@@ -52,6 +52,14 @@ typedef struct		s_env
 //	struct s_args	*next;
 //}				t_args;
 
+typedef struct	s_cmds
+{
+	char		*cmd;
+	char		**args;
+	t_list		*cmds_list;
+}				t_cmds;
+
+
 typedef struct		s_minishell
 {
 	int				close_signal;
@@ -61,7 +69,7 @@ typedef struct		s_minishell
 	int				history_pos;
 	int				cursor_pos;
 	unsigned char	*line;
-	char			***cmds;
+	t_cmds			cmds;
 	char			mask;
 	t_env			*env;
 }					t_minishell;
@@ -90,4 +98,6 @@ void    add_history(char *line);
 void	set_history(char c, char **line);
 void	print_prompt();
 void    fonction();
+
+void	echo_builtin(t_cmds *cmds);
 #endif
