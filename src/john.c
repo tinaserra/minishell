@@ -34,9 +34,11 @@ static void	execute(t_cmds *cmds)
 void 		fonction()
 {
 	char	**cmdss;
+	char	*env_var;
 	t_cmds	cmds;
 	int		i;
 	int		j;
+	int		k;
 
 	cmds.cmds_list = malloc(sizeof(t_list));
 	ft_bzero(&cmds, sizeof(t_cmds));
@@ -49,7 +51,18 @@ void 		fonction()
 		cmds.cmd = cmds.args[0];
 		j = 0;
 		while (cmds.args[++j])
-			ft_lstadd_back(&cmds.cmds_list, ft_lstnew(cmds.args[j]));
+		{
+			if (cmds.args[j][0] == '$')
+			{
+				k = 0;
+				env_var = malloc(sizeof(char) * ft_strlen(cmds.args[j]) - 1);
+				while (cmds.args[j][++k])
+					env_var[k - 1] = cmds.args[j][k];
+				ft_lstadd_back(&cmds.cmds_list, ft_lstnew(ft_strdup(getenv(env_var))));
+			}
+			else
+				ft_lstadd_back(&cmds.cmds_list, ft_lstnew(cmds.args[j]));
+		}
 		execute(&cmds);
 		free(cmds.cmd);
 		//TODO: free cmds.cmds_list
