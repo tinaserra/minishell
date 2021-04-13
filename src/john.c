@@ -58,10 +58,10 @@ void 		fonction()
 				env_var = malloc(sizeof(char) * ft_strlen(cmds.args[j]) - 1);
 				while (cmds.args[j][++k])
 					env_var[k - 1] = cmds.args[j][k];
-				ft_lstadd_back(&cmds.cmds_list, ft_lstnew(ft_strdup(getenv(env_var))));
+				ft_lstadd_back(&cmds.cmds_list, ft_lstcreate(ft_strdup(getenv(env_var))));
 			}
 			else
-				ft_lstadd_back(&cmds.cmds_list, ft_lstnew(cmds.args[j]));
+				ft_lstadd_back(&cmds.cmds_list, ft_lstcreate(cmds.args[j]));
 		}
 		execute(&cmds);
 		free(cmds.cmd);

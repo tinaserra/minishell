@@ -10,7 +10,7 @@ void    add_history(char *line)
     file = ft_strjoin(ft_strdup(find_env(ms->env, "HOME")), "/.minishell_history");
     if ((fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0600)) != -1)
     {
-        ft_lstadd_front(&ms->history, ft_lstnew(ft_strdup(line)));
+        ft_lstadd_front(&ms->history, ft_lstcreate(ft_strdup(line)));
         ms->history_pos = -1;
         write(fd, line, ft_strlen(line));
         write(fd, "\n", 1);
@@ -34,7 +34,7 @@ int     get_history(t_minishell *ms)
         line = NULL;
         while ((ret = get_next_line(fd, &line)) == 1)
         {
-            ft_lstadd_front(&ms->history, ft_lstnew(line));
+            ft_lstadd_front(&ms->history, ft_lstcreate(line));
             line = NULL;
         }
         free(line);
@@ -51,12 +51,12 @@ void	set_history(char c, char **line)
 	{
 		if (ms->history_pos >= ft_lstsize(ms->history) - 1)
 			return ;
-		*line = ft_strdup(ft_lst_find_pos(ms->history, ++(ms->history_pos))->content);
+		*line = ft_strdup(ft_lst_find_pos(ms->history, ++(ms->history_pos))->data);
 	}
 	if (c == 66)
 	{
         if (ms->history_pos > 0)
-		    *line = ft_strdup(ft_lst_find_pos(ms->history, --(ms->history_pos))->content);
+		    *line = ft_strdup(ft_lst_find_pos(ms->history, --(ms->history_pos))->data);
         else
         {
             ms->history_pos = -1;

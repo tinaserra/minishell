@@ -15,11 +15,11 @@ void	        echo_builtin(t_cmds *cmds)
 
 	i = -1;
 	tmp = cmds->cmds_list;
-	if ((nl = echo_new_line(tmp->content)) == 0)
+	if ((nl = echo_new_line(tmp->data)) == 0)
 		tmp = tmp->next;
 	while (tmp)
 	{
-		ft_putstr_fd(1, (char *)tmp->content);
+		ft_putstr_fd(1, (char *)tmp->data);
 		if (tmp->next)
 			ft_putchar_fd(' ', 1);
 		else if (nl)
