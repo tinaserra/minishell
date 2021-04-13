@@ -33,35 +33,19 @@ void	redraw_prompt(char *s)
 		ft_putchar_fd(s[i], 1);
 }
 
-char	*del_last_char(char *s)
-{
-	char	*res;
-	int		len;
-	int		i;
-
-	len = ft_strlen(s) - 1;
-	if (!(res = malloc(sizeof(char) * (len))))
-		return (NULL);
-	i = -1;
-	while (++i < len)
-		res[i] = s[i];
-	res[i] = '\0';
-	free(s);
-	return (res);
-}
-
 int		handle_termcaps(t_minishell *ms, char **line, char c)
 {
 	(void)ms;
 	if (c == CTRL_D)
 	{
-		ft_putstr_fd(1, "exit\n");
-		return (-1);
+		if (ft_strlen(*line) == 0)
+			return (ft_putstr_fd(1, "exit\n"));
+		return (42);
 	}
 	if (c == KEY_DEL && ms->cursor > 0)
 	{
 		(ms->cursor)--;
-		*line = del_last_char(*line);
+		*line = ft_del_last_char(*line);
 		redraw_prompt(*line);
 		return (42);
 	}

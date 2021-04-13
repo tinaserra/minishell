@@ -58,7 +58,7 @@ int		minishell()
 	line = NULL;
 	while (read(0, &c, 1) == 1)
 	{
-		if ((ret = handle_termcaps(ms, &line, c)) == -1)
+		if ((ret = handle_termcaps(ms, &line, c)) == 5)
 			return (EXIT_SUCCESS);
 		else if (ret == 1)
 		{
