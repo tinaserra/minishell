@@ -32,6 +32,7 @@ void	*ft_memcpy(void *dst, void *src, size_t n);
 void	*ft_realloc(void *ptr, size_t size);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strcpy(char *dest, char *src);
+char	*ft_del_last_char(char *s);
 
 void	ft_putnbr_fd(int n, int fd);
 void	ft_swap(int *a, int *b);
