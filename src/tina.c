@@ -7,55 +7,44 @@
 		//ms->mask |= IS_ENV;
 		//ms->mask |= IS_EXIT;
 
-	//int i;
-	//int		len;
-	//char	**cmds;
+// void	print_list(t_list *args)
+// {
+// 	t_list *list;
+// 	int i;
 
-	//cmds = ft_split(*(ms->line), " ");
-	//len = ft_strs_tab_size(cmds);
-	//i = 0;
-	//while (i < len)
-	//{
-	//	printf("%s\n", cmds[i]);
-	//	i++;
-	//}
+// 	list = args;
+// 	i = 0;
+// 	while (list)
+// 	{
+// 		i++;
+// 		printf("%d ", i);
+// 		printf("arg = |%s| ", list->data);
+// 		list = list->next;
+// 		printf("\n");
+// 	}
+// }
 
-//int	ft_isalnum(int c)
-//{
-//	if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')
-//	|| (c >= 'A' && c <= 'Z')))
-//		return (0);
-//	return (1);
-//}
-
-void	print_list(t_list *args)
+void	print_list(t_list *l)
 {
-	t_list *list;
-	int i;
-
-	list = args;
-	i = 0;
-	while (list)
+	if (l == NULL)
+		printf("la liste est vide\n");
+	while (l != NULL)
 	{
-		i++;
-		printf("%d ", i);
-		printf("arg = |%s|\n", list->content);
-		list = list->next;
-
+		printf("|%s| ", l->data);
+		l = l->next;
 	}
+	printf("\n");
 }
 
-int		get_args(t_minishell *ms, t_list *args)
+int		get_args(t_minishell *ms)
 {
-
 	printf("GET ARGS\n");
 	int		len;
-	//int i;
 	char	*tmp;
+	t_list	*args;
 
+	args = NULL;
 
-	printf("1 |%c|\n", *ms->line);
-	//i = 0;
 	while (*(ms->line)!= '\0')
 	{
 		while (*(ms->line) == ' ')
@@ -69,38 +58,24 @@ int		get_args(t_minishell *ms, t_list *args)
 			len++;
 		}
 		ms->line -= len;
-		printf("2 |%c|\n", *ms->line);
-		printf("len = %d\n", len);
 		tmp = ft_calloc(len + 1, 1);
-		printf("1 tmp = |%s|\n", tmp);
 		ft_strncpy(tmp, (char *)ms->line, len);
-		printf("2 tmp = |%s|\n", tmp);
-		//printf("%p\n", args);
-		//if (args)
-		//{
-			//printf("NIQUE TES GRANDS MORTS\n");
-			ft_lstadd_back(&args, ft_lstnew(tmp));
-
-		printf("%s\n", args->content);
-		//}
-		//else
-		//	args = ft_lstnew(tmp);
+		printf("tmp = |%s| len = %d\n", tmp, len);
+		args = ft_lstadd_at(args, tmp, ft_lstsize(args));
 		free(tmp);
 		tmp = NULL;
 		ms->line += len;
-		printf("3 |%c|\n", *ms->line);
+		print_list(args);
 	}
-	print_list(args);
 	return (0);
 }
 
 int		parse_echo(t_minishell *ms)
 {
-	t_list	*args;
+	// t_list	*args;
 	printf("PARSE ECHO\n");
 
-	args = malloc(sizeof(t_list));
-	args = NULL;
+	// args = NULL;
 	ms->mask |= IS_ECHO;
 	ms->line += 4;
 	while (*(ms->line) == ' ')
@@ -113,7 +88,7 @@ int		parse_echo(t_minishell *ms)
 	while (*(ms->line) == ' ')
 		ms->line++;
 
-	return(get_args(ms, args));
+	return(get_args(ms));
 	//execute_echo(ms); // #john
 }
 
