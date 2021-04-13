@@ -99,5 +99,10 @@ void	set_history(char c, char **line);
 void	print_prompt();
 void    fonction();
 
+/*
+** BUILTINS ---------------------------------------------------------------- **
+*/
+
 void	echo_builtin(t_cmds *cmds);
+void    env_builtin();
 #endif

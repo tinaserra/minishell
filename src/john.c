@@ -29,6 +29,8 @@ static void	execute(t_cmds *cmds)
 {
 	if (ft_strcmp(cmds->cmd, "echo") == 0)
 		echo_builtin(cmds);
+	if (ft_strcmp(cmds->cmd, "env") == 0)
+		env_builtin(cmds);
 }
 
 void 		fonction()
