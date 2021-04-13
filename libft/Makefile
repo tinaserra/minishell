@@ -31,6 +31,7 @@ SRCS			=	ft_putstr_fd.c \
 					ft_atoi_base.c \
 					ft_itoa_base.c \
 					ft_convert_base.c \
+					ft_lstadd_at.c \
 					ft_lstadd_back.c \
 					ft_lstadd_front.c \
 					ft_lstclear.c \
@@ -38,10 +39,14 @@ SRCS			=	ft_putstr_fd.c \
 					ft_lstiter.c \
 					ft_lstlast.c \
 					ft_lstmap.c \
-					ft_lstnew.c \
 					ft_lstsize.c \
 					ft_free_tab.c \
 					ft_lst_find.c \
+					ft_lstcreate.c \
+					ft_lstfree_at.c \
+					ft_lstfree.c \
+					ft_lstget_at.c \
+					ft_lstset_at.c
 
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

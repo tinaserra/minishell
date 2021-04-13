@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstset_at.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/12 02:22:57 by vserra            #+#    #+#             */
-/*   Updated: 2019/11/14 23:03:42 by vserra           ###   ########.fr       */
+/*   Created: 2021/04/13 02:37:25 by tinaserra         #+#    #+#             */
+/*   Updated: 2021/04/13 02:50:28 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** Créé un nouvel element de la liste
-*/
-
-t_list	*ft_lstnew(void *content)
+void	ft_lstset_at(t_list *l, void *new_data, int pos)
 {
-	t_list	*new;
+	int i;
 
-	if ((new = malloc(sizeof(*new))) == NULL)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
+	if (l == NULL || pos > ft_lstsize(l))
+		return ;
+	i = 0;
+	while (i < pos)
+	{
+		l = l->next;
+		i++;
+	}
+	l->data = new_data;
 }

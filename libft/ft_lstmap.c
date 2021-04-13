@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 22:28:24 by vserra            #+#    #+#             */
-/*   Updated: 2019/11/14 22:45:45 by vserra           ###   ########.fr       */
+/*   Updated: 2021/04/13 03:00:15 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	current = lst;
 	while (current)
 	{
-		if (!(new = ft_lstnew(f(current->content))))
+		if (!(new = ft_lstcreate(f(current->data))))
 		{
 			ft_lstclear(r, del);
 			free(r);

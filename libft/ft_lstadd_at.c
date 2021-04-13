@@ -1,34 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_at.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 14:26:35 by vserra            #+#    #+#             */
-/*   Updated: 2021/04/13 02:58:31 by tinaserra        ###   ########.fr       */
+/*   Created: 2021/04/13 02:42:30 by tinaserra         #+#    #+#             */
+/*   Updated: 2021/04/13 03:04:34 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+t_list	*ft_lstadd_at(t_list *l, void *data, int pos)
 {
-	t_list	*save;
-	t_list	*begin;
+	t_list *prec;
+	t_list *cur;
+	t_list *cell;
+	int i;
 
-	begin = *lst;
-	save = *lst;
-	if (!lst)
-		return ;
-	if (*lst == NULL || !del)
-		return ;
-	while (save)
+	prec = l;
+	cur = l;
+	cell = ft_lstcreate(data);
+	if (l == NULL)
+		return(cell);
+	if (pos == 0)
 	{
-		del(save->data);
-		begin = save;
-		save = save->next;
-		free(begin);
+		cell->next = l;
+		return(cell);
 	}
-	*lst = NULL;
+	if (pos > ft_lstsize(l))
+		return (NULL);
+	i = 0;
+	while (i < pos)
+	{
+		i++;
+		prec = cur;
+		cur = cur->next;
+	}
+	prec->next = cell;
+	cell->next = cur;
+	return(l);
 }

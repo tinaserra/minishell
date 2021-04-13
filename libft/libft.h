@@ -8,7 +8,7 @@
 
 typedef struct	s_list
 {
-	void			*content;
+	void			*data;
 	struct s_list	*next;
 }				t_list;
 
@@ -55,7 +55,13 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lst_find_pos(t_list *lst, int pos);
-t_list	*ft_lstnew(void *content);
-int		ft_lstsize(t_list *lst);
 void	ft_free_tab(char **tab);
+
+t_list	*ft_lstcreate(void *data);
+int		ft_lstsize(t_list *l);
+t_list	*ft_lstadd_at(t_list *l, void *data, int pos);
+void	*ft_lstget_at(t_list *l, int pos);
+void	ft_lstset_at(t_list *l, void *data, int pos);
+t_list	*ft_lstfree_at(t_list *l, int pos);
+t_list	*ft_lstfree(t_list *l);
 #endif
