@@ -42,6 +42,7 @@ int		get_args(t_minishell *ms)
 	int		len;
 	char	*tmp;
 	t_list	*args;
+	int pos = 0;
 
 	args = NULL;
 
@@ -57,13 +58,14 @@ int		get_args(t_minishell *ms)
 			ms->line++;
 			len++;
 		}
-		ms->line -= len;
 		tmp = ft_calloc(len + 1, 1);
+		ms->line -= len;
 		ft_strncpy(tmp, (char *)ms->line, len);
 		printf("tmp = |%s| len = %d\n", tmp, len);
-		args = ft_lstadd_at(args, tmp, ft_lstsize(args));
+		args = ft_lstadd_at(args, tmp, pos);
 		free(tmp);
 		tmp = NULL;
+		pos++;
 		ms->line += len;
 		print_list(args);
 	}
