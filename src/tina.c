@@ -7,22 +7,6 @@
 		//ms->mask |= IS_ENV;
 		//ms->mask |= IS_EXIT;
 
-// void	print_list(t_list *args)
-// {
-// 	t_list *list;
-// 	int i;
-
-// 	list = args;
-// 	i = 0;
-// 	while (list)
-// 	{
-// 		i++;
-// 		printf("%d ", i);
-// 		printf("arg = |%s| ", list->data);
-// 		list = list->next;
-// 		printf("\n");
-// 	}
-// }
 
 void	print_list(t_list *l)
 {
@@ -47,7 +31,7 @@ int		get_args(t_minishell *ms)
 
 	while (*(ms->line)!= '\0')
 	{
-		while (*(ms->line) == ' ')
+		while (*(ms->line) == ' ') // strtrim '\f\t\n\r\v '
 			ms->line++;
 		len = 0;
 		while (*(ms->line) != '"' && *(ms->line) != '\0')
