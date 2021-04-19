@@ -33,13 +33,36 @@ void	redraw_prompt(char *s)
 		ft_putchar_fd(s[i], 1);
 }
 
+char	*append_at_pos(char *s, char c, int pos)
+{
+	char	*res;
+	int		i;
+
+	i = -1;
+	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	while (++i < pos)
+		res[i] = s[i];
+	res[i] = c;
+	while (++i < ft_strlen(s))
+		res[i] = s[i];
+	res[i] = '\0';
+	return (res);
+}
+
 int		handle_termcaps(t_minishell *ms, char **line, char c)
 {
 	(void)ms;
 	if (c == CTRL_D)
 	{
-		if (ft_strlen(*line) == 0)
+		if (!*line || ft_strlen(*line) == 0)
 			return (ft_putstr_fd(1, "exit\n"));
+		
+		return (42);
+	}
+	if ((c == 67 || c == 68) && ms->cursor != ft_strlen(*line))
+	{
+		*line = append_at_pos(*line, c, ms->cursor);
+		redraw_prompt(*line);
 		return (42);
 	}
 	if (c == KEY_DEL && ms->cursor > 0)

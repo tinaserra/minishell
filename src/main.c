@@ -44,6 +44,8 @@ int		minishell2(t_minishell *ms, char **line)
 		add_history(*line);
 		ms->line = (unsigned char *)ft_strdup(*line);
 		fonction();
+		free(*line);
+		*line = NULL;
 	}
 	print_prompt(0);
 	return (1);
