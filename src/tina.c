@@ -20,12 +20,23 @@ void	print_list(t_list *l)
 	printf("\n");
 }
 
+void copy_lst(t_minishell *ms, t_list **args, int len)
+{
+	char	tmp[len + 1];
+
+	ft_strncpy(tmp, (char *)ms->line, len);
+printf("tmp = |%s| len = %d\n", tmp, len);
+	*args = ft_lstadd_at(*args, tmp, ft_lstsize(*args));
+}
+
 int		get_args(t_minishell *ms)
 {
 	printf("GET ARGS\n");
 	int		len;
-	char	*tmp;
+	// char	*tmp;
 	t_list	*args;
+	// int pos = 0;
+	// int i;
 
 	args = NULL;
 
@@ -41,13 +52,22 @@ int		get_args(t_minishell *ms)
 			ms->line++;
 			len++;
 		}
+		// tmp = ft_calloc(len + 1, 1);
 		ms->line -= len;
-		tmp = ft_calloc(len + 1, 1);
-		ft_strncpy(tmp, (char *)ms->line, len);
-		printf("tmp = |%s| len = %d\n", tmp, len);
-		args = ft_lstadd_at(args, tmp, ft_lstsize(args));
-		free(tmp);
-		tmp = NULL;
+		copy_lst(ms, &args, len);
+		// i = 0;
+		// while (i < len)
+		// {
+		// 	tmp[i] = *(ms->line);
+		// 	i++;
+		// 	ms->line++;
+		// }
+		// tmp[len] = '\0';
+		// ft_strncpy(tmp, (char *)ms->line, len);
+		// printf("tmp = |%s| len = %d\n", tmp, len);
+		// args = ft_lstadd_at(args, tmp, pos);
+		// free(tmp);
+		// tmp = NULL;
 		ms->line += len;
 		print_list(args);
 	}
