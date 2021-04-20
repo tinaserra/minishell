@@ -8,7 +8,7 @@ void	get_cmds(t_minishell *ms)
 	int		k;
 	int		len;
 
-	cmds = ft_split((char *)ms->line, ";");
+	cmds = ft_split(ms->line, ";");
 	len = ft_strs_tab_size(cmds);
 	ms->cmds = malloc(sizeof(char **) * len);
 	i = 0;

@@ -40,9 +40,8 @@ int		minishell2(t_minishell *ms, char **line)
 	*line = ft_strtrim(*line, "\f\t\n\r\v");
 	if (ft_strlen(*line) != 0)
 	{
-		free(tmp);
 		add_history(*line);
-		ms->line = (unsigned char *)ft_strdup(*line);
+		ms->line = ft_strdup(*line);
 		fonction();
 		free(*line);
 		*line = NULL;

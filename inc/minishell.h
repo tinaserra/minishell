@@ -30,14 +30,17 @@
 ** VALUES ------------------------------------------------------------------- **
 */
 
-# define IS_ECHO	1 << 0
-# define IS_NL		1 << 1
-# define IS_CD		1 << 2
-# define IS_PWD		1 << 3
-# define IS_EXPORT	1 << 4
-# define IS_UNSET	1 << 5
-# define IS_ENV		1 << 6
-# define IS_EXIT	1 << 7
+// # define IS_ECHO		1 << 0 // -> 0000 0001
+// # define IS_NL		1 << 1 // -> 0000 0010
+// # define IS_CD		1 << 2 // -> 0000 0100
+// # define IS_PWD		1 << 3 // -> 0000 1000
+// # define IS_EXPORT	1 << 4
+// # define IS_UNSET	1 << 5
+// # define IS_ENV		1 << 6
+// # define IS_EXIT		1 << 7
+
+# define DOUBLE_Q	1 << 0 // -> 0000 0001
+# define SIMPLE_Q	1 << 1 // -> 0000 0010
 
 typedef struct		s_env
 {
@@ -55,22 +58,48 @@ typedef struct		s_env
 typedef struct	s_cmds
 {
 	char		*cmd;
-	char		**args;
-	t_list		*cmds_list;
+	t_list		*args;
 }				t_cmds;
 
 
+
+// [echo $HOME bonjour cnecn rfor] ; OK
+// [echo '$HOME' cnecn rfor] ;
+// [echo bonjour cnecn rfor | cat -e] ;
+// [echo bonjour cnecn rfor | cat -e] ;
+// [echo bonjour cnecn rfor | cat -e]
+
+	// OR |
+	// 0 | 0 = 0
+	// 0 | 1 = 1
+	// 1 | 0 = 1
+	// 1 | 1 = 1
+
+	// XOR ^
+	// 0 ^ 0 = 0
+	// 0 ^ 1 = 1
+	// 1 ^ 0 = 1
+	// 1 ^ 1 = 0
+
 typedef struct		s_minishell
 {
+	char			mask; // -> 0000 0000
+
+	// ms->mask ^= DOUBLE_Q
+	// 0 ^ 1 = 1
+	// mask -> 0000 0010
+
+
+
 	int				close_signal;
 	int				cursor;
 	int				prompt_size;
 	t_list			*history;
 	int				history_pos;
 	int				cursor_pos;
-	unsigned char	*line;
+	char			*line;
+	t_list			*commands;
 	t_cmds			cmds;
-	char			mask;
 	t_env			*env;
 }					t_minishell;
 t_minishell *ms;

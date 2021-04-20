@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 21:47:38 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/02/25 17:19:18 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/04/20 17:01:09 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char	*ft_strtrim(char *s1, char *set)
 	while (--i > j && ft_strchr(set, s1[i]))
 		len--;
 	result = ft_substr(s1, j, len);
+	free(s1);
 	return (result);
 }

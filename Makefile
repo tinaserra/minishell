@@ -1,5 +1,5 @@
 SRCS			=	main.c			\
-					john.c			\
+					tinav2.c			\
 					signal.c		\
 					env.c			\
 					history.c		\

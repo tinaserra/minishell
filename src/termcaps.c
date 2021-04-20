@@ -54,10 +54,10 @@ int		handle_termcaps(t_minishell *ms, char **line, char c)
 	(void)ms;
 	if (c == CTRL_D)
 	{
-		if (!*line || ft_strlen(*line) == 0)
+		//if (!*line || ft_strlen(*line) == 0)
 			return (ft_putstr_fd(1, "exit\n"));
 		
-		return (42);
+		//return (42);
 	}
 	if ((c == 67 || c == 68) && ms->cursor != ft_strlen(*line))
 	{
