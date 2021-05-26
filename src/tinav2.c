@@ -6,7 +6,7 @@ void	print_list(t_list *l)
 		printf("la liste est vide\n");
 	while (l != NULL)
 	{
-		printf("[%s]\n", l->data);
+		printf("[%s]\n", (char *)l->data);
 		l = l->next;
 	}
 	printf("\n");
@@ -43,7 +43,7 @@ int		check_syntaxe()
 	{
 		if (ms->line[i] == ';' && ms->line[i + 1] == ';')
 		{	
-			ft_putstr_fd(2, "syntax error near unexpected token `;;'\n");
+			ft_putstr_fd(2, "syntax error near unexpected token `;;`\n");
 			return (0);
 		}
 		i++;
@@ -77,48 +77,56 @@ int		count_simple_quote(char *s, int end)
 	// 1 & 0 = 0
 	// 1 & 1 = 1
 
+	// if ((mask & DOUBLE_Q) == 1) ->  y a "
+	// if (mask == DOUBLE_Q) ->  y a " uniquement
+
 int		truc(char *s)
 {
-	int i;
-	int j;
-	int dq;
-	int sq;
-	int quote;
-
-	quote = 0;
-	dq = 0;
-	sq = 0;
-	i = 0;
-	while (s[i] != '\0')
+	printf("fdp (s) = %d\n", ms->fdp);
+	// i = 0;
+	ms->mask = 0;
+	while (s[ms->fdp])
 	{
-		printf("c: %c\n", s[i]);
-		if (s[i] == '"' && sq == 0) // si le caracter = " et qu'on a pas encore trouver de quote (simple ou double)
+		if (s[ms->fdp] == '\'' && ms->mask == 0)
+			ms->mask ^= SIMPLE_Q;
+		if (s[ms->fdp] == '"' && ms->mask == 0) // && ms->mask == 0
+			ms->mask ^= DOUBLE_Q;
+		if (ms->mask == DOUBLE_Q)
 		{
-			quote = '"';
-			printf("quote : %c\n", quote);
-		}
-		if (s[i] == '\'' && dq == 0)// si le caracter = ' et qu'on a pas encore trouver de quote (simple ou double)
-		{
-			quote = '\'';
-			printf("quote : %c\n", quote);
-		}
-		j = i;
-		while ((quote != 0) && (s[j] != quote || s[j] != '$'))
-		{
-			j++;
-			printf("pd: %c\n", s[j]);
-			printf("quote pd: %c\n", quote);
-			if (s[j] == '$') // la variable est dans la boite actuelle
-				return (quote);
-			if (s[j] == quote)
+			ms->fdp++;
+			while (s[ms->fdp] != '"')
 			{
-				printf("pd\n");
-				quote = 0;
-				break;
+				if (s[ms->fdp] == '$')
+				{
+					printf("fdp (e) = %d\n", ms->fdp);
+					printf("char =    %c\n", s[ms->fdp]);
+					return (ms->mask);
+				}
+				ms->fdp++;
 			}
+			if (s[ms->fdp] == '"')
+				ms->mask = 0;
 		}
-		i++;
+		else if (ms->mask == SIMPLE_Q)
+		{
+			ms->fdp++;
+			while (s[ms->fdp] != '\'')
+			{
+				if (s[ms->fdp] == '$')
+				{
+					printf("fdp (e) = %d\n", ms->fdp);
+					printf("char =    %c\n", s[ms->fdp]);
+					return (ms->mask);
+				}
+				ms->fdp++;
+			}
+			if (s[ms->fdp] == '\'')
+				ms->mask = 0;
+		}
+		ms->fdp++;
 	}
+	printf("fdp (e) = %d\n", ms->fdp);
+	printf("char =    %c\n", s[ms->fdp]);
 	return (0);
 }
 
@@ -141,22 +149,26 @@ char	*replace_env(char *str)
 	char	*s1;
 	char	*s2;
 
+
 	i = 0;
-	printf("truc %d\n", truc(str));
-	while (str[i] != '\0')
+	ms->fdp = 0;
+	while (str[i])
 	{
 		if (str[i] == '$')
 		{
-			// if (count_simple_quote(str, i) == 1)
-			// 	return (str);
-			//printf("%d\n", count_simple_quote(str, i));
-			len = get_env_content(&str[i], &env_content);
-			s1 = ft_strndup(str, i);
-			i = len + i + 1;
-			s2 = ft_strdup(&str[i]);
-			str = ft_strjoin_free(s1, env_content, 'L');
-			str = ft_strjoin_free(str, s2, 'B');
-			i = 0;
+			if (truc(str) != SIMPLE_Q) //
+			{
+				// if (count_simple_quote(str, i) == 1)
+				// 	return (str);
+				//printf("%d\n", count_simple_quote(str, i));
+				len = get_env_content(&str[i], &env_content);
+				s1 = ft_strndup(str, i);
+				i = len + i + 1;
+				s2 = ft_strdup(&str[i]);
+				str = ft_strjoin_free(s1, env_content, 'L');
+				str = ft_strjoin_free(str, s2, 'B');
+				i = 0;
+			}
 		}
 		i++;
 	}
@@ -174,12 +186,16 @@ int		parsing()
 	if (check_syntaxe() == 0)
 		return (0);
 	ms->line = ft_strtrim(ms->line, "\f\t\n\r\v ");
+	// ici on split les commandes sur le ;
 	i = 0;
 	old = 0;
+	ms->mask = 0;
 	while (ms->line[i] != '\0')
 	{
 		if (ms->line[i] == '"')
 			ms->mask ^= DOUBLE_Q;
+		if (ms->line[i] == '\'')
+			ms->mask ^= SIMPLE_Q;
 		if (ms->line[i] == ';' || ms->line[i + 1] == '\0')
 		{
 			if (ms->mask == 0)

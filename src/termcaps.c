@@ -8,9 +8,11 @@ void	set_raw()
 	term.c_lflag &= ~(ICANON);
 	term.c_lflag &= ~(ECHO);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
+	ms->key_upp = tgetstr("ku", NULL);
+	//ms->key_upp[1] = '[';
 }
 
-int termputs(int c)
+int		termputs(int c)
 {
 	return (write(1, &c, 1));
 }
@@ -49,21 +51,19 @@ char	*append_at_pos(char *s, char c, int pos)
 	return (res);
 }
 
-int		handle_termcaps(t_minishell *ms, char **line, char c)
+int		handle_termcaps(t_minishell *ms, char **line, char c, char d)
 {
 	(void)ms;
+	(void)line;
+	(void)c;
+	(void)d;
+
 	if (c == CTRL_D)
 	{
 		//if (!*line || ft_strlen(*line) == 0)
 			return (ft_putstr_fd(1, "exit\n"));
 		
 		//return (42);
-	}
-	if ((c == 67 || c == 68) && ms->cursor != ft_strlen(*line))
-	{
-		*line = append_at_pos(*line, c, ms->cursor);
-		redraw_prompt(*line);
-		return (42);
 	}
 	if (c == KEY_DEL && ms->cursor > 0)
 	{
@@ -72,6 +72,13 @@ int		handle_termcaps(t_minishell *ms, char **line, char c)
 		redraw_prompt(*line);
 		return (42);
 	}
+	//if (d == '[' && (c == 'A' || c == 'D'))
+	//{
+	//	printf("%d\n", c);
+	//	print_term("cd");
+	//	set_history(c, line);
+	//	return (42);
+	//}
 	else if (c == KEY_DOWN || c == KEY_UP)
 	{
 		print_term("cd");

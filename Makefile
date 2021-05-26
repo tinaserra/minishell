@@ -36,7 +36,7 @@ LIBFT_DIR		=	libft
 LIBFT			=	libft.a
 
 # override -> permet de reecrire la suite de la variable
-override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
+override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 -fsanitize=address
 
 OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 OBJ_TINA		=	$(addprefix $(OBJ_DIR)/,$(SRCS_TINA:.c=.o))

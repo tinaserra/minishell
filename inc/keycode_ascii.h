@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keycode_ascii.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/22 11:40:31 by vserra            #+#    #+#             */
-/*   Updated: 2021/03/21 20:28:22 by vserra           ###   ########.fr       */
+/*   Updated: 2021/05/10 17:15:43 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # define KEY_ENTER			10
 # define KEY_DEL			127
 # define CTRL_D				4
+# define KEY_RIGHT			67
+# define KEY_LEFT			68
 
-# define KEY_RIGHT			124
-# define KEY_LEFT			123
 # define KEY_ESCAPE			53
 # define KEY_F1 			122
 # define KEY_F2				120

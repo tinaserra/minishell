@@ -53,13 +53,14 @@ int		minishell2(t_minishell *ms, char **line)
 int		minishell()
 {
 	char	c;
+	char	d;
 	char	*line;
 	int		ret;
 	
 	line = NULL;
 	while (read(0, &c, 1) == 1)
 	{
-		if ((ret = handle_termcaps(ms, &line, c)) == 5)
+		if ((ret = handle_termcaps(ms, &line, c, d)) == 5)
 			return (EXIT_SUCCESS);
 		else if (ret == 1)
 		{
@@ -74,6 +75,7 @@ int		minishell()
 				ms->cursor++;
 			}
 		}
+		d = c;
 	}
 	return (1);
 }

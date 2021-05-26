@@ -35,7 +35,6 @@ void	*ft_realloc(void *ptr, size_t size);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strcpy(char *dest, char *src);
 char	*ft_del_last_char(char *s);
-
 void	ft_putnbr_fd(int n, int fd);
 void	ft_swap(int *a, int *b);
 void	ft_rev_int_tab(int *tab, int size);
@@ -59,7 +58,6 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lst_find_pos(t_list *lst, int pos);
 void	ft_free_tab(char **tab);
-
 t_list	*ft_lstcreate(void *data);
 int		ft_lstsize(t_list *l);
 t_list	*ft_lstadd_at(t_list *l, void *data, int pos);

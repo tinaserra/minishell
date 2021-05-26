@@ -20,8 +20,8 @@
 # include <errno.h>
 # include <termios.h>
 # include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 # include <term.h>
@@ -90,7 +90,7 @@ typedef struct		s_minishell
 	// mask -> 0000 0010
 
 
-
+	int				fdp;
 	int				close_signal;
 	int				cursor;
 	int				prompt_size;
@@ -98,6 +98,7 @@ typedef struct		s_minishell
 	int				history_pos;
 	int				cursor_pos;
 	char			*line;
+	char			*key_upp;
 	t_list			*commands;
 	t_cmds			cmds;
 	t_env			*env;
@@ -116,7 +117,7 @@ void	sig_int(int c);
 */
 
 void	set_raw();
-int		handle_termcaps(t_minishell *ms, char **line, char c);
+int		handle_termcaps(t_minishell *ms, char **line, char c, char d);
 void	print_term(char *c);
 int		termputs(int c);
 
@@ -126,6 +127,8 @@ int     get_history(t_minishell *ms);
 void    add_history(char *line);
 void	set_history(char c, char **line);
 void	print_prompt();
+char	*append_at_pos(char *s, char c, int pos);
+void	redraw_prompt(char *s);
 void    fonction();
 
 /*
