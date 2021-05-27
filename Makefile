@@ -1,5 +1,5 @@
 SRCS			=	main.c			\
-					tinav2.c		\
+					parsing_start.c	\
 					signal.c		\
 					env.c			\
 					history.c		\
@@ -9,7 +9,7 @@ SRCS			=	main.c			\
 					env_replace.c	\
 
 SRCS_TINA		=	main.c			\
-					tinav2.c		\
+					parsing_start.c	\
 					signal.c		\
 					env.c			\
 					history.c		\

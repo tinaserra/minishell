@@ -68,7 +68,7 @@ char	*truc(char *str)
 	ms->quote = 0;
 	while (str[i])
 	{
-		fdp(str, &i);
+		check_quotes(str, &i);
 		if (str[i] == '$')
 		{
 			if (ms->quote != '\'')
