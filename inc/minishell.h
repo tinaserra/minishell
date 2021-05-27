@@ -90,7 +90,7 @@ typedef struct		s_minishell
 	// mask -> 0000 0010
 
 
-	int				fdp;
+	int				quote;
 	int				close_signal;
 	int				cursor;
 	int				prompt_size;
@@ -123,6 +123,8 @@ int		termputs(int c);
 
 int	    init_env(char **env);
 char	*find_env(t_env *env, char *name);
+int		get_env_content(char *line, char **env_content);
+char	*replace_env(char *str, int pos_dollar);
 int     get_history(t_minishell *ms);
 void    add_history(char *line);
 void	set_history(char c, char **line);
