@@ -24,7 +24,7 @@
 
 	// if (str[i] == '"' && !(ms->mask & SIMPLE_Q))// on une double quote en premier
 
-int		check_syntaxe()
+int	check_syntaxe(void)
 {
 	int		i;
 
@@ -62,7 +62,7 @@ void	check_quotes(char *str, int *i)
 
 char	*truc(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ms->quote = 0;
@@ -79,28 +79,21 @@ char	*truc(char *str)
 	return (str);
 }
 
-int		parsing()
+t_list	*parsing(void)
 {
 	int		i;
 	int		old;
 	char	*tmp;
 	t_list	*commands;
 
-	commands = NULL;
-	if (check_syntaxe() == 0)
-		return (0);
-	ms->line = ft_strtrim(ms->line, "\f\t\n\r\v ");
-	// ici on split les commandes sur le ;
 	i = 0;
 	old = 0;
-	ms->quote = 0;
+	commands = NULL;
 	while (ms->line[i] != '\0')
 	{
 		check_quotes(ms->line, &i);
-		if (ms->line[i] == ';' || ms->line[i + 1] == '\0')
+		if ((ms->line[i] == ';' || ms->line[i + 1] == '\0') && ms->quote == 0)
 		{
-			if (ms->quote == 0)
-			{
 				if (ms->line[i + 1] == '\0' && ms->line[i] != ';')
 					tmp = ft_substr(ms->line, old, i - old + 1);
 				else
@@ -108,26 +101,26 @@ int		parsing()
 				tmp = ft_strtrim(tmp, "\f\t\n\r\v ");
 				ft_lstadd_back(&commands, ft_lstcreate(tmp));
 				old = i + 1;
-			}
 		}
 		i++;
 	}
-	ms->commands = commands;
+	return (commands);
+}
+
+void	fonction(void)
+{
+	t_list	*commands;
+
+	ms->quote = 0;
+	ms->line = ft_strtrim(ms->line, "\f\t\n\r\v ");
+	if (check_syntaxe() == 0)
+		return ;
+	ms->commands = parsing();
 	commands = ms->commands;
-	// on parcours chaque chaines
 	while (commands)
 	{
 		commands->data = truc(commands->data);
 		commands = commands->next;
 	}
 	ft_lstprint(ms->commands);
-	return (1);
-}
-
-void	fonction() // parsing
-{
-	if (parsing() == 1)
-	{
-		//printf("ta race\n");
-	}
 }
