@@ -65,4 +65,5 @@ void	*ft_lstget_at(t_list *l, int pos);
 void	ft_lstset_at(t_list *l, void *data, int pos);
 t_list	*ft_lstfree_at(t_list *l, int pos);
 t_list	*ft_lstfree(t_list *l);
+void	ft_lstprint(t_list *l);
 #endif

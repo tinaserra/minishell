@@ -40,6 +40,7 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_lstlast.c				\
 					ft_lstmap.c					\
 					ft_lstsize.c				\
+					ft_lstprint.c 				\
 					ft_free_tab.c				\
 					ft_lst_find.c				\
 					ft_lstcreate.c				\
