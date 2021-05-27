@@ -94,13 +94,13 @@ t_list	*parsing(void)
 		check_quotes(ms->line, &i);
 		if ((ms->line[i] == ';' || ms->line[i + 1] == '\0') && ms->quote == 0)
 		{
-				if (ms->line[i + 1] == '\0' && ms->line[i] != ';')
-					tmp = ft_substr(ms->line, old, i - old + 1);
-				else
-					tmp = ft_substr(ms->line, old, i - old);
-				tmp = ft_strtrim(tmp, "\f\t\n\r\v ");
-				ft_lstadd_back(&commands, ft_lstcreate(tmp));
-				old = i + 1;
+			if (ms->line[i + 1] == '\0' && ms->line[i] != ';')
+				tmp = ft_substr(ms->line, old, i - old + 1);
+			else
+				tmp = ft_substr(ms->line, old, i - old);
+			tmp = ft_strtrim(tmp, "\f\t\n\r\v ");
+			ft_lstadd_back(&commands, ft_lstcreate(tmp));
+			old = i + 1;
 		}
 		i++;
 	}
