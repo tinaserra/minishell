@@ -18,6 +18,8 @@ char	*ft_del_last_char(char *s)
 	int		len;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s) - 1;
 	if (!(res = malloc(sizeof(char) * (len + 1))))
 		return (NULL);

@@ -101,6 +101,7 @@ typedef struct		s_minishell
 	char			*key_upp;
 	t_list			*commands;
 	t_cmds			cmds;
+	char			*ce;
 	t_env			*env;
 }					t_minishell;
 t_minishell *ms;
@@ -117,7 +118,7 @@ void	sig_int(int c);
 */
 
 void	set_raw(void);
-int		handle_termcaps(t_minishell *ms, char **line, char c, char d);
+int		handle_termcaps(long c);
 void	print_term(char *c);
 int		termputs(int c);
 
@@ -127,9 +128,8 @@ int		get_env_content(char *line, char **env_content);
 char	*replace_env(char *str, int pos_dollar);
 int		get_history(t_minishell *ms);
 void	add_history(char *line);
-void	set_history(char c, char **line);
+void	set_history(long c, char **line);
 void	print_prompt();
-char	*append_at_pos(char *s, char c, int pos);
 void	redraw_prompt(char *s);
 void	parsing();
 void	fonction();
