@@ -9,6 +9,7 @@ SRCS			=	main.c			\
 					env_replace.c	\
 
 SRCS_TINA		=	main.c			\
+					tina.c			\
 					parsing_start.c	\
 					signal.c		\
 					env.c			\

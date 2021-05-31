@@ -60,7 +60,7 @@ void	check_quotes(char *str, int *i)
 		ms->quote = 0;
 }
 
-char	*truc(char *str)
+char	*handle_env(char *str)
 {
 	int	i;
 
@@ -79,7 +79,7 @@ char	*truc(char *str)
 	return (str);
 }
 
-t_list	*parsing(void)
+t_list	*split_pointvirgule(void)
 {
 	int		i;
 	int		old;
@@ -107,7 +107,7 @@ t_list	*parsing(void)
 	return (commands);
 }
 
-void	fonction(void)
+void	parsing()
 {
 	t_list	*commands;
 
@@ -115,11 +115,11 @@ void	fonction(void)
 	ms->line = ft_strtrim(ms->line, "\f\t\n\r\v ");
 	if (check_syntaxe() == 0)
 		return ;
-	ms->commands = parsing();
+	ms->commands = split_pointvirgule();
 	commands = ms->commands;
 	while (commands)
 	{
-		commands->data = truc(commands->data);
+		commands->data = handle_env(commands->data);
 		commands = commands->next;
 	}
 	ft_lstprint(ms->commands);

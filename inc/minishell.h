@@ -116,27 +116,28 @@ void	sig_int(int c);
 ** TERMCAPS ----------------------------------------------------------------- **
 */
 
-void	set_raw();
+void	set_raw(void);
 int		handle_termcaps(t_minishell *ms, char **line, char c, char d);
 void	print_term(char *c);
 int		termputs(int c);
 
-int	    init_env(char **env);
+int		init_env(char **env);
 char	*find_env(t_env *env, char *name);
 int		get_env_content(char *line, char **env_content);
 char	*replace_env(char *str, int pos_dollar);
-int     get_history(t_minishell *ms);
-void    add_history(char *line);
+int		get_history(t_minishell *ms);
+void	add_history(char *line);
 void	set_history(char c, char **line);
 void	print_prompt();
 char	*append_at_pos(char *s, char c, int pos);
 void	redraw_prompt(char *s);
-void    fonction();
+void	parsing();
+void	fonction();
 
 /*
 ** BUILTINS ---------------------------------------------------------------- **
 */
 
 void	echo_builtin(t_cmds *cmds);
-void    env_builtin();
+void	env_builtin();
 #endif
