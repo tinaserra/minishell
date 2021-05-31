@@ -60,6 +60,7 @@ int		minishell()
 		if (c == 4)
 			return (EXIT_SUCCESS);
 		handle_termcaps(c);
+		c = 0;
 	}
 	return (1);
 }

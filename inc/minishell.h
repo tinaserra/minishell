@@ -128,7 +128,7 @@ int		get_env_content(char *line, char **env_content);
 char	*replace_env(char *str, int pos_dollar);
 int		get_history(t_minishell *ms);
 void	add_history(char *line);
-void	set_history(long c, char **line);
+void	set_history(long c);
 void	print_prompt();
 void	redraw_prompt(char *s);
 void	parsing();

@@ -44,7 +44,7 @@ int     get_history(t_minishell *ms)
     return (1);
 }
 
-void	set_history(long c, char **line)
+void	set_history(long c)
 {
 	free(ms->line);
     ms->cursor = 0;
@@ -52,21 +52,21 @@ void	set_history(long c, char **line)
 	{
 		if (ms->history_pos >= ft_lstsize(ms->history) - 1)
 			return ;
-		*line = ft_strdup(ft_lst_find_pos(ms->history, ++(ms->history_pos))->data);
+		ms->line = ft_strdup(ft_lst_find_pos(ms->history, ++(ms->history_pos))->data);
 	}
 	if (c == 4348699)
 	{
         if (ms->history_pos > 0)
-		    *line = ft_strdup(ft_lst_find_pos(ms->history, --(ms->history_pos))->data);
+		    ms->line = ft_strdup(ft_lst_find_pos(ms->history, --(ms->history_pos))->data);
         else
         {
             ms->history_pos = -1;
-            *line = NULL;
+            ms->line = NULL;
         }
 	}
-	ms->cursor = ft_strlen(*line);
+	ms->cursor = ft_strlen(ms->line);
 	write(1, "\r", 1);
 	print_term("ce");
     print_prompt();
-    ft_putstr_fd(1, *line);
+    ft_putstr_fd(1, ms->line);
 }

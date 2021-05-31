@@ -8,7 +8,7 @@ void	set_raw()
 	term.c_lflag &= ~(ICANON);
 	term.c_lflag &= ~(ECHO);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
-	ms->ce = tgetstr("ce", NULL);
+	//ms->ce = tgetstr("ce", NULL);
 }
 
 int		termputs(int c)
@@ -27,7 +27,7 @@ void	redraw_prompt(char *s)
 	int i;
 
 	i = -1;
-	ft_putstr_fd(1, "\r"); //remettre curseur au debut de la ligne
+	ft_putstr_fd(1, "\r"); // reset la ligne
 	print_term("cd"); //clear la ligne avant de reafficher
 	print_prompt();
 	while (++i < (ft_strlen(s)))
@@ -54,15 +54,24 @@ int		handle_termcaps(long c)
 		print_char(c);
 		write(1, &c, 1);
 	}
-	else if (c == 4283163) //history up
-		set_history(c, &ms->line);
-	else if (c == 4348699)
-		set_history(c, &ms->line);
+	else if (c == 4283163 || c == 4348699)
+		set_history(c);
 	else if (c == 127 && ms->cursor > 0)
 	{
 		ms->line = ft_del_last_char(ms->line);
 		//printf("\n[%s]\n", ms->line);
 		redraw_prompt(ms->line);
+	}
+	else if (c == 10)
+	{
+		add_history(ms->line);
+		write(1, "\n", 1);
+		ms->cursor = 0;
+		if (ms->line)
+			fonction();
+		free(ms->line);
+		ms->line = NULL;
+		print_prompt();
 	}
 	//printf("%s\n", ms->line);
 	return (1);
