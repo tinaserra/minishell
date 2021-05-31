@@ -50,7 +50,8 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_lstset_at.c				\
 					ft_del_last_char.c			\
 					ft_strndup.c				\
-					ft_strjoin_free.c
+					ft_strjoin_free.c			\
+					ft_strncat.c
 
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
