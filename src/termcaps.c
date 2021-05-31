@@ -8,8 +8,7 @@ void	set_raw()
 	term.c_lflag &= ~(ICANON);
 	term.c_lflag &= ~(ECHO);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
-	ms->key_upp = tgetstr("ku", NULL);
-	//ms->key_upp[1] = '[';
+	ms->ce = tgetstr("ce", NULL);
 }
 
 int		termputs(int c)
@@ -35,55 +34,36 @@ void	redraw_prompt(char *s)
 		ft_putchar_fd(s[i], 1);
 }
 
-char	*append_at_pos(char *s, char c, int pos)
+void	print_char(long c)
 {
-	char	*res;
-	int		i;
+	char	s[2];
 
-	i = -1;
-	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	while (++i < pos)
-		res[i] = s[i];
-	res[i] = c;
-	while (++i < ft_strlen(s))
-		res[i] = s[i];
-	res[i] = '\0';
-	return (res);
+	s[0] = c;
+	s[1] = '\0';
+	if (ms->line)
+		ms->line = ft_strjoin_free(ms->line, s, 'L');
+	else
+		ms->line = ft_strdup(s);
+	ms->cursor++;
 }
 
-int		handle_termcaps(t_minishell *ms, char **line, char c, char d)
+int		handle_termcaps(long c)
 {
-	(void)ms;
-	(void)line;
-	(void)c;
-	(void)d;
-
-	if (c == CTRL_D)
+	if (c >= 32 && c <= 126)
 	{
-		//if (!*line || ft_strlen(*line) == 0)
-			return (ft_putstr_fd(1, "exit\n"));
-		
-		//return (42);
+		print_char(c);
+		write(1, &c, 1);
 	}
-	if (c == KEY_DEL && ms->cursor > 0)
+	else if (c == 4283163) //history up
+		set_history(c, &ms->line);
+	else if (c == 4348699)
+		set_history(c, &ms->line);
+	else if (c == 127 && ms->cursor > 0)
 	{
-		(ms->cursor)--;
-		*line = ft_del_last_char(*line);
-		redraw_prompt(*line);
-		return (42);
+		ms->line = ft_del_last_char(ms->line);
+		//printf("\n[%s]\n", ms->line);
+		redraw_prompt(ms->line);
 	}
-	//if (d == '[' && (c == 'A' || c == 'D'))
-	//{
-	//	printf("%d\n", c);
-	//	print_term("cd");
-	//	set_history(c, line);
-	//	return (42);
-	//}
-	else if (c == KEY_DOWN || c == KEY_UP)
-	{
-		print_term("cd");
-		set_history(c, line);
-		return (42);
-	}
+	//printf("%s\n", ms->line);
 	return (1);
 }

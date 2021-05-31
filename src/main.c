@@ -52,30 +52,14 @@ int		minishell2(t_minishell *ms, char **line)
 
 int		minishell()
 {
-	char	c;
-	char	d;
-	char	*line;
-	int		ret;
-	
-	line = NULL;
-	while (read(0, &c, 1) == 1)
+	long	c;
+
+	c = 0;
+	while (read(0, &c, sizeof(c)) > 0)
 	{
-		if ((ret = handle_termcaps(ms, &line, c, d)) == 5)
+		if (c == 4)
 			return (EXIT_SUCCESS);
-		else if (ret == 1)
-		{
-			line = line_join(line, c);
-			if (c == KEY_ENTER)
-				minishell2(ms, &line);
-			else
-			{
-				write(1, &c, 1);
-				line[ms->cursor] = c;
-				line[ms->cursor + 1] = '\0';
-				ms->cursor++;
-			}
-		}
-		d = c;
+		handle_termcaps(c);
 	}
 	return (1);
 }

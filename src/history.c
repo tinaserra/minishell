@@ -44,16 +44,17 @@ int     get_history(t_minishell *ms)
     return (1);
 }
 
-void	set_history(char c, char **line)
+void	set_history(long c, char **line)
 {
+	free(ms->line);
     ms->cursor = 0;
-	if (c == 65)
+	if (c == 4283163)
 	{
 		if (ms->history_pos >= ft_lstsize(ms->history) - 1)
 			return ;
 		*line = ft_strdup(ft_lst_find_pos(ms->history, ++(ms->history_pos))->data);
 	}
-	if (c == 66)
+	if (c == 4348699)
 	{
         if (ms->history_pos > 0)
 		    *line = ft_strdup(ft_lst_find_pos(ms->history, --(ms->history_pos))->data);
