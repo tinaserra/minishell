@@ -1,66 +1,5 @@
 #include "minishell.h"
 
-		//ms->mask |= IS_CD;
-		//ms->mask |= IS_PWD;
-		//ms->mask |= IS_EXPORT; // int is_export = 1;
-		//ms->mask |= IS_UNSET;
-		//ms->mask |= IS_ENV;
-		//ms->mask |= IS_EXIT;
-
-//void copy_lst(t_minishell *ms, t_list **args, int len)
-//{
-//	char	tmp[len + 1];
-
-//	ft_strncpy(tmp, ms->line, len);
-//printf("tmp = |%s| len = %d\n", tmp, len);
-//	*args = ft_lstadd_at(*args, tmp, ft_lstsize(*args));
-//}
-
-//int		get_args(t_minishell *ms)
-//{
-//	printf("GET ARGS\n");
-//	int		len;
-//	// char	*tmp;
-//	t_list	*args;
-//	// int pos = 0;
-//	// int i;
-
-//	args = NULL;
-
-//	while (*(ms->line)!= '\0')
-//	{
-//		while (*(ms->line) == ' ') // strtrim '\f\t\n\r\v '
-//			ms->line++;
-//		len = 0;
-//		while (*(ms->line) != '"' && *(ms->line) != '\0')
-//		{
-//			if (*(ms->line) == ';' || *(ms->line) == ' ')
-//				break ;
-//			ms->line++;
-//			len++;
-//		}
-//		// tmp = ft_calloc(len + 1, 1);
-//		ms->line -= len;
-//		copy_lst(ms, &args, len);
-//		// i = 0;
-//		// while (i < len)
-//		// {
-//		// 	tmp[i] = *(ms->line);
-//		// 	i++;
-//		// 	ms->line++;
-//		// }
-//		// tmp[len] = '\0';
-//		// ft_strncpy(tmp, ms->line, len);
-//		// printf("tmp = |%s| len = %d\n", tmp, len);
-//		// args = ft_lstadd_at(args, tmp, pos);
-//		// free(tmp);
-//		// tmp = NULL;
-//		ms->line += len;
-//		print_list(args);
-//	}
-//	return (0);
-//}
-
 //int		parse_echo(t_minishell *ms)
 //{
 //	// t_list	*args;
@@ -106,31 +45,8 @@
 //	return (-1);
 //}
 
-//void		truc(t_minishell *ms)
-//{
-//	//int i;
-
-//	printf("|%s|\n", ms->line);
-//	while (*(ms->line) == ' ')
-//		ms->line++;
-//	if (get_cmds(ms) == -1)
-//		ft_putstr_fd(2, "command not found\n");
-//	//while (*(ms->line))
-//	//{
-//		//i = 0;
-//	//	while (ms->line[i] != ';' && ms->line[i])
-//	//	{
-//	//		while (ms->line[i] == ' ')
-//	//			i++;
-//	//		i++;
-//	//	}
-//	//	// reset mask + args
-//	//	ms->line++;
-//	//}
-//}
 
 void fonction() // parsing
 {
 	parsing();
-	printf("[%s]\n", ms->line);
 }
