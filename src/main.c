@@ -1,5 +1,11 @@
 #include "minishell.h"
 
+/**
+ * print_prompt
+ * * print prompt
+ * @param mode
+ */
+
 void	print_prompt(int mode)
 {
 	(void)mode;
@@ -15,39 +21,6 @@ void	print_prompt(int mode)
 	ms->prompt_size += 3;
 	ft_free_tab(pwd);
 	print_term("me");	
-}
-
-char	*line_join(char *s1, char c)
-{
-	char	*res;
-	char	*s2;
-
-	s2 = malloc(sizeof(char) * 2);
-	s2[0] = c;
-	s2[1] = '\0';
-	res = ft_strjoin(s1, s2);
-	free(s2);
-	return (res);
-}
-
-int		minishell2(t_minishell *ms, char **line)
-{
-	char	*tmp;
-
-	write(1, "\n", 1);
-	ms->cursor = 0;
-	tmp = *line;
-	*line = ft_strtrim(*line, "\f\t\n\r\v");
-	if (ft_strlen(*line) != 0)
-	{
-		add_history(*line);
-		ms->line = ft_strdup(*line);
-		fonction();
-		free(*line);
-		*line = NULL;
-	}
-	print_prompt(0);
-	return (1);
 }
 
 int		minishell()
