@@ -75,6 +75,10 @@ make tina && ./minitina
 Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf) | [FR](https://github.com/tinaserra/minishell/blob/master/links/minishell_fr.pdf)
 Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
 
+## USEFULL LINKS 🤙🏼
+
+[usefull](https://github.com/lucielebriquer)
+
 ## Comment utiliser Git en multi ?
 
 [Readme 😏](https://github.com/tinaserra/minishell/blob/master/links/git.md)

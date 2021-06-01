@@ -1,4 +1,5 @@
 SRCS			=	main.c			\
+					tina.c			\
 					parsing_start.c	\
 					signal.c		\
 					env.c			\
