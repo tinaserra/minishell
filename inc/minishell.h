@@ -49,13 +49,12 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-//typedef struct	s_args
-//{
-//	char			*arg;
-//	struct s_args	*next;
-//}				t_args;
+typedef struct	s_args
+{
+	char		**args;
+}				t_args;
 
-typedef struct	s_cmds
+typedef struct	s_cmds // john.c
 {
 	char		*cmd;
 	t_list		*args;
@@ -124,20 +123,24 @@ int		termputs(int c);
 
 int		init_env(char **env);
 char	*find_env(t_env *env, char *name);
-int		get_env_content(char *line, char **env_content);
-char	*replace_env(char *str, int pos_dollar);
 int		get_history(t_minishell *ms);
 void	add_history(char *line);
 void	set_history(long c);
 void	print_prompt();
 void	redraw_prompt(char *s);
-void	parsing();
-void	fonction();
 
 /*
-** BUILTINS ---------------------------------------------------------------- **
+** PARSING ------------------------------------------------------------------ **
+*/
+void	fonction();
+void	parsing();
+int		get_env_content(char *line, char **env_content);
+char	*replace_env(char *str, int pos_dollar);
+
+/*
+** BUILTINS ----------------------------------------------------------------- **
 */
 
-void	echo_builtin(t_cmds *cmds);
+void	echo_builtin(t_cmds *cmds); // john.c
 void	env_builtin();
 #endif

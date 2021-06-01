@@ -41,22 +41,26 @@ int	check_syntaxe(void)
 	}
 	return (1);
 }
-
+//str[*(i - 1)] != '\\' 
 void	check_quotes(char *str, int *i)
 {
-	if (str[*i] == '\'' && ms->quote == 0)
+	if (ms->quote == 0)
 	{
-		ms->quote = '\'';
-		(*i)++;
+		if ((str[*i - 1] != '\\' && i != 0) && str[*i] == '\'')
+		{
+			ms->quote = '\'';
+			(*i)++;
+		}
+		if ((str[*i - 1] != '\\' && i != 0) && str[*i] == '"')
+		{
+			ms->quote = '"';
+			(*i)++;
+		}
+		
 	}
-	if (str[*i] == '"' && ms->quote == 0)
-	{
-		ms->quote = '"';
-		(*i)++;
-	}
-	if (str[*i] == '\'' && ms->quote == '\'')
+	if ((str[*i - 1] != '\\' && i != 0) && str[*i] == '\'' && ms->quote == '\'')
 		ms->quote = 0;
-	if (str[*i] == '"' && ms->quote == '"')
+	if ((str[*i - 1] != '\\' && i != 0) && str[*i] == '"' && ms->quote == '"')
 		ms->quote = 0;
 }
 
@@ -92,7 +96,7 @@ t_list	*split_pointvirgule(void)
 	while (ms->line[i] != '\0')
 	{
 		check_quotes(ms->line, &i);
-		if ((ms->line[i] == ';' || ms->line[i + 1] == '\0') && ms->quote == 0)
+		if ((ms->line[i] == ';' || ms->line[i + 1] == '\0') && ms->quote == 0) // /!\ ne rempli pas en cas de quote non fermees
 		{
 			if (ms->line[i + 1] == '\0' && ms->line[i] != ';')
 				tmp = ft_substr(ms->line, old, i - old + 1);
@@ -120,6 +124,8 @@ void	parsing()
 	while (commands)
 	{
 		commands->data = handle_env(commands->data);
+		// stocker commandes et arguments dans un tableau
+		// lancer les builtins & edecuter
 		commands = commands->next;
 	}
 	ft_lstprint(ms->commands);
