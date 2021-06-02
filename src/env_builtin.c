@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:08:16 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/04/13 04:16:43 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/06/02 23:43:42 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void    env_builtin()
 {
-    int     i;
     t_env   *tmp;
 
-    i = -1;
     tmp = ms->env;
     while (tmp)
     {
