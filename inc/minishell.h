@@ -82,13 +82,7 @@ typedef struct	s_cmds // john.c
 
 typedef struct		s_minishell
 {
-	char			mask; // -> 0000 0000
-
-	// ms->mask ^= DOUBLE_Q
-	// 0 ^ 1 = 1
-	// mask -> 0000 0010
-
-
+	char			mask;
 	int				quote;
 	int				close_signal;
 	int				cursor;
@@ -97,10 +91,8 @@ typedef struct		s_minishell
 	int				history_pos;
 	int				cursor_pos;
 	char			*line;
-	char			*key_upp;
 	t_list			*commands;
 	t_cmds			cmds;
-	char			*ce;
 	t_env			*env;
 }					t_minishell;
 t_minishell *ms;
@@ -123,9 +115,11 @@ int		termputs(int c);
 
 int		init_env(char **env);
 char	*find_env(t_env *env, char *name);
+void	free_env(void);
 int		get_history(t_minishell *ms);
 void	add_history(char *line);
 void	set_history(long c);
+void	free_history(void);
 void	print_prompt();
 void	redraw_prompt(char *s);
 
