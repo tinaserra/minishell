@@ -8,7 +8,6 @@ void	set_raw()
 	term.c_lflag &= ~(ICANON);
 	term.c_lflag &= ~(ECHO);
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
-	//ms->ce = tgetstr("ce", NULL);
 }
 
 int		termputs(int c)
