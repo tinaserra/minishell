@@ -70,3 +70,16 @@ void	set_history(long c)
     print_prompt();
     ft_putstr_fd(1, ms->line);
 }
+
+void	free_history(void)
+{
+	t_list	*tmp;
+
+	while (ms->history)
+	{
+		tmp = ms->history->next;
+		free(ms->history->data);
+		free(ms->history);
+		ms->history = tmp;
+	}
+}
