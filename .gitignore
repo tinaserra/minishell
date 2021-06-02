@@ -6,3 +6,5 @@ minitina
 .DS*
 obj
 a.out
+valgrind_log
+*.sh
