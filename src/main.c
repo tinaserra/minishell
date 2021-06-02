@@ -30,7 +30,10 @@ int		minishell()
 	while (read(0, &c, sizeof(c)) > 0)
 	{
 		if (c == 4)
+		{
+			write(1, "\n", 1);
 			break ;
+		}
 		handle_termcaps(c);
 		c = 0;
 	}
