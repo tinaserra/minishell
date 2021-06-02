@@ -63,7 +63,7 @@ char	*find_env(t_env *env, char *name)
 
 int		init_env(char **env)
 {
-	char	**tabb;
+	char	**array;
 	char	*tmp;
 	int		i;
 
@@ -71,11 +71,25 @@ int		init_env(char **env)
 
 	while (env[++i])
 	{
-		if ((tabb = ft_split(env[i], "=")) == NULL)
+		if ((array = ft_split(env[i], "=")) == NULL)
 			return (0);
-		tmp = tabb[1] == NULL ? "" : ft_strdup(tabb[1]);
-		add_env(&ms->env, lst_new_env(ft_strdup(tabb[0]), tmp));
-		//TODO: free tabb
+		tmp = array[1] == NULL ? "" : ft_strdup(array[1]);
+		add_env(&ms->env, lst_new_env(ft_strdup(array[0]), tmp));
+		ft_free_tab(array);
 	}
 	return (1);
+}
+
+void	free_env(void)
+{
+	t_env	*tmp;
+
+	while (ms->env)
+	{
+		tmp = ms->env->next;
+		free(ms->env->name);
+		free(ms->env->value);
+		free(ms->env);
+		ms->env = tmp;
+	}
 }
