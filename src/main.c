@@ -6,9 +6,8 @@
  * @param mode
  */
 
-void	print_prompt(int mode)
+void	print_prompt(void)
 {
-	(void)mode;
 	char	**pwd;
 
 	pwd = ft_split(find_env(ms->env, "PWD"), "/");
@@ -31,7 +30,7 @@ int		minishell()
 	while (read(0, &c, sizeof(c)) > 0)
 	{
 		if (c == 4)
-			return (EXIT_SUCCESS);
+			break ;
 		handle_termcaps(c);
 		c = 0;
 	}
@@ -50,12 +49,11 @@ int		main(int ac, char **av, char **env)
 	signal(SIGQUIT, &sig_quit);
 	if (!init_env(env) || !get_history(ms))
 		exit(EXIT_FAILURE);
-	if (tgetent(NULL, find_env(ms->env, "TERM")) != 1)
-	{
-		printf("Unable to initialize TERM env");
-		exit(EXIT_FAILURE);
-	}
 	set_raw();
-	print_prompt(0);
+	print_prompt();
 	minishell();
+	free_env();
+	free_history();
+	free(ms->line);
+	free(ms);
 }
