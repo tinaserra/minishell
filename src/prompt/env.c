@@ -80,6 +80,11 @@ int		init_env(char **env)
 	return (1);
 }
 
+/**
+ * free_env
+ * * free env list
+ */
+
 void	free_env(void)
 {
 	t_env	*tmp;

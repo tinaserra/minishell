@@ -1,5 +1,11 @@
 #include "minishell.h"
 
+/**
+ * add_history
+ * * add line to history
+ * @param line line from prompt
+ */
+
 void    add_history(char *line)
 {
     char    *file;
@@ -18,6 +24,12 @@ void    add_history(char *line)
     }
     free(file);
 }
+
+/**
+ * get_history
+ * * get line from history
+ * @param ms minishell structure
+ */
 
 int     get_history(t_minishell *ms)
 {
@@ -43,6 +55,12 @@ int     get_history(t_minishell *ms)
     free(file);
     return (1);
 }
+
+/**
+ * set_history
+ * * get line in history file
+ * @param c input key 
+ */
 
 void	set_history(long c)
 {
@@ -74,6 +92,11 @@ void	set_history(long c)
     print_prompt();
     ft_putstr_fd(1, ms->line);
 }
+
+/**
+ * set_history
+ * * free history list
+ */
 
 void	free_history(void)
 {
