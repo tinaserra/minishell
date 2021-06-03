@@ -46,7 +46,11 @@ int     get_history(t_minishell *ms)
 
 void	set_history(long c)
 {
-	free(ms->line);
+	if (ms->line)
+	{
+		free(ms->line);
+	}
+	ms->line = NULL;
     ms->cursor = 0;
 	if (c == 4283163)
 	{
@@ -66,7 +70,7 @@ void	set_history(long c)
 	}
 	ms->cursor = ft_strlen(ms->line);
 	write(1, "\r", 1);
-	print_term("ce");
+	print_term("cd");
     print_prompt();
     ft_putstr_fd(1, ms->line);
 }

@@ -23,14 +23,10 @@ void	print_term(char *c)
 
 void	redraw_prompt(char *s)
 {
-	int i;
-
-	i = -1;
 	ft_putstr_fd(1, "\r"); // reset la ligne
 	print_term("cd"); //clear la ligne avant de reafficher
 	print_prompt();
-	while (++i < (ft_strlen(s)))
-		ft_putchar_fd(s[i], 1);
+	ft_putstr_fd(1, s);
 }
 
 void	print_char(long c)
@@ -58,7 +54,6 @@ int		handle_termcaps(long c)
 	else if (c == 127 && ms->cursor > 0)
 	{
 		ms->line = ft_del_last_char(ms->line);
-		//printf("\n[%s]\n", ms->line);
 		redraw_prompt(ms->line);
 	}
 	else if (c == 10)
@@ -72,6 +67,5 @@ int		handle_termcaps(long c)
 		ms->line = NULL;
 		print_prompt();
 	}
-	//printf("%s\n", ms->line);
 	return (1);
 }

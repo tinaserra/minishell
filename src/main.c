@@ -52,11 +52,18 @@ int		main(int ac, char **av, char **env)
 	signal(SIGQUIT, &sig_quit);
 	if (!init_env(env) || !get_history(ms))
 		exit(EXIT_FAILURE);
+	if (tgetent(ms->term, find_env(ms->env, "TERM")) != 1)
+	{
+		printf("Unable to initialize TERM env\n");
+		exit(EXIT_FAILURE);
+	}
 	set_raw();
 	print_prompt();
 	minishell();
 	free_env();
 	free_history();
+	free_commands();
 	free(ms->line);
+	free(ms->term);
 	free(ms);
 }
