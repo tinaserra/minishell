@@ -21,22 +21,22 @@ SRCS            =		src/main.c									\
 						$(addprefix ${PROMPT}, utils.c)				\
 
 .c.o:
-						$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
+						@$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
 
 OBJS			=		$(SRCS:.c=.o)
 
 all				:		$(NAME)
 
 $(NAME)			:		$(OBJS) $(HEADER)
-						make -C $(LIBFT)
-						$(CC) -o $(NAME) $(FLAGS) $(OBJS) -L$(LIBFT) -lft -ltermcap
+						@make -C $(LIBFT)
+						@$(CC) -o $(NAME) $(FLAGS) $(OBJS) -L$(LIBFT) -lft -ltermcap
 
 clean			:
 						rm -rf $(OBJS)
-						make clean -C $(LIBFT)
+						@make clean -C $(LIBFT)
 
 fclean			:		clean
 						rm -f $(NAME)
-						make fclean -C $(LIBFT)
+						@make fclean -C $(LIBFT)
 
 re				:		fclean all

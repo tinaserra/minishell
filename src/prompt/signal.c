@@ -15,7 +15,6 @@ void	sig_quit(int c)
 		free(ms->line);
 		ms->line = NULL;
 	}
-	ft_putstr_fd(1, "\n");
 	print_prompt();
 }
 

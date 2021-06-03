@@ -9,7 +9,7 @@ int		minishell()
 	{
 		if (c == 4)
 		{
-			write(1, "\n", 1);
+			write(1, "exit\n", 5);
 			break ;
 		}
 		handle_termcaps(c);
