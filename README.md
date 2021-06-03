@@ -5,8 +5,7 @@ Aussi mignon qu’un vrai shell
 
 ### ```termcaps```
 
-- [ ] afficher l'historique avec les fleches directionnels
-- [ ] gerer la touche suppr
+- [x] afficher l'historique avec les fleches directionnels
 - [x] gerer la touche del
 
 ### ```echo```

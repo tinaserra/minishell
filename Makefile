@@ -1,99 +1,42 @@
-SRCS			=	main.c			\
-					tina.c			\
-					parsing_start.c	\
-					signal.c		\
-					env.c			\
-					history.c		\
-					termcaps.c		\
-					echo.c			\
-					env_builtin.c	\
-					env_replace.c	\
+NAME			=		minishell
+CC				=		gcc
+FLAGS			=		-Wall -Werror -Wextra -I $(HEADER) -I $(LIBFT) -Wunused-function #-fsanitize=address
 
-SRCS_TINA		=	main.c			\
-					tina.c			\
-					parsing_start.c	\
-					signal.c		\
-					env.c			\
-					history.c		\
-					termcaps.c		\
-					echo.c			\
-					env_builtin.c	\
-					env_replace.c	\
+HEADER          =		./inc/
+PARSING         =		./src/parsing/
+PROMPT         	=		./src/prompt/
+BUILTINS        =		./src/builtins/
+LIBFT           =		./libft/
+SRCS            =		src/main.c									\
+						src/tina.c									\
+						$(addprefix ${BUILTINS}, echo.c)			\
+						$(addprefix ${BUILTINS}, env.c)				\
+						$(addprefix ${PARSING}, commands.c)			\
+						$(addprefix ${PARSING}, env_replace.c)		\
+						$(addprefix ${PARSING}, start.c)			\
+						$(addprefix ${PROMPT}, env.c)				\
+						$(addprefix ${PROMPT}, history.c)			\
+						$(addprefix ${PROMPT}, signal.c)			\
+						$(addprefix ${PROMPT}, termcaps.c)			\
+						$(addprefix ${PROMPT}, utils.c)				\
 
-SRCS_JOHN		=	main.c			\
-					john.c			\
-					signal.c		\
-					env.c			\
-					history.c		\
-					termcaps.c		\
-					echo.c			\
-					env_builtin.c	\
+.c.o:
+						$(CC) $(FLAGS) -c $< -o ${<:.c=.o}
 
-NAME			=	minishell
-NAME_JOHN		=	minijohn
-NAME_TINA		=	minitina
+OBJS			=		$(SRCS:.c=.o)
 
-OBJ_DIR			=	obj
-SRC_DIR			=	src
-INC_DIR			=	inc
-LIBFT_DIR		=	libft
-LIBFT			=	libft.a
+all				:		$(NAME)
 
-# override -> permet de reecrire la suite de la variable
-override FLAGS	+=	-Wall -Wextra -Werror -MMD -O3 #-fsanitize=address
-
-OBJ				=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
-OBJ_TINA		=	$(addprefix $(OBJ_DIR)/,$(SRCS_TINA:.c=.o))
-OBJ_JOHN		=	$(addprefix $(OBJ_DIR)/,$(SRCS_JOHN:.c=.o))
-DPD				=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
-
-
-# -C faire make comme si on etait dans le dossier
-# -j multisreder / ameliore la vitesse de compliation
-# Pas de regle opti car makefile mlx pas compatible
-all				:
-				@$(MAKE) -C $(LIBFT_DIR)
-				@$(MAKE) -j $(NAME)
-
-$(NAME)			:	$(OBJ)
-				@gcc $(FLAGS) -o $(NAME) $(OBJ) -L $(LIBFT_DIR) -l ft -ltermcap
-				@echo $(NAME) : Created !
-
-# si le .c est plus recent que le .o on rentre dans la regle
-$(OBJ_DIR)/%.o	:	$(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT) | .gitignore
-				@mkdir -p $(OBJ_DIR)
-				@gcc $(FLAGS) -I $(INC_DIR) -I $(LIBFT_DIR) -c $< -o $@
-
-.gitignore		:
-				@echo $(NAME) > .gitignore
-
-debug			:	fclean
-				make all CFLAGS:="-DDEBUG -g"
-
-john			:	$(OBJ_JOHN)
-				@$(MAKE) -C $(LIBFT_DIR)
-				@clang $(FLAGS) -o $(NAME_JOHN) $(OBJ_JOHN) -L $(LIBFT_DIR) -l ft -ltermcap
-				@echo $(NAME_JOHN) : Souris John !!
-
-tina			:	$(OBJ_TINA)
-				@$(MAKE) -C $(LIBFT_DIR)
-				@gcc $(FLAGS) -o $(NAME_TINA) $(OBJ_TINA) -L $(LIBFT_DIR) -l ft -ltermcap
-				@echo $(NAME_TINA) : Le temps est bon, le ciel est bleu !
+$(NAME)			:		$(OBJS) $(HEADER)
+						make -C $(LIBFT)
+						$(CC) -o $(NAME) $(FLAGS) $(OBJS) -L$(LIBFT) -lft -ltermcap
 
 clean			:
-				@$(MAKE) clean -C $(LIBFT_DIR)
-				@rm -rf $(OBJ_DIR)
-				@echo "obj deleted"
+						rm -rf $(OBJS)
+						make clean -C $(LIBFT)
 
-fclean			:	clean
-				@rm -rf $(LIBFT_DIR)/$(LIBFT)
-				@echo "[$(LIBFT)]: deleted"
-				@rm -rf $(NAME)
-				@echo "[$(NAME)]: deleted"
+fclean			:		clean
+						rm -f $(NAME)
+						make fclean -C $(LIBFT)
 
-re				: fclean all
-
-.PHONY			: all, clean, fclean, re
-
-# Utilise les .d (et ignore s'ils n'existe pas)
- -include $(DPD)
+re				:		fclean all

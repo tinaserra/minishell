@@ -86,7 +86,6 @@ typedef struct		s_minishell
 	int				quote;
 	int				close_signal;
 	int				cursor;
-	int				prompt_size;
 	t_list			*history;
 	int				history_pos;
 	int				cursor_pos;
@@ -94,6 +93,7 @@ typedef struct		s_minishell
 	t_list			*commands;
 	t_cmds			cmds;
 	t_env			*env;
+	char			*term;
 }					t_minishell;
 t_minishell *ms;
 
@@ -120,8 +120,9 @@ int		get_history(t_minishell *ms);
 void	add_history(char *line);
 void	set_history(long c);
 void	free_history(void);
-void	print_prompt();
+void	print_prompt(void);
 void	redraw_prompt(char *s);
+void	free_commands(void);
 
 /*
 ** PARSING ------------------------------------------------------------------ **
