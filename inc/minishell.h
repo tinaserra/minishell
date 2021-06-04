@@ -95,7 +95,7 @@ typedef struct		s_minishell
 	t_env			*env;
 	char			*term;
 }					t_minishell;
-t_minishell *ms;
+t_minishell *g_ms;
 
 /*
 ** SIGNALS ------------------------------------------------------------------ **
@@ -116,7 +116,7 @@ int		termputs(int c);
 int		init_env(char **env);
 char	*find_env(t_env *env, char *name);
 void	free_env(void);
-int		get_history(t_minishell *ms);
+int		get_history();
 void	add_history(char *line);
 void	set_history(long c);
 void	free_history(void);

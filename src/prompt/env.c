@@ -56,7 +56,7 @@ char	*find_env(t_env *env, char *name)
 
 /**
  * init_env
- * * store environment variables in ms.env structure
+ * * store environment variables in g_ms.env structure
  * @param ms minishell structure
  * @param env environment variables
  */
@@ -74,7 +74,7 @@ int		init_env(char **env)
 		if ((array = ft_split(env[i], "=")) == NULL)
 			return (0);
 		tmp = array[1] == NULL ? "" : ft_strdup(array[1]);
-		add_env(&ms->env, lst_new_env(ft_strdup(array[0]), tmp));
+		add_env(&g_ms->env, lst_new_env(ft_strdup(array[0]), tmp));
 		ft_free_tab(array);
 	}
 	return (1);
@@ -89,12 +89,12 @@ void	free_env(void)
 {
 	t_env	*tmp;
 
-	while (ms->env)
+	while (g_ms->env)
 	{
-		tmp = ms->env->next;
-		free(ms->env->name);
-		free(ms->env->value);
-		free(ms->env);
-		ms->env = tmp;
+		tmp = g_ms->env->next;
+		free(g_ms->env->name);
+		free(g_ms->env->value);
+		free(g_ms->env);
+		g_ms->env = tmp;
 	}
 }

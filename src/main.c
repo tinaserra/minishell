@@ -23,14 +23,14 @@ int		main(int ac, char **av, char **env)
 	(void)av;
 	(void)ac;
 
-	ms = malloc(sizeof(t_minishell));
-	ft_bzero(ms, sizeof(t_minishell));
-	ms->history_pos = -1;
+	g_ms = malloc(sizeof(t_minishell));
+	ft_bzero(g_ms, sizeof(t_minishell));
+	g_ms->history_pos = -1;
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
-	if (!init_env(env) || !get_history(ms))
+	if (!init_env(env) || !get_history())
 		exit(EXIT_FAILURE);
-	if (tgetent(ms->term, find_env(ms->env, "TERM")) != 1)
+	if (tgetent(g_ms->term, find_env(g_ms->env, "TERM")) != 1)
 	{
 		printf("Unable to initialize TERM env\n");
 		exit(EXIT_FAILURE);
@@ -41,7 +41,7 @@ int		main(int ac, char **av, char **env)
 	free_env();
 	free_history();
 	free_commands();
-	free(ms->line);
-	free(ms->term);
-	free(ms);
+	free(g_ms->line);
+	free(g_ms->term);
+	free(g_ms);
 }

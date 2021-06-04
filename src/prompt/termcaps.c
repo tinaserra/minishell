@@ -35,11 +35,11 @@ void	print_char(long c)
 
 	s[0] = c;
 	s[1] = '\0';
-	if (ms->line)
-		ms->line = ft_strjoin_free(ms->line, s, 'L');
+	if (g_ms->line)
+		g_ms->line = ft_strjoin_free(g_ms->line, s, 'L');
 	else
-		ms->line = ft_strdup(s);
-	ms->cursor++;
+		g_ms->line = ft_strdup(s);
+	g_ms->cursor++;
 }
 
 int		handle_termcaps(long c)
@@ -51,20 +51,20 @@ int		handle_termcaps(long c)
 	}
 	else if (c == 4283163 || c == 4348699)
 		set_history(c);
-	else if (c == 127 && ms->cursor > 0)
+	else if (c == 127 && g_ms->cursor > 0)
 	{
-		ms->line = ft_del_last_char(ms->line);
-		redraw_prompt(ms->line);
+		g_ms->line = ft_del_last_char(g_ms->line);
+		redraw_prompt(g_ms->line);
 	}
 	else if (c == 10)
 	{
-		add_history(ms->line);
+		add_history(g_ms->line);
 		write(1, "\n", 1);
-		ms->cursor = 0;
-		if (ms->line)
+		g_ms->cursor = 0;
+		if (g_ms->line)
 			fonction();
-		free(ms->line);
-		ms->line = NULL;
+		free(g_ms->line);
+		g_ms->line = NULL;
 		print_prompt();
 	}
 	return (1);
