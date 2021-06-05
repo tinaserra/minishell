@@ -113,20 +113,28 @@ t_list	*split_pointvirgule(void)
 
 void	parsing()
 {
-	t_list	*commands;
-
-	g_ms->quote = 0;
-	g_ms->line = ft_strtrim(g_ms->line, "\f\t\n\r\v ");
-	if (check_syntaxe() == 0)
-		return ;
-	g_ms->commands = split_pointvirgule();
-	commands = g_ms->commands;
-	while (commands)
+	split_minishell(g_ms->line);
+	get_token_type();
+	while (g_ms->tokens)
 	{
-		commands->data = handle_env(commands->data);
-		// stocker commandes et arguments dans un tableau
-		// lancer les builtins & edecuter
-		commands = commands->next;
+		printf("[%d]  [%s]\n", g_ms->tokens->type, g_ms->tokens->word);
+		g_ms->tokens = g_ms->tokens->next;
 	}
-	ft_lstprint(g_ms->commands);
+	//t_list	*commands;
+
+	//g_ms->quote = 0;
+	//g_ms->line = ft_strtrim(g_ms->line, "\f\t\n\r\v ");
+	//if (check_syntaxe() == 0)
+	//	return ;
+	//g_ms->commands = split_pointvirgule();
+	//commands = g_ms->commands;
+	//while (commands)
+	//{
+	//	commands->data = handle_env(commands->data);
+	//	// stocker commandes et arguments dans un tableau
+	//	split_minishell((char *)commands->data);
+	//	// lancer les builtins & edecuter
+	//	commands = commands->next;
+	//}
+	////ft_lstprint(g_ms->commands);
 }

@@ -49,17 +49,21 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef struct	s_args
+typedef struct		s_cmd
 {
-	char		**args;
-}				t_args;
+	char			*cmd;
+	char			**args;
+	char			sep;
+	struct s_cmd	*next;
+}					t_cmd;
 
-typedef struct	s_cmds // john.c
+typedef struct		s_token
 {
-	char		*cmd;
-	t_list		*args;
-}				t_cmds;
-
+	char			*word;
+	int				type;
+	struct s_token	*prev;
+	struct s_token	*next;
+}					t_token;
 
 
 // [echo $HOME bonjour cnecn rfor] ; OK
@@ -91,9 +95,11 @@ typedef struct		s_minishell
 	int				cursor_pos;
 	char			*line;
 	t_list			*commands;
-	t_cmds			cmds;
+	t_token			*tokens;
+	t_cmd			*cmd;
 	t_env			*env;
 	char			*term;
+	int				count;
 }					t_minishell;
 t_minishell *g_ms;
 
@@ -131,11 +137,16 @@ void	fonction();
 void	parsing();
 int		get_env_content(char *line, char **env_content);
 char	*replace_env(char *str, int pos_dollar);
-
+void	split_minishell(char *command);
+int		is_in_str(char *s, char c);
+int 	is_in_quote(char *s, int pos);
+int		is_escaped(char *s, int pos);
+int		get_token_type(void);
+int		is_valid_env_var(char *s);
 /*
 ** BUILTINS ----------------------------------------------------------------- **
 */
 
-void	echo_builtin(t_cmds *cmds); // john.c
+void	echo_builtin(); // john.c
 void	env_builtin();
 #endif
