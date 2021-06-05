@@ -6,13 +6,13 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 23:41:36 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/06/05 06:40:53 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/06/05 07:21:12 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token		*create_token(int i)
+t_token	*create_token(int i)
 {
 	t_token	*new;
 
@@ -25,7 +25,21 @@ t_token		*create_token(int i)
 	return (new);
 }
 
-void		add_token(t_token **start, t_token *new)
+void	free_token(void)
+{
+	t_token	*tmp;
+
+	while (g_ms->tokens)
+	{
+		tmp = g_ms->tokens->next;
+		free(g_ms->tokens->word);
+		free(g_ms->tokens);
+		g_ms->tokens = tmp;
+	}
+	g_ms->tokens = NULL;
+}
+
+void	add_token(t_token **start, t_token *new)
 {
 	t_token	*tmp;
 
@@ -47,7 +61,7 @@ void		add_token(t_token **start, t_token *new)
 		*start = new;
 }
 
-t_token		*create_token2(char *word, int type)
+t_token	*create_token2(char *word, int type)
 {
 	t_token	*new;
 
@@ -57,41 +71,7 @@ t_token		*create_token2(char *word, int type)
 	return (new);
 }
 
-int	split_ms(int i, char *s, char *chset, int type)
-{
-	if (type == 1 && is_in_str(chset, s[i]) && !is_in_str(chset, s[i + 1])
-		&& !is_in_quote(s, i) && !is_escaped(s, i - 1))
-		return (1);
-	else if (!type && is_in_str(chset, s[i]) && i > 0
-		&& is_in_str(chset, s[i - 1]) && !is_in_quote(s, i)
-		&& !is_escaped(s, i - 1))
-		return (1);
-	else if (type == 2 && is_in_str(chset, s[i])
-		&& i > 0 && is_in_str(chset, s[i - 1]) && !is_in_quote(s, i)
-		&& !is_escaped(s, i - 1))
-		return (1);
-	else if (type == 3 && is_in_str(chset, s[i]) && !is_in_quote(s, i)
-		&& !is_escaped(s, i - 1))
-		return (1);
-	return (0);
-}
-
-int	split_minishell2(char *s, int *i, t_token **start)
-{
-	if (is_in_str(" ", s[*i]) && !is_in_quote(s, *i)
-		&& !is_escaped(s, *i - 1))
-	{
-		add_token(start, create_token(*i));
-		(*i)++;
-		return (0);
-	}
-	if (is_in_str(";|<>", s[*i]) && !is_in_quote(s, *i)
-		&& !is_escaped(s, *i - 1) && *i > 0 && !is_in_str("<>", s[*i - 1]))
-		add_token(start, create_token(*i));
-	return (1);
-}
-
-int		get_token_type(void)
+int	get_token_type(void)
 {
 	t_token	*tmp;
 	
@@ -109,31 +89,16 @@ int		get_token_type(void)
 			tmp->type = 2;
 		else if (is_valid_env_var(tmp->word))
 			tmp->type = 3;
-		else
+		else if (ft_strcmp(tmp->word, "\n") == 0)
 			tmp->type = 4;
+		else
+			tmp->type = 5;
+		if (have_error(tmp))
+		{
+			g_ms->exit = 258;
+			return (0);
+		}
 		tmp = tmp->next;
 	}
 	return (1);
-}
-
-void	split_minishell(char *cmd)
-{
-	int		i;
-	t_token	**start;
-
-	i = 0;
-	start = &g_ms->tokens;
-	while (cmd[i])
-	{
-		if (!split_minishell2(cmd, &i, start))
-			continue ;
-		g_ms->count++;
-		if (split_ms(i, cmd, ";|", 3) || split_ms(i, cmd, ">", 1)
-			|| split_ms(i, cmd, ">", 0) || split_ms(i, cmd, "<", 1)
-			|| split_ms(i, cmd, "<", 0))
-			add_token(start, create_token(i + 1));
-		i++;
-	}
-	if (i > 0)
-		add_token(&g_ms->tokens, create_token(i));
 }
