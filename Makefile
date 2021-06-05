@@ -14,6 +14,8 @@ SRCS            =		src/main.c									\
 						$(addprefix ${PARSING}, commands.c)			\
 						$(addprefix ${PARSING}, env_replace.c)		\
 						$(addprefix ${PARSING}, start.c)			\
+						$(addprefix ${PARSING}, tokens.c)			\
+						$(addprefix ${PARSING}, utils.c)			\
 						$(addprefix ${PROMPT}, env.c)				\
 						$(addprefix ${PROMPT}, history.c)			\
 						$(addprefix ${PROMPT}, signal.c)			\
