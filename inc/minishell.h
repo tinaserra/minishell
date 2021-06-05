@@ -100,6 +100,7 @@ typedef struct		s_minishell
 	t_env			*env;
 	char			*term;
 	int				count;
+	int				exit;
 }					t_minishell;
 t_minishell *g_ms;
 
@@ -143,6 +144,11 @@ int 	is_in_quote(char *s, int pos);
 int		is_escaped(char *s, int pos);
 int		get_token_type(void);
 int		is_valid_env_var(char *s);
+int		have_error(t_token *token);
+void	add_token(t_token **start, t_token *new);
+void	free_token(void);
+t_token	*create_token(int i);
+t_token	*create_token2(char *word, int type);
 /*
 ** BUILTINS ----------------------------------------------------------------- **
 */
