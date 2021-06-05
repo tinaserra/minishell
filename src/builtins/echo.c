@@ -7,9 +7,8 @@ int	echo_new_line(char *s)
 	return (1);
 }
 
-void	echo_builtin(t_cmds *cmds)
+void	echo_builtin()
 {
-	(void)cmds;
 	// size_t	i;
 	// int		nl;
 	// t_list	*tmp;
