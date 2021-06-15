@@ -151,6 +151,10 @@ void	add_token(t_token **start, t_token *new);
 void	free_token(void);
 t_token	*create_token(int i);
 t_token	*create_token2(char *word, int type);
+t_token	*create_token3(char *s, int type);
+void	add_list(t_cmd **begin, t_cmd *new);
+int		parse_token2(t_token **token, t_cmd *cmd);
+void	parse_token(t_token	**token);
 /*
 ** BUILTINS ----------------------------------------------------------------- **
 */
