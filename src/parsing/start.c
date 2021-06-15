@@ -60,6 +60,30 @@ void	split_minishell(char *cmd)
 	}
 }
 
+void	edit_args(t_cmd *cmd)
+{
+	t_token	*tmp;
+
+	tmp = cmd->args;
+	while (tmp)
+	{
+		
+		tmp = tmp->next;
+	}
+}
+
+void	exec_cmds()
+{
+	t_cmd	*cmd;
+
+	cmd = g_ms->cmds;
+	while (cmd)
+	{
+		edit_args(cmd);
+		cmd = cmd->next;
+	}
+}
+
 void	parsing()
 {
 	t_token	*tmp;
@@ -87,7 +111,8 @@ void	parsing()
 		}
 		tmp2 = tmp2->next;
 	}*/
-	//execute_cmd();
+	if (g_ms->cmds)
+		execute_cmd();
 	free_commands();
 	free_token();
 }
