@@ -49,13 +49,6 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef struct		s_cmd
-{
-	char			*cmd;
-	char			**args;
-	char			sep;
-	struct s_cmd	*next;
-}					t_cmd;
 
 typedef struct		s_token
 {
@@ -65,6 +58,15 @@ typedef struct		s_token
 	struct s_token	*next;
 }					t_token;
 
+typedef struct		s_cmd
+{
+	char			*cmd;
+	t_token			*args;
+	t_list			*env;
+	int				type;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}					t_cmd;
 
 // [echo $HOME bonjour cnecn rfor] ; OK
 // [echo '$HOME' cnecn rfor] ;
@@ -96,7 +98,7 @@ typedef struct		s_minishell
 	char			*line;
 	t_list			*commands;
 	t_token			*tokens;
-	t_cmd			*cmd;
+	struct s_cmd	*cmds;
 	t_env			*env;
 	char			*term;
 	int				count;

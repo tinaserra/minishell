@@ -62,7 +62,7 @@ int	is_valid_env_var(char *s)
 			if (!ft_isalpha(s[i + 1]))
 				return (0);
 			j = i + 2;
-			while (s[j] && !is_in_str(" \"'\0", s[j]))
+			while (s[j] && !is_in_str(" $\"'\0", s[j]))
 			{
 				if (!ft_isalnum(s[j]) && s[j] != '_')
 					return (0);

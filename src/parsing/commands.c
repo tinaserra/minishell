@@ -14,13 +14,22 @@
 
 void	free_commands(void)
 {
-	t_list	*tmp;
+	t_cmd	*tmp;
+	t_token	*tmp2;
 
-	while (g_ms->commands)
+	while (g_ms->cmds)
 	{
-		tmp = g_ms->commands->next;
-		free(g_ms->commands->data);
-		free(g_ms->commands);
-		g_ms->commands = tmp;
+		while(g_ms->cmds->args)
+		{
+			tmp2 = g_ms->cmds->args->next;
+			free(g_ms->cmds->args->word);
+			free(g_ms->cmds->args);
+			g_ms->cmds->args = tmp2;
+		}
+
+		tmp = g_ms->cmds->next;
+		free(g_ms->cmds->cmd);
+		free(g_ms->cmds);
+		g_ms->cmds = tmp;
 	}
 }
