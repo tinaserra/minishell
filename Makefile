@@ -8,7 +8,6 @@ PROMPT         	=		./src/prompt/
 BUILTINS        =		./src/builtins/
 LIBFT           =		./libft/
 SRCS            =		src/main.c									\
-						src/tina.c									\
 						$(addprefix ${BUILTINS}, echo.c)			\
 						$(addprefix ${BUILTINS}, env.c)				\
 						$(addprefix ${PARSING}, commands.c)			\

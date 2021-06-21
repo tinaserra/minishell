@@ -62,7 +62,7 @@ int		handle_termcaps(long c)
 		write(1, "\n", 1);
 		g_ms->cursor = 0;
 		if (g_ms->line)
-			fonction();
+			parsing();
 		free(g_ms->line);
 		g_ms->line = NULL;
 		print_prompt();
