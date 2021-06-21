@@ -60,6 +60,52 @@ void	split_minishell(char *cmd)
 	}
 }
 
+t_token	*redirect3(t_token *args, t_token **start)
+{
+	t_token	*tmp;
+	t_token	*next;
+
+	tmp = *start;
+	if (*start == args)
+	{
+		next = (*start)->next;
+		*start = next;
+		if (next)
+			next->prev = NULL;
+		return (next);
+	}
+	while (tmp)
+	{
+		if (tmp == args && tmp->prev)
+		{
+			next = tmp->next;
+			tmp->prev->next = next;
+			if (tmp->next)
+				tmp->next->prev = tmp->prev;
+			return (next);
+		}
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+
+int 	redirect2(t_cmd *cmd, t_token **args, int flags)
+{
+	int		fd;
+
+	if ((fd = open((*args)->next->word, flags, 0644)) < 0)
+		g_ms->exit = 1;
+	if ((ft_strcmp((*args)->word, ">") == 0
+		|| ft_strcmp((*args)->word, ">>") == 0) && cmd->out)
+		close(cmd->out);
+	if (ft_strcmp((*args)->word, "<") == 0 && cmd->in)
+		close(cmd->in);
+	*args = redirect3(*args, &cmd->args);
+	*args = redirect3(*args, &cmd->args);
+	return (fd);
+}
+
 void	redirect(t_cmd *cmd)
 {
 	t_token	*args;
@@ -69,18 +115,22 @@ void	redirect(t_cmd *cmd)
 	{
 		if (ft_strcmp(args->word, ">") == 0 && args->type == 2
 			&& cmd->out != -1)
-			cmd->out = redirect2(cmd, &args,
-				O_TRUNC | O_RDWR | O_CREAT);
+			cmd->out = redirect2(cmd, &args, O_TRUNC | O_RDWR | O_CREAT);
 		else if (ft_strcmp(args->word, ">>") == 0 && args->type == 2
 			&& cmd->out != -1)
-			cmd->out = redirect2(cmd, &args,
-				O_RDWR | O_CREAT | O_APPEND);
+			cmd->out = redirect2(cmd, &args, O_RDWR | O_CREAT | O_APPEND);
 		else if (ft_strcmp(args->word, "<") == 0 && args->type == 2
 			&& cmd->in != -1)
 			cmd->in = redirect2(cmd, &args, O_RDONLY);
 		else
 			args = args->next;
 	}
+}
+
+void	exec_cmd(t_cmd *cmd)
+{
+	if (ft_strcmp(cmd->cmd, "echo") == 0)
+		echo_builtin(cmd->args, cmd->out);
 }
 
 void	exec_cmds()
@@ -92,6 +142,11 @@ void	exec_cmds()
 	{
 		//edit_args(cmd);
 		redirect(cmd);
+		exec_cmd(cmd);
+		if (cmd->in)
+			close(cmd->in);
+		if (cmd->out)
+			close(cmd->out);
 		cmd = cmd->next;
 	}
 }
