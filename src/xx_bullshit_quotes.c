@@ -1,4 +1,17 @@
-#include "minishell.h"
+// #include "minishell.h"
+# include <limits.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <signal.h>
+# include <errno.h>
+# include <termios.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <sys/ioctl.h>
+# include <term.h>
 
 // 					 0000 0001 & 0000 0010
 	// savoir si une chaine est entre simple quote ou double quote
@@ -11,11 +24,6 @@
 	// parcoure la chaine et si " la plus grosse boite c'est " si le $ et dedans
 
 	// if (str[i] == '"' && !(ms->mask & SIMPLE_Q))// on une double quote en premier
-
-// void	print_echo(char *str)
-// {
-// 	ft_putstr_fd(1, str);
-// }
 
 char	*ft_strcdup(char *str, int c)
 {
@@ -44,14 +52,11 @@ char	*ft_strcdup(char *str, int c)
 	return (out);
 }
 
+
 int		main()
 {
 	char str[17];
 	char *out;
-	// int i;
-	// int simple_quote = 0;
-	// int double_quote = 0;
-	// int quote = 0;
 
 	// str = "   lolo"......'$HOME'"lolo   ";
 	str[0] = 'A';
@@ -75,23 +80,4 @@ int		main()
 	printf("str = |%s|\n", str);
 	out = ft_strcdup(str, '"');
 	printf("out = %s\n", out);
-	// i = 0;
-	// while (str[i] && (str[i] == '\'' || str[i] == '"'))
-	// {
-	// 	if (str[i] == '\'') // simple quote
-	// 		quote = 1;
-	// 	if (str[i] == '"') // double quote
-	// 		quote = 2;
-	// 	i++;
-	// }
-	// if (quote == 1)
-	// {
-
-	// }
-	// if (quote == 2)
-	// {
-
-	// }
-
-
 }
