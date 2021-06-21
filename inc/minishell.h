@@ -161,6 +161,6 @@ void	parse_token(t_token	**token);
 ** BUILTINS ----------------------------------------------------------------- **
 */
 
-void	echo_builtin(); // john.c
+void	echo_builtin(t_token *args, int fd);
 void	env_builtin();
 #endif

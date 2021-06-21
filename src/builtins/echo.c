@@ -7,23 +7,25 @@ int	echo_new_line(char *s)
 	return (1);
 }
 
-void	echo_builtin()
+void	echo_builtin(t_token *args, int fd)
 {
-	// size_t	i;
-	// int		nl;
-	// t_list	*tmp;
+	 size_t		i;
+	 int		nl;
+	 t_token	*tmp;
 
-	// i = -1;
-	// tmp = cmds->cmds_list;
-	// if ((nl = echo_new_line(tmp->data)) == 0)
-	// 	tmp = tmp->next;
-	// while (tmp)
-	// {
-	// 	ft_putstr_fd(1, tmp->data);
-	// 	if (tmp->next)
-	// 		ft_putchar_fd(' ', 1);
-	// 	else if (nl)
-	// 		ft_putchar_fd('\n', 1);
-	// 	tmp = tmp->next;
-	// }
+	 i = -1;
+	 tmp = args;
+	 if (fd == 0)
+	 	fd = 1;
+	 if ((nl = echo_new_line(tmp->word)) == 0)
+	 	tmp = tmp->next;
+	 while (tmp)
+	 {
+	 	ft_putstr_fd(fd, tmp->word);
+	 	if (tmp->next)
+	 		ft_putchar_fd(' ', fd);
+	 	else if (nl)
+	 		ft_putchar_fd('\n', fd);
+	 	tmp = tmp->next;
+	 }
 }
