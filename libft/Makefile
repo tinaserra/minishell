@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/06/21 13:59:05 by vserra            #+#    #+#              #
+#    Updated: 2021/06/21 13:59:07 by vserra           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRCS			=	ft_putstr_fd.c				\
 					ft_strtrim.c				\
 					ft_bzero.c					\
@@ -53,7 +65,9 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_strjoin_free.c			\
 					ft_strncat.c				\
 					ft_isalnum.c				\
-					ft_isalpha.c				
+					ft_isalpha.c				\
+					ft_atoi.c
+
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 

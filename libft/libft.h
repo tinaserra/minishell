@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 13:48:41 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/21 13:49:53 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/21 13:59:48 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void	ft_lstset_at(t_list *l, void *data, int pos);
 t_list	*ft_lstfree_at(t_list *l, int pos);
 t_list	*ft_lstfree(t_list *l);
 void	ft_lstprint(t_list *l);
+int		ft_atoi(const char *str);
 #endif
