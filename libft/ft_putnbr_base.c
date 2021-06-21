@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 23:41:28 by vserra            #+#    #+#             */
-/*   Updated: 2019/08/12 12:54:19 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/21 13:16:05 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_putnbr_base(int nbr, char *base)
 {
-	int l;
-	int save;
+	int	l;
+	int	save;
 
 	if (ft_check_base(base) == 0)
 		return ;

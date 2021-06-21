@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 02:30:32 by vserra            #+#    #+#             */
-/*   Updated: 2019/08/18 00:48:16 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/21 13:22:41 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** quand on tombe sur un separateur, on arrete de compter
 */
 
-int		ft_len_word(char *str, char *charset)
+static int	ft_len_word(char *str, char *charset)
 {
 	int		len;
 
@@ -33,7 +33,7 @@ int		ft_len_word(char *str, char *charset)
 	return (len);
 }
 
-char	*ft_dup(char *src, char *charset)
+static char	*ft_dup(char *src, char *charset)
 {
 	int		i;
 	char	*dest;
@@ -41,7 +41,8 @@ char	*ft_dup(char *src, char *charset)
 
 	i = 0;
 	len = ft_len_word(src, charset);
-	if (!(dest = malloc(sizeof(*src) * (len + 1))))
+	dest = malloc(sizeof(*src) * (len + 1));
+	if (dest == NULL)
 		return (0);
 	while (src[i] && i < len)
 	{
@@ -58,7 +59,7 @@ char	*ft_dup(char *src, char *charset)
 ** et que le caractere d'avant est un charset, on compte un mot.
 */
 
-int		ft_count_word(char *str, char *charset)
+static int	ft_count_word(char *str, char *charset)
 {
 	int		i;
 	int		nbr_word;
@@ -72,8 +73,8 @@ int		ft_count_word(char *str, char *charset)
 			nbr_word++;
 			i++;
 		}
-		if ((ft_strchr(charset, str[i]) == NULL) &&
-				(ft_strchr(charset, str[i - 1]) != NULL))
+		if ((ft_strchr(charset, str[i]) == NULL)
+			&& (ft_strchr(charset, str[i - 1]) != NULL))
 			nbr_word++;
 		i++;
 	}
@@ -87,7 +88,8 @@ char	**ft_split(char *str, char *charset)
 	int		nbr_word;
 
 	nbr_word = ft_count_word(str, charset);
-	if (!(tab = (char **)malloc(sizeof(char*) * (nbr_word + 1))))
+	tab = malloc(sizeof(char *) * (nbr_word + 1));
+	if (tab == NULL)
 		return (NULL);
 	tab[nbr_word] = NULL;
 	i = 0;

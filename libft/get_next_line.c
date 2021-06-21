@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 12:50:14 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/02/25 17:19:28 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:54:24 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#define BUFFERSIZE 8192
 
-int		is_end_line(char *s)
+static int	is_end_line(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)
@@ -28,36 +29,7 @@ int		is_end_line(char *s)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*res;
-	int		length;
-	int		i;
-	int		j;
-
-	if (!s1 && !s2)
-		return (NULL);
-	length = ft_strlen(s1) + ft_strlen(s2) + 1;
-	if (!(res = malloc(sizeof(char) * length)))
-		return (NULL);
-	i = 0;
-	while (s1 && s1[i])
-	{
-		res[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2 && s2[j])
-	{
-		res[i + j] = s2[j];
-		j++;
-	}
-	res[i + j] = '\0';
-	free(s1);
-	return (res);
-}
-
-char	*get_line(char *s)
+static char	*get_line(char *s)
 {
 	char	*res;
 	int		i;
@@ -67,7 +39,8 @@ char	*get_line(char *s)
 		return (NULL);
 	while (s[i] && s[i] != '\n')
 		i++;
-	if (!(res = malloc(sizeof(char) * (i + 1))))
+	res = malloc(i + 1);
+	if (res == NULL)
 		return (NULL);
 	i = 0;
 	while (s[i] && s[i] != '\n')
@@ -79,7 +52,7 @@ char	*get_line(char *s)
 	return (res);
 }
 
-char	*get_tmp(char *s)
+static char	*get_tmp(char *s)
 {
 	char	*res;
 	int		i;
@@ -93,7 +66,8 @@ char	*get_tmp(char *s)
 		free(s);
 		return (NULL);
 	}
-	if (!(res = malloc(sizeof(char) * (ft_strlen(s) - i + 1))))
+	res = malloc(ft_strlen(s) - i + 1);
+	if (res == NULL)
 		return (NULL);
 	i++;
 	j = 0;
@@ -104,29 +78,41 @@ char	*get_tmp(char *s)
 	return (res);
 }
 
-int		get_next_line(int fd, char **line)
+static int	check_params(int fd, char **line, char *buffer)
 {
-	char		*buffer;
-	static char	*tmp;
-	int			ret;
-
 	if (fd < 0 || !line)
 		return (-1);
-	if (!(buffer = malloc(sizeof(char) * (8192 + 1))))
+	buffer = malloc(BUFFERSIZE + 1);
+	if (buffer == NULL)
+		return (-1);
+}
+
+int	get_next_line(int fd, char **line)
+{
+	static char	*tmp;
+	char		*buffer;
+	int			ret;
+
+	ret = check_params(fd, line, buffer);
+	if (ret == -1)
 		return (-1);
 	ret = 1;
 	while (!is_end_line(tmp) && ret != 0)
 	{
-		if ((ret = read(fd, buffer, 8192)) == -1)
+		ret = read(fd, buffer, BUFFERSIZE);
+		if (ret == -1)
 		{
 			free(buffer);
 			return (-1);
 		}
 		buffer[ret] = '\0';
-		tmp = ft_strjoin(tmp, buffer);
+		tmp = ft_strjoin_free(tmp, buffer, 'L');
 	}
 	free(buffer);
 	*line = get_line(tmp);
 	tmp = get_tmp(tmp);
-	return (ret == 0 ? 0 : 1);
+	if (ret == 0)
+		return (0);
+	else
+		return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 01:40:18 by vserra            #+#    #+#             */
-/*   Updated: 2019/08/06 16:15:11 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/21 13:33:35 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 char	*ft_strstr(char *haystack, char *needle)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;

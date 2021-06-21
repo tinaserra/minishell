@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_base2.c                                 :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 01:15:45 by vserra            #+#    #+#             */
-/*   Updated: 2019/08/15 03:23:32 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/21 12:16:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_nbrlen(int *power, int nbr, char *base)
+int	ft_nbrlen(int *power, int nbr, char *base)
 {
-	int		length;
+	int	length;
+	int	len_base;
 
 	length = 1;
 	*power = 1;
@@ -23,10 +24,11 @@ int		ft_nbrlen(int *power, int nbr, char *base)
 		*power = -1;
 		length = 1;
 	}
-	while (nbr <= (-(ft_strlen(base))) || nbr >= ft_strlen(base))
+	len_base = ft_strlen(base);
+	while (nbr <= (-(len_base)) || nbr >= len_base)
 	{
-		nbr = nbr / ft_strlen(base);
-		*power = *power * ft_strlen(base);
+		nbr = nbr / len_base;
+		*power = *power * len_base;
 		length++;
 	}
 	return (length);
@@ -42,7 +44,8 @@ char	*ft_itoa_base(int nbr, char *base)
 	if (ft_check_base(base) == 0)
 		return (NULL);
 	length = ft_nbrlen(&power, nbr, base);
-	if (!(out = malloc(length + 1)))
+	out = malloc(length + 1);
+	if (out == NULL)
 		return (NULL);
 	i = 0;
 	if (nbr < 0)

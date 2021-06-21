@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 11:41:21 by vserra            #+#    #+#             */
-/*   Updated: 2019/11/14 22:46:40 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/21 12:31:18 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	t_list *save;
+	t_list	*save;
 
 	save = *alst;
 	if (*alst == NULL)

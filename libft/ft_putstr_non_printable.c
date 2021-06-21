@@ -6,15 +6,15 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 18:15:36 by vserra            #+#    #+#             */
-/*   Updated: 2019/08/04 22:24:05 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/21 13:17:35 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	change(int str)
+static void	change(int str)
 {
-	char *hexa;
+	char	*hexa;
 
 	if (str < 0)
 		str += 256;
@@ -34,7 +34,7 @@ void	change(int str)
 
 void	ft_putstr_non_printable(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

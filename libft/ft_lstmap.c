@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 22:28:24 by vserra            #+#    #+#             */
-/*   Updated: 2021/04/13 03:00:15 by tinaserra        ###   ########.fr       */
+/*   Updated: 2021/06/21 13:13:36 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	if (!lst)
 		return (NULL);
-	if (!(r = (t_list**)malloc(ft_lstsize(lst) * sizeof(*r))))
+	r = malloc(sizeof(*r) * ft_lstsize(lst));
+	if (r == NULL)
 		return (NULL);
 	*r = NULL;
 	current = lst;
 	while (current)
 	{
-		if (!(new = ft_lstcreate(f(current->data))))
+		new = ft_lstcreate(f(current->data));
+		if (!new)
 		{
 			ft_lstclear(r, del);
 			free(r);

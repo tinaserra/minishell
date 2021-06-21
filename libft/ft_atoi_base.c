@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi2.c                                            :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 23:35:33 by vserra            #+#    #+#             */
-/*   Updated: 2019/08/12 12:58:51 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/21 11:54:32 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
 	int	i;
 	int	sign;

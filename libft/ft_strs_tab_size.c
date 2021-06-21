@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strs_tab_size.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 05:12:16 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/03/01 19:00:24 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:33:02 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strs_tab_size(char **tab)
+int	ft_strs_tab_size(char **tab)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (!tab)
 		return (i);

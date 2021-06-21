@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstset_at.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 02:37:25 by tinaserra         #+#    #+#             */
-/*   Updated: 2021/04/13 02:50:28 by tinaserra        ###   ########.fr       */
+/*   Updated: 2021/06/21 13:14:36 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstset_at(t_list *l, void *new_data, int pos)
 {
-	int i;
+	int	i;
 
 	if (l == NULL || pos > ft_lstsize(l))
 		return ;

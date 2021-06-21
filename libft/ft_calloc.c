@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 22:13:56 by vserra            #+#    #+#             */
-/*   Updated: 2021/04/02 18:08:24 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/06/21 11:56:52 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void *nemo;
+	void	*nemo;
 
-	if (!(nemo = malloc(count * size)))
+	nemo = malloc(count * size);
+	if (nemo == NULL)
 		return (NULL);
 	ft_bzero(nemo, count * size);
 	return (nemo);
