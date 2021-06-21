@@ -64,6 +64,8 @@ typedef struct		s_cmd
 	t_token			*args;
 	t_list			*env;
 	int				type;
+	int				in;
+	int				out;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }					t_cmd;

@@ -60,15 +60,26 @@ void	split_minishell(char *cmd)
 	}
 }
 
-void	edit_args(t_cmd *cmd)
+void	redirect(t_cmd *cmd)
 {
-	t_token	*tmp;
+	t_token	*args;
 
-	tmp = cmd->args;
-	while (tmp)
+	args = cmd->args;
+	while (args && args->next)
 	{
-		
-		tmp = tmp->next;
+		if (ft_strcmp(args->word, ">") == 0 && args->type == 2
+			&& cmd->out != -1)
+			cmd->out = redirect2(cmd, &args,
+				O_TRUNC | O_RDWR | O_CREAT);
+		else if (ft_strcmp(args->word, ">>") == 0 && args->type == 2
+			&& cmd->out != -1)
+			cmd->out = redirect2(cmd, &args,
+				O_RDWR | O_CREAT | O_APPEND);
+		else if (ft_strcmp(args->word, "<") == 0 && args->type == 2
+			&& cmd->in != -1)
+			cmd->in = redirect2(cmd, &args, O_RDONLY);
+		else
+			args = args->next;
 	}
 }
 
@@ -79,7 +90,8 @@ void	exec_cmds()
 	cmd = g_ms->cmds;
 	while (cmd)
 	{
-		edit_args(cmd);
+		//edit_args(cmd);
+		redirect(cmd);
 		cmd = cmd->next;
 	}
 }
@@ -87,8 +99,6 @@ void	exec_cmds()
 void	parsing()
 {
 	t_token	*tmp;
-	//t_cmd	*tmp2;
-	t_token	*i;
 
 	split_minishell(g_ms->line);
 	if (!get_token_type())
@@ -99,20 +109,8 @@ void	parsing()
 		while (tmp)
 			parse_token(&tmp);
 	}
-	/*tmp2 = g_ms->cmds;
-	while (tmp2)
-	{
-		i = tmp2->args;
-		printf("command: %s\n", tmp2->cmd);
-		while (i)
-		{
-			printf("\targ: [%d] %s\n", i->type, i->word);
-			i = i->next;
-		}
-		tmp2 = tmp2->next;
-	}*/
 	if (g_ms->cmds)
-		execute_cmd();
+		exec_cmds();
 	free_commands();
 	free_token();
 }
