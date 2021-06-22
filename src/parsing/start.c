@@ -134,6 +134,8 @@ void	exec_cmd(t_cmd *cmd)
 		env_builtin(cmd->out);
 	if (ft_strcmp(cmd->cmd, "cd") == 0)
 		cd_builtin(cmd);
+	if (ft_strcmp(cmd->cmd, "pwd") == 0)
+		pwd_builtin();
 }
 
 void	exec_cmds(void)
