@@ -12,17 +12,19 @@
 
 #include "minishell.h"
 
-void	env_builtin(void)
+void	env_builtin(int fd)
 {
 	t_env	*tmp;
 
 	tmp = g_ms->env;
+	if (fd == 0)
+		fd = 1;
 	while (tmp)
 	{
-		ft_putstr_fd(1, tmp->name);
-		ft_putchar_fd('=', 1);
-		ft_putstr_fd(1, tmp->value);
-		ft_putchar_fd('\n', 1);
+		ft_putstr_fd(fd, tmp->name);
+		ft_putchar_fd('=', fd);
+		ft_putstr_fd(fd, tmp->value);
+		ft_putchar_fd('\n', fd);
 		tmp = tmp->next;
 	}
 }

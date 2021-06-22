@@ -98,6 +98,7 @@ typedef struct		s_minishell
 	int				history_pos;
 	int				cursor_pos;
 	char			*line;
+	char			*curdir;
 	t_list			*commands;
 	t_token			*tokens;
 	struct s_cmd	*cmds;
@@ -157,10 +158,13 @@ t_token	*create_token3(char *s, int type);
 void	add_list(t_cmd **begin, t_cmd *new);
 int		parse_token2(t_token **token, t_cmd *cmd);
 void	parse_token(t_token	**token);
+void	set_env(char* env, char *value);
+
 /*
 ** BUILTINS ----------------------------------------------------------------- **
 */
-
 void	echo_builtin(t_token *args, int fd);
-void	env_builtin();
+void	env_builtin(int fd);
+void	cd_builtin(t_cmd *cmd);
+
 #endif

@@ -130,6 +130,10 @@ void	exec_cmd(t_cmd *cmd)
 {
 	if (ft_strcmp(cmd->cmd, "echo") == 0)
 		echo_builtin(cmd->args, cmd->out);
+	if (ft_strcmp(cmd->cmd, "env") == 0)
+		env_builtin(cmd->out);
+	if (ft_strcmp(cmd->cmd, "cd") == 0)
+		cd_builtin(cmd);
 }
 
 void	exec_cmds(void)

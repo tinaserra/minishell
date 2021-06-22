@@ -25,6 +25,7 @@ int	main(int ac, char **av, char **env)
 	g_ms = malloc(sizeof(t_minishell));
 	ft_bzero(g_ms, sizeof(t_minishell));
 	g_ms->history_pos = -1;
+	g_ms->curdir = getcwd(NULL, 0);
 	signal(SIGINT, &sig_int);
 	signal(SIGQUIT, &sig_quit);
 	if (!init_env(env) || !get_history())
