@@ -34,7 +34,6 @@ char	*ft_strchr(char *s, int c);
 char	*ft_strdup(char *s1);
 char	*ft_strndup(char *s1, size_t len);
 char	*ft_substr(char *s, unsigned int start, size_t len);
-int		get_next_line(int fd, char **line);
 char	*ft_itoa(int n);
 int		ft_strs_tab_size(char **tab);
 int		ft_strncmp(char *s1, char *s2, size_t n);

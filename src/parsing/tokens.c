@@ -20,7 +20,7 @@ t_token	*create_token(int i)
 		return (NULL);
 	new = ft_calloc(1, sizeof(t_token));
 	new->word = ft_substr(g_ms->line, i - g_ms->count,
-		g_ms->count);
+				g_ms->count);
 	g_ms->count = 0;
 	return (new);
 }
@@ -74,7 +74,7 @@ t_token	*create_token2(char *word, int type)
 int	get_token_type(void)
 {
 	t_token	*tmp;
-	
+
 	tmp = g_ms->tokens;
 	while (tmp)
 	{

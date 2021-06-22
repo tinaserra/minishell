@@ -12,12 +12,6 @@
 
 #include "minishell.h"
 
-/**
- * print_prompt
- * * print prompt
- * @param mode
- */
-
 void	print_prompt(void)
 {
 	char	**pwd;
@@ -30,5 +24,5 @@ void	print_prompt(void)
 	ft_putstr_fd(1, pwd[ft_strs_tab_size(pwd) - 1]);
 	ft_putstr_fd(1, " \x1b[0m");
 	ft_free_tab(pwd);
-	print_term("me");	
+	print_term("me");
 }

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		get_env_content(char *line, char **env_content)
+int	get_env_content(char *line, char **env_content)
 {
 	char			*pos;
 	unsigned int	len;
@@ -29,8 +29,6 @@ char	*replace_env(char *str, int pos_dollar)
 	char	*s2;
 
 	len = get_env_content(&str[pos_dollar], &env_content);
-	// while (env_content && ft_strchr(env_content, '$') != NULL)
-	// 	len_content = get_env_content(&str[pos_dollar], &env_content);
 	s1 = ft_strndup(str, pos_dollar);
 	s2 = ft_strdup(&str[len + pos_dollar + 1]);
 	str = ft_strjoin_free(s1, env_content, 'L');

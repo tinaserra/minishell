@@ -19,14 +19,13 @@ void	free_commands(void)
 
 	while (g_ms->cmds)
 	{
-		while(g_ms->cmds->args)
+		while (g_ms->cmds->args)
 		{
 			tmp2 = g_ms->cmds->args->next;
 			free(g_ms->cmds->args->word);
 			free(g_ms->cmds->args);
 			g_ms->cmds->args = tmp2;
 		}
-
 		tmp = g_ms->cmds->next;
 		free(g_ms->cmds->cmd);
 		free(g_ms->cmds);

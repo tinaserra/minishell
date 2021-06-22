@@ -12,17 +12,17 @@
 
 #include "minishell.h"
 
-void    env_builtin()
+void	env_builtin(void)
 {
-    t_env   *tmp;
+	t_env	*tmp;
 
-    tmp = g_ms->env;
-    while (tmp)
-    {
-        ft_putstr_fd(1, tmp->name);
-        ft_putchar_fd('=', 1);
-        ft_putstr_fd(1, tmp->value);
-        ft_putchar_fd('\n', 1);
-        tmp = tmp->next;
-    }
+	tmp = g_ms->env;
+	while (tmp)
+	{
+		ft_putstr_fd(1, tmp->name);
+		ft_putchar_fd('=', 1);
+		ft_putstr_fd(1, tmp->value);
+		ft_putchar_fd('\n', 1);
+		tmp = tmp->next;
+	}
 }

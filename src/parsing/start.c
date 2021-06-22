@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 int	split_ms(int i, char *s, char *chset, int type)
 {
 	if (type == 1 && is_in_str(chset, s[i]) && !is_in_str(chset, s[i + 1])
@@ -89,15 +88,15 @@ t_token	*redirect3(t_token *args, t_token **start)
 	return (NULL);
 }
 
-
 int 	redirect2(t_cmd *cmd, t_token **args, int flags)
 {
 	int		fd;
 
-	if ((fd = open((*args)->next->word, flags, 0644)) < 0)
+	fd = open((*args)->next->word, flags, 0644);
+	if (fd < 0)
 		g_ms->exit = 1;
 	if ((ft_strcmp((*args)->word, ">") == 0
-		|| ft_strcmp((*args)->word, ">>") == 0) && cmd->out)
+			|| ft_strcmp((*args)->word, ">>") == 0) && cmd->out)
 		close(cmd->out);
 	if (ft_strcmp((*args)->word, "<") == 0 && cmd->in)
 		close(cmd->in);
@@ -133,7 +132,7 @@ void	exec_cmd(t_cmd *cmd)
 		echo_builtin(cmd->args, cmd->out);
 }
 
-void	exec_cmds()
+void	exec_cmds(void)
 {
 	t_cmd	*cmd;
 
@@ -151,7 +150,7 @@ void	exec_cmds()
 	}
 }
 
-void	parsing()
+void	parsing(void)
 {
 	t_token	*tmp;
 

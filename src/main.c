@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		minishell()
+int	minishell(void)
 {
 	long	c;
 
@@ -18,11 +18,10 @@ int		minishell()
 	return (1);
 }
 
-int		main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	(void)av;
 	(void)ac;
-
 	g_ms = malloc(sizeof(t_minishell));
 	ft_bzero(g_ms, sizeof(t_minishell));
 	g_ms->history_pos = -1;

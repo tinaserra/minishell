@@ -1,17 +1,11 @@
 #include "minishell.h"
 
-/**
- * lst_new_env
- * * create new t_env element
- * @param name name of env variable
- * @param name value of env variable
- */
-
 t_env	*lst_new_env(char *name, char *value)
 {
 	t_env	*tmp;
 
-	if ((tmp = malloc(sizeof(t_env))) == NULL)
+	tmp = malloc(sizeof(t_env));
+	if (!tmp)
 		return (NULL);
 	tmp->name = name;
 	tmp->value = value;
@@ -19,26 +13,12 @@ t_env	*lst_new_env(char *name, char *value)
 	return (tmp);
 }
 
-/**
- * add_env
- * * add env variable to the end of list
- * @param alst pointer on list
- * @param new new element
- */
-
 void	add_env(t_env **alst, t_env *new)
 {
 	while (*alst)
 		alst = &(*alst)->next;
 	*alst = new;
 }
-
-/**
- * find_env
- * * find env variable in chained list
- * @param env environment variables
- * @param name variable name
- */
 
 char	*find_env(t_env *env, char *name)
 {
@@ -54,36 +34,27 @@ char	*find_env(t_env *env, char *name)
 	return (NULL);
 }
 
-/**
- * init_env
- * * store environment variables in g_ms.env structure
- * @param ms minishell structure
- * @param env environment variables
- */
-
-int		init_env(char **env)
+int	init_env(char **env)
 {
 	char	**array;
 	char	*tmp;
 	int		i;
 
 	i = -1;
-
 	while (env[++i])
 	{
-		if ((array = ft_split(env[i], "=")) == NULL)
+		array = ft_split(env[i], "=");
+		if (!array)
 			return (0);
-		tmp = array[1] == NULL ? "" : ft_strdup(array[1]);
+		if (!array[1])
+			tmp = "";
+		else
+			tmp = ft_strdup(array[1]);
 		add_env(&g_ms->env, lst_new_env(ft_strdup(array[0]), tmp));
 		ft_free_tab(array);
 	}
 	return (1);
 }
-
-/**
- * free_env
- * * free env list
- */
 
 void	free_env(void)
 {

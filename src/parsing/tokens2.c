@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_token		*create_token3(char *s, int type)
+t_token	*create_token3(char *s, int type)
 {
 	t_token	*tmp;
 
@@ -13,10 +13,10 @@ t_token		*create_token3(char *s, int type)
 int	parse_token2(t_token **token, t_cmd *cmd)
 {
 	if ((*token)->type == 5 && (cmd->cmd || ((*token)->prev
-		&& (*token)->prev->type == 2)))
+				&& (*token)->prev->type == 2)))
 		add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
 	if ((*token)->type == 5 && !cmd->cmd && (((*token)->prev
-		&& (*token)->prev->type != 2) || !(*token)->prev))
+				&& (*token)->prev->type != 2) || !(*token)->prev))
 		cmd->cmd = ft_strdup((*token)->word);
 	if ((*token)->type == 2)
 		add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
@@ -43,7 +43,6 @@ void	add_list(t_cmd **begin, t_cmd *new)
 
 	if (!new || !begin)
 		return ;
-	//
 	if (*begin)
 	{
 		tmp = *begin;
@@ -60,7 +59,6 @@ void	add_list(t_cmd **begin, t_cmd *new)
 		*begin = new;
 }
 
-
 void	parse_token(t_token	**token)
 {
 	t_cmd	*cmd;
@@ -70,14 +68,16 @@ void	parse_token(t_token	**token)
 		*token = (*token)->next;
 		return ;
 	}
-	if (!(cmd = ft_calloc(1, sizeof(t_cmd))))
+	cmd = ft_calloc(1, sizeof(t_cmd));
+	if (!cmd)
 		return ;
 	while (*token)
 	{
 		if (!parse_token2(token, cmd))
 			break ;
-		if((*token)->type == 3 && cmd->cmd)
-			add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
+		if ((*token)->type == 3 && cmd->cmd)
+			add_token(&cmd->args, create_token3((*token)->word,
+					(*token)->type));
 		*token = (*token)->next;
 	}
 	add_list(&g_ms->cmds, cmd);

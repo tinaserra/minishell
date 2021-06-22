@@ -9,23 +9,24 @@ int	echo_new_line(char *s)
 
 void	echo_builtin(t_token *args, int fd)
 {
-	 size_t		i;
-	 int		nl;
-	 t_token	*tmp;
+	size_t	i;
+	int		nl;
+	t_token	*tmp;
 
-	 i = -1;
-	 tmp = args;
-	 if (fd == 0)
-	 	fd = 1;
-	 if ((nl = echo_new_line(tmp->word)) == 0)
-	 	tmp = tmp->next;
-	 while (tmp)
-	 {
-	 	ft_putstr_fd(fd, tmp->word);
-	 	if (tmp->next)
-	 		ft_putchar_fd(' ', fd);
-	 	else if (nl)
-	 		ft_putchar_fd('\n', fd);
-	 	tmp = tmp->next;
-	 }
+	i = -1;
+	tmp = args;
+	if (fd == 0)
+		fd = 1;
+	nl = echo_new_line(tmp->word);
+	if (nl == 0)
+		tmp = tmp->next;
+	while (tmp)
+	{
+		ft_putstr_fd(fd, tmp->word);
+		if (tmp->next)
+			ft_putchar_fd(' ', fd);
+		else if (nl)
+			ft_putchar_fd('\n', fd);
+		tmp = tmp->next;
+	}
 }

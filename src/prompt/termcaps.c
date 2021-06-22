@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	set_raw()
+void	set_raw(void)
 {
 	struct termios	term;
 
@@ -10,7 +10,7 @@ void	set_raw()
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 }
 
-int		termputs(int c)
+int	termputs(int c)
 {
 	return (write(1, &c, 1));
 }
@@ -23,8 +23,8 @@ void	print_term(char *c)
 
 void	redraw_prompt(char *s)
 {
-	ft_putstr_fd(1, "\r"); // reset la ligne
-	print_term("cd"); //clear la ligne avant de reafficher
+	ft_putstr_fd(1, "\r");
+	print_term("cd");
 	print_prompt();
 	ft_putstr_fd(1, s);
 }
@@ -42,7 +42,7 @@ void	print_char(long c)
 	g_ms->cursor++;
 }
 
-int		handle_termcaps(long c)
+int	handle_termcaps(long c)
 {
 	if (c >= 32 && c <= 126)
 	{

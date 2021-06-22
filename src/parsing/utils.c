@@ -2,7 +2,7 @@
 
 int	is_escaped(char *s, int pos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (pos >= 0 && s[pos] == '\\')
@@ -13,7 +13,7 @@ int	is_escaped(char *s, int pos)
 	return (i % 2);
 }
 
-int is_in_quote(char *s, int pos)
+int	is_in_quote(char *s, int pos)
 {
 	int	i;
 	int	s_quote;
@@ -38,7 +38,7 @@ int is_in_quote(char *s, int pos)
 
 int	is_in_str(char *s, char c)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (s[++i])
@@ -80,12 +80,12 @@ int	have_error(t_token *token)
 		return (1);
 	if (token->type == 2 && (token->prev && token->prev->type == 2))
 		return (1);
-	if(token->type == 4 && token->prev && (token->prev->type == 2
-		|| token->prev->type == 1))
+	if (token->type == 4 && token->prev && (token->prev->type == 2
+			|| token->prev->type == 1))
 		return (1);
 	if ((token->type == 1 || token->type == 0)
 		&& (token->prev->type == 1 || token->prev->type == 0
-		|| token->prev->type == 2))
+			|| token->prev->type == 2))
 		return (1);
 	return (0);
 }

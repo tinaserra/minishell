@@ -1,15 +1,8 @@
 #include "minishell.h"
 
-/**
- * sig_quit
- * * handle CTRL + \ 
- * @param c exit code
- */
-
 void	sig_quit(int c)
 {
 	(void)c;
-
 	if (g_ms->line)
 	{
 		free(g_ms->line);
@@ -18,16 +11,9 @@ void	sig_quit(int c)
 	print_prompt();
 }
 
-/**
- * sig_int
- * * handle CTRL + C
- * @param c exit code
- */
-
 void	sig_int(int c)
 {
 	(void)c;
-
 	if (g_ms->line)
 	{
 		free(g_ms->line);
