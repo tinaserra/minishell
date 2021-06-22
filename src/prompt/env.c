@@ -69,3 +69,24 @@ void	free_env(void)
 		g_ms->env = tmp;
 	}
 }
+
+void	set_env(char* env, char *value)
+{
+	t_env	*tmp;
+	t_env	*tmp2;
+	char	*tmp3;
+
+	tmp = g_ms->env;
+	while (tmp)
+	{
+		tmp2 = tmp;
+		if (ft_strcmp(env, tmp2->name) == 0)
+		{
+			tmp3 = tmp2->value;
+			tmp2->value = ft_strdup(value);
+			free(tmp3);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
