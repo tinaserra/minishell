@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 12:50:14 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/06/21 13:54:24 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/23 16:19:18 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*get_tmp(char *s)
 	return (res);
 }
 
-int		get_next_line(int fd, char **line)
+int		ft_get_next_line(int fd, char **line)
 {
 	static char	*tmp;
  	char		*buffer;

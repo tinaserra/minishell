@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 13:59:05 by vserra            #+#    #+#              #
-#    Updated: 2021/06/21 13:59:07 by vserra           ###   ########.fr        #
+#    Updated: 2021/06/23 16:20:56 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_strchr.c					\
 					ft_substr.c					\
 					ft_strlen.c					\
-					get_next_line.c				\
+					ft_get_next_line.c				\
 					ft_itoa.c					\
 					ft_strs_tab_size.c			\
 					ft_strncmp.c				\
@@ -33,7 +33,7 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_putnbr_fd.c				\
 					ft_swap.c					\
 					ft_rev_int_tab.c			\
-					ft_sort_int_tab.c			\
+					ft_ft_sort_int_tab.c			\
 					ft_putchar_fd.c				\
 					ft_strstr.c					\
 					ft_strnstr.c				\
@@ -66,7 +66,8 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_strncat.c				\
 					ft_isalnum.c				\
 					ft_isalpha.c				\
-					ft_atoi.c
+					ft_atoi.c \
+					ft_print_tab.c
 
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
