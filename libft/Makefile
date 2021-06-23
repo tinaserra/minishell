@@ -66,7 +66,8 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_strncat.c				\
 					ft_isalnum.c				\
 					ft_isalpha.c				\
-					ft_atoi.c
+					ft_atoi.c					\
+					ft_strlcat.c				
 
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
