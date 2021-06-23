@@ -5,26 +5,10 @@
 
 int main(void)
 {
-	fork();
+    
+    char *args[] = {"/bin/ls", NULL} ;
 
-	// imprime deux fois
-	printf("Salutations Mundo!\n");
-
-	fork();
-
-	// affiche quatre fois
-	printf("Salutations, professeur Falken.\n");
-
-	fork();
-	fork();
-
-	// affiche bcp
-	printf("coucou\n");
-	printf("12\n");
-	printf("13\n");
-	printf("14\n");
-	printf("15\n");
-	printf("16\n");
+    execve("/bin/ls", args, NULL);
 
 	return (0);
 }

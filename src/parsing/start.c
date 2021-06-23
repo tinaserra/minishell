@@ -136,6 +136,11 @@ void	exec_cmd(t_cmd *cmd)
 		cd_builtin(cmd);
 	if (ft_strcmp(cmd->cmd, "pwd") == 0)
 		pwd_builtin();
+	else
+	{
+		ta_mere(cmd);
+	}
+	
 }
 
 void	exec_cmds(void)

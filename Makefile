@@ -8,6 +8,7 @@ PROMPT         	=		./src/prompt/
 BUILTINS        =		./src/builtins/
 LIBFT           =		./libft/
 SRCS            =		src/main.c									\
+						src/test.c \
 						$(addprefix ${BUILTINS}, echo.c)			\
 						$(addprefix ${BUILTINS}, env.c)				\
 						$(addprefix ${BUILTINS}, cd.c)				\

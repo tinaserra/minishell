@@ -163,9 +163,13 @@ void	set_env(char* env, char *value);
 /*
 ** BUILTINS ----------------------------------------------------------------- **
 */
+
 void	echo_builtin(t_token *args, int fd);
 void	env_builtin(int fd);
 void	cd_builtin(t_cmd *cmd);
 void	pwd_builtin(void);
+
+
+int ta_mere(t_cmd *cmd);
 
 #endif

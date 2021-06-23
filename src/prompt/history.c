@@ -36,12 +36,12 @@ int	get_history(void)
 	if (fd != -1)
 	{
 		line = NULL;
-		ret = get_next_line(fd, &line);
+		ret = ft_get_next_line(fd, &line);
 		while (ret == 1)
 		{
 			ft_lstadd_front(&g_ms->history, ft_lstcreate(line));
 			line = NULL;
-			ret = get_next_line(fd, &line);
+			ret = ft_get_next_line(fd, &line);
 		}
 		free(line);
 		close(fd);
@@ -58,13 +58,13 @@ void	set_history(long c)
 	{
 		if (g_ms->history_pos >= ft_lstsize(g_ms->history) - 1)
 			return ;
-		g_ms->line = ft_strdup(ft_lst_find_pos(g_ms->history,
+		g_ms->line = ft_strdup(ft_lstfind_pos(g_ms->history,
 					++(g_ms->history_pos))->data);
 	}
 	if (c == 4348699)
 	{
 		if (g_ms->history_pos > 0)
-			g_ms->line = ft_strdup(ft_lst_find_pos(g_ms->history,
+			g_ms->line = ft_strdup(ft_lstfind_pos(g_ms->history,
 						--(g_ms->history_pos))->data);
 		else
 		{
