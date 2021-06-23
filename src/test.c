@@ -1,7 +1,14 @@
-// #include <stdio.h>
-// #include <sys/types.h>
-// #include <unistd.h>
-// #include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
+/*   Updated: 2021/06/23 16:51:28 by vserra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -20,41 +27,29 @@ int	lst_size(t_cmd *cmd)
 	return (len);
 }
 
-void	ft_print_tab(char **halo, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size)
-	{
-		printf("tab = %s\n", halo[i]);
-		i++;
-	}
-}
-
 char	**list_to_tab(t_cmd *cmd)
 {
-	t_token *liste;
+	t_token	*liste;
 	int		len;
 	int		i;
-	char	**salope;
+	char	**aaargs;
 
 	len = lst_size(cmd);
-	salope = malloc(sizeof(char *) * len + 2);
-	if (salope == NULL)
+	aaargs = malloc(sizeof(char *) * len + 2);
+	if (aaargs == NULL)
 		return (NULL);
 	liste = cmd->args;
-	salope[0] = ft_strdup(cmd->cmd);
+	aaargs[0] = ft_strdup(cmd->cmd);
 	i = 1;
 	while (liste)
 	{
-		salope[i] = ft_strdup(liste->word);
+		aaargs[i] = ft_strdup(liste->word);
 		i++;
 		liste = liste->next;
 	}
-	salope[i] = NULL;
-	ft_print_tab(salope, len + 2);
-	return(salope);
+	aaargs[i] = NULL;
+	ft_print_tab(aaargs, len + 2);
+	return(aaargs);
 }
 
 int	ta_mere(t_cmd *cmd)
@@ -65,13 +60,12 @@ int	ta_mere(t_cmd *cmd)
 	char **aaaaaaaaargs;
 
 	aaaaaaaaargs = list_to_tab(cmd);
-
 	pid_t pid;
 
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("fork");
+		perror("Error with fork");
 		// exit(EXIT_FAILURE);
 	}
 	if (pid == 0) // Processus enfant
