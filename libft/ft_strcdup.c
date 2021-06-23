@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strcdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/23 16:34:33 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/23 16:35:43 by vserra           ###   ########.fr       */
+/*   Created: 2021/06/23 16:32:42 by vserra            #+#    #+#             */
+/*   Updated: 2021/06/23 16:34:13 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+char	*ft_strcdup(char *str, int c)
 {
-	size_t		i;
-	size_t		j;
+	int		i;
+	int		j;
+	int		len;
+	char	*out;
 
 	i = 0;
-	j = 0;
-	while (dst[i])
+	while (str[i] != c)
 		i++;
-	if (dstsize)
+	i++;
+	len = 0;
+	while (str[i + len] != c)
+		len++;
+	out = malloc(len + 1);
+	if (out == NULL)
+		return (NULL);
+	j = 0;
+	while (str[i] && j < len)
 	{
-		while ((i + j) < (dstsize - 1) && src[j])
-		{
-			dst[i + j] = src[j];
-			j++;
-		}
-		dst[i + j] = '\0';
-	}
-	while (src[j])
+		out[j] = str[i];
 		j++;
-	if (i < dstsize)
-		return (i + j);
-	return (dstsize + j);
+		i++;
+	}
+	out[j] = '\0';
+	return (out);
 }

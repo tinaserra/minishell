@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 13:59:05 by vserra            #+#    #+#              #
-#    Updated: 2021/06/23 16:30:10 by vserra           ###   ########.fr        #
+#    Updated: 2021/06/23 16:35:18 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_isalnum.c				\
 					ft_isalpha.c				\
 					ft_atoi.c \
-					ft_print_tab.c
+					ft_print_tab.c \
+					ft_strcdup.c
 
 OBJ_DIR			=	obj
 OBJS			=	$(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 13:48:41 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/23 16:29:43 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/23 16:35:40 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(int fd, char *s);
 void	ft_putstr_non_printable(char *str);
 char	**ft_split(char *str, char *charset);
+char	*ft_strcdup(char *str, int c);
 char	*ft_strchr(char *s, int c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strcpy(char *dest, char *src);
