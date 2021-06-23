@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 13:48:41 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/23 16:25:45 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/23 16:29:43 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ char	*ft_strchr(char *s, int c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strcpy(char *dest, char *src);
 char	*ft_strdup(char *s1);
+char	*ft_strndup(char *s1, size_t len);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_itoa(int n);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+int		ft_strs_tab_size(char **tab);
+int		ft_strncmp(char *s1, char *s2, size_t n);
+int		ft_isdigit(int c);
+int		ft_isalpha(int c);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strjoin_free(char *s1, char *s2, int ctrl);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *s);
