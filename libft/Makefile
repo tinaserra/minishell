@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 13:59:05 by vserra            #+#    #+#              #
-#    Updated: 2021/06/23 16:35:18 by vserra           ###   ########.fr        #
+#    Updated: 2021/06/23 16:43:25 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_putnbr_fd.c				\
 					ft_swap.c					\
 					ft_rev_int_tab.c			\
-					ft_ft_sort_int_tab.c			\
+					ft_sort_int_tab.c			\
 					ft_putchar_fd.c				\
 					ft_strstr.c					\
 					ft_strnstr.c				\
@@ -54,7 +54,7 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_lstsize.c				\
 					ft_lstprint.c 				\
 					ft_free_tab.c				\
-					ft_lst_find.c				\
+					ft_lstfind_pos.c				\
 					ft_lstcreate.c				\
 					ft_lstfree_at.c				\
 					ft_lstfree.c				\
