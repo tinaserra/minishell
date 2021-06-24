@@ -24,6 +24,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/ioctl.h>
+#include <dirent.h>
 # include <term.h>
 
 /*
@@ -139,6 +140,7 @@ void	free_commands(void);
 /*
 ** PARSING ------------------------------------------------------------------ **
 */
+
 void	fonction();
 void	parsing();
 int		get_env_content(char *line, char **env_content);
@@ -159,6 +161,8 @@ void	add_list(t_cmd **begin, t_cmd *new);
 int		parse_token2(t_token **token, t_cmd *cmd);
 void	parse_token(t_token	**token);
 void	set_env(char* env, char *value);
+void	redirect(t_cmd *cmd);
+void	exec_cmds(void);
 
 /*
 ** BUILTINS ----------------------------------------------------------------- **
@@ -169,7 +173,10 @@ void	env_builtin(int fd);
 void	cd_builtin(t_cmd *cmd);
 void	pwd_builtin(void);
 
+/*
+** EXECUTION ---------------------------------------------------------------- **
+*/
 
-int ta_mere(t_cmd *cmd);
+int		start_command(t_cmd *cmd);
 
 #endif

@@ -19,6 +19,6 @@ void	sig_int(int c)
 		free(g_ms->line);
 		g_ms->line = NULL;
 	}
-	ft_putstr_fd(1, "\n");
+	ft_putstr_fd("\n", 1);
 	print_prompt();
 }

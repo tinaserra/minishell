@@ -7,7 +7,7 @@ void	pwd_builtin(void)
 	pwd = find_env(g_ms->env, "PWD");
 	if (pwd)
 	{
-		ft_putstr_fd(1, pwd);
+		ft_putstr_fd(pwd, 1);
 		ft_putchar_fd('\n', 1);
 	}
 }

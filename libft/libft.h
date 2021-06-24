@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 13:48:41 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/23 16:35:40 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/24 15:48:50 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 void	ft_print_tab(char **halo, int size);
 void	ft_putchar_fd(char c, int fd);
-int		ft_putstr_fd(int fd, char *s);
+int		ft_putstr_fd(char *s, int fd);
 void	ft_putstr_non_printable(char *str);
 char	**ft_split(char *str, char *charset);
 char	*ft_strcdup(char *str, int c);

@@ -22,7 +22,7 @@ void	echo_builtin(t_token *args, int fd)
 		tmp = tmp->next;
 	while (tmp)
 	{
-		ft_putstr_fd(fd, tmp->word);
+		ft_putstr_fd(tmp->word, fd);
 		if (tmp->next)
 			ft_putchar_fd(' ', fd);
 		else if (nl)

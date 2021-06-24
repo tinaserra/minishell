@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:08:16 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/06/04 23:18:14 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/06/24 15:45:05 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	env_builtin(int fd)
 		fd = 1;
 	while (tmp)
 	{
-		ft_putstr_fd(fd, tmp->name);
+		ft_putstr_fd(tmp->name, fd);
 		ft_putchar_fd('=', fd);
-		ft_putstr_fd(fd, tmp->value);
+		ft_putstr_fd(tmp->value, fd);
 		ft_putchar_fd('\n', fd);
 		tmp = tmp->next;
 	}

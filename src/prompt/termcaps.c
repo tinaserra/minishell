@@ -23,10 +23,10 @@ void	print_term(char *c)
 
 void	redraw_prompt(char *s)
 {
-	ft_putstr_fd(1, "\r");
+	ft_putstr_fd("\r", 1);
 	print_term("cd");
 	print_prompt();
-	ft_putstr_fd(1, s);
+	ft_putstr_fd(s, 1);
 }
 
 void	print_char(long c)

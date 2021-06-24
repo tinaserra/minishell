@@ -76,7 +76,7 @@ void	set_history(long c)
 	write(1, "\r", 1);
 	print_term("cd");
 	print_prompt();
-	ft_putstr_fd(1, g_ms->line);
+	ft_putstr_fd(g_ms->line, 1);
 }
 
 void	free_history(void)
