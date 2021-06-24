@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/23 16:51:28 by vserra           ###   ########.fr       */
+/*   Updated: 2021/06/24 13:17:50 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	**list_to_tab(t_cmd *cmd)
 		return (NULL);
 	liste = cmd->args;
 	aaargs[0] = ft_strdup(cmd->cmd);
+	printf("cmd -> %s\n", cmd->cmd);
+	printf("tab -> %s\n", aaargs[0]);
 	i = 1;
 	while (liste)
 	{
@@ -48,19 +50,19 @@ char	**list_to_tab(t_cmd *cmd)
 		liste = liste->next;
 	}
 	aaargs[i] = NULL;
-	ft_print_tab(aaargs, len + 2);
 	return(aaargs);
 }
 
+	// (void)cmd;
+	// char *args[] = {"/bin/ls", NULL} ;
+	// ft_print_tab(aaaaaaaaargs, 0);
+
 int	ta_mere(t_cmd *cmd)
 {
-	(void)cmd;
-	char *args[] = {"/bin/ls", NULL} ;
-
 	char **aaaaaaaaargs;
 
 	aaaaaaaaargs = list_to_tab(cmd);
-	pid_t pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid < 0)
@@ -71,7 +73,7 @@ int	ta_mere(t_cmd *cmd)
 	if (pid == 0) // Processus enfant
 	{
 		printf("Child process	%d\n", getpid());
-		execve("/bin/ls", args, NULL);
+		execve(cmd->cmd, aaaaaaaaargs, NULL);
 		kill(pid, SIGKILL);
 	}
 	if (pid > 0) // Processus parent
@@ -81,6 +83,5 @@ int	ta_mere(t_cmd *cmd)
 		kill(pid, SIGKILL);
 	}
 	pid = 0;
-
 	return (0);
 }
