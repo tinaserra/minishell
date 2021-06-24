@@ -43,6 +43,15 @@
 # define DOUBLE_Q	1 << 0 // -> 0000 0001
 # define SIMPLE_Q	1 << 1 // -> 0000 0010
 
+typedef enum		e_type{
+	POINT_V,
+	PIPE,
+	REDIR,
+	ENV,
+	NEWL,
+	TXT
+}					t_type;
+
 typedef struct		s_env
 {
 	char			*name;
@@ -178,5 +187,6 @@ void	pwd_builtin(void);
 */
 
 int		start_command(t_cmd *cmd);
+int		print_error(char *str);
 
 #endif

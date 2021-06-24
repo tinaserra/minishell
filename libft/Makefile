@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
+#    By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 13:59:05 by vserra            #+#    #+#              #
-#    Updated: 2021/06/23 16:43:25 by vserra           ###   ########.fr        #
+#    Updated: 2021/06/24 16:30:58 by jode-vri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_strchr.c					\
 					ft_substr.c					\
 					ft_strlen.c					\
-					ft_get_next_line.c				\
+					ft_get_next_line.c			\
 					ft_itoa.c					\
 					ft_strs_tab_size.c			\
 					ft_strncmp.c				\
@@ -54,7 +54,7 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_lstsize.c				\
 					ft_lstprint.c 				\
 					ft_free_tab.c				\
-					ft_lstfind_pos.c				\
+					ft_lstfind_pos.c			\
 					ft_lstcreate.c				\
 					ft_lstfree_at.c				\
 					ft_lstfree.c				\
@@ -66,8 +66,8 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_strncat.c				\
 					ft_isalnum.c				\
 					ft_isalpha.c				\
-					ft_atoi.c \
-					ft_print_tab.c \
+					ft_atoi.c					\
+					ft_print_tab.c				\
 					ft_strcdup.c
 
 OBJ_DIR			=	obj

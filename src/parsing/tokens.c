@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 23:41:36 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/06/05 07:21:12 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/06/24 16:33:10 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,20 @@ int	get_token_type(void)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->word, ";") == 0)
-			tmp->type = 0;
+			tmp->type = POINT_V; // point virgule
 		else if (ft_strcmp(tmp->word, "|") == 0)
-			tmp->type = 1;
+			tmp->type = PIPE;
 		else if (ft_strcmp(tmp->word, "<") == 0
 			|| ft_strcmp(tmp->word, "<<") == 0
 			|| ft_strcmp(tmp->word, ">") == 0
 			|| ft_strcmp(tmp->word, ">>") == 0)
-			tmp->type = 2;
+			tmp->type = REDIR; // redirection
 		else if (is_valid_env_var(tmp->word))
-			tmp->type = 3;
+			tmp->type = ENV; //variable environnement
 		else if (ft_strcmp(tmp->word, "\n") == 0)
-			tmp->type = 4;
+			tmp->type = NEWL; // newline
 		else
-			tmp->type = 5;
+			tmp->type = TXT; // texte
 		if (have_error(tmp))
 		{
 			g_ms->exit = 258;

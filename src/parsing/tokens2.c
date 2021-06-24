@@ -12,25 +12,25 @@ t_token	*create_token3(char *s, int type)
 
 int	parse_token2(t_token **token, t_cmd *cmd)
 {
-	if ((*token)->type == 5 && (cmd->cmd || ((*token)->prev
-				&& (*token)->prev->type == 2)))
+	if ((*token)->type == TXT && (cmd->cmd || ((*token)->prev
+				&& (*token)->prev->type == REDIR)))
 		add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
-	if ((*token)->type == 5 && !cmd->cmd && (((*token)->prev
-				&& (*token)->prev->type != 2) || !(*token)->prev))
+	if ((*token)->type == TXT && !cmd->cmd && (((*token)->prev
+				&& (*token)->prev->type != REDIR) || !(*token)->prev))
 		cmd->cmd = ft_strdup((*token)->word);
-	if ((*token)->type == 2)
+	if ((*token)->type == REDIR)
 		add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
-	if ((*token)->type == 3 && !cmd->cmd)
+	if ((*token)->type == ENV && !cmd->cmd)
 		ft_lstadd_back(&cmd->env, ft_lstcreate(ft_strdup((*token)->word)));
-	if ((*token)->type == 1)
+	if ((*token)->type == PIPE)
 	{
-		cmd->type = 1;
+		cmd->type = PIPE;
 		*token = (*token)->next;
 		return (0);
 	}
-	if ((*token)->type == 0)
+	if ((*token)->type == POINT_V)
 	{
-		cmd->type = 0;
+		cmd->type = POINT_V;
 		*token = (*token)->next;
 		return (0);
 	}
@@ -63,7 +63,7 @@ void	parse_token(t_token	**token)
 {
 	t_cmd	*cmd;
 
-	if ((*token)->type == 4)
+	if ((*token)->type == NEWL)
 	{
 		*token = (*token)->next;
 		return ;
@@ -75,7 +75,7 @@ void	parse_token(t_token	**token)
 	{
 		if (!parse_token2(token, cmd))
 			break ;
-		if ((*token)->type == 3 && cmd->cmd)
+		if ((*token)->type == ENV && cmd->cmd)
 			add_token(&cmd->args, create_token3((*token)->word,
 					(*token)->type));
 		*token = (*token)->next;

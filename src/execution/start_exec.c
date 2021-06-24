@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   start_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/24 13:17:50 by tinaserra        ###   ########.fr       */
+/*   Updated: 2021/06/24 15:41:25 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ char	**list_to_tab(t_cmd *cmd)
 		return (NULL);
 	liste = cmd->args;
 	aaargs[0] = ft_strdup(cmd->cmd);
-	printf("cmd -> %s\n", cmd->cmd);
-	printf("tab -> %s\n", aaargs[0]);
 	i = 1;
 	while (liste)
 	{
@@ -57,31 +55,63 @@ char	**list_to_tab(t_cmd *cmd)
 	// char *args[] = {"/bin/ls", NULL} ;
 	// ft_print_tab(aaaaaaaaargs, 0);
 
-int	ta_mere(t_cmd *cmd)
+char	*check_path(t_cmd *cmd)
 {
-	char **aaaaaaaaargs;
+	char		**path;
+	char		*binary;
+	struct stat	stats;
+	
+	int		i;
+	(void)cmd;
 
-	aaaaaaaaargs = list_to_tab(cmd);
+	path = ft_split(find_env(g_ms->env, "PATH"), ":");
+	i = 0;
+	while (path[i])
+	{
+		binary = ft_strjoin(path[i], "/");
+		binary = ft_strjoin_free(binary, cmd->cmd, 'L');
+		if (lstat(binary, &stats) == 0)
+			return (binary);
+		i++;
+	}
+	return (NULL);
+}
+
+void	exec_command(char *binary, char **args)
+{
 	pid_t	pid;
 
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("Error with fork");
+		// strerror(errno);
 		// exit(EXIT_FAILURE);
 	}
 	if (pid == 0) // Processus enfant
 	{
 		printf("Child process	%d\n", getpid());
-		execve(cmd->cmd, aaaaaaaaargs, NULL);
+		execve(binary, args, NULL);
 		kill(pid, SIGKILL);
 	}
 	if (pid > 0) // Processus parent
 	{
 		printf("Parent process	%d\n", getpid());
-		wait(NULL);
-		kill(pid, SIGKILL);
+		wait(0);
+		// kill(pid, SIGKILL);
 	}
-	pid = 0;
+}
+
+int	start_command(t_cmd *cmd)
+{
+	char	*binary;
+	char	**args;
+
+	args = list_to_tab(cmd);
+	binary = check_path(cmd);
+	if (binary)
+		exec_command(binary, args);
+	else
+		exec_command(cmd->cmd, args);
 	return (0);
 }

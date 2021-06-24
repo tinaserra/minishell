@@ -21,6 +21,25 @@ void	update_pwd()
 	free(tmp);
 }
 
+int		have_permission(t_cmd *cmd)
+{
+	DIR	*dir;
+
+	dir = opendir(cmd->args->word);
+	if (dir == NULL)
+	{
+		ft_putstr_fd("cd: ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(cmd->args->word, 2);
+		ft_putchar_fd('\n', 2);
+		return (0);
+	}
+	else
+		closedir(dir);
+	return (1);
+}
+
 void	cd_builtin(t_cmd *cmd)
 {
 	t_token	*tmp;
@@ -28,7 +47,7 @@ void	cd_builtin(t_cmd *cmd)
 	tmp = cmd->args;
 	if (!tmp)
 	{
-		if (chdir(find_env(g_ms->env, "HOME")))
+		if (chdir(find_env(g_ms->env, "HOME")) != 0)
 		{
 			printf("cd: HOME not set\n");
 			g_ms->exit = 1;
@@ -37,7 +56,7 @@ void	cd_builtin(t_cmd *cmd)
 	}
 	else
 	{
-		if (chdir(tmp->word))
+		if (have_permission(cmd) && chdir(tmp->word) != 0)
 		{
 			printf("cd: no such file or directory: %s\n", tmp->word);
 			g_ms->exit = 1;

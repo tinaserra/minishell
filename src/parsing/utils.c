@@ -76,16 +76,16 @@ int	is_valid_env_var(char *s)
 
 int	have_error(t_token *token)
 {
-	if ((token->type == 1 || token->type == 0) && !token->prev)
+	if ((token->type == PIPE || token->type == POINT_V) && !token->prev)
 		return (1);
-	if (token->type == 2 && (token->prev && token->prev->type == 2))
+	if (token->type == REDIR && (token->prev && token->prev->type == REDIR))
 		return (1);
-	if (token->type == 4 && token->prev && (token->prev->type == 2
-			|| token->prev->type == 1))
+	if (token->type == NEWL && token->prev && (token->prev->type == REDIR
+			|| token->prev->type == PIPE))
 		return (1);
-	if ((token->type == 1 || token->type == 0)
-		&& (token->prev->type == 1 || token->prev->type == 0
-			|| token->prev->type == 2))
+	if ((token->type == PIPE || token->type == POINT_V)
+		&& (token->prev->type == PIPE || token->prev->type == POINT_V
+			|| token->prev->type == REDIR))
 		return (1);
 	return (0);
 }
