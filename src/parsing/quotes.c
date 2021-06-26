@@ -1,22 +1,22 @@
 #include "minishell.h"
 
-int		quote_size(char *src, int type, int env)
+int	quote_size(char *src, int type, int env)
 {
 	int	i;
 	int	j;
 	int	esc;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	esc = 0;
-	while (src[i])
+	while (src[++i])
 	{
 		if (!esc && src[i] == '\'' && type == 2)
 			return (i);
 		if (!esc && src[i] == '\'' && type == 0)
 			return (i + j);
-		if (!esc && src[i] == '$' && (type == 0 || type == 1 || type == 4) &&
-			env)
+		if (!esc && src[i] == '$' && (type == 0 || type == 1 || type == 4)
+			&& env)
 			j += env_size(src, i);
 		if (!esc && src[i] == '\"' && (type == 0 || type == 1))
 			return (i + j);
@@ -25,7 +25,6 @@ int		quote_size(char *src, int type, int env)
 			esc = 1;
 		else
 			esc = 0;
-		i++;
 	}
 	return (i + j);
 }
@@ -70,7 +69,7 @@ char	*double_quotes(char *src, int *i, int j, int env)
 			continue ;
 		}
 		if ((src[*i] != '\\' || is_escaped(src, *i - 1) || (src[*i + 1] != '\"'
-			&& src[*i + 1] != '\\' && src[*i + 1] != '$')) && j < k)
+					&& src[*i + 1] != '\\' && src[*i + 1] != '$')) && j < k)
 			dest[j++] = src[*i];
 		(*i)++;
 	}

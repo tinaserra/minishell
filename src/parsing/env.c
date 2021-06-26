@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		env_size(char *src, int i)
+int	env_size(char *src, int i)
 {
 	int		count;
 	char	buf[4096];

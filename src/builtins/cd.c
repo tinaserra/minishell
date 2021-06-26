@@ -1,12 +1,12 @@
 #include "minishell.h"
 
-void	update_pwd()
+void	update_pwd(void)
 {
 	char	*tmp;
 
 	tmp = ft_strdup(g_ms->curdir);
 	free(g_ms->curdir);
-	g_ms->curdir= NULL;
+	g_ms->curdir = NULL;
 	if (find_env(g_ms->env, "PWD") && find_env(g_ms->env, "OLDPWD"))
 		set_env("OLDPWD", find_env(g_ms->env, "PWD"));
 	g_ms->curdir = getcwd(NULL, 0);
@@ -21,7 +21,7 @@ void	update_pwd()
 	free(tmp);
 }
 
-int		have_permission(t_cmd *cmd)
+int	have_permission(t_cmd *cmd)
 {
 	DIR	*dir;
 

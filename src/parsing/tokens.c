@@ -20,7 +20,7 @@ t_token	*create_token(int i)
 		return (NULL);
 	new = ft_calloc(1, sizeof(t_token));
 	new->word = ft_substr(g_ms->line, i - g_ms->count,
-				g_ms->count);
+			g_ms->count);
 	g_ms->count = 0;
 	return (new);
 }
@@ -79,20 +79,20 @@ int	get_token_type(void)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->word, ";") == 0)
-			tmp->type = POINT_V; // point virgule
+			tmp->type = POINT_V;
 		else if (ft_strcmp(tmp->word, "|") == 0)
 			tmp->type = PIPE;
 		else if (ft_strcmp(tmp->word, "<") == 0
 			|| ft_strcmp(tmp->word, "<<") == 0
 			|| ft_strcmp(tmp->word, ">") == 0
 			|| ft_strcmp(tmp->word, ">>") == 0)
-			tmp->type = REDIR; // redirection
+			tmp->type = REDIR;
 		else if (is_valid_env_var(tmp->word))
-			tmp->type = ENV; //variable environnement
+			tmp->type = ENV;
 		else if (ft_strcmp(tmp->word, "\n") == 0)
-			tmp->type = NEWL; // newline
+			tmp->type = NEWL;
 		else
-			tmp->type = TXT; // texte
+			tmp->type = TXT;
 		if (have_error(tmp))
 		{
 			g_ms->exit = 258;

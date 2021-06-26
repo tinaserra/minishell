@@ -29,7 +29,7 @@ void	exec_cmd(t_cmd *cmd)
 void	edit_args(t_cmd *cmd)
 {
 	t_token	*tmp;
-	int is_env;
+	int		is_env;
 
 	tmp = cmd->args;
 	while (tmp)
