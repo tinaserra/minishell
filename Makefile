@@ -16,6 +16,8 @@ SRCS            =		src/main.c									\
 						$(addprefix ${BUILTINS}, pwd.c)				\
 						$(addprefix ${EXEC}, start_exec.c)			\
 						$(addprefix ${PARSING}, commands.c)			\
+						$(addprefix ${PARSING}, quotes.c)			\
+						$(addprefix ${PARSING}, env.c)				\
 						$(addprefix ${PARSING}, env_replace.c)		\
 						$(addprefix ${PARSING}, redirections.c)		\
 						$(addprefix ${PARSING}, start.c)			\

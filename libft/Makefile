@@ -18,6 +18,7 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_strchr.c					\
 					ft_substr.c					\
 					ft_strlen.c					\
+					ft_strlcat.c				\
 					ft_get_next_line.c			\
 					ft_itoa.c					\
 					ft_strs_tab_size.c			\

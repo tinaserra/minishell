@@ -26,6 +26,22 @@ void	exec_cmd(t_cmd *cmd)
 		start_command(cmd);
 }
 
+void	edit_args(t_cmd *cmd)
+{
+	t_token	*tmp;
+	int is_env;
+
+	tmp = cmd->args;
+	while (tmp)
+	{
+		is_env = 0;
+		if (tmp->word && tmp->word[0] == '$')
+			is_env = 1;
+		tmp->word = handle_quotes(tmp->word, 1);
+		tmp = tmp->next;
+	}
+}
+
 void	exec_cmds(void)
 {
 	t_cmd	*cmd;
@@ -33,7 +49,7 @@ void	exec_cmds(void)
 	cmd = g_ms->cmds;
 	while (cmd)
 	{
-		//edit_args(cmd);
+		edit_args(cmd);
 		redirect(cmd);
 		exec_cmd(cmd);
 		if (cmd->in)

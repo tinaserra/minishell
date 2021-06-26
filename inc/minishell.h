@@ -172,6 +172,9 @@ void	parse_token(t_token	**token);
 void	set_env(char* env, char *value);
 void	redirect(t_cmd *cmd);
 void	exec_cmds(void);
+char	*handle_quotes(char *src, int env);
+char	*replace_env2(char *str, int *i);
+int		env_size(char *src, int i);
 
 /*
 ** BUILTINS ----------------------------------------------------------------- **
