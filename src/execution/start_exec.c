@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/24 15:41:25 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/06/26 17:07:50 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,18 @@ void	exec_command(char *binary, char **args)
 
 	pid = fork();
 	if (pid < 0)
-	{
-		perror("Error with fork");
-		// strerror(errno);
-		// exit(EXIT_FAILURE);
-	}
+		print_error("Error forking\n");
 	if (pid == 0) // Processus enfant
 	{
 		printf("Child process	%d\n", getpid());
+		// ancer create_pipe() ??
 		execve(binary, args, NULL);
 		kill(pid, SIGKILL);
 	}
 	if (pid > 0) // Processus parent
 	{
 		printf("Parent process	%d\n", getpid());
-		wait(0);
+		wait(NULL);
 		// kill(pid, SIGKILL);
 	}
 }

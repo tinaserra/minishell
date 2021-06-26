@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/26 17:04:15 by vserra            #+#    #+#             */
+/*   Updated: 2021/06/26 17:07:14 by vserra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -10,41 +22,43 @@
 #define BUFFER_MAX 255
 
 int main(void){
-    
-    pid_t returnPID;
+	
+	pid_t returnPID;
 
-    int thePipe[2];
+	int thePipe[2];
+	char buffer[BUFFER_MAX];
 
-    if(pipe(thePipe)<0)
+	pipe(thePipe);
+	if(thePipe < 0)
 	{
 		printf("Error creating pipe.\n");
-        exit(EXIT_FAILURE);
-    }
+		 exit(EXIT_FAILURE);
+	}
 
-    if((returnPID=fork())<0)
+	returnPID = fork();
+	if(returnPID < 0)
 	{
 		printf("Error forking.\n");
-        exit(EXIT_FAILURE);
-    }
+		exit(EXIT_FAILURE);
+	}
 	//in child process
-    if(returnPID==0)
+	if(returnPID == 0)
 	{
-        close(thePipe[READ_PIPE]);
-        dup2(thePipe[WRITE_PIPE], 1);
-        printf("Never attribute to malice that which can be adequately explained by stupidity.\n");
-    }
+		close(thePipe[READ_PIPE]);
+		dup2(thePipe[WRITE_PIPE], 1);
+		printf("Never attribute to malice that which can be adequately explained by stupidity.\n");
+	}
 	//in parent process
 	else
 	{
-        close(thePipe[WRITE_PIPE]);
-        wait(NULL);
-        printf("In parent process: ");
-        char buffer[BUFFER_MAX];
-        read(thePipe[READ_PIPE], buffer, BUFFER_MAX);
-        printf("%s\n", buffer);    
-    }
+		close(thePipe[WRITE_PIPE]);
+		wait(NULL);
+		printf("In parent process: ");
+		read(thePipe[READ_PIPE], buffer, BUFFER_MAX);
+		printf("%s\n", buffer);
+	}
 
-    return 0;
+	return 0;
 
 }
 
