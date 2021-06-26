@@ -189,7 +189,7 @@ void	pwd_builtin(void);
 ** EXECUTION ---------------------------------------------------------------- **
 */
 
-int		start_command(t_cmd *cmd);
+int		start_command(t_cmd *cmd, int ppipe[2]);
 int		print_error(char *str);
 
 #endif

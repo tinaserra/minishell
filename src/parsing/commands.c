@@ -12,18 +12,20 @@
 
 #include "minishell.h"
 
-void	exec_cmd(t_cmd *cmd)
+void	exec_cmd(t_cmd *cmd, int ppipe[2])
 {
-	if (ft_strcmp(cmd->cmd, "echo") == 0)
+	if (ft_strcmp(cmd->cmd, "echo") == 0 && cmd->type != PIPE
+		&& (!cmd->prev || cmd->prev->type != PIPE))
 		echo_builtin(cmd->args, cmd->out);
 	else if (ft_strcmp(cmd->cmd, "env") == 0)
 		env_builtin(cmd->out);
-	else if (ft_strcmp(cmd->cmd, "cd") == 0)
+	else if (ft_strcmp(cmd->cmd, "cd") == 0 && cmd->type != PIPE
+		&& (!cmd->prev || cmd->prev->type != PIPE))
 		cd_builtin(cmd);
 	else if (ft_strcmp(cmd->cmd, "pwd") == 0)
 		pwd_builtin();
-	else
-		start_command(cmd);
+	else if (!cmd->prev || (cmd->prev && cmd->prev->type != PIPE))
+		start_command(cmd, ppipe);
 }
 
 void	edit_args(t_cmd *cmd)
@@ -45,13 +47,20 @@ void	edit_args(t_cmd *cmd)
 void	exec_cmds(void)
 {
 	t_cmd	*cmd;
+	int		ppipe[2];
 
 	cmd = g_ms->cmds;
 	while (cmd)
 	{
 		edit_args(cmd);
 		redirect(cmd);
-		exec_cmd(cmd);
+		if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
+		{
+			if (pipe(ppipe) != 0)
+				return ;
+			exec_cmd(cmd, ppipe);
+
+		}
 		if (cmd->in)
 			close(cmd->in);
 		if (cmd->out)

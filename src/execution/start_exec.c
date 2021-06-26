@@ -99,8 +99,9 @@ void	exec_command(char *binary, char **args)
 	}
 }
 
-int	start_command(t_cmd *cmd)
+int	start_command(t_cmd *cmd, int ppipe[2])
 {
+	(void)ppipe;
 	char	*binary;
 	char	**args;
 
