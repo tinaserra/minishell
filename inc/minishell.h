@@ -191,5 +191,7 @@ void	pwd_builtin(void);
 
 int		start_command(t_cmd *cmd, int ppipe[2]);
 int		print_error(char *str);
+char	**list_to_tab(t_cmd *cmd);
+int		create_pipe(t_cmd *cmd);
 
 #endif

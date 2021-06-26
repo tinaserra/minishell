@@ -15,11 +15,17 @@
 #define READ 0 // stdin
 #define WRITE 1 // stdout
 
-int	create_pipe(char *binary, char **args)
+int	create_pipe(t_cmd *cmd)
 {
 	int		fd[2];
+
 	int		pid;
-	char	buffer[BUFSIZ];
+	//char	buffer[BUFSIZ];
+	char	**args;
+	char	**args2;
+
+	args = list_to_tab(cmd);
+	args2 = list_to_tab(cmd->next);
 
 	/* create the pipe */
 	if (pipe(fd) == -1)
@@ -38,7 +44,7 @@ int	create_pipe(char *binary, char **args)
 		close(fd[READ]);
 
 		/* execute the process (command 2) */
-		execve(binary, args, NULL);
+		execve(cmd->next->cmd, args2, NULL);
 
 		/* read some data and print the result on screen */
 		// while (read(fd[READ], buffer, BUFSIZ) != 0)
@@ -52,7 +58,7 @@ int	create_pipe(char *binary, char **args)
 		close(fd[WRITE]);
 
 		/* execute the process (command 1) */
-		execve(binary, args, NULL);
+		execve(cmd->cmd, args, NULL);
 
 		// write(fd[WRITE], buffer, strlen(buffer)+1);
 	}
