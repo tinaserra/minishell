@@ -9,14 +9,14 @@ int	echo_new_line(char *s)
 
 void	echo_builtin(t_token *args, int fd)
 {
-	size_t	i;
 	int		nl;
 	t_token	*tmp;
 
-	i = -1;
 	tmp = args;
 	if (fd == 0)
 		fd = 1;
+	if (!tmp)
+		return ;
 	nl = echo_new_line(tmp->word);
 	if (nl == 0)
 		tmp = tmp->next;
