@@ -6,13 +6,13 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 01:30:56 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/06/24 14:49:55 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/08 12:15:57 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_cmd(t_cmd *cmd, int ppipe[2])
+void	exec_cmd(t_cmd *cmd)
 {
 	if (ft_strcmp(cmd->cmd, "echo") == 0 && cmd->type != PIPE
 		&& (!cmd->prev || cmd->prev->type != PIPE))
@@ -25,7 +25,7 @@ void	exec_cmd(t_cmd *cmd, int ppipe[2])
 	else if (ft_strcmp(cmd->cmd, "pwd") == 0)
 		pwd_builtin();
 	else if (!cmd->prev || (cmd->prev && cmd->prev->type != PIPE))
-		start_command(cmd, ppipe);
+		start_command(cmd);
 }
 
 void	edit_args(t_cmd *cmd)
@@ -58,7 +58,7 @@ void	exec_cmds(void)
 		{
 			if (pipe(ppipe) != 0)
 				return ;
-			exec_cmd(cmd, ppipe);
+			exec_cmd(cmd);
 
 		}
 		if (cmd->in)
