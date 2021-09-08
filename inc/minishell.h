@@ -187,7 +187,7 @@ void	pwd_builtin(void);
 ** EXECUTION ---------------------------------------------------------------- **
 */
 
-int		start_command(t_cmd *cmd);
+int		start_command(t_cmd *cmd, int fd[2]);
 int		print_error(char *str);
 char	**list_to_tab(t_cmd *cmd);
 int		create_pipe(t_cmd *cmd);

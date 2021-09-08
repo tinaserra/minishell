@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 01:30:56 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/09/08 12:15:57 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/08 15:04:46 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_cmd(t_cmd *cmd)
+void	exec_cmd(t_cmd *cmd, int fd[2])
 {
 	if (ft_strcmp(cmd->cmd, "echo") == 0 && cmd->type != PIPE
 		&& (!cmd->prev || cmd->prev->type != PIPE))
@@ -25,7 +25,7 @@ void	exec_cmd(t_cmd *cmd)
 	else if (ft_strcmp(cmd->cmd, "pwd") == 0)
 		pwd_builtin();
 	else if (!cmd->prev || (cmd->prev && cmd->prev->type != PIPE))
-		start_command(cmd);
+		start_command(cmd, fd);
 }
 
 void	edit_args(t_cmd *cmd)
@@ -47,7 +47,7 @@ void	edit_args(t_cmd *cmd)
 void	exec_cmds(void)
 {
 	t_cmd	*cmd;
-	int		ppipe[2];
+	int		fd[2];
 
 	cmd = g_ms->cmds;
 	while (cmd)
@@ -56,9 +56,11 @@ void	exec_cmds(void)
 		redirect(cmd);
 		if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
 		{
-			if (pipe(ppipe) != 0)
-				return ;
-			exec_cmd(cmd);
+			/* create the pipe */
+			if (pipe(fd) == -1)
+				print_error("pipe failled\n");
+			//printf("%d\n", cmd->type);
+			exec_cmd(cmd, fd);
 
 		}
 		if (cmd->in)
