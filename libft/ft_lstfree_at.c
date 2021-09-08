@@ -3,24 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstfree_at.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 02:39:06 by tinaserra         #+#    #+#             */
-/*   Updated: 2021/06/21 13:09:15 by vserra           ###   ########.fr       */
+/*   Updated: 2021/09/08 12:17:16 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	useless_function(t_list	*prec, t_list	*cur)
-{
-	prec = cur;
-	cur = cur->next;
-}
-
 t_list	*ft_lstfree_at(t_list *l, int pos)
 {
-	t_list	*prec;
+	(void)pos;
+	/*t_list	*prec;
 	t_list	*cur;
 	int		i;
 
@@ -40,6 +35,6 @@ t_list	*ft_lstfree_at(t_list *l, int pos)
 	while (++i < pos)
 		useless_function(prec, cur);
 	prec->next = cur->next;
-	free(cur);
+	free(cur);*/
 	return (l);
 }
