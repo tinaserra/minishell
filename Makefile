@@ -1,6 +1,6 @@
 NAME			=		minishell
 CC				=		gcc
-FLAGS			=		-Wall -Werror -Wextra -I $(HEADER) -I $(LIBFT) -Wunused-function #-fsanitize=address
+FLAGS			=		-Wall -Werror -Wextra -I $(HEADER) -I $(LIBFT) #-fsanitize=address
 
 HEADER          =		./inc/
 PARSING         =		./src/parsing/
@@ -26,9 +26,7 @@ SRCS            =		src/main.c									\
 						$(addprefix ${PARSING}, tokens2.c)			\
 						$(addprefix ${PARSING}, utils.c)			\
 						$(addprefix ${PROMPT}, env.c)				\
-						$(addprefix ${PROMPT}, history.c)			\
 						$(addprefix ${PROMPT}, signal.c)			\
-						$(addprefix ${PROMPT}, termcaps.c)			\
 						$(addprefix ${PROMPT}, utils.c)				\
 
 .c.o:
@@ -40,7 +38,7 @@ all				:		$(NAME)
 
 $(NAME)			:		$(OBJS) $(HEADER)
 						@make -C $(LIBFT)
-						@$(CC) -o $(NAME) $(FLAGS) $(OBJS) -L$(LIBFT) -lft -ltermcap
+						@$(CC) -o $(NAME) $(FLAGS) $(OBJS) -L$(LIBFT) -lft -lreadline
 
 clean			:
 						rm -rf $(OBJS)

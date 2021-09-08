@@ -24,8 +24,11 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/ioctl.h>
-#include <dirent.h>
+# include <dirent.h>
 # include <term.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 
 /*
 ** VALUES ------------------------------------------------------------------- **
@@ -123,8 +126,7 @@ t_minishell *g_ms;
 ** SIGNALS ------------------------------------------------------------------ **
 */
 
-void	sig_quit(int c);
-void	sig_int(int c);
+void	sig_handler(int c);
 
 /*
 ** TERMCAPS ----------------------------------------------------------------- **
@@ -138,11 +140,7 @@ int		termputs(int c);
 int		init_env(char **env);
 char	*find_env(t_env *env, char *name);
 void	free_env(void);
-int		get_history();
-void	add_history(char *line);
-void	set_history(long c);
-void	free_history(void);
-void	print_prompt(void);
+char	*print_prompt(void);
 void	redraw_prompt(char *s);
 void	free_commands(void);
 
@@ -189,7 +187,7 @@ void	pwd_builtin(void);
 ** EXECUTION ---------------------------------------------------------------- **
 */
 
-int		start_command(t_cmd *cmd, int ppipe[2]);
+int		start_command(t_cmd *cmd);
 int		print_error(char *str);
 char	**list_to_tab(t_cmd *cmd);
 int		create_pipe(t_cmd *cmd);
