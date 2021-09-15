@@ -169,10 +169,12 @@ int		parse_token2(t_token **token, t_cmd *cmd);
 void	parse_token(t_token	**token);
 void	set_env(char* env, char *value);
 void	redirect(t_cmd *cmd);
-void	exec_cmds(void);
 char	*handle_quotes(char *src, int env);
 char	*replace_env2(char *str, int *i);
 int		env_size(char *src, int i);
+t_env	*lst_new_env(char *name, char *value);
+void	add_env(t_env **alst, t_env *new);
+t_env	*get_env(t_env *env, char *name);
 
 /*
 ** BUILTINS ----------------------------------------------------------------- **
@@ -182,12 +184,18 @@ void	echo_builtin(t_token *args, int fd);
 void	env_builtin(int fd);
 void	cd_builtin(t_cmd *cmd);
 void	pwd_builtin(void);
+void	export_builtin(t_cmd *cmd);
 
 /*
 ** EXECUTION ---------------------------------------------------------------- **
 */
 
-int		start_command(t_cmd *cmd);
+void	exec_start(void);
+int		exec_binary(t_cmd *cmd);
+void	edit_args(t_cmd *cmd);
+int		lst_size(t_cmd *cmd);
+char	**list_to_tab(t_cmd *cmd);
+char	*check_path(t_cmd *cmd);
 int		print_error(char *str);
 char	**list_to_tab(t_cmd *cmd);
 int		create_pipe(t_cmd *cmd);

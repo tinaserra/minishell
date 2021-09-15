@@ -14,8 +14,9 @@ SRCS            =		src/main.c									\
 						$(addprefix ${BUILTINS}, env.c)				\
 						$(addprefix ${BUILTINS}, cd.c)				\
 						$(addprefix ${BUILTINS}, pwd.c)				\
-						$(addprefix ${EXEC}, start_exec.c)			\
-						$(addprefix ${EXEC}, pipi.c)				\
+						$(addprefix ${BUILTINS}, export.c)			\
+						$(addprefix ${EXEC}, exec_start.c)			\
+						$(addprefix ${EXEC}, exec_utils.c)			\
 						$(addprefix ${PARSING}, commands.c)			\
 						$(addprefix ${PARSING}, quotes.c)			\
 						$(addprefix ${PARSING}, env.c)				\
@@ -27,7 +28,7 @@ SRCS            =		src/main.c									\
 						$(addprefix ${PARSING}, utils.c)			\
 						$(addprefix ${PROMPT}, env.c)				\
 						$(addprefix ${PROMPT}, signal.c)			\
-						$(addprefix ${PROMPT}, utils.c)				\
+						$(addprefix ${PROMPT}, utils.c)
 
 .c.o:
 						@$(CC) $(FLAGS) -c $< -o ${<:.c=.o}

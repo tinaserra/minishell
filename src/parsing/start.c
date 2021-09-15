@@ -73,7 +73,7 @@ void	parsing(void)
 			parse_token(&tmp);
 	}
 	if (g_ms->cmds)
-		exec_cmds();
+		exec_start(); // exec_cmds -> EXEC_START
 	free_commands();
 	free_token();
 }
