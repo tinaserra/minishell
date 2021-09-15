@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/08 15:30:48 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/15 08:42:25 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,58 +101,87 @@ char	*check_path(t_cmd *cmd)
 //	}
 //}
 
-void	exec_command(t_cmd *cmd,char *binary, char **args, int fd[2])
+void	exec_command(t_cmd *cmd, char *binary, char **args)
 {
-	//int fd[2];
 	pid_t pid;
-	int fdd = 0;
+	(void)cmd;
+	
+	pid = fork();
+	if (pid < 0)
+		print_error("fork failled\n");
 
-	//while (*cmd != NULL)
-	//{
-		///* create the pipe */
-		//if (pipe(fd) == -1)
-		//	print_error("pipe failled\n");
-		printf("%d\n", cmd->out);
-		printf("%d\n", cmd->next->in);
-		ft_putstr_fd("FDPPPPPPPPPPPPPPPPPPPP", cmd->next->in);
-
-		/* create the child */
-		pid = fork();
-		if (pid < 0)
-			print_error("fork failled\n");
-
-		/* child process */
-		else if (pid == 0)
-		{
-			dup2(fdd, 0);
-			if (cmd->type == PIPE)
-				dup2(fd[WRITE], 1);
-			close(fd[READ]);
-			execvp(binary, args);
-			exit(1);
-		}
-
-		/* parent process */
-		else
-		{
-			wait(NULL);			/* Collect childs */
-			close(fd[WRITE]);
-			fdd = fd[READ];
-			//cmd++;
-		}
-	//}
+	/* child process */
+	else if (pid == 0)
+	{
+		execve(binary, args, NULL);
+		exit(1);
+	}
+	else
+		wait(NULL);
 }
 
-int	start_command(t_cmd *cmd, int fd[2])
+void exec_command_pipe(char *cmd, char *cmd2, char **s1, char **s2)
+{
+	
+	int fd[2];
+	pid_t pid;
+	pid_t pid2;
+	int	status;
+	int	status2;
+
+	if (pipe(fd) == -1)
+		printf("Erreur pipe\n");
+	pid = fork();
+	if (pid == 0)
+	{
+		//commande 1
+		dup2(fd[1], 1);
+		close(fd[0]);
+		close(fd[1]);
+		execve(cmd, s1, NULL);
+		exit(1);
+	}
+	pid2 = fork();
+	if (pid2 == 0)
+	{
+		//commande 2
+		dup2(fd[0], 0);
+		close(fd[0]);
+		close(fd[1]);
+		execve(cmd2, s2, NULL);
+		exit(1);
+	}
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid, &status, 0);
+	waitpid(pid2, &status2, 0);
+}
+
+
+int	start_command(t_cmd *cmd)
 {
 	char	*binary;
+	char	*binary2;
 	char	**args;
+	char	**args2;
 
 	args = list_to_tab(cmd);
 	binary = check_path(cmd);
-	if (binary)
-		exec_command(cmd, binary, args, fd);
+	if (cmd->type == PIPE)
+	{
+		binary2 = check_path(cmd->next);
+		args2 = list_to_tab(cmd->next);
+		if (binary)
+			exec_command_pipe(binary, binary2, args, args2);
+		else
+			exec_command_pipe(cmd->cmd, cmd->next->cmd, args, args2);
+	}
 	else
-		exec_command(cmd, cmd->cmd, args, fd);
+	{
+		if (binary)
+			exec_command(cmd, binary, args);
+		else
+			exec_command(cmd, cmd->cmd, args);
+	}
 	return (0);
 }
