@@ -3,10 +3,18 @@ Aussi mignon qu’un vrai shell
 
 ## TO DO !!
 
-### ```termcaps```
+### Ces cas de pipe
 
-- [x] afficher l'historique avec les fleches directionnels
-- [x] gerer la touche del
+- [ ] ```echo puta madre | cat -e```
+```
+admin ➜ minishell1 echo puta madre | cat -e
+puta madre$
+free(): invalid pointer
+[1]    18526 abort      ./minishell
+```
+- [ ] ```cat | ls```
+- [ ] ```ls -la | rev | cat -e```
+- [ ] ```cat /dev/random | head -c 10```
 
 ### ```echo```
 
@@ -36,12 +44,13 @@ Aussi mignon qu’un vrai shell
 - [ ] ```export nom_variable``` Exportation de la variable dans les processus fils.
 - [ ] ```export nom_variable=value``` Assignation et exportation de la variable dans les processus fils.
 
-## ```unset```
 ## ```env```
 
 - [ ] print la liste des variables d'environnement.
 - [ ] print les variables ajoutêes par ```export```
 - [ ] Attention aux variables que la commante ```exort``` affiche mais que ```env``` ne doit pas afficher
+
+## ```unset```
 ## ```exit```
 
 
@@ -52,31 +61,19 @@ Start
 make && ./minishell
 ```
 
-Start john's
-```
-make john && ./minijohn
-```
-
-Start tina's
-```
-make tina && ./minitina
-```
-
-## MANS
-
-[man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)</br>
-[man erno](http://manpagesfr.free.fr/man/man3/errno.3.html)</br>
-[man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)</br>
-[TUTO SHELL](http://marionpatrick.free.fr/man_html/html/tuto_shell.html)
-
 ## INTRODUCTION 🤓
 
 Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf) | [FR](https://github.com/tinaserra/minishell/blob/master/links/minishell_fr.pdf)
 Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
 
+
 ## USEFULL LINKS 🤙🏼
 
 [usefull](https://github.com/lucielebriquer)
+[man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)</br>
+[man erno](http://manpagesfr.free.fr/man/man3/errno.3.html)</br>
+[man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)</br>
+[TUTO SHELL](http://marionpatrick.free.fr/man_html/html/tuto_shell.html)
 
 ## Comment utiliser Git en multi ?
 
