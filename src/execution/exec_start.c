@@ -6,13 +6,11 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/15 11:40:37 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/15 11:53:48 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#define READ 0 // stdin
-#define WRITE 1 // stdout
 
 void	exec_command(char *binary, char **args)
 {

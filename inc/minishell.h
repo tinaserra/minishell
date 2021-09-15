@@ -27,6 +27,7 @@
 # include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/errno.h>
 
 
 /*
@@ -205,5 +206,6 @@ char	**list_to_tab(t_cmd *cmd);
 */
 
 int		print_error(char *str);
+void	printerrno_fd(int fd);
 
 #endif
