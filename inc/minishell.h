@@ -6,7 +6,6 @@
 */
 
 # include "libft.h"
-# include "keycode_ascii.h"
 
 /*
 ** LIBRARIES ---------------------------------------------------------------- **
@@ -175,6 +174,9 @@ int		env_size(char *src, int i);
 t_env	*lst_new_env(char *name, char *value);
 void	add_env(t_env **alst, t_env *new);
 t_env	*get_env(t_env *env, char *name);
+t_env	*get_env2(t_env *env, char *name);
+void	unset_builtin(t_cmd *cmd);
+t_env	*env_free_at(t_env *l, int pos);
 
 /*
 ** BUILTINS ----------------------------------------------------------------- **
@@ -191,13 +193,17 @@ void	export_builtin(t_cmd *cmd);
 */
 
 void	exec_start(void);
-int		exec_binary(t_cmd *cmd);
+void	exec_pipe(char *cmd, char *cmd2, char **s1, char **s2);
 void	edit_args(t_cmd *cmd);
 int		lst_size(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
 char	*check_path(t_cmd *cmd);
-int		print_error(char *str);
 char	**list_to_tab(t_cmd *cmd);
-int		create_pipe(t_cmd *cmd);
+
+/*
+** ERROR -------------------------------------------------------------------- **
+*/
+
+int		print_error(char *str);
 
 #endif

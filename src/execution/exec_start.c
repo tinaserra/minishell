@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/15 10:12:40 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/15 11:40:37 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,52 +20,15 @@ void	exec_command(char *binary, char **args)
 
 	pid = fork();
 	if (pid < 0)
-		print_error("fork failled\n");
-
-	/* child process */
-	else if (pid == 0)
+		print_error("Error Forking\n");
+	else if (pid == 0)		/* child process */
 	{
 		execve(binary, args, NULL);
 		exit(1);
 	}
-	else
+	else					/* parent process */
 		wait(NULL);
 }
-
-void exec_pipe(char *cmd, char *cmd2, char **s1, char **s2) // EXEC_PIPE
-{
-	int		fd[2];
-	pid_t	pid;
-	pid_t	pid2;
-	int		status;
-	int		status2;
-
-	if (pipe(fd) == -1)
-		printf("Erreur pipe\n");
-	pid = fork();
-	if (pid == 0) /* commande 1 */
-	{
-		dup2(fd[1], 1);
-		close(fd[0]);
-		close(fd[1]);
-		execve(cmd, s1, NULL);
-		exit(1);
-	}
-	pid2 = fork();
-	if (pid2 == 0) /* commande 2 */
-	{
-		dup2(fd[0], 0);
-		close(fd[0]);
-		close(fd[1]);
-		execve(cmd2, s2, NULL);
-		exit(1);
-	}
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid, &status, 0);
-	waitpid(pid2, &status2, 0);
-}
-
 
 int	exec_binary(t_cmd *cmd) // start_command -> EXEC_BINARY
 {
@@ -109,6 +72,8 @@ void	exec_switch(t_cmd *cmd) //exec_cmd -> EXEC_SWITCH
 		pwd_builtin();
 	else if (ft_strcmp(cmd->cmd, "export") == 0)
 		export_builtin(cmd);
+	else if (ft_strcmp(cmd->cmd, "unset") == 0)
+		unset_builtin(cmd);
 	else if (!cmd->prev || (cmd->prev && cmd->prev->type != PIPE))
 		exec_binary(cmd);
 }

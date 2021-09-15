@@ -65,3 +65,42 @@ int main(int ac, char **av)
 		printf("\nlkjljabc\n");
 	}
 }
+
+
+//void exec_pipe(char *cmd, char *cmd2, char **s1, char **s2) // EXEC_PIPE
+//{
+//	int		fd[2];
+//	pid_t	pid;
+//	pid_t	pid2;
+//	int		status;
+//	int		status2;
+
+//	if (pipe(fd) == -1)
+//		print_error("Error Piping\n");
+//	pid = fork();
+//	if (pid < 0)
+//		print_error("Error Forking\n");
+//	if (pid == 0) /* commande 1 */
+//	{
+//		dup2(fd[WRITE], 1);
+//		close(fd[READ]);
+//		close(fd[WRITE]);
+//		execve(cmd, s1, NULL);
+//		exit(EXIT_SUCCESS);
+//	}
+//	pid2 = fork();
+//	if (pid2 < 0)
+//		print_error("Error Forking\n");
+//	if (pid2 == 0) /* commande 2 */
+//	{
+//		dup2(fd[READ], 0);
+//		close(fd[READ]);
+//		close(fd[WRITE]);
+//		execve(cmd2, s2, NULL);
+//		exit(EXIT_SUCCESS);
+//	}
+//	close(fd[READ]);
+//	close(fd[WRITE]);
+//	waitpid(pid, &status, 0);
+//	waitpid(pid2, &status2, 0);
+//}

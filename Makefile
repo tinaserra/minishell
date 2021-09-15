@@ -15,7 +15,9 @@ SRCS            =		src/main.c									\
 						$(addprefix ${BUILTINS}, cd.c)				\
 						$(addprefix ${BUILTINS}, pwd.c)				\
 						$(addprefix ${BUILTINS}, export.c)			\
+						$(addprefix ${BUILTINS}, unset.c)			\
 						$(addprefix ${EXEC}, exec_start.c)			\
+						$(addprefix ${EXEC}, exec_pipe.c)			\
 						$(addprefix ${EXEC}, exec_utils.c)			\
 						$(addprefix ${PARSING}, commands.c)			\
 						$(addprefix ${PARSING}, quotes.c)			\
