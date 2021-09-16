@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/15 11:53:48 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/16 13:39:45 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ int	exec_binary(t_cmd *cmd) // start_command -> EXEC_BINARY
 	{
 		binary2 = check_path(cmd->next);
 		args2 = list_to_tab(cmd->next);
-		if (binary)
+		if (binary && binary2)
 			exec_pipe(binary, binary2, args, args2);
 		else
 			exec_pipe(cmd->cmd, cmd->next->cmd, args, args2);
+		free(binary2);
+		//ft_free_tab(args2);
 	}
 	else
 	{
@@ -53,6 +55,8 @@ int	exec_binary(t_cmd *cmd) // start_command -> EXEC_BINARY
 		else
 			exec_command(cmd->cmd, args);
 	}
+	//ft_free_tab(args);
+	free(binary);
 	return (0);
 }
 

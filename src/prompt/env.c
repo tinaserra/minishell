@@ -88,6 +88,8 @@ void	free_env(void)
 {
 	t_env	*tmp;
 
+	if (!g_ms->env)
+		return ;
 	while (g_ms->env)
 	{
 		tmp = g_ms->env->next;

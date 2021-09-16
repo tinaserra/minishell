@@ -39,7 +39,7 @@ char	**list_to_tab(t_cmd *cmd)
 	char	**aaargs;
 
 	len = lst_size(cmd);
-	aaargs = malloc(sizeof(char *) * len + 2);
+	aaargs = malloc(sizeof(char *) * (len + 2));
 	if (aaargs == NULL)
 		return (NULL);
 	liste = cmd->args;
@@ -71,8 +71,13 @@ char	*check_path(t_cmd *cmd)
 		binary = ft_strjoin(path[i], "/");
 		binary = ft_strjoin_free(binary, cmd->cmd, 'L');
 		if (lstat(binary, &stats) == 0)
+		{
+			//ft_free_tab(path);
 			return (binary);
+		}
+		free(binary);
 		i++;
 	}
+	//ft_free_tab(path);
 	return (NULL);
 }

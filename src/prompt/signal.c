@@ -2,6 +2,8 @@
 
 void	sig_handler(int c)
 {
+	//if (c == 3) // backslash
+	//	free_all();
 	if (c == 2)
 	{
 		printf("\n");
