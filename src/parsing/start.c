@@ -65,16 +65,16 @@ void	parsing(void)
 
 	split_minishell(g_ms->line);
 	if (!get_token_type())
-		printerrno_fd(STDERR_FILENO);
-		//print_error("minishell: syntax error unexpected token\n");
+		print_error(SYNTXT);
 	else
 	{
 		tmp = g_ms->tokens;
 		while (tmp)
 			parse_token(&tmp);
 	}
+	free_token();
 	if (g_ms->cmds)
 		exec_start(); // exec_cmds -> EXEC_START
-	free_commands();
 	free_token();
+	free_commands();
 }

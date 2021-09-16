@@ -12,7 +12,7 @@ void	update_pwd(void)
 	g_ms->curdir = getcwd(NULL, 0);
 	if (!g_ms->curdir)
 	{
-		printf("error\n");
+		printf("error pute\n"); //  ?????????
 		g_ms->curdir = ft_strjoin_free(tmp, "/.", 'L');
 		return ;
 	}
@@ -25,14 +25,11 @@ int	have_permission(t_cmd *cmd)
 {
 	DIR	*dir;
 
+	errno = 0;
 	dir = opendir(cmd->args->word);
-	if (dir == NULL)
+	if (dir == NULL || errno != 0) //(dir == NULL)
 	{
-		ft_putstr_fd("cd: ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(cmd->args->word, 2);
-		ft_putchar_fd('\n', 2);
+		printerrno_fd(STDERR_FILENO, "cd", cmd->args->word);
 		return (0);
 	}
 	else
@@ -49,7 +46,7 @@ void	cd_builtin(t_cmd *cmd)
 	{
 		if (chdir(find_env(g_ms->env, "HOME")) != 0)
 		{
-			printf("cd: HOME not set\n");
+			print_error(HOME);
 			g_ms->exit = 1;
 			return ;
 		}
@@ -58,7 +55,8 @@ void	cd_builtin(t_cmd *cmd)
 	{
 		if (have_permission(cmd) && chdir(tmp->word) != 0)
 		{
-			printf("cd: no such file or directory: %s\n", tmp->word);
+			printerrno_fd(STDERR_FILENO, "cd", tmp->word);
+			//printf("cd: no such file or directory: %s\n", tmp->word);
 			g_ms->exit = 1;
 			return ;
 		}

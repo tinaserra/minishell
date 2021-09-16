@@ -6,6 +6,7 @@
 */
 
 # include "libft.h"
+# include "struct.h"
 
 /*
 ** LIBRARIES ---------------------------------------------------------------- **
@@ -16,17 +17,15 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <signal.h>
-# include <errno.h>
-# include <termios.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 # include <dirent.h>
-# include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <errno.h>
 # include <sys/errno.h>
 
 
@@ -43,45 +42,8 @@
 // # define IS_ENV		1 << 6
 // # define IS_EXIT		1 << 7
 
-# define DOUBLE_Q	1 << 0 // -> 0000 0001
-# define SIMPLE_Q	1 << 1 // -> 0000 0010
-
-typedef enum		e_type{
-	POINT_V,
-	PIPE,
-	REDIR,
-	ENV,
-	NEWL,
-	TXT
-}					t_type;
-
-typedef struct		s_env
-{
-	char			*name;
-	char			*value;
-	struct s_env	*next;
-}					t_env;
-
-
-typedef struct		s_token
-{
-	char			*word;
-	int				type;
-	struct s_token	*prev;
-	struct s_token	*next;
-}					t_token;
-
-typedef struct		s_cmd
-{
-	char			*cmd;
-	t_token			*args;
-	t_list			*env;
-	int				type;
-	int				in;
-	int				out;
-	struct s_cmd	*prev;
-	struct s_cmd	*next;
-}					t_cmd;
+//# define DOUBLE_Q	1 << 0 // -> 0000 0001
+//# define SIMPLE_Q	1 << 1 // -> 0000 0010
 
 // [echo $HOME bonjour cnecn rfor] ; OK
 // [echo '$HOME' cnecn rfor] ;
@@ -100,27 +62,6 @@ typedef struct		s_cmd
 	// 0 ^ 1 = 1
 	// 1 ^ 0 = 1
 	// 1 ^ 1 = 0
-
-typedef struct		s_minishell
-{
-	char			mask;
-	int				quote;
-	int				close_signal;
-	int				cursor;
-	t_list			*history;
-	int				history_pos;
-	int				cursor_pos;
-	char			*line;
-	char			*curdir;
-	t_list			*commands;
-	t_token			*tokens;
-	struct s_cmd	*cmds;
-	t_env			*env;
-	char			*term;
-	int				count;
-	int				exit;
-}					t_minishell;
-t_minishell *g_ms;
 
 /*
 ** SIGNALS ------------------------------------------------------------------ **
@@ -178,6 +119,7 @@ t_env	*get_env(t_env *env, char *name);
 t_env	*get_env2(t_env *env, char *name);
 void	unset_builtin(t_cmd *cmd);
 t_env	*env_free_at(t_env *l, int pos);
+void	free_all();
 
 /*
 ** BUILTINS ----------------------------------------------------------------- **
@@ -205,7 +147,7 @@ char	**list_to_tab(t_cmd *cmd);
 ** ERROR -------------------------------------------------------------------- **
 */
 
-int		print_error(char *str);
-void	printerrno_fd(int fd);
+int		print_error(int error);
+void	printerrno_fd(int fd, char *cmd, char *arg);
 
 #endif

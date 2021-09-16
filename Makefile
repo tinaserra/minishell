@@ -1,6 +1,6 @@
 NAME			=		minishell
 CC				=		gcc
-FLAGS			=		-Wall -Werror -Wextra -I $(HEADER) -I $(LIBFT) #-fsanitize=address
+FLAGS			=		-g -Wall -Werror -Wextra -I $(HEADER) -I $(LIBFT) #-fsanitize=address
 
 HEADER          =		./inc/
 PARSING         =		./src/parsing/
