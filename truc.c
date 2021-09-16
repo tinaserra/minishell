@@ -3,17 +3,16 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <signal.h>
-# include <errno.h>
-# include <termios.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 # include <dirent.h>
-# include <term.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <errno.h>
+# include <sys/errno.h>
 
 int pipeCreation(char **s1, char **s2)
 {
