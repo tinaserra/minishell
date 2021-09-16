@@ -25,14 +25,19 @@ void	echo_builtin(t_token *args, int fd)
 		fd = 1;
 	if (!tmp)
 		return ;
+	printf("%s\n", tmp->word);
 	nl = echo_new_line(tmp->word);
-	coderr = echo_new_line(tmp->word);
-	if (coderr == 1)
-		printf("GROSSE TCHOIN\n");
 	if (nl == 0)
 		tmp = tmp->next;
+
 	while (tmp)
 	{
+		coderr = echo_code_error(tmp->word);
+		if (coderr == 1)
+		{
+			printf("DOLLAR POINT D'INTERROGATION\n");
+			printf("%d\n", errno);
+		}
 		ft_putstr_fd(tmp->word, fd);
 		if (tmp->next)
 			ft_putchar_fd(' ', fd);
