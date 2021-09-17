@@ -66,6 +66,19 @@ make && ./minishell
 Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf) | [FR](https://github.com/tinaserra/minishell/blob/master/links/minishell_fr.pdf)
 Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
 
+## ```echo $?```
+
+|Numéro de code de sortie|Sens|Exemple|Commentaire|
+| :--- | :--- | :--- | :--- |
+|```1```|Catchall pour les erreurs générales|```let "var1 = 1/0"```|Erreurs diverses, telles que "diviser par zéro" et autres opérations non autorisées|
+|```2```|Mauvaise utilisation des commandes intégrées du shell (selon la documentation Bash)|```empty_function() {}```|Mot - clé ou commande manquant , ou problème d'autorisation (et code de retour diff en cas d'échec de la comparaison de fichiers binaires )|
+|```126```|La commande invoquée ne peut pas s'exécuter|```/dev/null```|Le problème d'autorisation ou la commande n'est pas un exécutable|
+|```127```|```command not found```|```fdp```|Problème possible avec **$PATH** ou **une faute de frappe**|
+|```128```|Argument invalide pour quitter|```exit 3.14159```|**exit** ne prend que des arguments entiers compris entre 0 et 255 (voir la première note de bas de page)|
+|```128+n```|Signal d'erreur fatale "n"|```kill -9 $PPID of script```|``$?`` renvoie 137 (128 + 9)|
+|```130```|Script terminé par Control-C|```Ctl-C```|**Control-C** est le signal d'erreur fatale 2 , (130 = 128 + 2, voir ci-dessus)|
+|```255*```|État de sortie hors de portée|```exit -1```|**exit** ne prend que des arguments entiers compris entre 0 et 255|
+
 ## Doc & Lexique des fonctions autorisées
 
 * ```fork``` : crée un process child qui est une copie du process parent
