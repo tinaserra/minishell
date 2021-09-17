@@ -40,7 +40,7 @@ ls: execution.sh: No such file or directory
 127
 ```
 ```shell
-$ exit $? /* Vraiment tres fun */
+$ exit $? # Vraiment tres fun
 bash-3.2$ exit $?
 exit
 $ echo $?
@@ -50,9 +50,9 @@ $ echo $?
 bash-3.2$ exit 3.14 ; echo $?
 exit
 bash: exit: 3.14: numeric argument required
-$ echo $? /* Mac */
+$ echo $? # Mac
 255
-$ echo $? /* Linux */
+$ echo $? # Linux
 2
 ```
 ```
@@ -149,8 +149,8 @@ Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/l
 [man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)</br>
 [man errno](http://manpagesfr.free.fr/man/man3/errno.3.html)</br>
 [man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)</br>
-[TUTO SHELL](http://marionpatrick.free.fr/man_html/html/tuto_shell.html)
-[Fonctions autorisées par le sujet minishell 👉](https://github.com/tinaserra/minishell/blob/master/links/lexic.md)
+[TUTO SHELL](http://marionpatrick.free.fr/man_html/html/tuto_shell.html)</br>
+[Fonctions autorisées par le sujet minishell 👉](https://github.com/tinaserra/minishell/blob/master/links/lexic.md)</br>
 
 ## Comment utiliser Git en multi ?
 
