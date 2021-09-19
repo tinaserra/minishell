@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 15:46:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/15 12:48:21 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/19 07:36:03 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ void	exec_pipe(char *cmd, char *cmd2, char **s1, char **s2) // EXEC_PIPE
 	int		status2;
 
 	if (pipe(fd) == -1)
-		print_error("Error Piping\n");
+		print_error(1);
 	pid = fork();
 	if (pid < 0)
-		print_error("Error Forking\n");
+		print_error(1);
 	if (pid == 0) /* commande 1 */
 		exec_pipe1(cmd, s1, fd);
 	pid2 = fork();
 	if (pid2 < 0)
-		print_error("Error Forking\n");
+		print_error(1);
 	if (pid2 == 0) /* commande 2 */
 		exec_pipe2(cmd2, s2, fd);
 	close(fd[READ]);
