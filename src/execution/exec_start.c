@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/16 13:39:45 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/19 08:45:38 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec_command(char *binary, char **args)
 
 	pid = fork();
 	if (pid < 0)
-		print_error("Error Forking\n");
+		print_error(1);
 	else if (pid == 0)		/* child process */
 	{
 		execve(binary, args, NULL);
@@ -34,6 +34,7 @@ int	exec_binary(t_cmd *cmd) // start_command -> EXEC_BINARY
 	char	*binary2;
 	char	**args;
 	char	**args2;
+	struct stat stats;
 
 	args = list_to_tab(cmd);
 	binary = check_path(cmd);
@@ -44,7 +45,12 @@ int	exec_binary(t_cmd *cmd) // start_command -> EXEC_BINARY
 		if (binary && binary2)
 			exec_pipe(binary, binary2, args, args2);
 		else
-			exec_pipe(cmd->cmd, cmd->next->cmd, args, args2);
+		{
+			if (lstat(cmd->cmd, &stats))
+				printf("minishell: %s: command not found\n", cmd->cmd);				
+			else
+				exec_pipe(cmd->cmd, cmd->next->cmd, args, args2);
+		}
 		free(binary2);
 		//ft_free_tab(args2);
 	}
@@ -53,7 +59,12 @@ int	exec_binary(t_cmd *cmd) // start_command -> EXEC_BINARY
 		if (binary)
 			exec_command(binary, args);
 		else
-			exec_command(cmd->cmd, args);
+		{
+			if (lstat(cmd->cmd, &stats))
+				printf("minishell: %s: command not found\n", cmd->cmd);				
+			else
+				exec_command(cmd->cmd, args);
+		}
 	}
 	//ft_free_tab(args);
 	free(binary);
