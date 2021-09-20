@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 15:46:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/19 07:36:03 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/20 09:11:45 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,41 @@
 #define READ 0		/* stdin */
 #define WRITE 1		/* stdout */
 
-static void	exec_pipe1(char *cmd, char **s1, int fd[2])
-{
-	dup2(fd[WRITE], 1);
-	close(fd[READ]);
-	close(fd[WRITE]);
-	execve(cmd, s1, NULL);
-	exit(EXIT_SUCCESS);
-}
-
-static void	exec_pipe2(char *cmd2, char **s2, int fd[2])
-{
-	dup2(fd[READ], 0);
-	close(fd[READ]);
-	close(fd[WRITE]);
-	execve(cmd2, s2, NULL);
-	exit(EXIT_SUCCESS);
-}
-
-void	exec_pipe(char *cmd, char *cmd2, char **s1, char **s2) // EXEC_PIPE
+void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 {
 	int		fd[2];
 	pid_t	pid;
-	pid_t	pid2;
-	int		status;
-	int		status2;
+	int		fdd;
+	char	**args;
 
-	if (pipe(fd) == -1)
-		print_error(1);
-	pid = fork();
-	if (pid < 0)
-		print_error(1);
-	if (pid == 0) /* commande 1 */
-		exec_pipe1(cmd, s1, fd);
-	pid2 = fork();
-	if (pid2 < 0)
-		print_error(1);
-	if (pid2 == 0) /* commande 2 */
-		exec_pipe2(cmd2, s2, fd);
-	close(fd[READ]);
-	close(fd[WRITE]);
-	waitpid(pid, &status, 0);
-	waitpid(pid2, &status2, 0);
+		//printf("%s\n", cmd->cmd);
+	fdd = 0;
+	while (cmd && (cmd->type == PIPE || (cmd->prev && cmd->prev->type == PIPE)))
+	{
+		args = list_to_tab(cmd);
+		pipe(fd); // ERR
+		pid = fork();
+		if (pid == -1)
+		{
+			print_error(FORK); // ERR
+			exit(1);
+		}
+		else if (pid == 0)
+		{
+			dup2(fdd, 0);
+			if (cmd->next)
+				dup2(fd[1], 1);
+			close(fd[0]);
+			execve(cmd->cmd, args, NULL);
+			exit(1);
+		}
+		else
+		{
+			wait(NULL);
+			close(fd[1]);
+			fdd = fd[0];
+			free(args);
+			cmd = cmd->next;
+		}
+	}	
 }

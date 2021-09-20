@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/19 08:45:38 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/20 09:30:13 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,50 +28,53 @@ void	exec_command(char *binary, char **args)
 		wait(NULL);
 }
 
-int	exec_binary(t_cmd *cmd) // start_command -> EXEC_BINARY
+int	exec_binary(t_cmd *cmd)
 {
 	char	*binary;
-	char	*binary2;
 	char	**args;
-	char	**args2;
+	//t_cmd	*tmp;
 	struct stat stats;
 
-	args = list_to_tab(cmd);
-	binary = check_path(cmd);
 	if (cmd->type == PIPE)
 	{
-		binary2 = check_path(cmd->next);
-		args2 = list_to_tab(cmd->next);
-		if (binary && binary2)
-			exec_pipe(binary, binary2, args, args2);
+		binary = check_path(cmd);
+		if (binary)
+		{
+			free(cmd->cmd);
+			cmd->cmd = ft_strdup(binary);
+			exec_pipe(cmd);
+		}
 		else
 		{
 			if (lstat(cmd->cmd, &stats))
-				printf("minishell: %s: command not found\n", cmd->cmd);				
+				printf("minishell: %s: command not found\n", cmd->cmd); // ERR
 			else
-				exec_pipe(cmd->cmd, cmd->next->cmd, args, args2);
+				exec_pipe(cmd);
 		}
-		free(binary2);
-		//ft_free_tab(args2);
+		free(binary);
 	}
 	else
 	{
+		binary = check_path(cmd);
+		args = list_to_tab(cmd);
+		printf("%s\n", args[0]);
 		if (binary)
 			exec_command(binary, args);
 		else
 		{
+			printf("abc\n");
 			if (lstat(cmd->cmd, &stats))
-				printf("minishell: %s: command not found\n", cmd->cmd);				
+				printf("minishell: %s: command not found\n", cmd->cmd); // ERR
 			else
 				exec_command(cmd->cmd, args);
 		}
+		free(binary);
+		ft_free_tab(args);
 	}
-	//ft_free_tab(args);
-	free(binary);
 	return (0);
 }
 
-void	exec_switch(t_cmd *cmd) //exec_cmd -> EXEC_SWITCH
+void	exec_switch(t_cmd *cmd)
 {
 	if (ft_strcmp(cmd->cmd, "echo") == 0 && cmd->type != PIPE
 		&& (!cmd->prev || cmd->prev->type != PIPE))
@@ -91,7 +94,7 @@ void	exec_switch(t_cmd *cmd) //exec_cmd -> EXEC_SWITCH
 		exec_binary(cmd);
 }
 
-void	exec_start(void) // exec_cmds -> EXEC_START
+void	exec_start(void)
 {
 	t_cmd	*cmd;
 
@@ -101,7 +104,7 @@ void	exec_start(void) // exec_cmds -> EXEC_START
 		edit_args(cmd);
 		redirect(cmd);
 		if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
-			exec_switch(cmd); //exec_cmd -> EXEC_SWITCH
+			exec_switch(cmd);
 		if (cmd->in)
 			close(cmd->in);
 		if (cmd->out)
