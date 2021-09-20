@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 15:46:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/20 10:41:24 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:10:46 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 				dup2(fd[1], 1);
 			close(fd[0]);
 			execve(bin, args, NULL);
+			//if (errno != 0)
 			exit(1);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 23:41:36 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/06/24 16:33:10 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/20 14:53:02 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ int	get_token_type(void)
 			|| ft_strcmp(tmp->word, ">") == 0
 			|| ft_strcmp(tmp->word, ">>") == 0)
 			tmp->type = REDIR;
-		else if (is_valid_env_var(tmp->word))
+		else if (is_valid_env_var(tmp->word) == 1)
 			tmp->type = ENV;
+		else if (is_valid_env_var(tmp->word) == 2)
+			tmp->type = EXIT_STATUS;
 		else if (ft_strcmp(tmp->word, "\n") == 0)
 			tmp->type = NEWL;
 		else

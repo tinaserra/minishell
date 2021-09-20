@@ -23,7 +23,8 @@ typedef enum		e_type{
 	REDIR,
 	ENV,
 	NEWL,
-	TXT
+	TXT,
+	EXIT_STATUS
 }					t_type;
 
 /*
@@ -59,14 +60,9 @@ typedef struct		s_cmd
 
 typedef struct		s_minishell
 {
-	char			mask;
 	int				quote;
-	int				close_signal;
-	int				cursor;
-	t_list			*history;
-	int				history_pos;
-	int				cursor_pos;
 	char			*line;
+	int				erno;
 	char			*curdir;
 	t_list			*commands;
 	t_token			*tokens;

@@ -57,6 +57,8 @@ int	is_valid_env_var(char *s)
 	i = -1;
 	while (s[++i])
 	{
+		if (s[i] == '$' && s[i + 1] == '?')
+			return (2);
 		if (s[i] == '$')
 		{
 			if (!ft_isalpha(s[i + 1]))

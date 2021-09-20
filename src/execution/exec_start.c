@@ -6,70 +6,83 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/20 09:30:13 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/20 15:15:08 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_command(char *binary, char **args)
+void	exec_command(t_cmd *cmd, char *binary)
 {
 	pid_t	pid;
+	char	**args;
 
+	args = list_to_tab(cmd);
 	pid = fork();
 	if (pid < 0)
-		print_error(1);
+		print_error(FORKING, NULL, NULL);
 	else if (pid == 0)		/* child process */
 	{
+		dup2(cmd->out, 1);
 		execve(binary, args, NULL);
 		exit(1);
 	}
 	else					/* parent process */
+	{
 		wait(NULL);
+		g_ms->erno = errno;
+	}
+}
+
+char	*find_binary(t_cmd *cmd, int show)
+{
+	struct stat stats;
+	char		*binary;
+
+	binary = check_path(cmd);
+	if (!binary)
+	{
+		if (lstat(cmd->cmd, &stats))
+		{
+			if (show)
+				// printf("minishell: %s: command not found\n", cmd->cmd);
+				print_error(CMD, cmd->cmd, NULL);
+			return (NULL);
+		}
+		free(binary);
+		binary = ft_strdup(cmd->cmd);
+	}
+	return (binary);
+}
+
+int	find_all_binary(t_cmd *cmd)
+{
+	t_cmd	*tmpp;
+
+	tmpp = cmd;
+	while (tmpp)
+	{
+		if (!find_binary(tmpp, 1))
+			return (0);
+		tmpp = tmpp->next;
+	}
+	return (1);	
 }
 
 int	exec_binary(t_cmd *cmd)
 {
-	char	*binary;
-	char	**args;
-	//t_cmd	*tmp;
-	struct stat stats;
+	char	*bin;
 
 	if (cmd->type == PIPE)
 	{
-		binary = check_path(cmd);
-		if (binary)
-		{
-			free(cmd->cmd);
-			cmd->cmd = ft_strdup(binary);
-			exec_pipe(cmd);
-		}
-		else
-		{
-			if (lstat(cmd->cmd, &stats))
-				printf("minishell: %s: command not found\n", cmd->cmd); // ERR
-			else
-				exec_pipe(cmd);
-		}
-		free(binary);
+		if (!find_all_binary(cmd))
+			return (0);
+		exec_pipe(cmd);
 	}
 	else
 	{
-		binary = check_path(cmd);
-		args = list_to_tab(cmd);
-		printf("%s\n", args[0]);
-		if (binary)
-			exec_command(binary, args);
-		else
-		{
-			printf("abc\n");
-			if (lstat(cmd->cmd, &stats))
-				printf("minishell: %s: command not found\n", cmd->cmd); // ERR
-			else
-				exec_command(cmd->cmd, args);
-		}
-		free(binary);
-		ft_free_tab(args);
+		bin = find_binary(cmd, 1);
+		exec_command(cmd, bin);
 	}
 	return (0);
 }
@@ -103,6 +116,7 @@ void	exec_start(void)
 	{
 		edit_args(cmd);
 		redirect(cmd);
+		//printf("[%s %d] %d \n", cmd->cmd, cmd->type, cmd->args->type);
 		if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
 			exec_switch(cmd);
 		if (cmd->in)

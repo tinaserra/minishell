@@ -7,17 +7,16 @@ int	echo_new_line(char *s)
 	return (1);
 }
 
-int	echo_code_error(char *s)
-{
-	if (ft_strcmp(s, "$?") == 0)
-		return (1);
-	return (0);
-}
+// int	echo_exit_status(char *s)
+// {
+// 	if (ft_strcmp(s, "$?") == 0)
+// 		return (1);
+// 	return (0);
+// }
 
 void	echo_builtin(t_token *args, int fd)
 {
 	int		nl;
-	int		coderr;
 	t_token	*tmp;
 
 	tmp = args;
@@ -32,12 +31,8 @@ void	echo_builtin(t_token *args, int fd)
 
 	while (tmp)
 	{
-		coderr = echo_code_error(tmp->word);
-		if (coderr == 1)
-		{
-			//printf("DOLLAR POINT D'INTERROGATION\n");
-			//printf("%d\n", errno);
-		}
+		if (tmp->type == EXIT_STATUS)
+			printf("%d\n", g_ms->erno);
 		ft_putstr_fd(tmp->word, fd);
 		if (tmp->next)
 			ft_putchar_fd(' ', fd);

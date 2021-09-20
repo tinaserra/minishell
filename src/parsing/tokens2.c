@@ -20,6 +20,8 @@ int	parse_token2(t_token **token, t_cmd *cmd)
 		cmd->cmd = ft_strdup((*token)->word);
 	if ((*token)->type == REDIR)
 		add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
+	if ((*token)->type == EXIT_STATUS)
+		add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
 	if ((*token)->type == ENV && !cmd->cmd)
 		ft_lstadd_back(&cmd->env, ft_lstcreate(ft_strdup((*token)->word)));
 	if ((*token)->type == PIPE)

@@ -5,6 +5,20 @@ Aussi mignon qu’un vrai shell
 
 ### Ces cas
 
+```shell
+admin ➜ minishell1 ls | wc |  cat -e ; ls | ckjefvkj
+minishell: ckjefvkj: command not found
+
+minishell: ckjefvkj: command not found
+```
+
+```shell
+admin ➜ minishell1 ls | wc > b
+wc: '>': No such file or directory
+0 0 0 b
+0 0 0 total
+```
+
 - [ ] ```echo puta madre | cat -e```
 ```
 admin ➜ minishell1 echo puta madre | cat -e
