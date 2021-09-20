@@ -125,7 +125,7 @@ make && ./minishell
 
 ## INTRODUCTION 🤓
 
-Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf) | [FR](https://github.com/tinaserra/minishell/blob/master/links/minishell_fr.pdf)
+Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf)</br>
 Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
 
 ## ```echo $?```
@@ -145,7 +145,7 @@ Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/l
 
 ## USEFULL LINKS 🤙🏼
 
-[usefull](https://github.com/lucielebriquer)
+[usefull](https://github.com/lucielebriquer)</br>
 [man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)</br>
 [man errno](http://manpagesfr.free.fr/man/man3/errno.3.html)</br>
 [man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)</br>
@@ -154,5 +154,5 @@ Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/l
 
 ## Comment utiliser Git en multi ?
 
-[Readme 😏](https://github.com/tinaserra/minishell/blob/master/links/git.md)
+[Readme 😏](https://github.com/tinaserra/minishell/blob/master/links/git.md)</br>
 Git: [pense-bête](http://www.letuyau.net/2012/09/git-pense-bete/)
