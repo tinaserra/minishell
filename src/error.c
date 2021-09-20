@@ -1,8 +1,6 @@
 #include "minishell.h"
 #include "error.h"
 
-// printerrno_fd(STDERR_FILENO);
-
 /*
 ** The following symbolic constants shall be defined for file streams:
 **
@@ -14,12 +12,9 @@
 ** 		File number of stdout; 1.
 */
 
-// printerrno_fd(STDERR_FILENO, "cd", cmd->args->word);
-
 // print_error(NUMBER, "cmd", "arg");
 
-
-void	print_error(int error, char *cmd, char *arg) // enlever le 1er arg
+void	print_error(int error, char *cmd, char *arg)
 {
 	char	*error_message;
 

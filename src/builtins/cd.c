@@ -27,10 +27,9 @@ int	have_permission(t_cmd *cmd)
 
 	errno = 0;
 	dir = opendir(cmd->args->word);
-	if (dir == NULL || errno != 0) //(dir == NULL)
+	if (dir == NULL || errno != 0)
 	{
 		print_error(ERRNO, "cd", cmd->args->word);
-		// printerrno_fd(STDERR_FILENO, "cd", cmd->args->word);
 		return (0);
 	}
 	else
@@ -57,8 +56,6 @@ void	cd_builtin(t_cmd *cmd)
 		if (have_permission(cmd) && chdir(tmp->word) != 0)
 		{
 			print_error(ERRNO, "cd", tmp->word);
-			// printerrno_fd(STDERR_FILENO, "cd", tmp->word);
-			//printf("cd: no such file or directory: %s\n", tmp->word);
 			g_ms->exit = 1;
 			return ;
 		}
