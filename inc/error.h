@@ -17,6 +17,26 @@ static char g_str_error[NUMBER][256] =
 {
 	[SYNTXT] = "minishell: syntax error unexpected token\n",
 	[HOME] = "cd: HOME not set\n",
+	[EXPORT] = "minishell: export: not a valid identifier\n",
+	[CMD] = "minishell: %s: command not found\n",
+	[FORK] = "Error Forking\n",
+	[PIPE] = "Error Piping\n",
 };
 
 #endif
+
+
+/*
+** $ dd ou ; echo $?
+** dd: unknown operand ou
+** 1
+**
+** $ pwd fr ; echo $?
+** pwd: too many arguments
+** 1
+**
+** $ kill ooi ; echo $?
+** kill: illegal pid: ooi
+** 1
+
+*/

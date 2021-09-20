@@ -28,41 +28,6 @@
 # include <errno.h>
 # include <sys/errno.h>
 
-
-/*
-** VALUES ------------------------------------------------------------------- **
-*/
-
-// # define IS_ECHO		1 << 0 // -> 0000 0001
-// # define IS_NL		1 << 1 // -> 0000 0010
-// # define IS_CD		1 << 2 // -> 0000 0100
-// # define IS_PWD		1 << 3 // -> 0000 1000
-// # define IS_EXPORT	1 << 4
-// # define IS_UNSET	1 << 5
-// # define IS_ENV		1 << 6
-// # define IS_EXIT		1 << 7
-
-//# define DOUBLE_Q	1 << 0 // -> 0000 0001
-//# define SIMPLE_Q	1 << 1 // -> 0000 0010
-
-// [echo $HOME bonjour cnecn rfor] ; OK
-// [echo '$HOME' cnecn rfor] ;
-// [echo bonjour cnecn rfor | cat -e] ;
-// [echo bonjour cnecn rfor | cat -e] ;
-// [echo bonjour cnecn rfor | cat -e]
-
-	// OR |
-	// 0 | 0 = 0
-	// 0 | 1 = 1
-	// 1 | 0 = 1
-	// 1 | 1 = 1
-
-	// XOR ^
-	// 0 ^ 0 = 0
-	// 0 ^ 1 = 1
-	// 1 ^ 0 = 1
-	// 1 ^ 1 = 0
-
 /*
 ** SIGNALS ------------------------------------------------------------------ **
 */
@@ -136,7 +101,7 @@ void	export_builtin(t_cmd *cmd);
 */
 
 void	exec_start(void);
-void	exec_pipe(char *cmd, char *cmd2, char **s1, char **s2);
+void	exec_pipe(t_cmd *cmd); // EXEC_PIPE
 void	edit_args(t_cmd *cmd);
 int		lst_size(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);

@@ -5,6 +5,11 @@
 typedef enum		e_error{
 	SYNTXT,
 	HOME,
+	EXPORT,
+	CMD,
+	FORK,
+	PIPE,
+
 	NUMBER
 }					t_error;
 

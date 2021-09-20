@@ -14,11 +14,13 @@
 ** 		File number of stdout; 1.
 */
 
+// printerrno_fd(STDERR_FILENO, "cd", cmd->args->word);
+
 void	printerrno_fd(int fd, char *cmd, char *arg)
 {
 	char	*ret_error;
 
-	printf("Je suis dans print errno\n");
+	//printf("Je suis dans print errno\n");
 	ret_error = strerror(errno);
 	ft_putstr_fd("minishell: ", fd);
 	ft_putstr_fd(cmd, fd);
