@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 15:46:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/20 09:11:45 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:41:24 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@ void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 	pid_t	pid;
 	int		fdd;
 	char	**args;
+	char	*bin;
 
-		//printf("%s\n", cmd->cmd);
 	fdd = 0;
 	while (cmd && (cmd->type == PIPE || (cmd->prev && cmd->prev->type == PIPE)))
 	{
+		bin = find_binary(cmd, 0);
 		args = list_to_tab(cmd);
-		pipe(fd); // ERR
+		pipe(fd);
 		pid = fork();
 		if (pid == -1)
 		{
-			print_error(FORK); // ERR
+			print_error(FORKING, NULL, NULL);
 			exit(1);
 		}
 		else if (pid == 0)
@@ -39,7 +40,7 @@ void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 			if (cmd->next)
 				dup2(fd[1], 1);
 			close(fd[0]);
-			execve(cmd->cmd, args, NULL);
+			execve(bin, args, NULL);
 			exit(1);
 		}
 		else

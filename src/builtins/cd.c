@@ -29,7 +29,8 @@ int	have_permission(t_cmd *cmd)
 	dir = opendir(cmd->args->word);
 	if (dir == NULL || errno != 0) //(dir == NULL)
 	{
-		printerrno_fd(STDERR_FILENO, "cd", cmd->args->word);
+		print_error(ERRNO, "cd", cmd->args->word);
+		// printerrno_fd(STDERR_FILENO, "cd", cmd->args->word);
 		return (0);
 	}
 	else
@@ -46,7 +47,7 @@ void	cd_builtin(t_cmd *cmd)
 	{
 		if (chdir(find_env(g_ms->env, "HOME")) != 0)
 		{
-			print_error(HOME);
+			print_error(HOME, "cd", NULL);
 			g_ms->exit = 1;
 			return ;
 		}
@@ -55,7 +56,8 @@ void	cd_builtin(t_cmd *cmd)
 	{
 		if (have_permission(cmd) && chdir(tmp->word) != 0)
 		{
-			printerrno_fd(STDERR_FILENO, "cd", tmp->word);
+			print_error(ERRNO, "cd", tmp->word);
+			// printerrno_fd(STDERR_FILENO, "cd", tmp->word);
 			//printf("cd: no such file or directory: %s\n", tmp->word);
 			g_ms->exit = 1;
 			return ;

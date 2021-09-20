@@ -65,7 +65,7 @@ void	parsing(void)
 
 	split_minishell(g_ms->line);
 	if (!get_token_type())
-		print_error(SYNTXT);
+		print_error(SYNTXT, NULL, NULL);
 	else
 	{
 		tmp = g_ms->tokens;
@@ -74,7 +74,7 @@ void	parsing(void)
 	}
 	free_token();
 	if (g_ms->cmds)
-		exec_start(); // exec_cmds -> EXEC_START
+		exec_start();
 	free_token();
 	free_commands();
 }

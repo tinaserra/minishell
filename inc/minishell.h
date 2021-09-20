@@ -107,12 +107,14 @@ int		lst_size(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
 char	*check_path(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
+char	*find_binary(t_cmd *cmd, int show);
 
 /*
 ** ERROR -------------------------------------------------------------------- **
 */
 
-int		print_error(int error);
-void	printerrno_fd(int fd, char *cmd, char *arg);
+// int		print_error(int error);
+// void	printerrno_fd(int fd, char *cmd, char *arg);
+void	print_error(int error, char *cmd, char *arg);
 
 #endif

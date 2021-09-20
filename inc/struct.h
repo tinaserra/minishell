@@ -3,13 +3,13 @@
 */
 
 typedef enum		e_error{
+	ERRNO = -1,
 	SYNTXT,
 	HOME,
 	EXPORT,
 	CMD,
-	FORK,
-	PIPE,
-
+	FORKING,
+	PIPING,
 	NUMBER
 }					t_error;
 

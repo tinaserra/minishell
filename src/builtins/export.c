@@ -44,11 +44,11 @@ void	export_builtin(t_cmd *cmd)
 				if (!ft_isalpha(res[0][0]))
 				{
 					// printf("minishell: export: not a valid identifier\n");
-					print_error(EXPORT);
+					print_error(EXPORT, "export", NULL);
 					break;
 				}
 				if (export_errors(res[0]))
-					print_error(EXPORT);
+					print_error(EXPORT, "export", NULL);
 				else
 				{
 					tmp_env = get_env(g_ms->env, res[0]);
