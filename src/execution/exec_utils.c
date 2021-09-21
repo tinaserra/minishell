@@ -3,14 +3,10 @@
 void	edit_args(t_cmd *cmd)
 {
 	t_token	*tmp;
-	//int		is_env;
 
 	tmp = cmd->args;
 	while (tmp)
 	{
-		//is_env = 0;
-		/*if (tmp->word && tmp->word[0] == '$')
-			is_env = 1;*/
 		tmp->word = handle_quotes(tmp->word, 1);
 		tmp = tmp->next;
 	}
@@ -78,6 +74,5 @@ char	*check_path(t_cmd *cmd)
 		free(binary);
 		i++;
 	}
-	//ft_free_tab(path);
 	return (NULL);
 }

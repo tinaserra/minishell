@@ -12,7 +12,7 @@ void	pwd_builtin(t_cmd *cmd)
 			printf("pwd: too many arguments\n");
 			return ;
 		}
-		ft_putstr_fd(pwd, 1);
-		ft_putchar_fd('\n', 1);
+		ft_putstr_fd(pwd, STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 	}
 }
