@@ -93,7 +93,7 @@ void	free_all();
 void	echo_builtin(t_token *args, int fd);
 void	env_builtin(int fd);
 void	cd_builtin(t_cmd *cmd);
-void	pwd_builtin(void);
+void	pwd_builtin(t_cmd *cmd);
 void	export_builtin(t_cmd *cmd);
 
 /*
