@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 15:46:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/20 13:10:46 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/21 14:46:15 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 		if (pid == -1)
 		{
 			print_error(FORKING, NULL, NULL);
-			exit(1);
+			exit(EXIT_SUCCESS);
 		}
 		else if (pid == 0)
 		{
@@ -41,15 +41,16 @@ void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 				dup2(fd[1], 1);
 			close(fd[0]);
 			execve(bin, args, NULL);
-			//if (errno != 0)
-			exit(1);
+			exit(EXIT_SUCCESS);
 		}
 		else
 		{
 			wait(NULL);
+			// g_ms->erno = errno;
 			close(fd[1]);
 			fdd = fd[0];
-			free(args);
+			ft_free_tab(args);
+			free(bin);
 			cmd = cmd->next;
 		}
 	}	

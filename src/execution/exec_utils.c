@@ -68,11 +68,11 @@ char	*check_path(t_cmd *cmd)
 	i = 0;
 	while (path[i])
 	{
-		binary = ft_strjoin(path[i], "/");
+		binary = ft_strjoin_free(ft_strdup(path[i]), "/", 'L');
 		binary = ft_strjoin_free(binary, cmd->cmd, 'L');
 		if (lstat(binary, &stats) == 0)
 		{
-			//ft_free_tab(path);
+			ft_free_tab(path);
 			return (binary);
 		}
 		free(binary);

@@ -6,11 +6,23 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/21 13:40:44 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/21 14:44:29 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		status_child(int pid, int status)
+{
+	if (WIFEXITED(pid))
+		status = WEXITSTATUS(pid);
+	if (WIFSIGNALED(pid))
+	{
+		status = WTERMSIG(pid);
+		if (status != 131)
+			status += 128;
+	}
+}
 
 void	exec_command(t_cmd *cmd, char *binary)
 {
@@ -29,8 +41,10 @@ void	exec_command(t_cmd *cmd, char *binary)
 	}
 	else					/* parent process */
 	{
-		wait(NULL);
-		g_ms->erno = errno;
+		wait(&pid);
+		// status_child(pid, status);
+		// g_ms->erno = errno;
+		ft_free_tab(args);
 	}
 }
 
@@ -47,6 +61,7 @@ char	*find_binary(t_cmd *cmd, int show)
 			if (show)
 				// printf("minishell: %s: command not found\n", cmd->cmd);
 				print_error(CMD, cmd->cmd, NULL);
+			free(binary);
 			return (NULL);
 		}
 		free(binary);
@@ -58,12 +73,18 @@ char	*find_binary(t_cmd *cmd, int show)
 int	find_all_binary(t_cmd *cmd)
 {
 	t_cmd	*tmpp;
+	char	*bin;
 
 	tmpp = cmd;
 	while (tmpp)
 	{
-		if (!find_binary(tmpp, 1))
+		bin = find_binary(tmpp, 1);
+		if (!bin)
+		{
+			free(bin);
 			return (0);
+		}
+		free(bin);
 		tmpp = tmpp->next;
 	}
 	return (1);	
@@ -83,6 +104,7 @@ int	exec_binary(t_cmd *cmd)
 	{
 		bin = find_binary(cmd, 1);
 		exec_command(cmd, bin);
+		free(bin);
 	}
 	return (0);
 }
