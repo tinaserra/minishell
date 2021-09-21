@@ -54,7 +54,6 @@ void	free_commands(void);
 ** PARSING ------------------------------------------------------------------ **
 */
 
-void	fonction();
 void	parsing();
 int		get_env_content(char *line, char **env_content);
 char	*replace_env(char *str, int pos_dollar);
@@ -82,7 +81,6 @@ t_env	*lst_new_env(char *name, char *value);
 void	add_env(t_env **alst, t_env *new);
 t_env	*get_env(t_env *env, char *name);
 t_env	*get_env2(t_env *env, char *name);
-void	unset_builtin(t_cmd *cmd);
 t_env	*env_free_at(t_env *l, int pos);
 void	free_all();
 
@@ -94,6 +92,7 @@ void	echo_builtin(t_token *args, int fd);
 void	env_builtin(int fd);
 void	cd_builtin(t_cmd *cmd);
 void	pwd_builtin(t_cmd *cmd);
+void	unset_builtin(t_cmd *cmd);
 void	export_builtin(t_cmd *cmd);
 
 /*
@@ -102,13 +101,14 @@ void	export_builtin(t_cmd *cmd);
 
 void	exec_start(void);
 void	exec_pipe(t_cmd *cmd);
-void	status_child(void);
 void	edit_args(t_cmd *cmd);
 int		lst_size(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
 char	*check_path(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
+void	status_child(void);
 char	*find_binary(t_cmd *cmd, int show);
+int		find_all_binary(t_cmd *cmd);
 
 /*
 ** ERROR -------------------------------------------------------------------- **

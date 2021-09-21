@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	exec_command(t_cmd *cmd, char *binary)
+static void	exec_command(t_cmd *cmd, char *binary)
 {
 	char	**args;
 
@@ -34,48 +34,7 @@ void	exec_command(t_cmd *cmd, char *binary)
 	}
 }
 
-char	*find_binary(t_cmd *cmd, int show)
-{
-	struct stat stats;
-	char		*binary;
-
-	binary = check_path(cmd);
-	if (!binary)
-	{
-		if (lstat(cmd->cmd, &stats))
-		{
-			if (show)
-				print_error(CMD, cmd->cmd, NULL);
-			free(binary);
-			return (NULL);
-		}
-		free(binary);
-		binary = ft_strdup(cmd->cmd);
-	}
-	return (binary);
-}
-
-int	find_all_binary(t_cmd *cmd)
-{
-	t_cmd	*tmpp;
-	char	*bin;
-
-	tmpp = cmd;
-	while (tmpp)
-	{
-		bin = find_binary(tmpp, 1);
-		if (!bin)
-		{
-			free(bin);
-			return (0);
-		}
-		free(bin);
-		tmpp = tmpp->next;
-	}
-	return (1);	
-}
-
-int	exec_binary(t_cmd *cmd)
+static int	exec_binary(t_cmd *cmd)
 {
 	char	*bin;
 
@@ -94,7 +53,7 @@ int	exec_binary(t_cmd *cmd)
 	return (0);
 }
 
-void	exec_switch(t_cmd *cmd)
+static void	exec_switch(t_cmd *cmd)
 {
 	if (ft_strcmp(cmd->cmd, "echo") == 0 && cmd->type != PIPE
 		&& (!cmd->prev || cmd->prev->type != PIPE))
