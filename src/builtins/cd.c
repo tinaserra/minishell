@@ -29,6 +29,7 @@ int	have_permission(t_cmd *cmd)
 	dir = opendir(cmd->args->word);
 	if (dir == NULL || errno != 0)
 	{
+		g_ms->status = 1;
 		print_error(ERRNO, "cd", cmd->args->word);
 		return (0);
 	}
@@ -46,6 +47,7 @@ void	cd_builtin(t_cmd *cmd)
 	{
 		if (chdir(find_env(g_ms->env, "HOME")) != 0)
 		{
+			g_ms->status = 1;
 			print_error(HOME, "cd", NULL);
 			g_ms->exit = 1;
 			return ;
@@ -55,6 +57,7 @@ void	cd_builtin(t_cmd *cmd)
 	{
 		if (have_permission(cmd) && chdir(tmp->word) != 0)
 		{
+			g_ms->status = 1;
 			print_error(ERRNO, "cd", tmp->word);
 			g_ms->exit = 1;
 			return ;

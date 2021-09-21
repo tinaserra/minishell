@@ -60,9 +60,10 @@ typedef struct		s_cmd
 
 typedef struct		s_minishell
 {
+	pid_t			pid;
+	int				status;
 	int				quote;
 	char			*line;
-	int				erno;
 	char			*curdir;
 	t_list			*commands;
 	t_token			*tokens;

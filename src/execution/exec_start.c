@@ -6,34 +6,21 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/21 14:44:29 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/21 14:58:16 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		status_child(int pid, int status)
-{
-	if (WIFEXITED(pid))
-		status = WEXITSTATUS(pid);
-	if (WIFSIGNALED(pid))
-	{
-		status = WTERMSIG(pid);
-		if (status != 131)
-			status += 128;
-	}
-}
-
 void	exec_command(t_cmd *cmd, char *binary)
 {
-	pid_t	pid;
 	char	**args;
 
 	args = list_to_tab(cmd);
-	pid = fork();
-	if (pid < 0)
+	g_ms->pid = fork();
+	if (g_ms->pid < 0)
 		print_error(FORKING, NULL, NULL);
-	else if (pid == 0)		/* child process */
+	else if (g_ms->pid == 0)		/* child process */
 	{
 		dup2(cmd->out, 1);
 		execve(binary, args, NULL);
@@ -41,9 +28,8 @@ void	exec_command(t_cmd *cmd, char *binary)
 	}
 	else					/* parent process */
 	{
-		wait(&pid);
-		// status_child(pid, status);
-		// g_ms->erno = errno;
+		wait(&g_ms->pid);
+		status_child();
 		ft_free_tab(args);
 	}
 }
@@ -59,7 +45,6 @@ char	*find_binary(t_cmd *cmd, int show)
 		if (lstat(cmd->cmd, &stats))
 		{
 			if (show)
-				// printf("minishell: %s: command not found\n", cmd->cmd);
 				print_error(CMD, cmd->cmd, NULL);
 			free(binary);
 			return (NULL);

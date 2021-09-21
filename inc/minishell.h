@@ -101,7 +101,8 @@ void	export_builtin(t_cmd *cmd);
 */
 
 void	exec_start(void);
-void	exec_pipe(t_cmd *cmd); // EXEC_PIPE
+void	exec_pipe(t_cmd *cmd);
+void	status_child(void);
 void	edit_args(t_cmd *cmd);
 int		lst_size(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
@@ -113,8 +114,7 @@ char	*find_binary(t_cmd *cmd, int show);
 ** ERROR -------------------------------------------------------------------- **
 */
 
-// int		print_error(int error);
-// void	printerrno_fd(int fd, char *cmd, char *arg);
 void	print_error(int error, char *cmd, char *arg);
+
 
 #endif

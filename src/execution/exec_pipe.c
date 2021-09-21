@@ -14,10 +14,21 @@
 #define READ 0		/* stdin */
 #define WRITE 1		/* stdout */
 
+void		status_child(void)
+{
+	if (WIFEXITED(g_ms->pid))
+		g_ms->status = WEXITSTATUS(g_ms->pid);
+	if (WIFSIGNALED(g_ms->pid))
+	{
+		g_ms->status = WTERMSIG(g_ms->pid);
+		if (g_ms->status != 131)
+			g_ms->status += 128;
+	}
+}
+
 void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 {
 	int		fd[2];
-	pid_t	pid;
 	int		fdd;
 	char	**args;
 	char	*bin;
@@ -28,13 +39,13 @@ void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 		bin = find_binary(cmd, 0);
 		args = list_to_tab(cmd);
 		pipe(fd);
-		pid = fork();
-		if (pid == -1)
+		g_ms->pid = fork();
+		if (g_ms->pid == -1)
 		{
 			print_error(FORKING, NULL, NULL);
 			exit(EXIT_SUCCESS);
 		}
-		else if (pid == 0)
+		else if (g_ms->pid == 0)
 		{
 			dup2(fdd, 0);
 			if (cmd->next)
@@ -45,13 +56,13 @@ void	exec_pipe(t_cmd *cmd) // EXEC_PIPE
 		}
 		else
 		{
-			wait(NULL);
-			// g_ms->erno = errno;
+			wait(&g_ms->pid);
+			status_child();
 			close(fd[1]);
 			fdd = fd[0];
 			ft_free_tab(args);
 			free(bin);
 			cmd = cmd->next;
 		}
-	}	
+	}
 }
