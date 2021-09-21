@@ -1,6 +1,19 @@
 # Minishell
 Aussi mignon qu’un vrai shell
 
+
+## INTRODUCTION 🤓
+
+Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf)</br>
+Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
+
+### Usage 🧐
+
+Start
+```
+make && ./minishell
+```
+
 ## TO DO !!
 
 ### Ces cas
@@ -46,6 +59,11 @@ pwd: too many arguments
 $ kill ooi ; echo $?
 kill: illegal pid: ooi
 1
+```
+```shell
+$ env fnrf ; echo $?
+env: ‘fnrf’: No such file or directory
+127
 ```
 ```shell
 $ ls -l execution.sh | ./execution.sh ; echo $?
@@ -111,36 +129,24 @@ $ echo $?
 [man echo baby !](http://marionpatrick.free.fr/man_html/html/tuto_shell.html#chp3.3.2.3)
 
 
-## ```pwd```
+### ```pwd```
 
 - [ ] Pas d'arguments, ou alors **ignorés**
 - [ ] Pipe ?? ⚠️ a ```cat -e```
 
-## ```export```
+### ```export```
 
 - [ ] ```export``` *(sans arguments)* : print la liste des variables d'environnement dans l'ordre ascii
 - [ ] *avec arguments* : gerer les differentes possibilités de format ```$variable``` ou ```${variable}``` ou ```“$variable”``` ou ```"${variable}"```
 - [ ] ```export nom_variable``` Exportation de la variable dans les processus fils.
 - [ ] ```export nom_variable=value``` Assignation et exportation de la variable dans les processus fils.
 
-## ```env```
+### ```env```
 
 - [ ] print la liste des variables d'environnement.
 - [ ] print les variables ajoutêes par ```export```
 - [ ] Attention aux variables que la commante ```exort``` affiche mais que ```env``` ne doit pas afficher
 
-
-### Usage 🧐
-
-Start
-```
-make && ./minishell
-```
-
-## INTRODUCTION 🤓
-
-Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf)</br>
-Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
 
 ## ```echo $?```
 
