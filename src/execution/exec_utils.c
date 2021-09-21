@@ -12,6 +12,14 @@ void	edit_args(t_cmd *cmd)
 	}
 }
 
+int is_redirection(char *s)
+{
+	if (ft_strcmp(s, "<") == 0 || ft_strcmp(s, ">") == 0 
+		|| ft_strcmp(s, ">>") == 0)
+		return (1);
+	return (0);
+}
+
 int	lst_size(t_cmd *cmd)
 {
 	t_token *liste;
@@ -21,7 +29,8 @@ int	lst_size(t_cmd *cmd)
 	len = 0;
 	while (liste)
 	{
-		len++;
+		if (!is_redirection(liste->word))
+			len++;
 		liste = liste->next;
 	}
 	return (len);
@@ -43,8 +52,13 @@ char	**list_to_tab(t_cmd *cmd)
 	i = 1;
 	while (liste)
 	{
-		aaargs[i] = ft_strdup(liste->word);
-		i++;
+		if (!is_redirection(liste->word))
+		{
+			aaargs[i] = ft_strdup(liste->word);
+			i++;
+		}
+		else
+			liste = liste->next;
 		liste = liste->next;
 	}
 	aaargs[i] = NULL;
