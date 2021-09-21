@@ -12,6 +12,11 @@
 
 #include "minishell.h"
 
+/*
+** Si env + argument	-> $ env fnrf
+** print une erreur		-> env: ‘fnrf’: No such file or directory
+*/
+
 void	env_builtin(int fd)
 {
 	t_env	*tmp;
