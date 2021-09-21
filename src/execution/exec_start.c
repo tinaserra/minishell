@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/20 15:15:08 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/21 13:40:44 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exec_command(t_cmd *cmd, char *binary)
 	{
 		dup2(cmd->out, 1);
 		execve(binary, args, NULL);
-		exit(1);
+		exit(EXIT_SUCCESS);
 	}
 	else					/* parent process */
 	{
@@ -98,7 +98,7 @@ void	exec_switch(t_cmd *cmd)
 		&& (!cmd->prev || cmd->prev->type != PIPE))
 		cd_builtin(cmd);
 	else if (ft_strcmp(cmd->cmd, "pwd") == 0)
-		pwd_builtin();
+		pwd_builtin(cmd);
 	else if (ft_strcmp(cmd->cmd, "export") == 0)
 		export_builtin(cmd);
 	else if (ft_strcmp(cmd->cmd, "unset") == 0)
@@ -116,7 +116,6 @@ void	exec_start(void)
 	{
 		edit_args(cmd);
 		redirect(cmd);
-		//printf("[%s %d] %d \n", cmd->cmd, cmd->type, cmd->args->type);
 		if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
 			exec_switch(cmd);
 		if (cmd->in)
