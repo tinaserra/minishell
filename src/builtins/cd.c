@@ -64,4 +64,6 @@ void	cd_builtin(t_cmd *cmd)
 		}
 	}
 	update_pwd();
+	free(g_ms->term);
+	g_ms->term = print_prompt();
 }
