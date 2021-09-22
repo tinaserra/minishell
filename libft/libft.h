@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 13:48:41 by vserra            #+#    #+#             */
-/*   Updated: 2021/06/24 15:48:50 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/22 01:11:49 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len);
 */
 
 int		ft_atoi_base(char *str, char *base);
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 int		ft_check_base(char *base);
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 char	*ft_itoa_base(int nbr, char *base);

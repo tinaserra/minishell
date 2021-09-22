@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/21 14:58:16 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/22 01:15:16 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	exec_switch(t_cmd *cmd)
 		export_builtin(cmd);
 	else if (ft_strcmp(cmd->cmd, "unset") == 0)
 		unset_builtin(cmd);
+	else if (ft_strcmp(cmd->cmd, "exit") == 0)
+		exit_builtin(cmd);
 	else if (!cmd->prev || (cmd->prev && cmd->prev->type != PIPE))
 		exec_binary(cmd);
 }

@@ -83,6 +83,7 @@ t_env	*get_env(t_env *env, char *name);
 t_env	*get_env2(t_env *env, char *name);
 t_env	*env_free_at(t_env *l, int pos);
 void	free_all();
+int		tokens_list_size(t_token *token);
 
 /*
 ** BUILTINS ----------------------------------------------------------------- **
@@ -94,6 +95,7 @@ void	cd_builtin(t_cmd *cmd);
 void	pwd_builtin(t_cmd *cmd);
 void	unset_builtin(t_cmd *cmd);
 void	export_builtin(t_cmd *cmd);
+void	exit_builtin(t_cmd *cmd);
 
 /*
 ** EXECUTION ---------------------------------------------------------------- **

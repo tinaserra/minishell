@@ -84,3 +84,18 @@ void	parse_token(t_token	**token)
 	}
 	add_list(&g_ms->cmds, cmd);
 }
+
+int	tokens_list_size(t_token *token)
+{
+	t_token *tmp;
+	int		i;
+
+	tmp = token;
+	i = 0;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
