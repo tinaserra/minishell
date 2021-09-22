@@ -63,6 +63,7 @@ typedef struct		s_minishell
 	pid_t			pid;
 	int				status;
 	int				quote;
+	int				fork;
 	char			*line;
 	char			*curdir;
 	t_list			*commands;

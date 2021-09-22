@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/22 01:15:16 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/22 20:11:00 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	exec_binary(t_cmd *cmd)
 {
 	char	*bin;
 
+	g_ms->fork = 1;
 	if (cmd->type == PIPE)
 	{
 		if (!find_all_binary(cmd))
@@ -50,6 +51,7 @@ static int	exec_binary(t_cmd *cmd)
 		exec_command(cmd, bin);
 		free(bin);
 	}
+	g_ms->fork = 0;
 	return (0);
 }
 

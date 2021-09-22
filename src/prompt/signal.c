@@ -2,8 +2,8 @@
 
 void	sig_handler(int c)
 {
-	//if (c == 3) // backslash
-	//	free_all();
+	if (c == 3 && g_ms->fork) // backslash
+		printf("Quit\n");
 	if (c == 2)
 	{
 		printf("\n");
