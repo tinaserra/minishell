@@ -84,6 +84,7 @@ t_env	*get_env2(t_env *env, char *name);
 t_env	*env_free_at(t_env *l, int pos);
 void	free_all();
 int		tokens_list_size(t_token *token);
+int		is_builtin(char *s);
 
 /*
 ** BUILTINS ----------------------------------------------------------------- **

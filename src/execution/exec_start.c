@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   exec_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/26 01:36:24 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/26 02:28:33 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_builtin(char *s)
+{
+	if (ft_strcmp(s, "echo") == 0)
+		return (1);
+	if (ft_strcmp(s, "env") == 0)
+		return (1);
+	return (0);
+}
 
 static void	exec_command(t_cmd *cmd, char *binary)
 {
@@ -22,17 +31,29 @@ static void	exec_command(t_cmd *cmd, char *binary)
 		print_error(FORKING, NULL, NULL);
 	else if (g_ms->pid == 0)		/* child process */
 	{
-		if (cmd->out)
+		if (ft_strcmp(binary, "echo") == 0)
+			echo_builtin(cmd->args, cmd->out);
+		else if (ft_strcmp(binary, "env") == 0)
+			env_builtin(cmd->out);
+		else if (ft_strcmp(binary, "pwd") == 0)
 		{
-			dup2(cmd->out, 1);
-			close(cmd->out);
+			printf("fdp\n");
+			pwd_builtin(cmd);
 		}
-		if (cmd->in)
+		else
 		{
-			dup2(cmd->in, 0);
-			close(cmd->in);
+			if (cmd->out)
+			{
+				dup2(cmd->out, 1);
+				close(cmd->out);
+			}
+			if (cmd->in)
+			{
+				dup2(cmd->in, 0);
+				close(cmd->in);
+			}
+			execve(binary, args, NULL);
 		}
-		execve(binary, args, NULL);
 		exit(EXIT_SUCCESS);
 	}
 	else					/* parent process */
@@ -43,6 +64,7 @@ static void	exec_command(t_cmd *cmd, char *binary)
 	}
 }
 
+
 static int	exec_binary(t_cmd *cmd)
 {
 	char	*bin;
@@ -50,14 +72,17 @@ static int	exec_binary(t_cmd *cmd)
 	g_ms->fork = 1;
 	if (cmd->type == PIPE)
 	{
-		if (!find_all_binary(cmd))
+		
+		 if (!find_all_binary(cmd))
 			return (0);
 		exec_pipe(cmd);
 	}
 	else
 	{
 		bin = find_binary(cmd, 1);
-		if (bin)
+		if (is_builtin(cmd->cmd))
+			exec_command(cmd, cmd->cmd);
+		else if (bin)
 		{
 			exec_command(cmd, bin);
 			free(bin);
@@ -69,16 +94,9 @@ static int	exec_binary(t_cmd *cmd)
 
 static void	exec_switch(t_cmd *cmd)
 {
-	if (ft_strcmp(cmd->cmd, "echo") == 0 && cmd->type != PIPE
-		&& (!cmd->prev || cmd->prev->type != PIPE))
-		echo_builtin(cmd->args, cmd->out);
-	else if (ft_strcmp(cmd->cmd, "env") == 0)
-		env_builtin(cmd->out);
-	else if (ft_strcmp(cmd->cmd, "cd") == 0 && cmd->type != PIPE
+	if (ft_strcmp(cmd->cmd, "cd") == 0 && cmd->type != PIPE
 		&& (!cmd->prev || cmd->prev->type != PIPE))
 		cd_builtin(cmd);
-	else if (ft_strcmp(cmd->cmd, "pwd") == 0)
-		pwd_builtin(cmd);
 	else if (ft_strcmp(cmd->cmd, "export") == 0)
 		export_builtin(cmd);
 	else if (ft_strcmp(cmd->cmd, "unset") == 0)
