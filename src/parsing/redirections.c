@@ -62,6 +62,10 @@ void	redirect(t_cmd *cmd)
 		else if (ft_strcmp(args->word, "<") == 0 && args->type == REDIR
 			&& cmd->in != -1)
 			cmd->in = redirect2(cmd, &args, O_RDONLY);
+		else if (ft_strcmp(args->word, "<<") == 0 && args->type == REDIR)
+		{
+			
+		}
 		else
 			args = args->next;
 	}

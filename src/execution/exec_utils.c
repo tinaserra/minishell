@@ -15,7 +15,7 @@ void	edit_args(t_cmd *cmd)
 int is_redirection(char *s)
 {
 	if (ft_strcmp(s, "<") == 0 || ft_strcmp(s, ">") == 0 
-		|| ft_strcmp(s, ">>") == 0)
+		|| ft_strcmp(s, ">>") == 0 || ft_strcmp(s, "<<") == 0)
 		return (1);
 	return (0);
 }
@@ -88,5 +88,6 @@ char	*check_path(t_cmd *cmd)
 		free(binary);
 		i++;
 	}
+	ft_free_tab(path);
 	return (NULL);
 }
