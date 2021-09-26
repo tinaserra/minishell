@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/22 20:11:00 by admin            ###   ########.fr       */
+/*   Updated: 2021/09/26 01:36:24 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,16 @@ static void	exec_command(t_cmd *cmd, char *binary)
 		print_error(FORKING, NULL, NULL);
 	else if (g_ms->pid == 0)		/* child process */
 	{
-		dup2(cmd->out, 1);
+		if (cmd->out)
+		{
+			dup2(cmd->out, 1);
+			close(cmd->out);
+		}
+		if (cmd->in)
+		{
+			dup2(cmd->in, 0);
+			close(cmd->in);
+		}
 		execve(binary, args, NULL);
 		exit(EXIT_SUCCESS);
 	}
@@ -48,8 +57,11 @@ static int	exec_binary(t_cmd *cmd)
 	else
 	{
 		bin = find_binary(cmd, 1);
-		exec_command(cmd, bin);
-		free(bin);
+		if (bin)
+		{
+			exec_command(cmd, bin);
+			free(bin);
+		}
 	}
 	g_ms->fork = 0;
 	return (0);
