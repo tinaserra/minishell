@@ -38,6 +38,7 @@ int	main(int ac, char **av, char **env)
 		g_ms->line = NULL;
 		g_ms->line = readline(g_ms->term);
 	}
+	ft_putstr_fd("exit\n", 1);
 	free_all();
 }
 
