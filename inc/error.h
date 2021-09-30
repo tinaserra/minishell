@@ -15,12 +15,12 @@
 
 static char g_str_error[NUMBER][256] =
 {
-	[SYNTXT] = "syntax error unexpected token\n",
-	[HOME] = "HOME not set\n",
-	[EXPORT] = "not a valid identifier\n",
-	[CMD] = "command not found\n",
-	[FORKING] = "error forking\n",
-	[PIPING] = "error piping\n",
+	[SYNTXT] = "syntax error unexpected token",
+	[HOME] = "HOME not set",
+	[EXPORT] = "not a valid identifier",
+	[CMD] = "command not found",
+	[FORKING] = "error forking",
+	[PIPING] = "error piping",
 };
 
 #endif
