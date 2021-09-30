@@ -112,6 +112,7 @@ char	**list_to_tab(t_cmd *cmd);
 void	status_child(void);
 char	*find_binary(t_cmd *cmd, int show);
 int		find_all_binary(t_cmd *cmd);
+void	heredoc(t_cmd *cmd, t_token **token);
 
 /*
 ** ERROR -------------------------------------------------------------------- **

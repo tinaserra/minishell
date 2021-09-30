@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/26 02:28:33 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/09/26 18:59:36 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,14 @@ static void	exec_command(t_cmd *cmd, char *binary)
 	g_ms->pid = fork();
 	if (g_ms->pid < 0)
 		print_error(FORKING, NULL, NULL);
-	else if (g_ms->pid == 0)		/* child process */
+	else if (g_ms->pid == 0)
 	{
 		if (ft_strcmp(binary, "echo") == 0)
 			echo_builtin(cmd->args, cmd->out);
 		else if (ft_strcmp(binary, "env") == 0)
 			env_builtin(cmd->out);
 		else if (ft_strcmp(binary, "pwd") == 0)
-		{
-			printf("fdp\n");
 			pwd_builtin(cmd);
-		}
 		else
 		{
 			if (cmd->out)
@@ -56,7 +53,7 @@ static void	exec_command(t_cmd *cmd, char *binary)
 		}
 		exit(EXIT_SUCCESS);
 	}
-	else					/* parent process */
+	else
 	{
 		wait(&g_ms->pid);
 		status_child();

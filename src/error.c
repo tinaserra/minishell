@@ -14,9 +14,12 @@
 
 // print_error(NUMBER, "cmd", "arg");
 
-void	print_error(int error, char *cmd, char *arg)
+void	print_error(int error, char *cmd, char *arg) // int status
 {
 	char	*error_message;
+
+	// if (status > 0)
+	// 	g_ms->status = status;
 
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);

@@ -49,6 +49,7 @@ typedef struct		s_token
 typedef struct		s_cmd
 {
 	char			*cmd;
+	char			*tmp;
 	t_token			*args;
 	t_list			*env;
 	int				type;

@@ -4,7 +4,9 @@ void	sig_handler(int c)
 {
 	if (c == 3 && g_ms->fork) // backslash
 		printf("Quit\n");
-	if (c == 2)
+	if (c == 2 && g_ms->fork)
+		printf("\n");
+	if (c == 2 && !g_ms->fork)
 	{
 		printf("\n");
 		rl_on_new_line();

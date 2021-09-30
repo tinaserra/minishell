@@ -9,6 +9,8 @@ t_token	*redirect3(t_token *args, t_token **start)
 	if (*start == args)
 	{
 		next = (*start)->next;
+		free((*start)->word);
+		free(*start);
 		*start = next;
 		if (next)
 			next->prev = NULL;
@@ -22,6 +24,8 @@ t_token	*redirect3(t_token *args, t_token **start)
 			tmp->prev->next = next;
 			if (tmp->next)
 				tmp->next->prev = tmp->prev;
+			free(args->word);
+			free(args);
 			return (next);
 		}
 		tmp = tmp->next;
@@ -64,7 +68,9 @@ void	redirect(t_cmd *cmd)
 			cmd->in = redirect2(cmd, &args, O_RDONLY);
 		else if (ft_strcmp(args->word, "<<") == 0 && args->type == REDIR)
 		{
-			
+			heredoc(cmd, &args);
+			args = redirect3(args, &cmd->args);
+			args = redirect3(args, &cmd->args);
 		}
 		else
 			args = args->next;
