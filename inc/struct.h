@@ -1,3 +1,5 @@
+#ifndef STRUCT_H
+#define STRUCT_H
 /*
 ** ERRORS ------------------------------------------------------------------- **
 */
@@ -76,3 +78,5 @@ typedef struct		s_minishell
 	int				exit;
 }					t_minishell;
 t_minishell *g_ms;
+
+#endif
