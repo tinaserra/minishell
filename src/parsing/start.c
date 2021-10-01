@@ -63,10 +63,9 @@ void	parsing(void)
 {
 	t_token	*tmp;
 
-	// g_ms->erno = errno;
 	split_minishell(g_ms->line);
 	if (!get_token_type())
-		print_error(SYNTXT, NULL, NULL);
+		print_error("syntax error unexpected token", NULL, NULL, -1);
 	else
 	{
 		tmp = g_ms->tokens;

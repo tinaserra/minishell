@@ -113,12 +113,12 @@ void	status_child(void);
 char	*find_binary(t_cmd *cmd, int show);
 int		find_all_binary(t_cmd *cmd);
 void	heredoc(t_cmd *cmd, t_token **token);
+int		is_builtin(char *s);
 
 /*
 ** ERROR -------------------------------------------------------------------- **
 */
 
-void	print_error(int error, char *cmd, char *arg);
-
+void	print_error(char *message, char *cmd, char *arg, int status);
 
 #endif

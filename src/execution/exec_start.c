@@ -6,19 +6,38 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/26 18:59:36 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/01 10:06:09 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(char *s)
+static void	exec_child(t_cmd *cmd, char *binary, char **args)
 {
-	if (ft_strcmp(s, "echo") == 0)
-		return (1);
-	if (ft_strcmp(s, "env") == 0)
-		return (1);
-	return (0);
+	if (ft_strcmp(binary, "echo") == 0)
+		echo_builtin(cmd->args, cmd->out);
+	else if (ft_strcmp(binary, "env") == 0)
+		env_builtin(cmd->out);
+	else if (ft_strcmp(binary, "pwd") == 0)
+		pwd_builtin(cmd);
+	else
+	{
+		if (cmd->out)
+		{
+			dup2(cmd->out, 1);
+			close(cmd->out);
+		}
+		if (cmd->in)
+		{
+			dup2(cmd->in, 0);
+			close(cmd->in);
+		}
+		execve(binary, args, NULL);
+	}
+	//free(binary);
+	ft_free_tab(args);
+	free_all();
+	exit(EXIT_SUCCESS);
 }
 
 static void	exec_command(t_cmd *cmd, char *binary)
@@ -28,31 +47,9 @@ static void	exec_command(t_cmd *cmd, char *binary)
 	args = list_to_tab(cmd);
 	g_ms->pid = fork();
 	if (g_ms->pid < 0)
-		print_error(FORKING, NULL, NULL);
+		print_error("error forking", NULL, NULL, -1);
 	else if (g_ms->pid == 0)
-	{
-		if (ft_strcmp(binary, "echo") == 0)
-			echo_builtin(cmd->args, cmd->out);
-		else if (ft_strcmp(binary, "env") == 0)
-			env_builtin(cmd->out);
-		else if (ft_strcmp(binary, "pwd") == 0)
-			pwd_builtin(cmd);
-		else
-		{
-			if (cmd->out)
-			{
-				dup2(cmd->out, 1);
-				close(cmd->out);
-			}
-			if (cmd->in)
-			{
-				dup2(cmd->in, 0);
-				close(cmd->in);
-			}
-			execve(binary, args, NULL);
-		}
-		exit(EXIT_SUCCESS);
-	}
+		exec_child(cmd, binary, args);
 	else
 	{
 		wait(&g_ms->pid);
@@ -61,7 +58,6 @@ static void	exec_command(t_cmd *cmd, char *binary)
 	}
 }
 
-
 static int	exec_binary(t_cmd *cmd)
 {
 	char	*bin;
@@ -69,8 +65,7 @@ static int	exec_binary(t_cmd *cmd)
 	g_ms->fork = 1;
 	if (cmd->type == PIPE)
 	{
-		
-		 if (!find_all_binary(cmd))
+		if (!find_all_binary(cmd))
 			return (0);
 		exec_pipe(cmd);
 	}
@@ -80,10 +75,8 @@ static int	exec_binary(t_cmd *cmd)
 		if (is_builtin(cmd->cmd))
 			exec_command(cmd, cmd->cmd);
 		else if (bin)
-		{
 			exec_command(cmd, bin);
-			free(bin);
-		}
+		free(bin);
 	}
 	g_ms->fork = 0;
 	return (0);

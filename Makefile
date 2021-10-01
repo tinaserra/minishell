@@ -1,5 +1,5 @@
 NAME			=		minishell
-CC				=		gcc
+CC				=		clang
 FLAGS			=		-g -Wall -Werror -Wextra -I $(HEADER) -I $(LIBFT) #-fsanitize=address
 
 HEADER          =		./inc/
@@ -18,6 +18,7 @@ SRCS            =		src/main.c									\
 						$(addprefix ${BUILTINS}, unset.c)			\
 						$(addprefix ${BUILTINS}, exit.c)			\
 						$(addprefix ${EXEC}, exec_start.c)			\
+						$(addprefix ${EXEC}, utils.c)				\
 						$(addprefix ${EXEC}, exec_pipe.c)			\
 						$(addprefix ${EXEC}, exec_utils.c)			\
 						$(addprefix ${EXEC}, exec_utils2.c)			\

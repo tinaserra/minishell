@@ -13,7 +13,7 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-static char g_str_error[NUMBER][256] =
+static char g_ms->str_error[NUMBER][256] =
 {
 	[SYNTXT] = "syntax error unexpected token",
 	[HOME] = "HOME not set",
@@ -21,6 +21,7 @@ static char g_str_error[NUMBER][256] =
 	[CMD] = "command not found",
 	[FORKING] = "error forking",
 	[PIPING] = "error piping",
+	[EOF] = "bash: syntax error: unexpected end of file",
 };
 
 #endif

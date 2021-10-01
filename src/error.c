@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/01 08:12:13 by jode-vri          #+#    #+#             */
+/*   Updated: 2021/10/01 08:13:27 by jode-vri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-#include "error.h"
 
 /*
 ** The following symbolic constants shall be defined for file streams:
@@ -12,15 +23,10 @@
 ** 		File number of stdout; 1.
 */
 
-// print_error(NUMBER, "cmd", "arg");
-
-void	print_error(int error, char *cmd, char *arg) // int status
+void	print_error(char *message, char *cmd, char *arg, int status)
 {
-	char	*error_message;
-
-	// if (status > 0)
-	// 	g_ms->status = status;
-
+	if (status > 0)
+		g_ms->status = status;
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	if (cmd)
@@ -28,12 +34,6 @@ void	print_error(int error, char *cmd, char *arg) // int status
 	ft_putstr_fd(arg, STDERR_FILENO);
 	if (arg)
 		ft_putstr_fd(": ", STDERR_FILENO);
-	if (error == ERRNO)
-	{
-		error_message = strerror(errno);
-		ft_putstr_fd(error_message, STDERR_FILENO);
-	}
-	else
-		ft_putstr_fd(g_str_error[error], STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
 	ft_putchar_fd('\n', STDERR_FILENO);
 }

@@ -39,7 +39,8 @@ int	get_exit_status(t_cmd *cmd)
 		{
 			nb = ft_atoi(cmd->args->word);
 			if (nb > INT_MAX || nb < INT_MIN)
-				printf("minishell: exit: %s: wrong argument\n", cmd->args->word);
+				print_error("numeric argument required", "exit", cmd->args->word, 2);
+				// printf("minishell: exit: %s: wrong argument\n", cmd->args->word);
 		}
 		else
 			printf("minishell: exit: %s: wrong argument\n", cmd->args->word);
