@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
+/*   Updated: 2021/10/01 08:24:34 by jode-vri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	update_pwd(void)
@@ -12,13 +24,15 @@ void	update_pwd(void)
 	g_ms->curdir = getcwd(NULL, 0);
 	if (!g_ms->curdir)
 	{
-		printf("error pute\n"); //  ?????????
+		printf("error\n");
 		g_ms->curdir = ft_strjoin_free(tmp, "/.", 'L');
 		return ;
 	}
 	if (find_env(g_ms->env, "PWD"))
 		set_env("PWD", g_ms->curdir);
 	free(tmp);
+	free(g_ms->term);
+	g_ms->term = print_prompt();
 }
 
 int	have_permission(t_cmd *cmd)
@@ -64,6 +78,4 @@ void	cd_builtin(t_cmd *cmd)
 		}
 	}
 	update_pwd();
-	free(g_ms->term);
-	g_ms->term = print_prompt();
 }

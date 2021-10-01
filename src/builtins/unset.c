@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:06:09 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/09/15 11:39:21 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/01 08:20:48 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	unset_builtin(t_cmd *cmd)
 {
-	(void)cmd;
 	t_token	*tmp;
 	t_env	*tmp_env;
 
+	(void)cmd;
 	tmp = cmd->args;
 	while (tmp)
 	{

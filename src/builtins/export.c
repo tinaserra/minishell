@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/09/15 10:20:10 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/01 08:20:00 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,25 @@ static int	export_errors(char *res)
 	return (0);
 }
 
+void	export_builtin2(char **res)
+{
+	t_env	*tmp_env;
+
+	tmp_env = get_env(g_ms->env, res[0]);
+	if (tmp_env)
+	{
+		free(tmp_env->value);
+		tmp_env->value = ft_strdup(res[1]);
+	}
+	else
+		add_env(&g_ms->env, lst_new_env(ft_strdup(res[0]),
+				ft_strdup(res[1])));
+}
+
 void	export_builtin(t_cmd *cmd)
 {
-	(void)cmd;
 	t_token	*tmp;
-	t_env	*tmp_env;
 	char	**res;
-
 
 	tmp = cmd->args;
 	while (tmp)
@@ -43,27 +55,15 @@ void	export_builtin(t_cmd *cmd)
 			{
 				if (!ft_isalpha(res[0][0]))
 				{
-					// printf("minishell: export: not a valid identifier\n");
 					print_error(EXPORT, "export", NULL);
-					break;
+					break ;
 				}
 				if (export_errors(res[0]))
 					print_error(EXPORT, "export", NULL);
 				else
-				{
-					tmp_env = get_env(g_ms->env, res[0]);
-					if (tmp_env)
-					{
-						free(tmp_env->value);
-						tmp_env->value = ft_strdup(res[1]);
-					}
-					else
-						add_env(&g_ms->env, lst_new_env(ft_strdup(res[0]),
-								ft_strdup(res[1])));
-				}
+					export_builtin2(res);
 			}
 		}
-			
 		tmp = tmp->next;
 	}
 }
