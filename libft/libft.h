@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 13:48:41 by vserra            #+#    #+#             */
-/*   Updated: 2021/09/22 01:11:49 by admin            ###   ########.fr       */
+/*   Updated: 2021/10/03 15:03:20 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		ft_strs_tab_size(char **tab);
 char	*ft_strstr(char *haystack, char *needle);
 char	*ft_strtrim(char *s1, char *set);
 char	*ft_substr(char *s, unsigned int start, size_t len);
+int		ft_find_in_str(char *s, char c);
 
 /*
 ** NUMBERS ------------------------------------------------------------------ **
