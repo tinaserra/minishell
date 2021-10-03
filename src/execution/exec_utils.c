@@ -1,15 +1,53 @@
 #include "minishell.h"
 
-void	edit_args(t_cmd *cmd)
+int	count_quote(char *s)
+{
+	int	i;
+	int	d_quote;
+	int	s_quote;
+
+	d_quote = 0;
+	s_quote = 0;
+	i = -1;
+	while (s[++i])
+	{
+		if (s[i] == '\"' && !s_quote)
+		{
+			if (d_quote == 1)
+				d_quote = 0;
+			else
+				d_quote = 1;
+		}
+		if (s[i] == '\'' && !d_quote)
+		{
+			if (s_quote == 1)
+				s_quote = 0;
+			else
+				s_quote = 1;
+		}
+	}
+	if (s_quote || d_quote)
+		return (-1);
+	else
+		return (1);
+}
+
+int	edit_args(t_cmd *cmd)
 {
 	t_token	*tmp;
 
 	tmp = cmd->args;
 	while (tmp)
 	{
+		if (count_quote(tmp->word) == -1)
+		{
+			printf("minishell: Unclosed quote\n");
+			return (0);
+		}
 		tmp->word = handle_quotes(tmp->word, 1);
 		tmp = tmp->next;
 	}
+	return (1);
 }
 
 int is_redirection(char *s)

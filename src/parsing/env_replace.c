@@ -18,6 +18,7 @@ int	get_env_content(char *line, char **env_content)
 	env = ft_strndup(pos, len);
 	*env_content = getenv(env);
 	pos--;
+	free(env);
 	return (len);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/01 10:06:09 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/03 14:50:10 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	exec_command(t_cmd *cmd, char *binary)
 	args = list_to_tab(cmd);
 	g_ms->pid = fork();
 	if (g_ms->pid < 0)
-		print_error("error forking", NULL, NULL, -1);
+		error("error forking", NULL, NULL, -1);
 	else if (g_ms->pid == 0)
 		exec_child(cmd, binary, args);
 	else
@@ -104,14 +104,16 @@ void	exec_start(void)
 	cmd = g_ms->cmds;
 	while (cmd)
 	{
-		edit_args(cmd);
-		redirect(cmd);
-		if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
-			exec_switch(cmd);
-		if (cmd->in)
-			close(cmd->in);
-		if (cmd->out)
-			close(cmd->out);
+		if (edit_args(cmd))
+		{
+			redirect(cmd);
+			if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
+				exec_switch(cmd);
+			if (cmd->in)
+				close(cmd->in);
+			if (cmd->out)
+				close(cmd->out);
+		}
 		cmd = cmd->next;
 	}
 }
