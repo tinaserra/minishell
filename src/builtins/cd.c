@@ -34,7 +34,7 @@ int	have_permission(t_cmd *cmd)
 	if (dir == NULL || errno != 0)
 	{
 		// g_ms->status = 1;
-		print_error(strerror(errno), "cd", cmd->args->word, 1);
+		error(strerror(errno), "cd", cmd->args->word, 1);
 		return (0);
 	}
 	else
@@ -52,7 +52,7 @@ void	cd_builtin(t_cmd *cmd)
 		if (chdir(find_env(g_ms->env, "HOME")) != 0)
 		{
 			// g_ms->status = 1;
-			print_error("HOME not set", "cd", NULL, 1);
+			error("HOME not set", "cd", NULL, 1);
 			g_ms->exit = 1;
 			return ;
 		}
@@ -62,7 +62,7 @@ void	cd_builtin(t_cmd *cmd)
 		if (have_permission(cmd) && chdir(tmp->word) != 0)
 		{
 			// g_ms->status = 1;
-			print_error(strerror(errno), "cd", tmp->word, 1);
+			error(strerror(errno), "cd", tmp->word, 1);
 			g_ms->exit = 1;
 			return ;
 		}

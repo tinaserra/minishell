@@ -55,11 +55,11 @@ void	export_builtin(t_cmd *cmd)
 			{
 				if (!ft_isalpha(res[0][0]))
 				{
-					print_error("not a valid identifier", "export", tmp->word, 1);
+					error("not a valid identifier", "export", tmp->word, 1);
 					break ;
 				}
 				if (export_errors(res[0]))
-					print_error("not a valid identifier", "export", tmp->word, 1);
+					error("not a valid identifier", "export", tmp->word, 1);
 				else
 					export_builtin2(res);
 			}
