@@ -23,7 +23,7 @@
 ** 		File number of stdout; 1.
 */
 
-void	print_error(char *message, char *cmd, char *arg, int status)
+void	error(char *message, char *cmd, char *arg, int status)
 {
 	if (status > 0)
 		g_ms->status = status;

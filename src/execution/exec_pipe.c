@@ -60,7 +60,7 @@ void	exec_pipe(t_cmd *cmd)
 		g_ms->pid = fork();
 		if (g_ms->pid == -1)
 		{
-			print_error("error forking", NULL, NULL, -1);
+			error("error forking", NULL, NULL, -1);
 			exit(EXIT_SUCCESS);
 		}
 		else if (g_ms->pid == 0)

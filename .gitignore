@@ -7,4 +7,5 @@ minitina
 obj
 a.out
 valgrind_log
+valgrind_log.txt
 *.sh

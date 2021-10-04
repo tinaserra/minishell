@@ -23,7 +23,7 @@ char	*find_binary(t_cmd *cmd, int show)
 		if (lstat(cmd->cmd, &stats))
 		{
 			if (show)
-				print_error("command not found", cmd->cmd, NULL, 127);
+				error("command not found", cmd->cmd, NULL, 127);
 			free(binary);
 			return (NULL);
 		}

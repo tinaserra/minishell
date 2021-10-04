@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_token	*create_token3(char *s, int type)
+static t_token	*create_token3(char *s, int type)
 {
 	t_token	*tmp;
 
@@ -10,7 +10,7 @@ t_token	*create_token3(char *s, int type)
 	return (tmp);
 }
 
-int	parse_token2(t_token **token, t_cmd *cmd)
+static int	parse_token2(t_token **token, t_cmd *cmd)
 {
 	if ((*token)->type == TXT && (cmd->cmd || ((*token)->prev
 				&& (*token)->prev->type == REDIR)))
@@ -39,7 +39,7 @@ int	parse_token2(t_token **token, t_cmd *cmd)
 	return (1);
 }
 
-void	add_list(t_cmd **begin, t_cmd *new)
+static void	add_list(t_cmd **begin, t_cmd *new)
 {
 	t_cmd	*tmp;
 

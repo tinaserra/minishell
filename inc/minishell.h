@@ -38,16 +38,10 @@ void	sig_handler(int c);
 ** TERMCAPS ----------------------------------------------------------------- **
 */
 
-void	set_raw(void);
-int		handle_termcaps(long c);
-void	print_term(char *c);
-int		termputs(int c);
-
 int		init_env(char **env);
 char	*find_env(t_env *env, char *name);
 void	free_env(void);
 char	*print_prompt(void);
-void	redraw_prompt(char *s);
 void	free_commands(void);
 
 /*
@@ -68,9 +62,6 @@ void	add_token(t_token **start, t_token *new);
 void	free_token(void);
 t_token	*create_token(int i);
 t_token	*create_token2(char *word, int type);
-t_token	*create_token3(char *s, int type);
-void	add_list(t_cmd **begin, t_cmd *new);
-int		parse_token2(t_token **token, t_cmd *cmd);
 void	parse_token(t_token	**token);
 void	set_env(char* env, char *value);
 void	redirect(t_cmd *cmd);
@@ -81,7 +72,6 @@ t_env	*lst_new_env(char *name, char *value);
 void	add_env(t_env **alst, t_env *new);
 t_env	*get_env(t_env *env, char *name);
 t_env	*get_env2(t_env *env, char *name);
-t_env	*env_free_at(t_env *l, int pos);
 void	free_all();
 int		tokens_list_size(t_token *token);
 int		is_builtin(char *s);
@@ -104,21 +94,19 @@ void	exit_builtin(t_cmd *cmd);
 
 void	exec_start(void);
 void	exec_pipe(t_cmd *cmd);
-void	edit_args(t_cmd *cmd);
+int		edit_args(t_cmd *cmd);
 int		lst_size(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
 char	*check_path(t_cmd *cmd);
-char	**list_to_tab(t_cmd *cmd);
 void	status_child(void);
 char	*find_binary(t_cmd *cmd, int show);
 int		find_all_binary(t_cmd *cmd);
 void	heredoc(t_cmd *cmd, t_token **token);
-int		is_builtin(char *s);
 
 /*
 ** ERROR -------------------------------------------------------------------- **
 */
 
-void	print_error(char *message, char *cmd, char *arg, int status);
+void	error(char *message, char *cmd, char *arg, int status);
 
 #endif

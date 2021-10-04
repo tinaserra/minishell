@@ -65,7 +65,7 @@ void	parsing(void)
 
 	split_minishell(g_ms->line);
 	if (!get_token_type())
-		print_error("syntax error unexpected token", NULL, NULL, -1);
+		error("syntax error unexpected token", NULL, NULL, -1);
 	else
 	{
 		tmp = g_ms->tokens;
