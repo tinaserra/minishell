@@ -44,7 +44,7 @@ int		exit_arg(char *arg, t_cmd *cmd)
 			{
 				error("numeric argument required", "exit", cmd->args->word, 2);
 				// return (FAILURE);
-				// g_ms->status = nb % 256;
+				g_ms->status = 2;
 				free_all();
 				exit(2);
 			}
@@ -72,17 +72,13 @@ void	exit_builtin(t_cmd *cmd)
 		if (nb < 0 || nb > 255)
 		{
 			// error("numeric argument required", "exit", cmd->args->word, 2);
-			printf("%d\n", nb);
+			printf("%d : superieur a 255 ou  inferieur a 0\n", nb);
 		}
 	}
 	g_ms->status = nb % 256;
 	free_all();
-	// printf("love %d\n", nb);
-	// g_ms->status = -95455562556515 % 256;
-	// printf("status %d\n", g_ms->status);
 	exit(nb);
 }
-
 
 // long long	atoi_exit(char *str)
 // {
@@ -108,23 +104,4 @@ void	exit_builtin(t_cmd *cmd)
 // 		i++;
 // 	}
 // 	return (nbr * sign);
-// }
-
-// int	get_exit_status(t_cmd *cmd)
-// {
-// 	int	nb;
-
-// 	nb = 0;
-// 	if (cmd->args)
-// 	{
-// 		if (str_is_digit(cmd->args->word))
-// 		{
-// 			nb = ft_atoi(cmd->args->word);
-// 			if (nb < 0 || nb > 255)
-// 				error("numeric argument required", "exit", cmd->args->word, 2);
-// 		}
-// 		else
-// 			error("numeric argument required", "exit", cmd->args->word, 2);
-// 	}
-// 	return (nb);
 // }
