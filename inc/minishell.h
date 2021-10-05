@@ -71,7 +71,6 @@ int		env_size(char *src, int i);
 t_env	*lst_new_env(char *name, char *value);
 void	add_env(t_env **alst, t_env *new);
 t_env	*get_env(t_env *env, char *name);
-t_env	*get_env2(t_env *env, char *name);
 void	free_all();
 int		tokens_list_size(t_token *token);
 int		is_builtin(char *s);

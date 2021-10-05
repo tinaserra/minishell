@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/01 09:41:21 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:26:23 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	have_permission(t_cmd *cmd)
 	dir = opendir(cmd->args->word);
 	if (dir == NULL || errno != 0)
 	{
-		// g_ms->status = 1;
 		error(strerror(errno), "cd", cmd->args->word, 1);
 		return (0);
 	}
@@ -45,13 +44,14 @@ int	have_permission(t_cmd *cmd)
 void	cd_builtin(t_cmd *cmd)
 {
 	t_token	*tmp;
+	char	*s;
 
 	tmp = cmd->args;
 	if (!tmp)
 	{
-		if (chdir(find_env(g_ms->env, "HOME")) != 0)
+		s = find_env(g_ms->env, "HOME");
+		if (!s || chdir(s) != 0)
 		{
-			// g_ms->status = 1;
 			error("HOME not set", "cd", NULL, 1);
 			g_ms->exit = 1;
 			return ;
@@ -61,7 +61,6 @@ void	cd_builtin(t_cmd *cmd)
 	{
 		if (have_permission(cmd) && chdir(tmp->word) != 0)
 		{
-			// g_ms->status = 1;
 			error(strerror(errno), "cd", tmp->word, 1);
 			g_ms->exit = 1;
 			return ;

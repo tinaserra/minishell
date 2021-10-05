@@ -48,20 +48,6 @@ t_env	*get_env(t_env *env, char *name)
 	return (NULL);
 }
 
-t_env	*get_env2(t_env *env, char *name)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp->next)
-	{
-		if (ft_strcmp(tmp->next->name, name) == 0)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
 int	init_env(char **env)
 {
 	char	**array;
