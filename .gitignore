@@ -9,3 +9,6 @@ a.out
 valgrind_log
 valgrind_log.txt
 *.sh
+
+# Ta mere la grosse tchoin
+.vscode
