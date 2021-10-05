@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 00:57:34 by admin             #+#    #+#             */
-/*   Updated: 2021/10/02 12:50:17 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:43:30 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,7 @@
 #define SUCCESS 0
 #define FAILURE -1
 
-int	str_is_digit(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s[0] != '-' || !ft_isdigit(s[0]))
-		return (0);
-	while (s[++i])
-	{
-		if (!ft_isdigit(s[i]))
-			return (0);
-	}
-	return (1);
-}
-
-int		exit_arg(char *arg, t_cmd *cmd)
+static int	exit_arg(char *arg, t_cmd *cmd)
 {
 	int		i;
 
@@ -79,29 +64,3 @@ void	exit_builtin(t_cmd *cmd)
 	free_all();
 	exit(nb);
 }
-
-// long long	atoi_exit(char *str)
-// {
-// 	int			i;
-// 	long		sign;
-// 	long long	nbr;
-
-// 	i = 0;
-// 	sign = 1;
-// 	nbr = 0;
-// 	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\r'
-// 		|| str[i] == '\v' || str[i] == '\f' || str[i] == ' ' || str[i] == '0')
-// 		i++;
-// 	if (str[i] == '+' || str[i] == '-')
-// 	{
-// 		if (str[i] == '-')
-// 			sign = -1;
-// 		i++;
-// 	}
-// 	while (str[i] && str[i] >= '0' && str[i] <= '9')
-// 	{
-// 		nbr = (nbr * 10) + (str[i] - '0');
-// 		i++;
-// 	}
-// 	return (nbr * sign);
-// }
