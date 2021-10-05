@@ -96,7 +96,6 @@ int		lstfind_pos(t_env *lst, char *name);
 void	exec_start(void);
 void	exec_pipe(t_cmd *cmd);
 int		edit_args(t_cmd *cmd);
-int		lst_size(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
 char	*check_path(t_cmd *cmd);
 void	status_child(void);

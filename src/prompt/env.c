@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/05 14:51:28 by jode-vri          #+#    #+#             */
+/*   Updated: 2021/10/05 14:53:21 by jode-vri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_env	*lst_new_env(char *name, char *value)
@@ -48,45 +60,7 @@ t_env	*get_env(t_env *env, char *name)
 	return (NULL);
 }
 
-int	init_env(char **env)
-{
-	char	**array;
-	char	*tmp;
-	int		i;
-
-	i = -1;
-	while (env[++i])
-	{
-		array = ft_split(env[i], "=");
-		if (!array)
-			return (0);
-		if (!array[1])
-			tmp = "";
-		else
-			tmp = ft_strdup(array[1]);
-		add_env(&g_ms->env, lst_new_env(ft_strdup(array[0]), tmp));
-		ft_free_tab(array);
-	}
-	return (1);
-}
-
-void	free_env(void)
-{
-	t_env	*tmp;
-
-	if (!g_ms->env)
-		return ;
-	while (g_ms->env)
-	{
-		tmp = g_ms->env->next;
-		free(g_ms->env->name);
-		free(g_ms->env->value);
-		free(g_ms->env);
-		g_ms->env = tmp;
-	}
-}
-
-void	set_env(char* env, char *value)
+void	set_env(char *env, char *value)
 {
 	t_env	*tmp;
 	t_env	*tmp2;

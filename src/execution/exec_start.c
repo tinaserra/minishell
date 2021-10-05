@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/03 14:50:10 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:58:19 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	exec_child(t_cmd *cmd, char *binary, char **args)
 		}
 		execve(binary, args, NULL);
 	}
-	//free(binary);
 	ft_free_tab(args);
 	free_all();
 	exit(EXIT_SUCCESS);

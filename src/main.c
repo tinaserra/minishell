@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/05 14:56:37 by vserra            #+#    #+#             */
+/*   Updated: 2021/10/05 15:05:08 by jode-vri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	free_all()
+void	free_all(void)
 {
 	free_env();
 	free_commands();
@@ -18,7 +30,6 @@ int	main(int ac, char **av, char **env)
 {
 	(void)av;
 	(void)ac;
-
 	g_ms = malloc(sizeof(t_minishell));
 	ft_bzero(g_ms, sizeof(t_minishell));
 	g_ms->curdir = getcwd(NULL, 0);
@@ -41,4 +52,3 @@ int	main(int ac, char **av, char **env)
 	ft_putstr_fd("exit\n", 1);
 	free_all();
 }
-

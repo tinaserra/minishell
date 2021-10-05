@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/26 15:46:46 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/01 10:03:16 by jode-vri         ###   ########.fr       */
+/*   Created: 2021/10/05 14:59:19 by vserra            #+#    #+#             */
+/*   Updated: 2021/10/05 14:59:22 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#define READ 0		/* stdin */
-#define WRITE 1		/* stdout */
+#define READ 0
+#define WRITE 1
 
 void	handle_fds(t_cmd *cmd, int fdd, int fd[2])
 {

@@ -1,66 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/05 14:59:30 by vserra            #+#    #+#             */
+/*   Updated: 2021/10/05 15:08:31 by vserra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	count_quote(char *s)
+int	is_builtin(char *s)
 {
-	int	i;
-	int	d_quote;
-	int	s_quote;
-
-	d_quote = 0;
-	s_quote = 0;
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == '\"' && !s_quote)
-		{
-			if (d_quote == 1)
-				d_quote = 0;
-			else
-				d_quote = 1;
-		}
-		if (s[i] == '\'' && !d_quote)
-		{
-			if (s_quote == 1)
-				s_quote = 0;
-			else
-				s_quote = 1;
-		}
-	}
-	if (s_quote || d_quote)
-		return (-1);
-	else
+	if (ft_strcmp(s, "echo") == 0)
 		return (1);
+	if (ft_strcmp(s, "env") == 0)
+		return (1);
+	return (0);
 }
 
-int	edit_args(t_cmd *cmd)
+static int	is_redirection(char *s)
 {
-	t_token	*tmp;
-
-	tmp = cmd->args;
-	while (tmp)
-	{
-		if (count_quote(tmp->word) == -1)
-		{
-			printf("minishell: Unclosed quote\n");
-			return (0);
-		}
-		tmp->word = handle_quotes(tmp->word, 1);
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
-int is_redirection(char *s)
-{
-	if (ft_strcmp(s, "<") == 0 || ft_strcmp(s, ">") == 0 
+	if (ft_strcmp(s, "<") == 0 || ft_strcmp(s, ">") == 0
 		|| ft_strcmp(s, ">>") == 0 || ft_strcmp(s, "<<") == 0)
 		return (1);
 	return (0);
 }
 
-int	lst_size(t_cmd *cmd)
+static int	lst_size(t_cmd *cmd)
 {
-	t_token *liste;
+	t_token	*liste;
 	int		len;
 
 	liste = cmd->args;
@@ -100,7 +71,7 @@ char	**list_to_tab(t_cmd *cmd)
 		liste = liste->next;
 	}
 	aaargs[i] = NULL;
-	return(aaargs);
+	return (aaargs);
 }
 
 char	*check_path(t_cmd *cmd)
@@ -108,9 +79,7 @@ char	*check_path(t_cmd *cmd)
 	char		**path;
 	char		*binary;
 	struct stat	stats;
-	
-	int		i;
-	(void)cmd;
+	int			i;
 
 	path = ft_split(find_env(g_ms->env, "PATH"), ":");
 	i = 0;

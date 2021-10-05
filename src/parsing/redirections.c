@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/05 14:56:58 by jode-vri          #+#    #+#             */
+/*   Updated: 2021/10/05 14:56:59 by jode-vri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_token	*redirect3(t_token *args, t_token **start)
@@ -33,9 +45,9 @@ t_token	*redirect3(t_token *args, t_token **start)
 	return (NULL);
 }
 
-int 	redirect2(t_cmd *cmd, t_token **args, int flags)
+int	redirect2(t_cmd *cmd, t_token **args, int flags)
 {
-	int		fd;
+	int	fd;
 
 	fd = open((*args)->next->word, flags, 0644);
 	if (fd < 0)

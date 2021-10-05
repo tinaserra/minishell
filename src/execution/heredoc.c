@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 06:51:46 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/03 15:11:01 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/05 15:01:39 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	heredoc(t_cmd *cmd, t_token **token)
 		free(tmp);
 		tmp = NULL;
 		write(2, "> ", 2);
-		if (ft_get_next_line(0, &tmp) && ft_strcmp((*token)->next->word, tmp) != 0)
+		if (ft_get_next_line(0, &tmp)
+			&& ft_strcmp((*token)->next->word, tmp) != 0)
 		{
 			if (is_in_str(tmp, '$'))
 				tmp = replace_env(tmp, ft_find_in_str(tmp, '$'));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/22 00:57:34 by admin             #+#    #+#             */
-/*   Updated: 2021/10/05 14:43:30 by jode-vri         ###   ########.fr       */
+/*   Created: 2021/10/05 14:58:21 by vserra            #+#    #+#             */
+/*   Updated: 2021/10/05 14:58:25 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	exit_arg(char *arg, t_cmd *cmd)
 			if (arg[i] < '0' || arg[i] > '9')
 			{
 				error("numeric argument required", "exit", cmd->args->word, 2);
-				// return (FAILURE);
 				g_ms->status = 2;
 				free_all();
 				exit(2);
@@ -55,10 +54,7 @@ void	exit_builtin(t_cmd *cmd)
 		printf("coucou\n");
 		nb = ft_atoi(cmd->args->word);
 		if (nb < 0 || nb > 255)
-		{
-			// error("numeric argument required", "exit", cmd->args->word, 2);
 			printf("%d : superieur a 255 ou  inferieur a 0\n", nb);
-		}
 	}
 	g_ms->status = nb % 256;
 	free_all();

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokens2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/05 14:54:25 by jode-vri          #+#    #+#             */
+/*   Updated: 2021/10/05 14:54:52 by jode-vri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static t_token	*create_token3(char *s, int type)
@@ -87,7 +99,7 @@ void	parse_token(t_token	**token)
 
 int	tokens_list_size(t_token *token)
 {
-	t_token *tmp;
+	t_token	*tmp;
 	int		i;
 
 	tmp = token;
