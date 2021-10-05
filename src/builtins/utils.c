@@ -5,26 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/03 02:08:05 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:38:39 by jode-vri         ###   ########.fr       */
+/*   Created: 2021/10/05 14:40:55 by jode-vri          #+#    #+#             */
+/*   Updated: 2021/10/05 14:41:02 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*print_prompt(void)
+int	lstfind_pos(t_env *lst, char *name)
 {
-	char	**pwd;
-	char	*res;
+	int	pos;
 
-	res = NULL;
-	pwd = ft_split(find_env(g_ms->env, "PWD"), "/");
-	res = ft_strjoin(res, "\x1b[33m");
-	res = ft_strjoin_free(res, find_env(g_ms->env, "USER"), 'L');
-	res = ft_strjoin_free(res, "\x1b[31m ➜ ", 'L');
-	res = ft_strjoin_free(res, "\x1b[34m ", 'L');
-	res = ft_strjoin_free(res, pwd[ft_strs_tab_size(pwd) - 1], 'L');
-	res = ft_strjoin_free(res, " \x1b[0m", 'L');
-	ft_free_tab(pwd);
-	return (res);
+	pos = 0;
+	while (lst)
+	{
+		if (ft_strcmp(lst->name, name) == 0)
+			return (pos);
+		pos++;
+		lst = lst->next;
+	}
+	return (-1);
+}
+
+int	lstsize(t_env *l)
+{
+	int	len;
+
+	len = 0;
+	while (l)
+	{
+		len++;
+		l = l->next;
+	}
+	return (len);
 }

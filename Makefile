@@ -17,6 +17,7 @@ SRCS            =		src/main.c									\
 						$(addprefix ${BUILTINS}, export.c)			\
 						$(addprefix ${BUILTINS}, unset.c)			\
 						$(addprefix ${BUILTINS}, exit.c)			\
+						$(addprefix ${BUILTINS}, utils.c)			\
 						$(addprefix ${EXEC}, exec_start.c)			\
 						$(addprefix ${EXEC}, utils.c)				\
 						$(addprefix ${EXEC}, exec_pipe.c)			\

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:06:09 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:29:04 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:40:26 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,16 @@ static int	is_valid_envv(char *s)
 	return (1);
 }
 
-int	lstfind_pos(t_env *lst, char *name)
+static t_env	*lstfree_first(t_env *l, t_env *cur)
 {
-	int	pos;
-
-	pos = 0;
-	while (lst)
-	{
-		if (ft_strcmp(lst->name, name) == 0)
-			return (pos);
-		pos++;
-		lst = lst->next;
-	}
-	return (-1);
+	l = l->next;
+	free(cur->name);
+	free(cur->value);
+	free(cur);
+	return (l);
 }
 
-int	lstsize(t_env *l)
-{
-	int	len;
-
-	len = 0;
-	while (l)
-	{
-		len++;
-		l = l->next;
-	}
-	return (len);
-}
-
-t_env	*lstfree_at(t_env *l, int pos)
+static t_env	*lstfree_at(t_env *l, int pos)
 {
 	t_env	*prec;
 	t_env	*cur;
@@ -66,13 +47,7 @@ t_env	*lstfree_at(t_env *l, int pos)
 	if (l == NULL)
 		return (NULL);
 	if (pos == 0)
-	{
-		l = l->next;
-		free(cur->name);
-		free(cur->value);
-		free(cur);
-		return (l);
-	}
+		return (lstfree_first(l, cur));
 	if (pos > lstsize(l))
 		return (NULL);
 	i = -1;
@@ -99,7 +74,6 @@ void	unset_builtin(t_cmd *cmd)
 	pos = lstfind_pos(g_ms->env, tmp->word);
 	while (tmp)
 	{
-		printf("[%s]\n", tmp->word);
 		if (is_valid_envv(tmp->word))
 		{
 			env = get_env(g_ms->env, tmp->word);

@@ -86,6 +86,8 @@ void	pwd_builtin(t_cmd *cmd);
 void	unset_builtin(t_cmd *cmd);
 void	export_builtin(t_cmd *cmd);
 void	exit_builtin(t_cmd *cmd);
+int		lstsize(t_env *l);
+int		lstfind_pos(t_env *lst, char *name);
 
 /*
 ** EXECUTION ---------------------------------------------------------------- **
