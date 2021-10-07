@@ -16,10 +16,13 @@
 - [x] ```cd '' ''```
 - [x] ```echo $PWD; echo $OLDPWD; cd '' ''; pwd; echo $PWD; echo $OLDPWD```
 - [ ] ```echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD```
-bash :
+
+***bash output :***
+```
 /home/admin/42/minishell1
 /home/admin/42/minishell1
 /
 /
 /home/admin/42/minishell1
+```
 - [ ] ```echo $PWD; echo $OLDPWD; cd /.; pwd; echo $PWD; echo $OLDPWD```
