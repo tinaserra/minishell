@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:26:23 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:56:34 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	update_pwd(void)
 	g_ms->curdir = NULL;
 	if (find_env(g_ms->env, "PWD") && find_env(g_ms->env, "OLDPWD"))
 		set_env("OLDPWD", find_env(g_ms->env, "PWD"));
-	g_ms->curdir = getcwd(NULL, 0);
+	g_ms->curdir = ft_strdup(find_env(g_ms->env, "PWD"));
+
 	if (find_env(g_ms->env, "PWD"))
 		set_env("PWD", g_ms->curdir);
 	free(g_ms->term);
@@ -47,7 +48,12 @@ void	cd_builtin(t_cmd *cmd)
 	char	*s;
 
 	tmp = cmd->args;
-	if (!tmp)
+	if (tmp->next)
+	{
+		error("too many arguments", "cd", NULL, 1);
+		return ;
+	}
+	else if (!tmp)
 	{
 		s = find_env(g_ms->env, "HOME");
 		if (!s || chdir(s) != 0)
@@ -59,6 +65,8 @@ void	cd_builtin(t_cmd *cmd)
 	}
 	else
 	{
+		if (tmp->word[0] == '\0')
+			return ;
 		if (have_permission(cmd) && chdir(tmp->word) != 0)
 		{
 			error(strerror(errno), "cd", tmp->word, 1);
