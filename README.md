@@ -16,6 +16,8 @@ make && ./minishell
 
 ## TO DO !!
 
+Liste non exaustive des [Failed tests](https://github.com/tinaserra/minishell/blob/master/links/tests.md)
+
 ### Ces cas
 
 ```shell
