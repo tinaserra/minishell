@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/05 14:58:19 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:13:43 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,16 @@ static int	exec_binary(t_cmd *cmd)
 	}
 	else
 	{
-		bin = find_binary(cmd, 1);
 		if (is_builtin(cmd->cmd))
 			exec_command(cmd, cmd->cmd);
-		else if (bin)
-			exec_command(cmd, bin);
-		free(bin);
+		else
+		{
+			bin = find_binary(cmd, 1);
+			if (bin)
+				exec_command(cmd, bin);
+			else
+				free(bin);
+		}
 	}
 	g_ms->fork = 0;
 	return (0);

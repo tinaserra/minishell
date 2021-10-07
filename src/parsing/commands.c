@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 01:30:56 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/09/21 14:57:44 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:00:21 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	free_commands(void)
 			g_ms->cmds->args = tmp2;
 		}
 		tmp = g_ms->cmds->next;
-		free(g_ms->cmds->cmd);
+		if (g_ms->cmds->cmd)	
+			free(g_ms->cmds->cmd);
 		free(g_ms->cmds);
 		g_ms->cmds = tmp;
 	}

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:19 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/05 14:59:22 by vserra           ###   ########.fr       */
+/*   Updated: 2021/10/07 09:18:20 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_fds(t_cmd *cmd, int fdd, int fd[2])
 {
 	dup2(fdd, 0);
 	if (cmd->next)
-		dup2(fd[1], 1);
+		dup2(fd[WRITE], 1);
 	if (cmd->out > 0)
 	{
 		dup2(cmd->out, 1);
@@ -67,7 +67,7 @@ void	exec_pipe(t_cmd *cmd)
 		{
 			handle_fds(cmd, fdd, fd);
 			builtin_pipe(cmd, bin, args);
-			close(fd[0]);
+			close(fd[READ]);
 			ft_free_tab(args);
 			free(bin);
 			free_all();
@@ -77,8 +77,8 @@ void	exec_pipe(t_cmd *cmd)
 		{
 			wait(&g_ms->pid);
 			status_child();
-			close(fd[1]);
-			fdd = fd[0];
+			close(fd[WRITE]);
+			fdd = fd[READ];
 			free(bin);
 			cmd = cmd->next;
 		}
