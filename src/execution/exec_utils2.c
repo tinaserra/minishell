@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:44 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/05 15:03:57 by vserra           ###   ########.fr       */
+/*   Updated: 2021/10/07 12:12:45 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,12 @@ int	edit_args(t_cmd *cmd)
 	t_token	*tmp;
 
 	tmp = cmd->args;
+	if (count_quote(cmd->cmd) == -1)
+	{
+		printf("minishell: Unclosed quote\n");
+		return (0);
+	}
+	cmd->cmd = handle_quotes(cmd->cmd, 1);
 	while (tmp)
 	{
 		if (count_quote(tmp->word) == -1)
