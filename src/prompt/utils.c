@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 02:08:05 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/08 14:50:25 by admin            ###   ########.fr       */
+/*   Updated: 2021/10/08 14:51:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ char	*print_prompt(void)
 	if (!pwd[0])
 		res = ft_strjoin_free(res, "/", 'L');
 	else
-	{
 		res = ft_strjoin_free(res, pwd[ft_strs_tab_size(pwd) - 1], 'L');
-	}
 	ft_free_tab(pwd);
 	res = ft_strjoin_free(res, " \x1b[0m", 'L');
 	return (res);
