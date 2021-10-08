@@ -18,110 +18,6 @@ make && ./minishell
 
 Liste non exaustive des [Failed tests](https://github.com/tinaserra/minishell/blob/master/links/tests.md)
 
-### Ces cas
-
-```shell
-admin ➜ minishell1 ls | wc |  cat -e ; ls | ckjefvkj
-minishell: ckjefvkj: command not found
-
-minishell: ckjefvkj: command not found
-```
-
-```shell
-admin ➜ minishell1 ls | wc > b
-wc: '>': No such file or directory
-0 0 0 b
-0 0 0 total
-```
-
-- [ ] ```echo puta madre | cat -e```
-```
-admin ➜ minishell1 echo puta madre | cat -e
-puta madre$
-free(): invalid pointer
-[1]    18526 abort      ./minishell
-```
-- [ ] ```cat | ls```
-- [ ] ```ls -la | rev | cat -e```
-- [ ] ```cat /dev/random | head -c 10```
-
-### Messages d'erreur
-
-```shell
-$ dd ou ; echo $?
-dd: unknown operand ou
-1
-```
-```shell
-$ pwd fr ; echo $?
-pwd: too many arguments
-1
-```
-```shell
-$ kill ooi ; echo $?
-kill: illegal pid: ooi
-1
-```
-```shell
-$ env fnrf ; echo $?
-env: ‘fnrf’: No such file or directory
-127
-```
-```shell
-$ ls -l execution.sh | ./execution.sh ; echo $?
-zsh: no such file or directory: ./execution.sh
-ls: execution.sh: No such file or directory
-127
-```
-```shell
-$ exit $? # Vraiment tres fun
-bash-3.2$ exit $?
-exit
-$ echo $?
-0
-```
-```shell
-bash-3.2$ exit 3.14 ; echo $?
-exit
-bash: exit: 3.14: numeric argument required
-$ echo $? # Mac
-255
-$ echo $? # Linux
-2
-```
-```
-bash-3.2$ exit -1
-exit
-$ echo $?
-255
-```
-```shell
-$ chmod pute +5 ; echo $?
-chmod: Invalid file mode: pute
-1
-```
-```shell
-$ chmode pute -*52 ; echo $?
-zsh: no matches found: -*52
-1
-```
-```shell
-$ stty -f pute ; echo $?
-stty: stdin isn't a terminal
-1
-```
-```shell
-/dev/null ; echo $?
-zsh: permission denied: /dev/null
-126
-```
-```shell
-bash-3.2$ exit 4643153
-exit
-$ echo $?
-81
-```
-
 ### ```echo```
 
 - [x] les redirections (vers un fichier, vers une variable d'env...) ⚠️ a ```cat```
@@ -167,12 +63,14 @@ $ echo $?
 
 ## USEFULL LINKS 🤙🏼
 
-[usefull](https://github.com/lucielebriquer)</br>
-[man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)</br>
-[man errno](http://manpagesfr.free.fr/man/man3/errno.3.html)</br>
-[man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)</br>
-[TUTO SHELL](http://marionpatrick.free.fr/man_html/html/tuto_shell.html)</br>
-[Fonctions autorisées par le sujet minishell 👉](https://github.com/tinaserra/minishell/blob/master/links/lexic.md)</br>
+* Usefull [Readme](https://github.com/LucieLeBriquer/minishell)
+* Usefull @iciamyplant [Readme](https://github.com/iciamyplant/Minishell)
+* Liste de [tests](https://github.com/Sethhhhhhh/minishell-tester/blob/master/input)
+* [man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)
+* [man errno](http://manpagesfr.free.fr/man/man3/errno.3.html)
+* [man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)
+* [TUTO SHELL](http://marionpatrick.free.fr/man_html/html/tuto_shell.html)
+* [Fonctions autorisées par le sujet minishell 👉](https://github.com/tinaserra/minishell/blob/master/links/lexic.md)
 
 ## Comment utiliser Git en multi ?
 
