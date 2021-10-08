@@ -48,6 +48,11 @@
 - [ ] ```cd //```
 - [ ] ```echo $PWD; echo $OLDPWD; cd //; pwd; echo $PWD; echo $OLDPWD```
 
+### Autre
+
+- [ ] ```echo $PWD; echo $OLDPWD; cd ' // '; pwd; echo $PWD; echo $OLDPWD```
+- [ ] ```echo $PWD; echo $OLDPWD; cd //home; pwd; echo $PWD; echo $OLDPWD```
+
 ## Segmentation fault 😭
 
 ### ***bash output :***
@@ -58,3 +63,8 @@
 ```
 - [ ] ```cd```
 - [ ] ```echo $PWD; echo $OLDPWD; cd; echo $OLDPWD```
+
+## Message d'erreur 🧐
+
+- [ ] ```cd ' / '```
+- [ ] ```echo $PWD; echo $OLDPWD; cd ' / '; pwd; echo $PWD; echo $OLDPWD ```
