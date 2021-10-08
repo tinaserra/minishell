@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/07 14:56:34 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/08 14:31:03 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,25 @@
 
 void	update_pwd(void)
 {
+	char *tmp;
+
+	tmp = ft_strdup(g_ms->curdir);
 	free(g_ms->curdir);
 	g_ms->curdir = NULL;
 	if (find_env(g_ms->env, "PWD") && find_env(g_ms->env, "OLDPWD"))
 		set_env("OLDPWD", find_env(g_ms->env, "PWD"));
-	g_ms->curdir = ft_strdup(find_env(g_ms->env, "PWD"));
-
+	g_ms->curdir = getcwd(NULL, 0);
+	if (!g_ms->curdir)
+	{
+		error("unable to retrieve current directory", "cd", NULL, 1);
+		g_ms->curdir = ft_strjoin(tmp, "/");
+		return ;
+	}
 	if (find_env(g_ms->env, "PWD"))
 		set_env("PWD", g_ms->curdir);
 	free(g_ms->term);
 	g_ms->term = print_prompt();
+	free(tmp);
 }
 
 int	have_permission(t_cmd *cmd)
@@ -48,12 +57,12 @@ void	cd_builtin(t_cmd *cmd)
 	char	*s;
 
 	tmp = cmd->args;
-	if (tmp->next)
+	if (tmp && tmp->next)
 	{
 		error("too many arguments", "cd", NULL, 1);
 		return ;
 	}
-	else if (!tmp)
+	if (!tmp)
 	{
 		s = find_env(g_ms->env, "HOME");
 		if (!s || chdir(s) != 0)
