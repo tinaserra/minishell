@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strs_tab_size.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 05:12:16 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/06/21 13:33:02 by vserra           ###   ########.fr       */
+/*   Updated: 2021/10/08 14:39:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strs_tab_size(char **tab)
 	i = 0;
 	if (!tab)
 		return (i);
-	while (tab[i])
+	while (tab && tab[i])
 		i++;
 	return (i);
 }
