@@ -24,18 +24,18 @@
 /
 /home/admin/42/minishell1
 ```
-- [ ] ```cd /```
-- [ ] ```echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD```
-- [ ] ```cd /.```
-- [ ] ```echo $PWD; echo $OLDPWD; cd /.; pwd; echo $PWD; echo $OLDPWD```
-- [ ] ```cd/./```
-- [ ] ```echo $PWD; echo $OLDPWD; cd /./; pwd; echo $PWD; echo $OLDPWD```
-- [ ] ```cd /././././```
-- [ ] ```echo $PWD; echo $OLDPWD; cd /././././; pwd; echo $PWD; echo $OLDPWD```
-- [ ] ```cd ///```
-- [ ] ```echo $PWD; echo $OLDPWD; cd ///; pwd; echo $PWD; echo $OLDPWD```
-- [ ] ```cd ////```
-- [ ] ```echo $PWD; echo $OLDPWD; cd ////; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```cd /```
+- [x] ```echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```cd /.```
+- [x] ```echo $PWD; echo $OLDPWD; cd /.; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```cd/./```
+- [x] ```echo $PWD; echo $OLDPWD; cd /./; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```cd /././././```
+- [x] ```echo $PWD; echo $OLDPWD; cd /././././; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```cd ///```
+- [x] ```echo $PWD; echo $OLDPWD; cd ///; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```cd ////```
+- [x] ```echo $PWD; echo $OLDPWD; cd ////; pwd; echo $PWD; echo $OLDPWD```
 
 ### ***bash output :***
 ```
@@ -50,8 +50,8 @@
 
 ### Autre
 
-- [ ] ```echo $PWD; echo $OLDPWD; cd ' // '; pwd; echo $PWD; echo $OLDPWD```
-- [ ] ```echo $PWD; echo $OLDPWD; cd //home; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```echo $PWD; echo $OLDPWD; cd ' // '; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```echo $PWD; echo $OLDPWD; cd //home; pwd; echo $PWD; echo $OLDPWD```
 
 ## Segmentation fault 😭
 
@@ -61,13 +61,13 @@
 /home/admin/42
 /home/admin/42/minishell1
 ```
-- [ ] ```cd```
-- [ ] ```echo $PWD; echo $OLDPWD; cd; echo $OLDPWD```
+- [x] ```cd```
+- [x] ```echo $PWD; echo $OLDPWD; cd; echo $OLDPWD```
 
 ## Message d'erreur 🧐
 
-- [ ] ```cd ' / '```
-- [ ] ```echo $PWD; echo $OLDPWD; cd ' / '; pwd; echo $PWD; echo $OLDPWD ```
+- [x] ```cd ' / '```
+- [x] ```echo $PWD; echo $OLDPWD; cd ' / '; pwd; echo $PWD; echo $OLDPWD ```
 
 ### Ces cas
 
