@@ -6,16 +6,16 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:44 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/07 12:12:45 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/12 10:00:35 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	status_child(void)
+void	status_child(int status)
 {
-	if (WIFEXITED(g_ms->pid))
-		g_ms->status = WEXITSTATUS(g_ms->pid);
+	if (WIFEXITED(status))
+		g_ms->status = WEXITSTATUS(status);
 	if (WIFSIGNALED(g_ms->pid))
 	{
 		g_ms->status = WTERMSIG(g_ms->pid);
@@ -74,7 +74,7 @@ static int	count_quote(char *s)
 	d_quote = 0;
 	s_quote = 0;
 	i = -1;
-	while (s[++i])
+	while (s && s[++i])
 	{
 		if (s[i] == '\"' && !s_quote)
 		{
