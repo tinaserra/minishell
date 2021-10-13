@@ -124,6 +124,38 @@ On sépare notre input sur les caractères ```;```, ```|```, ```>```, ```<```, `
 
 ## 4. Exécution avec ```execve``` 🌶
 
+### Les processus
+
+Creér un fork.
+
+```c++
+int pid;
+
+pid = fork();
+if (pid < 0)
+	/* Error forking */
+if (pid == 0)
+	/* Child process */
+else
+	/* Parent process */
+```
+
+
+
+### La fonction execve
+
+L'utilisateur peut rentrer le **nom** de la commande (ex : ```ls```) ou le **path** (ex: ```/bin/ls```).
+si c'est juste le nom aui est entré il faut récupérer le path de la commande avec la fonction ```lstat```.
+la fonction ```execve``` prend en paramètre le **path ou le nom** du commande a executer, un **tableau d'arguments**, et l'environement (ici on met ```NULL```).
+
+[Utilisation de exec](https://aljensencprogramming.wordpress.com/2014/03/31/using-the-exec-function-in-unix-like-enviroments/)
+[Utilisation de wait](https://aljensencprogramming.wordpress.com/2014/04/29/waiting-for-and-exiting-from-processes-in-linux-c/)
+[Implémentation de pipe](https://aljensencprogramming.wordpress.com/2014/05/16/implementing-pipes-in-c/)
+[La fonction kill](https://aljensencprogramming.wordpress.com/2014/05/15/the-kill-function-in-c/)
+[Les signaux 1](https://aljensencprogramming.wordpress.com/2014/05/09/introduction-to-signals-using-alarm-in-linux-c/)
+[Les signaux 2](https://aljensencprogramming.wordpress.com/2014/12/30/review-of-signals-in-linux-c/)
+[Utilisation de dup2](https://aljensencprogramming.wordpress.com/2014/09/03/review-of-pipes-in-linux-c-with-dup2/)
+
 ## 5. Gestion d'erreur & ```echo $?``` 🦄
 
 ⚠️ les codes de retours sont différents sur mac et linux
@@ -144,7 +176,6 @@ On sépare notre input sur les caractères ```;```, ```|```, ```>```, ```<```, `
 
 ## USEFULL LINKS 🤙🏼
 
-* Usefull [Readme](https://github.com/LucieLeBriquer/minishell)
 * [@iciamyplant](https://github.com/iciamyplant/Minishell#i---quest-ce-que-minishell--1) Readme
 * Liste de [tests](https://github.com/Sethhhhhhh/minishell-tester/blob/master/input) by [@Seth](https://github.com/Sethhhhhhh)
 * [man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)
