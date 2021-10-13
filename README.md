@@ -40,11 +40,11 @@ On va créer une liste chaînée à partir de l'environnement contenant à chaqu
 ```c++
 typedef struct		s_token
 {
-	char			*word;
-	int				type;
+	char	*word;
+	int		type;
 	struct s_token	*prev;
 	struct s_token	*next;
-}					t_token;
+}		t_token;
 
 typedef struct		s_cmd
 {
