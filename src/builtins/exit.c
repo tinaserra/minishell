@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/05 14:58:25 by vserra           ###   ########.fr       */
+/*   Updated: 2021/10/13 14:08:58 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	exit_builtin(t_cmd *cmd)
 	}
 	if (cmd->args && exit_arg(cmd->args->word, cmd) == SUCCESS)
 	{
-		printf("coucou\n");
 		nb = ft_atoi(cmd->args->word);
 		if (nb < 0 || nb > 255)
 			printf("%d : superieur a 255 ou  inferieur a 0\n", nb);
