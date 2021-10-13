@@ -13,7 +13,6 @@ do
 	rm -f wesh
 done < "$input"
 
-cat my_output | sed '/exit/d' > my_output
 #cat my_output2 | sed 's/exit//' > my_output2
 
 #echo "** DIFF START ------------------------ **"
