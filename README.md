@@ -18,11 +18,11 @@ make && ./minishell
 ### TO DO !!
 Liste non exaustive des [Failed tests](https://github.com/tinaserra/minishell/blob/master/links/tests.md)
 
-## Introduction 🤓
+### Introduction 🤓
 Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf)</br>
 Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
 
-### 1. Sujet
+## 1. Sujet
 L'objectif du projet est de creer notre propre shell.
 
 #### Qu'est-ce qu'un shell ?
@@ -34,6 +34,69 @@ Le shell c'est en quelque sorte l'interface utilisaeur d'un systeme. Il permet �
 * Nous interpretons les special characters ```\``` or ```;```, mais dans la maj du sujet on n'est pas obliges de le faire.
 
 ## 2. Parsing 🤯
+
+On va créer une liste chaînée à partir de l'environnement contenant à chaque maillon le nom de la **commande** et ses **arguments**.
+
+```c++
+typedef struct		s_token
+{
+	char			*word;
+	int				type;
+	struct s_token	*prev;
+	struct s_token	*next;
+}					t_token;
+
+typedef struct		s_cmd
+{
+	char			*cmd;
+	char			*tmp;
+	t_token			*args;
+	t_list			*env;
+	int				type;
+	int				in;
+	int				out;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}					t_cmd;
+```
+
+### La tokénisation
+
+Le but va etre de trier notre input par *type*. On **split** selon les quotes et les opérateurs rencontrés. On construit un tableau de structure avec comme attribut le **caractère séparateur** ainsi que la **chaîne** contenue entre les deux délimiteurs.</br>
+Chaque type a une valeur (0: point virgule, 1: pipe, 2: redirection, 3: variable d'environnement, 4: newline, 5: texte, 6: exit status).
+
+#### Exemple
+
+```
+$ Ceci est un beau $parsing ; Avec des >> commandes | et des arguments
+```
+```
+[5] [Ceci est un beau]
+[3] [$parsing]
+[0] [; Avec des]
+[2] [>> commandes]
+[1] [| et des arguments]
+```
+
+Pour mieux s'y retrouver dans les types, on fait un **enum**. cela permet en quelque sorte de donner un nom a des int. Par defaut la premiere valeur (ici ```POINT_V```) vaut 0 et les suivantes +1. Il est donc simple de rajouter un type.
+
+```c++
+typedef enum		e_type{
+	POINT_V,	// = 0
+	PIPE,		// = 1
+	REDIR,		// = 2
+	ENV,		// = 3
+	NEWL,		// = 4
+	TXT,		// = 5
+	EXIT_STATUS	// = 6
+}					t_type;
+```
+
+En savoir plus sur la tokenisation et l'AST -> [@LucieLeBriquer](https://github.com/LucieLeBriquer/minishell#parsing-de-la-commande)
+
+<!-- ### Étape 1 : séparer
+
+On sépare notre input sur les caractères ```;```, ```|```, ```>```, ```<```, ```>>```, ```<<``` et on commence a renger les chaines dans des types. -->
 
 ## 3. Buildtins 👾
 
