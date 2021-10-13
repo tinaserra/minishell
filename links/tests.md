@@ -7,19 +7,26 @@
 - [x] cd $HOME/Documents
 - [x] echo \>
 - [x] echo -n -n -nnnn -nnnnm
-- [ ] cat /dev/random | head -n 1 | cat -e
-- [ ] unset var1 # with undefined var1
-- [ ] export "" et unset ""
-- [ ] echo test > file test1
 - [x] $
 - [x] not_cmd bonjour > salut
 - [x] env puis export puis env # vars aren't sorted
-- [ ] cat Makefile | grep pr | head -n 5 | cd test (mybin) # check status code
-- [ ] cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
-
-
 - [x] echo 2 >> out1 > out2
 - [x] echo 2 > out1 >> out2
+- [x] export "HI= hi"
+- [x] export "HI =hi"
+- [x] /bin/ls
+- [x] # write something the press ctrl+c
+- [x] # write something then press ctrl+d
+- [x] cat < >
+- [x] cat < <
+- [x] cat > >
+- [x] cat < Makefile | grep gcc > output
+
+- [ ] unset var1 # with undefined var1
+- [ ] export "" et unset ""
+- [ ] echo test > file test1
+- [ ] cat Makefile | grep pr | head -n 5 | cd test (mybin) # check status code
+- [ ] cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
 - [ ] cat < test # with non-existent test
 - [ ] export var; export var=test
 - [ ] echo bonjour > $test # with test not defined
@@ -44,35 +51,19 @@
 - [ ] exit -10
 - [ ] exit +10
 - [ ] ;
-
-
 - [ ] export ; env # display is different for both commands
 - [ ] > log echo coucou
-
-
 - [ ] echo "\\"
 - [ ] echo "\n \n \n"
 - [ ] echo "\n \\n \\\n"
-
 - [ ] export LOL=lala ROR=rara
 - [ ] unset LOL ROR
-- [x] export "HI= hi"
-- [x] export "HI =hi"
-- [x] /bin/ls
-- [x] # write something the press ctrl+c
-- [x] # write something then press ctrl+d
 - [ ] # write something then press ctrl+\
-- [x] echo $?
 - [ ] l^Ds
-
 - [ ] sort | ls # check output order
-- [x] cat < >
-- [x] cat < <
-- [x] cat > >
 - [ ] > a ls > b < Makefile
 - [ ] echo > a Hello World!
 - [ ] > a echo Hello World!
-- [x] cat < Makefile | grep gcc > output
 - [ ] exit 0 | exit 1
 - [ ] exit 1 | exit 0
 
@@ -102,6 +93,7 @@
 - [ ] echo "bip | bip ; coyotte > < \" "
 - [ ] cd ~
 - [ ] cat Makefile | grep pr | head -n 5 | cat test (bin) # check status code
+- [ ] cat /dev/random | head -n 1 | cat -e
 
 ### ***bash output :***
 ```
