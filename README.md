@@ -1,46 +1,47 @@
 # Minishell
 Aussi mignon qu’un vrai shell
 
-
-## INTRODUCTION 🤓
-
-Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf)</br>
-Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
-
 ### Usage 🧐
-
 Start
 ```
 make && ./minishell
 ```
 
-## TO DO !!
-
+### TO DO !!
 Liste non exaustive des [Failed tests](https://github.com/tinaserra/minishell/blob/master/links/tests.md)
 
-### ```echo```
+## INTRODUCTION 🤓
+Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf)</br>
+Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
 
+### Le sujet
+L'objectif du projet est de creer notre propre shell.
+
+#### Qu'est-ce qu'un shell ?
+Le shell c'est en quelque sorte l'interface utilisaeur d'un systeme. Il permet à l'utilisateur de communiquer avec le système d’exploitation par l'intermédiaire de commandes. L'utilisateur rentre des commandes dans le terminal et grâce à l’interpréteur de commande (tel que bash ou zsh qui sont des shells), les commandes entrées sont exécutées.
+
+#### Precisions
+* Le sujet de minishell a eu plusieurs mises a jour. Ici nous ne faisons pas les termcaps (utilisation de ```readline```, ```rl_clear_history```, ...).
+* Nous avons adapte pour utiliser qu'une seule variable globale.
+* Nous interpretons les special characters ```\``` or ```;```, mais dans la maj du sujet on n'est pas obliges de le faire.
+
+### ```echo```
 - [x] les redirections (vers un fichier, vers une variable d'env...) ⚠️ a ```cat```
 - [ ] Pipe ?? ⚠️ a ```cat```
 - [ ] $? -> retourne le code erreur de la derniere commande
-
 [man echo baby !](http://marionpatrick.free.fr/man_html/html/tuto_shell.html#chp3.3.2.3)
 
-
 ### ```pwd```
-
 - [ ] Pas d'arguments, ou alors **ignorés**
 - [ ] Pipe ?? ⚠️ a ```cat -e```
 
 ### ```export```
-
 - [ ] ```export``` *(sans arguments)* : print la liste des variables d'environnement dans l'ordre ascii
 - [ ] *avec arguments* : gerer les differentes possibilités de format ```$variable``` ou ```${variable}``` ou ```“$variable”``` ou ```"${variable}"```
 - [ ] ```export nom_variable``` Exportation de la variable dans les processus fils.
 - [ ] ```export nom_variable=value``` Assignation et exportation de la variable dans les processus fils.
 
 ### ```env```
-
 - [ ] print la liste des variables d'environnement.
 - [ ] print les variables ajoutêes par ```export```
 - [ ] Attention aux variables que la commante ```exort``` affiche mais que ```env``` ne doit pas afficher
