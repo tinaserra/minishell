@@ -3,43 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:21:24 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/01 08:21:25 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/13 13:30:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+#define OPT_N 0
+#define NL 1
+
 int	echo_new_line(char *s)
 {
-	if (ft_strcmp(s, "-n") == 0)
-		return (0);
-	return (1);
+	int i;
+
+	i = 0;
+	if (s[i] && s[i] == '-' && s[i + 1] && s[i + 1] == 'n')
+	{
+		i += 2;
+		while (s[i] && s[i] == 'n')
+			i++;
+		if (s[i] && s[i] != 'n')
+			return (NL);
+		g_ms->newline = 0;
+		return (OPT_N);
+	}
+	return (NL);
 }
 
 void	echo_builtin(t_token *args, int fd)
 {
-	int		nl;
 	t_token	*tmp;
 
 	tmp = args;
 	if (fd == 0)
 		fd = 1;
 	if (!tmp)
+	{
+		ft_putchar_fd('\n', fd);
 		return ;
-	nl = echo_new_line(tmp->word);
-	if (nl == 0)
-		tmp = tmp->next;
+	}
+	g_ms->newline = NL;
 	while (tmp)
 	{
+		while (echo_new_line(tmp->word) == OPT_N)
+		{
+			g_ms->newline = OPT_N;
+			tmp = tmp->next;
+		}
 		if (tmp->type == EXIT_STATUS)
 			ft_putnbr_fd(g_ms->status, STDOUT_FILENO);
 		ft_putstr_fd(tmp->word, fd);
 		if (tmp->next)
 			ft_putchar_fd(' ', fd);
-		else if (nl)
+		else if (g_ms->newline == NL)
 			ft_putchar_fd('\n', fd);
 		tmp = tmp->next;
 	}
