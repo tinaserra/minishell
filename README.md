@@ -1,20 +1,28 @@
-# Minishell
+# Minishell 🌈
 Aussi mignon qu’un vrai shell
 
-### Usage 🧐
+### Usage
 Start
 ```
 make && ./minishell
 ```
 
+### Sommaire 🧐
+
+* 1. Sujet
+* 2. Parsing
+* 3. Buildtins
+* 4. Exécution
+* 5. Gestion d'erreur
+
 ### TO DO !!
 Liste non exaustive des [Failed tests](https://github.com/tinaserra/minishell/blob/master/links/tests.md)
 
-## INTRODUCTION 🤓
+## Introduction 🤓
 Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf)</br>
 Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
 
-### Le sujet
+### 1. Sujet
 L'objectif du projet est de creer notre propre shell.
 
 #### Qu'est-ce qu'un shell ?
@@ -24,6 +32,10 @@ Le shell c'est en quelque sorte l'interface utilisaeur d'un systeme. Il permet �
 * Le sujet de minishell a eu plusieurs mises a jour. Ici nous ne faisons pas les termcaps (utilisation de ```readline```, ```rl_clear_history```, ...).
 * Nous avons adapte pour utiliser qu'une seule variable globale.
 * Nous interpretons les special characters ```\``` or ```;```, mais dans la maj du sujet on n'est pas obliges de le faire.
+
+## 2. Parsing 🤯
+
+## 3. Buildtins 👾
 
 ### ```echo```
 - [x] les redirections (vers un fichier, vers une variable d'env...) ⚠️ a ```cat```
@@ -47,7 +59,9 @@ Le shell c'est en quelque sorte l'interface utilisaeur d'un systeme. Il permet �
 - [ ] Attention aux variables que la commante ```exort``` affiche mais que ```env``` ne doit pas afficher
 
 
-## ```echo $?```
+## 4. Exécution avec ```execve``` 🌶
+
+## 5. Gestion d'erreur & ```echo $?``` 🦄
 
 ⚠️ les codes de retours sont différents sur mac et linux
 
@@ -62,13 +76,14 @@ Le shell c'est en quelque sorte l'interface utilisaeur d'un systeme. Il permet �
 |```130```|Script terminé par Control-C|```Ctl-C```|**Control-C** est le signal d'erreur fatale 2 , (130 = 128 + 2, voir ci-dessus)|
 |```255*```|État de sortie hors de portée|```exit -1```|**exit** ne prend que des arguments entiers compris entre 0 et 255|
 
+* [man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)
+* [man errno](http://manpagesfr.free.fr/man/man3/errno.3.html)
+
 ## USEFULL LINKS 🤙🏼
 
 * Usefull [Readme](https://github.com/LucieLeBriquer/minishell)
-* Usefull @iciamyplant [Readme](https://github.com/iciamyplant/Minishell)
-* Liste de [tests](https://github.com/Sethhhhhhh/minishell-tester/blob/master/input)
-* [man strerror](http://manpagesfr.free.fr/man/man3/strerror.3.html)
-* [man errno](http://manpagesfr.free.fr/man/man3/errno.3.html)
+* [@iciamyplant](https://github.com/iciamyplant/Minishell#i---quest-ce-que-minishell--1) Readme
+* Liste de [tests](https://github.com/Sethhhhhhh/minishell-tester/blob/master/input) by [@Seth](https://github.com/Sethhhhhhh)
 * [man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)
 * [TUTO SHELL](http://marionpatrick.free.fr/man_html/html/tuto_shell.html)
 * [Fonctions autorisées par le sujet minishell 👉](https://github.com/tinaserra/minishell/blob/master/links/lexic.md)
