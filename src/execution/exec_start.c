@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/07 14:28:37 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/12 13:55:18 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	exec_child(t_cmd *cmd, char *binary, char **args)
 static void	exec_command(t_cmd *cmd, char *binary)
 {
 	char	**args;
+	int		status;
 
 	args = list_to_tab(cmd);
 	g_ms->pid = fork();
@@ -51,8 +52,8 @@ static void	exec_command(t_cmd *cmd, char *binary)
 		exec_child(cmd, binary, args);
 	else
 	{
-		wait(&g_ms->pid);
-		status_child();
+		waitpid(g_ms->pid, &status, 0);
+		status_child(status);
 		ft_free_tab(args);
 	}
 }

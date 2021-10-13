@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/01 08:20:00 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/12 10:54:14 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	export_errors(char *res)
 	i = -1;
 	while (res[++i])
 	{
-		if (ft_strchr(",.%~@^*/", res[i]))
+		if (ft_strchr(" ,.%~@^*/", res[i]))
 			return (1);
 	}
 	return (0);

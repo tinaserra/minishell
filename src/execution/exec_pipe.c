@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:19 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/07 09:18:20 by vserra           ###   ########.fr       */
+/*   Updated: 2021/10/12 09:54:00 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	exec_pipe(t_cmd *cmd)
 	int		fdd;
 	char	**args;
 	char	*bin;
+	int		status;
 
 	fdd = 0;
+	status = 0;
 	while (cmd && (cmd->type == PIPE || (cmd->prev && cmd->prev->type == PIPE)))
 	{
 		redirect(cmd);
@@ -75,8 +77,8 @@ void	exec_pipe(t_cmd *cmd)
 		}
 		else
 		{
-			wait(&g_ms->pid);
-			status_child();
+			waitpid(g_ms->pid, &status, 0);
+			status_child(status);
 			close(fd[WRITE]);
 			fdd = fd[READ];
 			free(bin);

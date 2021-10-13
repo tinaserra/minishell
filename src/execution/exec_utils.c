@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:30 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/05 15:08:31 by vserra           ###   ########.fr       */
+/*   Updated: 2021/10/12 10:17:00 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ char	**list_to_tab(t_cmd *cmd)
 		}
 		else
 			liste = liste->next;
-		liste = liste->next;
+		if (liste)
+			liste = liste->next;
 	}
 	aaargs[i] = NULL;
 	return (aaargs);

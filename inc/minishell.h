@@ -98,7 +98,7 @@ void	exec_pipe(t_cmd *cmd);
 int		edit_args(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
 char	*check_path(t_cmd *cmd);
-void	status_child(void);
+void	status_child(int status);
 char	*find_binary(t_cmd *cmd, int show);
 int		find_all_binary(t_cmd *cmd);
 void	heredoc(t_cmd *cmd, t_token **token);
