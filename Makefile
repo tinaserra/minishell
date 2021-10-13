@@ -46,13 +46,16 @@ all				:		$(NAME)
 $(NAME)			:		$(OBJS) $(HEADER)
 						@make -C $(LIBFT)
 						@$(CC) -o $(NAME) $(FLAGS) $(OBJS) -L$(LIBFT) -lft -lreadline
+						@echo "\033[1;31m$(NAME)\033[0;33m created\033[0m"
 
 clean			:
 						rm -rf $(OBJS)
 						@make clean -C $(LIBFT)
+						@echo "\033[0;33mCleaning minishell: \033[1;31m.o\033[0;33m files\033[0m"
 
 fclean			:		clean
 						rm -f $(NAME)
+						@echo "\033[0;33mCleaning minishell: \033[1;31m$(NAME)\033[0m"
 						@make fclean -C $(LIBFT)
 
 re				:		fclean all
