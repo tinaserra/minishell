@@ -28,10 +28,10 @@ L'objectif du projet est de creer notre propre shell.
 #### Qu'est-ce qu'un shell ?
 Le shell c'est en quelque sorte l'interface utilisaeur d'un systeme. Il permet à l'utilisateur de communiquer avec le système d’exploitation par l'intermédiaire de commandes. L'utilisateur rentre des commandes dans le terminal et grâce à l’interpréteur de commande (tel que bash ou zsh qui sont des shells), les commandes entrées sont exécutées.
 
-#### Precisions
+#### Attention ⚠️
 * Le sujet de minishell a eu plusieurs mises a jour. Ici nous ne faisons pas les termcaps (utilisation de ```readline```, ```rl_clear_history```, ...).
-* Nous avons adapte pour utiliser qu'une seule variable globale.
-* Nous interpretons les special characters ```\``` or ```;```, mais dans la maj du sujet on n'est pas obliges de le faire.
+* Nous avons du adapter le code pour utiliser qu'une seule variable globale.
+* Nous interprétons les caractères spéciaux ```\``` et ```;```, mais dans la maj du sujet on n'est pas obligés de les gérer.
 
 ## 2. Parsing 🤯
 
@@ -148,13 +148,10 @@ L'utilisateur peut rentrer le **nom** de la commande (ex : ```ls```) ou le **pat
 si c'est juste le nom aui est entré il faut récupérer le path de la commande avec la fonction ```lstat```.
 la fonction ```execve``` prend en paramètre le **path ou le nom** du commande a executer, un **tableau d'arguments**, et l'environement (ici on met ```NULL```).
 
-[Utilisation de exec](https://aljensencprogramming.wordpress.com/2014/03/31/using-the-exec-function-in-unix-like-enviroments/)
-[Utilisation de wait](https://aljensencprogramming.wordpress.com/2014/04/29/waiting-for-and-exiting-from-processes-in-linux-c/)
-[Implémentation de pipe](https://aljensencprogramming.wordpress.com/2014/05/16/implementing-pipes-in-c/)
-[La fonction kill](https://aljensencprogramming.wordpress.com/2014/05/15/the-kill-function-in-c/)
-[Les signaux 1](https://aljensencprogramming.wordpress.com/2014/05/09/introduction-to-signals-using-alarm-in-linux-c/)
-[Les signaux 2](https://aljensencprogramming.wordpress.com/2014/12/30/review-of-signals-in-linux-c/)
-[Utilisation de dup2](https://aljensencprogramming.wordpress.com/2014/09/03/review-of-pipes-in-linux-c-with-dup2/)
+* [Utilisation de exec](https://aljensencprogramming.wordpress.com/2014/03/31/using-the-exec-function-in-unix-like-enviroments/)
+* [Utilisation de wait](https://aljensencprogramming.wordpress.com/2014/04/29/waiting-for-and-exiting-from-processes-in-linux-c/)
+* [Implémentation de pipe](https://aljensencprogramming.wordpress.com/2014/05/16/implementing-pipes-in-c/)
+* [Utilisation de dup2](https://aljensencprogramming.wordpress.com/2014/09/03/review-of-pipes-in-linux-c-with-dup2/)
 
 ## 5. Gestion d'erreur & ```echo $?``` 🦄
 
@@ -181,6 +178,9 @@ la fonction ```execve``` prend en paramètre le **path ou le nom** du commande a
 * [man BASH](http://manpagesfr.free.fr/man/man1/bash.1.html)
 * [TUTO SHELL](http://marionpatrick.free.fr/man_html/html/tuto_shell.html)
 * [Fonctions autorisées par le sujet minishell 👉](https://github.com/tinaserra/minishell/blob/master/links/lexic.md)
+* [La fonction kill](https://aljensencprogramming.wordpress.com/2014/05/15/the-kill-function-in-c/)
+* [Les signaux 1](https://aljensencprogramming.wordpress.com/2014/05/09/introduction-to-signals-using-alarm-in-linux-c/)
+* [Les signaux 2](https://aljensencprogramming.wordpress.com/2014/12/30/review-of-signals-in-linux-c/)
 
 ## Comment utiliser Git en multi ?
 
