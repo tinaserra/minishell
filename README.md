@@ -40,24 +40,24 @@ On va créer une liste chaînée à partir de l'environnement contenant à chaqu
 ```c++
 typedef struct		s_token
 {
-	char	*word;
+	char		*word;
 	int		type;
 	struct s_token	*prev;
 	struct s_token	*next;
-}		t_token;
+}			t_token;
 
 typedef struct		s_cmd
 {
-	char			*cmd;
-	char			*tmp;
-	t_token			*args;
-	t_list			*env;
-	int				type;
-	int				in;
-	int				out;
+	char		*cmd;
+	char		*tmp;
+	t_token		*args;
+	t_list		*env;
+	int		type;
+	int		in;
+	int		out;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
-}					t_cmd;
+}			t_cmd;
 ```
 
 ### La tokénisation
