@@ -1,3 +1,83 @@
+- [x] echo bonjour ; |
+- [x] echo bonjour | |
+- [x] |
+- [x] echo bonjour |;
+- [x] echo bonjour \; ls
+- [x] echo bonjour > test\ 1
+- [x] cd $HOME/Documents
+- [x] echo \>
+- [x] echo -n -n -nnnn -nnnnm
+- [ ] cat /dev/random | head -n 1 | cat -e
+- [ ] unset var1 # with undefined var1
+- [ ] export "" et unset ""
+- [ ] echo test > file test1
+- [x] $
+- [x] not_cmd bonjour > salut
+- [x] env puis export puis env # vars aren't sorted
+- [ ] cat Makefile | grep pr | head -n 5 | cd test (mybin) # check status code
+- [ ] cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
+
+
+- [x] echo 2 >> out1 > out2
+- [x] echo 2 > out1 >> out2
+- [ ] cat < test # with non-existent test
+- [ ] export var; export var=test
+- [ ] echo bonjour > $test # with test not defined
+- [ ] file_name_in_current_dir
+- [ ] cd ../../../../../.. ; pwd
+- [ ] ctrl-C . 130 sur bin(ex : sleep 10)&line vide
+- [ ] ctrl-\ .131 sur bin
+- [ ] cat | cat | cat | ls # check outputs order
+- [ ] $bla # with bla not defined
+- [ ] export var ="cat Makefile | grep >"
+- [ ] export "test=ici"=coucou
+- [ ] c$var Makefile # with var=at
+- [ ] $LESS$VAR
+- [ ] /bin/echo bonjour
+- [ ] not_cmd
+- [ ] sleep 5 | exit
+- [ ] echo bonjour > $test w/ t
+- [ ] "exit retour a la ligne"
+- [ ] minishell # binary not in path without "./" before
+- [ ] cat diufosgid # check exit code
+- [ ] exit # should return the last exit code value
+- [ ] exit -10
+- [ ] exit +10
+- [ ] ;
+
+
+- [ ] export ; env # display is different for both commands
+- [ ] > log echo coucou
+
+
+- [ ] echo "\\"
+- [ ] echo "\n \n \n"
+- [ ] echo "\n \\n \\\n"
+
+- [ ] export LOL=lala ROR=rara
+- [ ] unset LOL ROR
+- [x] export "HI= hi"
+- [x] export "HI =hi"
+- [x] /bin/ls
+- [x] # write something the press ctrl+c
+- [x] # write something then press ctrl+d
+- [ ] # write something then press ctrl+\
+- [x] echo $?
+- [ ] l^Ds
+
+- [ ] sort | ls # check output order
+- [x] cat < >
+- [x] cat < <
+- [x] cat > >
+- [ ] > a ls > b < Makefile
+- [ ] echo > a Hello World!
+- [ ] > a echo Hello World!
+- [x] cat < Makefile | grep gcc > output
+- [ ] exit 0 | exit 1
+- [ ] exit 1 | exit 0
+
+
+
 # Failed tests
 
 ## leaks 🤬
@@ -8,6 +88,7 @@
 - [x] ```echo $PWD; echo $OLDPWD; cd ../../../../..; pwd; echo $PWD; echo $OLDPWD```
 - [x] ```echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD```
 - [x] ```echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD```
+- [ ] ```export "" ; unset ""```
 
 ## On gere pas 😳
 
@@ -15,6 +96,12 @@
 - [x] ```echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD```
 - [x] ```cd '' ''```
 - [x] ```echo $PWD; echo $OLDPWD; cd '' ''; pwd; echo $PWD; echo $OLDPWD```
+- [ ] ```echo "\s" & echo "\\s"```
+
+- [ ] echo "\"
+- [ ] echo "bip | bip ; coyotte > < \" "
+- [ ] cd ~
+- [ ] cat Makefile | grep pr | head -n 5 | cat test (bin) # check status code
 
 ### ***bash output :***
 ```
@@ -93,7 +180,7 @@ free(): invalid pointer
 [1]    18526 abort      ./minishell
 ```
 - [ ] ```cat | ls```
-- [ ] ```ls -la | rev | cat -e```
+- [x] ```ls -la | rev | cat -e```
 - [ ] ```cat /dev/random | head -c 10```
 
 ### Messages d'erreur
