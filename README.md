@@ -9,11 +9,11 @@ make && ./minishell
 
 ### Sommaire 🧐
 
-* 1. Sujet
-* 2. Parsing
-* 3. Buildtins
-* 4. Exécution
-* 5. Gestion d'erreur
+1. [Sujet](https://github.com/tinaserra/minishell#introduction-)
+2. [Parsing](https://github.com/tinaserra/minishell#2-parsing-)
+3. [Buildtins](https://github.com/tinaserra/minishell#3-buildtins-)
+4. [Exécution](https://github.com/tinaserra/minishell#4-ex%C3%A9cution-avec-execve-)
+5. [Gestion d'erreur](https://github.com/tinaserra/minishell#5-gestion-derreur--echo--)
 
 ### TO DO !!
 Liste non exaustive des [Failed tests](https://github.com/tinaserra/minishell/blob/master/links/tests.md)
