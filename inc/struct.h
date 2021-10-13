@@ -77,6 +77,7 @@ typedef struct		s_minishell
 	char			*term;
 	int				count;
 	int				exit;
+	int				newline;
 }					t_minishell;
 t_minishell *g_ms;
 

@@ -6,7 +6,7 @@
 #    By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 13:59:05 by vserra            #+#    #+#              #
-#    Updated: 2021/10/03 15:03:37 by jode-vri         ###   ########.fr        #
+#    Updated: 2021/10/12 09:24:59 by jode-vri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,18 +84,18 @@ $(OBJ_DIR)/%o	:	%c
 $(NAME)			:	${OBJS}
 				@ar -rcs ${NAME} ${OBJS}
 				@ranlib ${NAME}
-				@echo $(NAME) : Created !
+				@echo "\033[1;31m$(NAME)\033[0;33m created\033[0m"
 
 all				:	${NAME}
 
 clean			:
 				@rm -rf $(OBJ_DIR)
 				@rm -f ${OBJS}
-				@echo $(OBJ_DIR) : deleted !
+				@echo "\033[0;33mCleaning libft: \033[1;31m$(OBJ_DIR)\033[0;33m directory\033[0m"
 
 fclean			:	clean
 				@rm -f ${NAME}
-				@echo $(NAME) : deleted !
+				@echo "\033[0;33mCleaning libft: \033[1;31m$(NAME)\033[0;33m\033[0m"
 
 re				:	fclean all
 
