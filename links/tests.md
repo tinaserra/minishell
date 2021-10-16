@@ -21,55 +21,53 @@
 - [x] cat < <
 - [x] cat > >
 - [x] cat < Makefile | grep gcc > output
-
-- [ ] unset var1 # with undefined var1
-- [ ] export "" et unset ""
-- [ ] echo test > file test1
-- [ ] cat Makefile | grep pr | head -n 5 | cd test (mybin) # check status code
-- [ ] cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
-- [ ] cat < test # with non-existent test
-- [ ] export var; export var=test
-- [ ] echo bonjour > $test # with test not defined
-- [ ] file_name_in_current_dir
-- [ ] cd ../../../../../.. ; pwd
-- [ ] ctrl-C . 130 sur bin(ex : sleep 10)&line vide
-- [ ] ctrl-\ .131 sur bin
-- [ ] cat | cat | cat | ls # check outputs order
-- [ ] $bla # with bla not defined
-- [ ] export var ="cat Makefile | grep >"
-- [ ] export "test=ici"=coucou
-- [ ] c$var Makefile # with var=at
-- [ ] $LESS$VAR
-- [ ] /bin/echo bonjour
-- [ ] not_cmd
-- [ ] sleep 5 | exit
-- [ ] echo bonjour > $test w/ t
-- [ ] "exit retour a la ligne"
-- [ ] minishell # binary not in path without "./" before
-- [ ] cat diufosgid # check exit code
-- [ ] exit # should return the last exit code value
-- [ ] exit -10
-- [ ] exit +10
-- [ ] ;
-- [ ] export ; env # display is different for both commands
-- [ ] > log echo coucou
-- [ ] echo "\\"
-- [ ] echo "\n \n \n"
-- [ ] echo "\n \\n \\\n"
-- [ ] export LOL=lala ROR=rara
-- [ ] unset LOL ROR
-- [ ] # write something then press ctrl+\
-- [ ] l^Ds
-- [ ] sort | ls # check output order
-- [ ] > a ls > b < Makefile
-- [ ] echo > a Hello World!
-- [ ] > a echo Hello World!
+- [x] unset var1 # with undefined var1
+- [x] export "" et unset ""
+- [x] echo test > file test1
+- [x] cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
+- [x] export var; export var=test
+- [x] cd ../../../../../.. ; pwd
+- [x] $bla # with bla not defined
+- [x] /bin/echo bonjour
+- [x] not_cmd
+- [x] cat diufosgid # check exit code
+- [x] exit # should return the last exit code value
+- [x] exit -10
+- [x] exit +10
+- [x] ;
+- [x] export ; env # display is different for both commands
+- [x] > log echo coucou
+- [x] echo "\\"
+- [x] echo "\n \n \n"
+- [x] echo "\n \\n \\\n"
+- [x] export LOL=lala ROR=rara
+- [x] unset LOL ROR
+- [x] l^Ds
+- [x] > a ls > b < Makefile
+- [x] echo > a Hello World!
+- [x] > a echo Hello World!
 - [ ] exit 0 | exit 1
 - [ ] exit 1 | exit 0
 
 
 
 # Failed tests
+
+- [ ] cat < test # with non-existent test
+- [ ] echo bonjour > $test # with test not defined
+- [ ] file_name_in_current_dir
+- [ ] sort | ls # check output order
+- [ ] # write something then press ctrl+\
+- [ ] echo bonjour > $test w/ t
+- [ ] sleep 5 | exit
+- [ ] cat | cat | cat | ls # check outputs order
+- [ ] export var ="cat Makefile | grep >"
+- [ ] export "test=ici"=coucou
+- [ ] c$var Makefile # with var=at
+- [ ] $LESS$VAR
+
+# Mauvais message d'erreur
+- [ ] cat Makefile | grep pr | head -n 5 | cd test (mybin) # check status code
 
 ## leaks 🤬
 
