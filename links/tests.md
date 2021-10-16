@@ -77,30 +77,8 @@
 - [x] ```echo $PWD; echo $OLDPWD; cd ../../../../..; pwd; echo $PWD; echo $OLDPWD```
 - [x] ```echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD```
 - [x] ```echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD```
-- [ ] ```export "" ; unset ""```
+- [x] ```export "" ; unset ""```
 
-## On gere pas 😳
-
-- [x] ```cd ''```
-- [x] ```echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd '' ''```
-- [x] ```echo $PWD; echo $OLDPWD; cd '' ''; pwd; echo $PWD; echo $OLDPWD```
-- [ ] ```echo "\s" & echo "\\s"```
-
-- [ ] echo "\"
-- [ ] echo "bip | bip ; coyotte > < \" "
-- [ ] cd ~
-- [ ] cat Makefile | grep pr | head -n 5 | cat test (bin) # check status code
-- [ ] cat /dev/random | head -n 1 | cat -e
-
-### ***bash output :***
-```
-/home/admin/42/minishell1
-/home/admin/42/minishell1
-/
-/
-/home/admin/42/minishell1
-```
 - [x] ```cd /```
 - [x] ```echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD```
 - [x] ```cd /.```
@@ -114,14 +92,21 @@
 - [x] ```cd ////```
 - [x] ```echo $PWD; echo $OLDPWD; cd ////; pwd; echo $PWD; echo $OLDPWD```
 
-### ***bash output :***
-```
-/home/admin/42/minishell1
-/home/admin/42/minishell1
-//
-//
-/home/admin/42/minishell1
-```
+
+## On gere pas 😳
+
+- [x] ```cd ''```
+- [x] ```echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```cd '' ''```
+- [x] ```echo $PWD; echo $OLDPWD; cd '' ''; pwd; echo $PWD; echo $OLDPWD```
+- [x] ```cat Makefile | grep pr | head -n 5 | cat test```
+- [ ] ```cat /dev/random | head -n 1 | cat -e```
+
+## on dois pas gerer
+- [ ] ```echo "\s" & echo "\\s"```
+- [ ] ```echo "\"```
+- [ ] ```echo "bip | bip ; coyotte > < \" "```
+- [ ] ```cd ~```
 - [ ] ```cd //```
 - [ ] ```echo $PWD; echo $OLDPWD; cd //; pwd; echo $PWD; echo $OLDPWD```
 
@@ -133,11 +118,6 @@
 ## Segmentation fault 😭
 
 ### ***bash output :***
-```
-/home/admin/42/minishell1
-/home/admin/42
-/home/admin/42/minishell1
-```
 - [x] ```cd```
 - [x] ```echo $PWD; echo $OLDPWD; cd; echo $OLDPWD```
 
@@ -149,20 +129,20 @@
 ### Ces cas
 
 ```shell
-admin ➜ minishell1 ls | wc |  cat -e ; ls | ckjefvkj
+ls | wc |  cat -e ; ls | ckjefvkj
 minishell: ckjefvkj: command not found
 
 minishell: ckjefvkj: command not found
 ```
 
 ```shell
-admin ➜ minishell1 ls | wc > b
+ls | wc > b
 wc: '>': No such file or directory
 0 0 0 b
 0 0 0 total
 ```
 
-- [ ] ```echo puta madre | cat -e```
+- [x] ```echo puta madre | cat -e```
 ```
 admin ➜ minishell1 echo puta madre | cat -e
 puta madre$
