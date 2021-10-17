@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/12 13:55:18 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/17 15:24:23 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void	exec_child(t_cmd *cmd, char *binary, char **args)
 		pwd_builtin(cmd);
 	else
 	{
-		if (cmd->out)
+		if (cmd->out > 0)
 		{
 			dup2(cmd->out, 1);
 			close(cmd->out);
 		}
-		if (cmd->in)
+		if (cmd->in > 0)
 		{
 			dup2(cmd->in, 0);
 			close(cmd->in);
@@ -112,9 +112,9 @@ void	exec_start(void)
 			redirect(cmd);
 			if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
 				exec_switch(cmd);
-			if (cmd->in)
+			if (cmd->in > 0)
 				close(cmd->in);
-			if (cmd->out)
+			if (cmd->out > 0)
 				close(cmd->out);
 		}
 		cmd = cmd->next;
