@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:44 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/12 10:00:35 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/17 16:01:01 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ char	*find_binary(t_cmd *cmd, int show)
 	{
 		if (lstat(cmd->cmd, &stats))
 		{
-			if (show)
-				error("command not found", cmd->cmd, NULL, 127);
+			if (show){}
+				//error("command not found", cmd->cmd, NULL, 127);
 			free(binary);
 			return (NULL);
 		}
 		free(binary);
+		if (S_ISDIR(stats.st_mode) != 0)
+			return (NULL);
 		binary = ft_strdup(cmd->cmd);
 	}
 	return (binary);

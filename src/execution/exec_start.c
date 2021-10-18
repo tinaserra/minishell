@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/17 15:24:23 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/17 15:49:18 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ static int	exec_binary(t_cmd *cmd)
 			bin = find_binary(cmd, 1);
 			if (bin)
 				exec_command(cmd, bin);
+			else
+				error("command not found", cmd->cmd, NULL, 127);
 			free(bin);
 		}
 	}

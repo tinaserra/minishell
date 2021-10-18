@@ -182,6 +182,11 @@ la fonction ```execve``` prend en paramètre le **path ou le nom** du commande a
 * [Les signaux 1](https://aljensencprogramming.wordpress.com/2014/05/09/introduction-to-signals-using-alarm-in-linux-c/)
 * [Les signaux 2](https://aljensencprogramming.wordpress.com/2014/12/30/review-of-signals-in-linux-c/)
 
+* https://aljensencprogramming.wordpress.com/2016/07/29/linked-lists-in-c/
+* https://aljensencprogramming.wordpress.com/2016/07/
+* https://aljensencprogramming.wordpress.com/2015/10/
+* [Les arbres binaires](https://aljensencprogramming.wordpress.com/2015/09/26/a-very-basic-introduction-to-binary-trees-in-c/)
+
 ## Comment utiliser Git en multi ?
 
 [Readme 😏](https://github.com/tinaserra/minishell/blob/master/links/git.md)</br>

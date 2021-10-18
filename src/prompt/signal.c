@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:53:27 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:53:32 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/17 16:00:14 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	sig_handler(int c)
 {
+	if (c == 3)
+		return ;
 	if (c == 3 && g_ms->fork)
 		printf("Quit\n");
 	if (c == 2 && g_ms->fork)
