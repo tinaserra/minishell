@@ -54,6 +54,7 @@ typedef struct		s_cmd
 	char			*cmd;
 	char			*tmp;
 	t_token			*args;
+	char			**argss;
 	t_list			*env;
 	int				type;
 	int				in;
@@ -77,6 +78,7 @@ typedef struct		s_minishell
 	char			*term;
 	int				count;
 	int				exit;
+	int				end;
 	int				newline;
 }					t_minishell;
 t_minishell *g_ms;

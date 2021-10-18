@@ -33,6 +33,7 @@
 */
 
 void	sig_handler(int c);
+void	quit_process(int c);
 
 /*
 ** TERMCAPS ----------------------------------------------------------------- **
@@ -95,6 +96,7 @@ int		lstfind_pos(t_env *lst, char *name);
 
 void	exec_start(void);
 void	exec_pipe(t_cmd *cmd);
+void	exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2]);
 int		edit_args(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
 char	*check_path(t_cmd *cmd);

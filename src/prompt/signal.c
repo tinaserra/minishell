@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:53:27 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/17 16:00:14 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:54:15 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,32 @@
 
 void	sig_handler(int c)
 {
-	if (c == 3)
+	if (c == SIGINT)
 		return ;
-	if (c == 3 && g_ms->fork)
+	if (c == SIGINT && g_ms->fork)
 		printf("Quit\n");
-	if (c == 2 && g_ms->fork)
+	if (c == SIGQUIT && g_ms->fork)
 		printf("\n");
-	if (c == 2 && !g_ms->fork)
+	if (c == SIGQUIT && !g_ms->fork)
 	{
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+	}
+}
+
+void	quit_process(int c)
+{
+	if (c == SIGINT)
+		printf("Quit: %d\n", c);
+	g_ms->quit = 4;
+	g_ms->quit2 = 1;
+	if (c == SIGQUIT)
+		g_ms->exit = 131;
+	if (c == SIGINT)
+	{
+		g_ms->exit = 130;
+		printf("\n");
 	}
 }

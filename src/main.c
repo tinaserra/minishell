@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:37 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/17 16:17:16 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:34:20 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	main(int ac, char **av, char **env)
 	g_ms->line = readline(g_ms->term);
 	while (g_ms->line != NULL)
 	{
+		
+		g_ms->fork = 0;
+		g_ms->end = 0;
 		signal(SIGINT, &sig_handler);
 		signal(SIGQUIT, &sig_handler);
 		add_history(g_ms->line);

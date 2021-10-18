@@ -6,88 +6,128 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/17 15:49:18 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:40:50 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	exec_child(t_cmd *cmd, char *binary, char **args)
+static void	handle_fds(t_cmd *cmd, int pipe1[2], int pipe2[2])
 {
-	if (ft_strcmp(binary, "echo") == 0)
+	if (cmd->prev && cmd->prev->type == PIPE)
+	{
+		dup2(pipe1[0], 0);
+		close(pipe1[1]);
+		if (cmd->type == PIPE)
+		{
+			dup2(pipe2[1], 1);
+			close(pipe2[0]);
+		}
+	}
+	else if (cmd->type == PIPE)
+	{
+		dup2(pipe1[1], 1);
+		close(pipe1[0]);
+	}
+	if (cmd->out)
+	{
+		dup2(cmd->out, 1);
+		close(cmd->out);
+	}
+	if (cmd->in)
+	{
+		dup2(cmd->in, 0);
+		close(cmd->in);
+	}
+}
+
+static void execute(t_cmd *cmd)
+{
+	if (!ft_strcmp(cmd->cmd, "echo"))
 		echo_builtin(cmd->args, cmd->out);
-	else if (ft_strcmp(binary, "env") == 0)
+	else if (!ft_strcmp(cmd->cmd, "env"))
 		env_builtin(cmd->out);
-	else if (ft_strcmp(binary, "pwd") == 0)
+	else if (!ft_strcmp(cmd->cmd, "pwd"))
 		pwd_builtin(cmd);
-	else
+	else if (!ft_strcmp(cmd->cmd, "cd"))
+		cd_builtin(cmd);
+	else if (!ft_strcmp(cmd->cmd, "exit"))
+		exit_builtin(cmd);
+	else if (!ft_strcmp(cmd->cmd, "export"))
+		export_builtin(cmd);
+	else if (!ft_strcmp(cmd->cmd, "unset"))
+		exit(0);
+	else if (cmd->cmd && g_ms->env && cmd->argss)
 	{
-		if (cmd->out > 0)
-		{
-			dup2(cmd->out, 1);
-			close(cmd->out);
-		}
-		if (cmd->in > 0)
-		{
-			dup2(cmd->in, 0);
-			close(cmd->in);
-		}
-		execve(binary, args, NULL);
+		execve(cmd->cmd, cmd->argss, NULL);
+		error("command not found", cmd->cmd, NULL, 127);
+		exit(g_ms->exit);
 	}
-	ft_free_tab(args);
-	free_all();
-	exit(EXIT_SUCCESS);
+	exit(0);
 }
 
-static void	exec_command(t_cmd *cmd, char *binary)
+static void exec_binary2(t_cmd *cmd, pid_t pid, int pipe1[2])
 {
-	char	**args;
-	int		status;
+	int status;
+	int	pipe2[2];
 
-	args = list_to_tab(cmd);
-	g_ms->pid = fork();
-	if (g_ms->pid < 0)
-		error("error forking", NULL, NULL, -1);
-	else if (g_ms->pid == 0)
-		exec_child(cmd, binary, args);
-	else
-	{
-		waitpid(g_ms->pid, &status, 0);
-		status_child(status);
-		ft_free_tab(args);
-	}
-}
-
-static int	exec_binary(t_cmd *cmd)
-{
-	char	*bin;
-
-	g_ms->fork = 1;
+	if (pipe(pipe2) < 0)
+		return ;
 	if (cmd->type == PIPE)
 	{
-		if (!find_all_binary(cmd))
-			return (0);
-		exec_pipe(cmd);
+		edit_args(cmd->next);
+		redirect(cmd->next);
+		while (cmd->next && !cmd->next->cmd)
+		{
+			edit_args(cmd);
+			redirect(cmd);
+			cmd = cmd->next;
+		}
+		if (cmd->next)
+			exec_binary(cmd->next, pipe1, pipe2);
+	}
+	close(pipe1[0]);
+	close(pipe1[1]);
+	close(pipe2[0]);
+	close(pipe2[1]);
+	waitpid(pid, &status, WUNTRACED);
+	while (!WIFEXITED(status))
+		if (!WIFSIGNALED(status) || g_ms->end != 0 || cmd->type == PIPE)
+			break ;
+	if (WIFEXITED(status) && cmd->type != PIPE)
+		g_ms->exit = WEXITSTATUS(status);
+}
+
+void exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
+{
+	pid_t	pid;
+
+	g_ms->fork = 1;
+	cmd->cmd = find_binary(cmd, 1);
+	cmd->argss = list_to_tab(cmd);
+	pid = fork();
+	if (pid < 0)
+		error("error forking", NULL, NULL, -1);
+	else if (pid == 0)
+	{
+		if (cmd->in == -1 || cmd->out == -1)
+			exit(1);
+		handle_fds(cmd, pipe1, pipe2);
+		execute(cmd);
 	}
 	else
 	{
-		if (is_builtin(cmd->cmd))
-			exec_command(cmd, cmd->cmd);
+		//signal(SIGINT, quit_process);
+		//signal(SIGQUIT, SIG_IGN);
+		if (cmd->type == PIPE && cmd->prev && cmd->prev->type == PIPE
+			&& !close(pipe1[1]) && !close(pipe1[0]))
+			exec_binary2(cmd, pid, pipe2);
 		else
-		{
-			bin = find_binary(cmd, 1);
-			if (bin)
-				exec_command(cmd, bin);
-			else
-				error("command not found", cmd->cmd, NULL, 127);
-			free(bin);
-		}
+			exec_binary2(cmd, pid, pipe1);
 	}
-	g_ms->fork = 0;
-	return (0);
 }
 
-static void	exec_switch(t_cmd *cmd)
+static void	exec_switch(t_cmd *cmd, int pipe1[2])
 {
 	if (ft_strcmp(cmd->cmd, "cd") == 0 && cmd->type != PIPE
 		&& (!cmd->prev || cmd->prev->type != PIPE))
@@ -99,26 +139,33 @@ static void	exec_switch(t_cmd *cmd)
 	else if (ft_strcmp(cmd->cmd, "exit") == 0)
 		exit_builtin(cmd);
 	else if (!cmd->prev || (cmd->prev && cmd->prev->type != PIPE))
-		exec_binary(cmd);
+		exec_binary(cmd, pipe1, NULL);
 }
 
 void	exec_start(void)
 {
 	t_cmd	*cmd;
+	int		pipe1[2];
 
 	cmd = g_ms->cmds;
 	while (cmd)
 	{
-		if (edit_args(cmd))
+		edit_args(cmd);
+		redirect(cmd);
+		if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
 		{
-			redirect(cmd);
-			if (cmd->cmd && cmd->in != -1 && cmd->out != -1)
-				exec_switch(cmd);
-			if (cmd->in > 0)
-				close(cmd->in);
-			if (cmd->out > 0)
-				close(cmd->out);
+			if (pipe(pipe1))
+				return ;
+			exec_switch(cmd, pipe1);
+			close(pipe1[0]);
+			close(pipe1[1]);
 		}
+		//if (!cmd->cmd && cmd->type != PIPE)
+		//{
+			
+		//}
+		while (cmd->type == PIPE)
+			cmd = cmd->next;
 		cmd = cmd->next;
 	}
 }
