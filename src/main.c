@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:37 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/18 12:34:20 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:01:13 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(int ac, char **av, char **env)
 	g_ms = malloc(sizeof(t_minishell));
 	ft_bzero(g_ms, sizeof(t_minishell));
 	g_ms->curdir = getcwd(NULL, 0);
-	signal(SIGINT, &sig_handler);
-	signal(SIGQUIT, &sig_handler);
+	signal(SIGINT, quit_process);
+	signal(SIGQUIT, quit_process);
 	if (!init_env(env))
 		exit(EXIT_FAILURE);
 	g_ms->term = print_prompt();
@@ -44,8 +44,8 @@ int	main(int ac, char **av, char **env)
 		
 		g_ms->fork = 0;
 		g_ms->end = 0;
-		signal(SIGINT, &sig_handler);
-		signal(SIGQUIT, &sig_handler);
+		signal(SIGINT, quit_process);
+		signal(SIGQUIT, quit_process);
 		add_history(g_ms->line);
 		if (g_ms->line)
 			parsing();

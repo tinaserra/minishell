@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/18 12:57:18 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:26:48 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,13 @@ void exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
 	}
 	else
 	{
-		signal(SIGINT, quit_process);
-		signal(SIGQUIT, SIG_IGN);
 		if (cmd->type == PIPE && cmd->prev && cmd->prev->type == PIPE
 			&& !close(pipe1[1]) && !close(pipe1[0]))
 			exec_binary2(cmd, pid, pipe2);
 		else
 			exec_binary2(cmd, pid, pipe1);
 	}
+	g_ms->fork = 0;
 }
 
 static void	exec_switch(t_cmd *cmd, int pipe1[2])
