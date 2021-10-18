@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:53:27 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/18 12:54:15 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:57:31 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void	quit_process(int c)
 {
 	if (c == SIGINT)
 		printf("Quit: %d\n", c);
-	g_ms->quit = 4;
-	g_ms->quit2 = 1;
+	g_ms->end = 4;
 	if (c == SIGQUIT)
 		g_ms->exit = 131;
 	if (c == SIGINT)
