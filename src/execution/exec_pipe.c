@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:19 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/12 09:54:00 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/20 10:31:32 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	builtin_pipe(t_cmd *cmd, char *bin, char **args)
 	if (ft_strcmp(cmd->cmd, "env") == 0)
 		env_builtin(0);
 	else if (ft_strcmp(cmd->cmd, "echo") == 0)
-		echo_builtin(cmd->args, 0);
+		echo_builtin(cmd, 0);
 	else if (ft_strcmp(cmd->cmd, "pwd") == 0)
 		pwd_builtin(cmd);
 	else

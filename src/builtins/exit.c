@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/13 14:08:58 by vserra           ###   ########.fr       */
+/*   Updated: 2021/10/20 11:56:06 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	exit_builtin(t_cmd *cmd)
 	int	nb;
 
 	nb = 0;
-	printf("exit\n");
+	if (!(cmd->prev && cmd->prev->type == PIPE))
+		printf("exit\n");
 	if (tokens_list_size(cmd->args) > 1)
 	{
 		error("too many arguments", "exit", cmd->args->word, 1);
@@ -53,7 +54,7 @@ void	exit_builtin(t_cmd *cmd)
 	{
 		nb = ft_atoi(cmd->args->word);
 		if (nb < 0 || nb > 255)
-			printf("%d : superieur a 255 ou  inferieur a 0\n", nb);
+			printf("%d : superieur a 255 ou inferieur a 0\n", nb);
 	}
 	g_ms->status = nb % 256;
 	free_all();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:21:24 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/13 13:30:19 by vserra           ###   ########.fr       */
+/*   Updated: 2021/10/20 11:15:16 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	echo_new_line(char *s)
 	return (NL);
 }
 
-void	echo_builtin(t_token *args, int fd)
+void	echo_builtin(t_cmd *cmd, int fd)
 {
 	t_token	*tmp;
 
-	tmp = args;
+	tmp = cmd->args;
 	if (fd == 0)
 		fd = 1;
 	if (!tmp)

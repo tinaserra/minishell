@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:30 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/12 10:17:00 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:14:08 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ int	is_builtin(char *s)
 	if (ft_strcmp(s, "echo") == 0)
 		return (1);
 	if (ft_strcmp(s, "env") == 0)
+		return (1);
+	if (ft_strcmp(s, "pwd") == 0)
+		return (1);
+	if (ft_strcmp(s, "cd") == 0)
+		return (1);
+	if (ft_strcmp(s, "exit") == 0)
+		return (1);
+	if (ft_strcmp(s, "export") == 0)
+		return (1);
+	if (ft_strcmp(s, "unset") == 0)
 		return (1);
 	return (0);
 }
@@ -52,6 +62,8 @@ char	**list_to_tab(t_cmd *cmd)
 	int		i;
 	char	**aaargs;
 
+	if (!cmd->cmd)
+		return (NULL);
 	len = lst_size(cmd);
 	aaargs = malloc(sizeof(char *) * (len + 2));
 	if (aaargs == NULL)

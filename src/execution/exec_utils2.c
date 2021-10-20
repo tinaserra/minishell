@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:44 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/17 16:01:01 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/20 10:19:40 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*find_binary(t_cmd *cmd, int show)
 	struct stat	stats;
 	char		*binary;
 
+	if (!cmd)
+		return (NULL);
 	binary = check_path(cmd);
 	if (!binary)
 	{

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/18 13:26:48 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/20 12:29:11 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,16 @@ static void	handle_fds(t_cmd *cmd, int pipe1[2], int pipe2[2])
 		dup2(pipe1[1], 1);
 		close(pipe1[0]);
 	}
-	if (cmd->out)
-	{
+	if (cmd->out > 0)
 		dup2(cmd->out, 1);
-		close(cmd->out);
-	}
-	if (cmd->in)
-	{
+	if (cmd->in > 0)
 		dup2(cmd->in, 0);
-		close(cmd->in);
-	}
 }
 
 static void execute(t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->cmd, "echo"))
-		echo_builtin(cmd->args, cmd->out);
+		echo_builtin(cmd, cmd->out);
 	else if (!ft_strcmp(cmd->cmd, "env"))
 		env_builtin(cmd->out);
 	else if (!ft_strcmp(cmd->cmd, "pwd"))
@@ -59,10 +53,11 @@ static void execute(t_cmd *cmd)
 		exit(0);
 	else if (cmd->cmd && g_ms->env && cmd->argss)
 	{
-		execve(cmd->cmd, cmd->argss, NULL);
+		execve(cmd->bin, cmd->argss, NULL);
 		error("command not found", cmd->cmd, NULL, 127);
 		exit(g_ms->exit);
 	}
+	free_all();
 	exit(0);
 }
 
@@ -103,8 +98,9 @@ void exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
 	pid_t	pid;
 
 	g_ms->fork = 1;
-	cmd->cmd = find_binary(cmd, 1);
-	cmd->argss = list_to_tab(cmd);
+	cmd->bin = find_binary(cmd, 1);
+	if (!is_builtin(cmd->cmd))
+		cmd->argss = list_to_tab(cmd);
 	pid = fork();
 	if (pid < 0)
 		error("error forking", NULL, NULL, -1);
@@ -114,6 +110,8 @@ void exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
 			exit(1);
 		handle_fds(cmd, pipe1, pipe2);
 		execute(cmd);
+		close(cmd->in);
+		close(cmd->out);
 	}
 	else
 	{
@@ -123,7 +121,8 @@ void exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
 		else
 			exec_binary2(cmd, pid, pipe1);
 	}
-	g_ms->fork = 0;
+	ft_free_tab(cmd->argss);
+	//g_ms->fork = 0;
 }
 
 static void	exec_switch(t_cmd *cmd, int pipe1[2])
@@ -159,10 +158,6 @@ void	exec_start(void)
 			close(pipe1[0]);
 			close(pipe1[1]);
 		}
-		//if (!cmd->cmd && cmd->type != PIPE)
-		//{
-			
-		//}
 		while (cmd->type == PIPE)
 			cmd = cmd->next;
 		cmd = cmd->next;
