@@ -1,81 +1,85 @@
 
+## Leaks
+- [ ] export qui leak quand on met rien
+
 ## Tests ok
-- [x] ```echo bonjour ; |```
-- [x] ```echo bonjour | |```
-- [x] ```|```
-- [x] ```echo bonjour |;```
-- [x] ```echo bonjour \; ls```
-- [x] ```echo bonjour > test\ 1```
-- [x] ```cd $HOME/Documents```
-- [x] ```echo \>```
-- [x] ```echo -n -n -nnnn -nnnnm```
-- [x] ```$```
-- [x] ```not_cmd bonjour > salut```
-- [x] ```env puis export puis env # vars aren't sorted```
-- [x] ```echo 2 >> out1 > out2```
-- [x] ```echo 2 > out1 >> out2```
-- [x] ```export "HI= hi"```
-- [x] ```export "HI =hi"```
-- [x] ```/bin/ls```
-- [x] ```# write something the press ctrl+c```
-- [x] ```# write something then press ctrl+d```
-- [x] ```cat < >```
-- [x] ```cat < <```
-- [x] ```cat > >```
-- [x] ```cat < Makefile | grep gcc > output```
-- [x] ```unset var1 # with undefined var1```
-- [x] ```export "" et unset ""```
-- [x] ```echo test > file test1```
-- [x] ```cat Makefile | grep pr | head -n 5 | hello (NA) # check status code```
-- [x] ```export var; export var=test```
-- [x] ```cd ../../../../../.. ; pwd```
-- [x] ```$bla # with bla not defined```
-- [x] ```/bin/echo bonjour```
-- [x] ```not_cmd```
-- [x] ```cat diufosgid # check exit code```
-- [x] ```exit # should return the last exit code value```
-- [x] ```exit -10```
-- [x] ```exit +10```
-- [x] ```;```
-- [x] ```export ; env # display is different for both commands```
-- [x] ```> log echo coucou```
-- [x] ```echo "\\"```
-- [x] ```echo "\n \n \n"```
-- [x] ```echo "\n \\n \\\n"```
-- [x] ```export LOL=lala ROR=rara```
-- [x] ```unset LOL ROR```
-- [x] ```l^Ds```
-- [x] ```> a ls > b < Makefile```
-- [x] ```echo > a Hello World!```
-- [x] ```> a echo Hello World!```
-- [x] ```echo $PWD; echo $OLDPWD; cd .; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```echo $PWD; echo $OLDPWD; cd ..; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```echo $PWD; echo $OLDPWD; cd ../../../..; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```echo $PWD; echo $OLDPWD; cd ../../../../..; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```export "" ; unset ""```
-- [x] ```cd /```
-- [x] ```echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd /.```
-- [x] ```echo $PWD; echo $OLDPWD; cd /.; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd/./```
-- [x] ```echo $PWD; echo $OLDPWD; cd /./; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd /././././```
-- [x] ```echo $PWD; echo $OLDPWD; cd /././././; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd ///```
-- [x] ```echo $PWD; echo $OLDPWD; cd ///; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd ////```
-- [x] ```echo $PWD; echo $OLDPWD; cd ////; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd ''```
-- [x] ```echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd '' ''```
-- [x] ```echo $PWD; echo $OLDPWD; cd '' ''; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cat Makefile | grep pr | head -n 5 | cat test```
-- [x] ```echo $PWD; echo $OLDPWD; cd ' // '; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```echo $PWD; echo $OLDPWD; cd //home; pwd; echo $PWD; echo $OLDPWD```
-- [x] ```cd```
-- [x] ```echo $PWD; echo $OLDPWD; cd; echo $OLDPWD```
+- [x] echo bonjour ; |
+- [x] echo bonjour | |
+- [x] |
+- [x] echo bonjour |;
+- [x] echo bonjour \; ls
+- [x] echo bonjour > test\ 1
+- [x] cd $HOME
+- [x] echo -n -n -nnnn -nnnnm
+- [x] $
+- [x] not_cmd bonjour > salut
+- [x] env puis export puis env # vars aren't sorted
+- [x] echo 2 >> out1
+- [x] echo 2 > out1 >> out2
+- [x] export "HI= hi"
+- [x] export "HI =hi"
+- [x] /bin/ls
+- [x] /bin/ls -lra
+- [x] # write something the press ctrl+c
+- [x] # write something then press ctrl+d
+- [x] cat < >
+- [x] cat < <
+- [x] cat > >
+- [x] cat < Makefile | grep gcc > output
+- [x] unset var1 # with undefined var1
+- [ ] export "" et unset ""
+- [x] echo test > file test1
+- [x] cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
+- [x] export var; export var=test
+- [x] cd ../../../../../.. ; pwd
+- [x] $bla # with bla not defined
+- [x] /bin/echo bonjour
+- [x] not_cmd
+- [ ] cat diufosgid # check exit code
+- [x] exit # should return the last exit code value
+- [x] exit -10
+- [x] exit +10
+- [x] ;
+- [x] export ; env # display is different for both commands
+- [ ] > log echo coucou
+- [ ] >> log echo coucou
+- [x] echo "\\"
+- [x] echo "\n \n \n"
+- [x] echo "\n \\n \\\n"
+- [x] export LOL=lala ROR=rara
+- [x] unset LOL ROR
+- [x] l^Ds
+- [x] > a ls > b < Makefile
+- [x] echo > a Hello World!
+- [x] > a echo Hello World!
+- [x] echo $PWD; echo $OLDPWD; cd .; pwd; echo $PWD; echo $OLDPWD
+- [x] echo $PWD; echo $OLDPWD; cd ..; pwd; echo $PWD; echo $OLDPWD
+- [x] echo $PWD; echo $OLDPWD; cd ../../../..; pwd; echo $PWD; echo $OLDPWD
+- [x] echo $PWD; echo $OLDPWD; cd ../../../../..; pwd; echo $PWD; echo $OLDPWD
+- [x] echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD
+- [x] echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD
+- [ ] export "" ; unset ""
+- [x] cd /
+- [x] echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD
+- [x] cd /.
+- [x] echo $PWD; echo $OLDPWD; cd /.; pwd; echo $PWD; echo $OLDPWD
+- [x] cd/./
+- [x] echo $PWD; echo $OLDPWD; cd /./; pwd; echo $PWD; echo $OLDPWD
+- [x] cd /././././
+- [x] echo $PWD; echo $OLDPWD; cd /././././; pwd; echo $PWD; echo $OLDPWD
+- [x] cd ///
+- [x] echo $PWD; echo $OLDPWD; cd ///; pwd; echo $PWD; echo $OLDPWD
+- [x] cd ////
+- [x] echo $PWD; echo $OLDPWD; cd ////; pwd; echo $PWD; echo $OLDPWD
+- [x] cd ''
+- [x] echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD
+- [x] cd '' ''
+- [x] echo $PWD; echo $OLDPWD; cd '' ''; pwd; echo $PWD; echo $OLDPWD
+- [x] cat Makefile | grep pr | head -n 5 | cat test
+- [x] echo $PWD; echo $OLDPWD; cd ' // '; pwd; echo $PWD; echo $OLDPWD
+- [x] echo $PWD; echo $OLDPWD; cd //home; pwd; echo $PWD; echo $OLDPWD
+- [x] cd
+- [x] echo $PWD; echo $OLDPWD; cd; echo $OLDPWD
 
 
 - [ ] exit 0 | exit 1
@@ -88,11 +92,11 @@
 - [x] cat < test # with non-existent test
 - [x] echo bonjour > $test # with test not defined
 - [x] file_name_in_current_dir
-- [ ] sort | ls # check output order
-- [ ] # write something then press ctrl+\
+- [x] sort | ls # check output order
+- [x] # write something then press ctrl+\
 - [x] echo bonjour > $test w/ t
-- [ ] sleep 5 | exit
-- [ ] cat | cat | cat | ls # check outputs order
+- [x] sleep 5 | exit
+- [x] cat | cat | cat | ls # check outputs order
 - [ ] export var ="cat Makefile | grep >"
 - [ ] export "test=ici"=coucou
 - [ ] c$var Makefile # with var=at
@@ -106,7 +110,7 @@
 
 
 ## On gere pas 😳
-- [ ] ```cat /dev/random | head -n 1 | cat -e```
+- [x] ```cat /dev/random | head -n 1 | cat -e```
 
 ## on dois pas gerer
 - [ ] ```echo "\s" & echo "\\s"```
@@ -125,34 +129,35 @@
 
 ## Message d'erreur 🧐
 
-- [x] ```cd ' / '```
-- [x] ```echo $PWD; echo $OLDPWD; cd ' / '; pwd; echo $PWD; echo $OLDPWD ```
+- [ ] ```cd ' / '```
+- [ ] ```echo $PWD; echo $OLDPWD; cd ' / '; pwd; echo $PWD; echo $OLDPWD ```
 
 ### Ces cas
 
+OK
 ```shell
 ls | wc |  cat -e ; ls | ckjefvkj
 minishell: ckjefvkj: command not found
 
 minishell: ckjefvkj: command not found
 ```
-
+OK
 ```shell
 ls | wc > b
 wc: '>': No such file or directory
 0 0 0 b
 0 0 0 total
 ```
-
-- [x] ```echo puta madre | cat -e```
+OK
+- [ ] ```echo puta madre | cat -e```
 ```
 admin ➜ minishell1 echo puta madre | cat -e
 puta madre$
 free(): invalid pointer
 [1]    18526 abort      ./minishell
 ```
-- [ ] ```cat | ls```
-- [x] ```ls -la | rev | cat -e```
+- [x] ```cat | ls```
+- [ ] ```ls -la | rev | cat -e```
 - [ ] ```cat /dev/random | head -c 10```
 
 ### Messages d'erreur
@@ -160,11 +165,6 @@ free(): invalid pointer
 ```shell
 $ dd ou ; echo $?
 dd: unknown operand ou
-1
-```
-```shell
-$ pwd fr ; echo $?
-pwd: too many arguments
 1
 ```
 ```shell

@@ -6,22 +6,32 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 01:30:56 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/20 11:10:46 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/21 10:21:20 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*static void	clear(void *data)
+{
+	if (data)
+		free(data);
+}*/
+
 void	free_commands(void)
 {
 	t_cmd	*tmp;
 	t_token	*tmp2;
+	t_list	*tmp3;
 
 	while (g_ms->cmds)
 	{
-		/*printf("%d\n", g_ms->cmds->argss ? 1 : 0);
-		if (g_ms->cmds->argss)
-			ft_free_tab(g_ms->cmds->argss);*/
+		while (g_ms->cmds->env)
+		{
+			tmp3 = g_ms->cmds->env->next;
+			free(g_ms->cmds->env);
+			g_ms->cmds->env = tmp3;
+		}
 		while (g_ms->cmds->args)
 		{
 			tmp2 = g_ms->cmds->args->next;

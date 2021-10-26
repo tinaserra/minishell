@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 02:08:05 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/08 14:51:54 by admin            ###   ########.fr       */
+/*   Updated: 2021/10/21 10:01:37 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,15 @@ char	*print_prompt(void)
 	res = ft_strjoin_free(res, "\x1b[31m ➜ ", 'L');
 	res = ft_strjoin_free(res, "\x1b[34m ", 'L');
 	if (!pwd[0])
+	{
+		free(pwd);
 		res = ft_strjoin_free(res, "/", 'L');
+	}
 	else
+	{
 		res = ft_strjoin_free(res, pwd[ft_strs_tab_size(pwd) - 1], 'L');
-	ft_free_tab(pwd);
+		ft_free_tab(pwd);
+	}
 	res = ft_strjoin_free(res, " \x1b[0m", 'L');
 	return (res);
 }

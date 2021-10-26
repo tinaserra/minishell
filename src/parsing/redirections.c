@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:58 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/17 15:33:37 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/21 09:39:03 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,16 @@ t_token	*redirect3(t_token *args, t_token **start)
 int	redirect2(t_cmd *cmd, t_token **args, int flags)
 {
 	int	fd;
+	char *tmp;
 
+	tmp = find_binary(cmd, 0);
+	if (!tmp)
+	{
+		free(tmp);
+		error("command not found", cmd->cmd, NULL, 127);
+		return (-1);
+	}
+	free(tmp);
 	fd = open((*args)->next->word, flags, 0644);
 	if (fd < 0)
 	{

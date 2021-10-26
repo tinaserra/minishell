@@ -8,7 +8,6 @@ obj
 a.out
 valgrind_log
 valgrind_log.txt
-leaks*.sh
 jhon.txt
 *output
 # Ta mere la grosse tchoin

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:54:25 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:54:52 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/21 10:14:09 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	parse_token2(t_token **token, t_cmd *cmd)
 	if ((*token)->type == EXIT_STATUS)
 		add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
 	if ((*token)->type == ENV && !cmd->cmd)
-		ft_lstadd_back(&cmd->env, ft_lstcreate(ft_strdup((*token)->word)));
+		ft_lstadd_back(&cmd->env, ft_lstcreate((*token)->word));
 	if ((*token)->type == PIPE)
 	{
 		cmd->type = PIPE;

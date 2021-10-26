@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/20 12:29:11 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:30:14 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,7 @@ void exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
 
 	g_ms->fork = 1;
 	cmd->bin = find_binary(cmd, 1);
-	if (!is_builtin(cmd->cmd))
-		cmd->argss = list_to_tab(cmd);
+	cmd->argss = list_to_tab(cmd);
 	pid = fork();
 	if (pid < 0)
 		error("error forking", NULL, NULL, -1);
@@ -130,11 +129,12 @@ static void	exec_switch(t_cmd *cmd, int pipe1[2])
 	if (ft_strcmp(cmd->cmd, "cd") == 0 && cmd->type != PIPE
 		&& (!cmd->prev || cmd->prev->type != PIPE))
 		cd_builtin(cmd);
-	else if (ft_strcmp(cmd->cmd, "export") == 0)
+	else if (ft_strcmp(cmd->cmd, "export") == 0 && cmd->args)
 		export_builtin(cmd);
 	else if (ft_strcmp(cmd->cmd, "unset") == 0)
 		unset_builtin(cmd);
-	else if (ft_strcmp(cmd->cmd, "exit") == 0)
+	else if (ft_strcmp(cmd->cmd, "exit") == 0 && cmd->type != PIPE
+		&& (!cmd->prev || cmd->prev->type != PIPE))
 		exit_builtin(cmd);
 	else if (!cmd->prev || (cmd->prev && cmd->prev->type != PIPE))
 		exec_binary(cmd, pipe1, NULL);

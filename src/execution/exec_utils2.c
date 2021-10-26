@@ -6,11 +6,42 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:44 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/20 10:19:40 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/25 23:05:35 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Connaître le code erreur d’un appel à une commande / d'un signal :
+** waitpid(pid_t pid, int *status, int options);
+
+** WIFEXITED(status) = renvoie vrai si le fils s'est terminé normalement,
+** c'est-à-dire par un appel à exit(3) ou _exit(2), ou bien par un retour de main().
+** Et dans ce cas on peut appeller : WEXITSTATUS(status) = renvoie le code
+** de sortie du fils. Ce code est constitué par les 8 bits de poids faibles de
+** l'argument status que le fils a fourni à exit(3) ou à _exit(2) ou l'argument
+** d'une commande de retour dans main(). "Cette macro ne peut être évaluée
+** que si WIFEXITED a renvoyé vrai".
+
+** WIFSIGNALED(status) = renvoie vrai si le fils s'est terminé à cause d'un signal.
+** Et dans ce cas on peut appeller : WTERMSIG(status) = renvoie le numéro du signal
+** qui a causé la fin du fils. "Cette macro ne peut être évaluée
+** que si WIFSIGNALED a renvoyé vrai".
+
+** void		status_child(void)
+** {
+** 	if (WIFEXITED(g_pid))
+** 		g_status = WEXITSTATUS(g_pid);
+** 	if (WIFSIGNALED(g_pid))
+** 	{
+** 		g_status = WTERMSIG(g_pid);
+** 		if (g_status != 131)
+** 			g_status += 128;
+** 	}
+** }
+
+*/
 
 void	status_child(int status)
 {
@@ -36,8 +67,8 @@ char	*find_binary(t_cmd *cmd, int show)
 	{
 		if (lstat(cmd->cmd, &stats))
 		{
-			if (show){}
-				//error("command not found", cmd->cmd, NULL, 127);
+			if (show && !is_builtin(cmd->cmd))
+				error("command not found", cmd->cmd, NULL, 127);
 			free(binary);
 			return (NULL);
 		}

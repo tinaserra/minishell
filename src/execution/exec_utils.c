@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:30 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/20 11:14:08 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/25 23:07:23 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,62 +29,30 @@ int	is_builtin(char *s)
 	if (ft_strcmp(s, "unset") == 0)
 		return (1);
 	return (0);
-}
-
-static int	is_redirection(char *s)
-{
-	if (ft_strcmp(s, "<") == 0 || ft_strcmp(s, ">") == 0
-		|| ft_strcmp(s, ">>") == 0 || ft_strcmp(s, "<<") == 0)
-		return (1);
-	return (0);
-}
-
-static int	lst_size(t_cmd *cmd)
-{
-	t_token	*liste;
-	int		len;
-
-	liste = cmd->args;
-	len = 0;
-	while (liste)
-	{
-		if (!is_redirection(liste->word))
-			len++;
-		liste = liste->next;
-	}
-	return (len);
-}
+} 
 
 char	**list_to_tab(t_cmd *cmd)
 {
-	t_token	*liste;
-	int		len;
+	char	**args;
+	t_token	*tmp;
 	int		i;
-	char	**aaargs;
 
+	i = 1;
 	if (!cmd->cmd)
 		return (NULL);
-	len = lst_size(cmd);
-	aaargs = malloc(sizeof(char *) * (len + 2));
-	if (aaargs == NULL)
-		return (NULL);
-	liste = cmd->args;
-	aaargs[0] = ft_strdup(cmd->cmd);
-	i = 1;
-	while (liste)
+	if (!(args = (char **)ft_calloc(1, sizeof(char *) *
+		(tokens_list_size(cmd->args) + 2))))
+		exit(0);
+	args[0] = ft_strdup(cmd->cmd);
+	tmp = cmd->args;
+	while (tmp)
 	{
-		if (!is_redirection(liste->word))
-		{
-			aaargs[i] = ft_strdup(liste->word);
-			i++;
-		}
-		else
-			liste = liste->next;
-		if (liste)
-			liste = liste->next;
+		args[i] = ft_strdup(tmp->word);
+		tmp = tmp->next;
+		i++;
 	}
-	aaargs[i] = NULL;
-	return (aaargs);
+	args[i] = NULL;
+	return (args);
 }
 
 char	*check_path(t_cmd *cmd)

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:37 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/20 12:27:27 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:29:56 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,8 @@ int	main(int ac, char **av, char **env)
 			parsing();
 		free(g_ms->line);
 		g_ms->line = NULL;
-		//printf("pd\n");
 		g_ms->line = readline(g_ms->term);
 	}
-	printf("exit\n");
+	printf("exit");
 	free_all();
 }
