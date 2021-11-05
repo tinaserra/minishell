@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/21 09:46:37 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/05 23:42:37 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void	export_builtin(t_cmd *cmd)
 					error("not a valid identifier", "export", tmp->word, 1);
 				else
 					export_builtin2(res);
+				ft_free_tab(res);
 			}
-			ft_free_tab(res);
+			else
+				free(res);
 		}
 		tmp = tmp->next;
 	}
