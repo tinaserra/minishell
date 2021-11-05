@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:58 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/21 09:39:03 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:28:16 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	redirect2(t_cmd *cmd, t_token **args, int flags)
 		if (!ft_strcmp((*args)->next->word, ""))
 			error("ambiguous redirect", NULL, NULL, -1);
 		else
-			error("No such file or directory", (*args)->next->word, NULL, -1);
+			error("No such file or directory", (*args)->next->word, NULL, 1);
 		return (-1);
 	}
 	if ((ft_strcmp((*args)->word, ">") == 0
