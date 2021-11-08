@@ -1,13 +1,12 @@
 *.o
 *.a
 minishell
-minijohn
-minitina
 .DS*
 obj
 a.out
 valgrind_log
 valgrind_log.txt
+truc.txt
 jhon.txt
 *output
 # Ta mere la grosse tchoin
