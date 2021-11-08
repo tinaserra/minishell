@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:21:24 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/20 11:15:16 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/08 10:13:36 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define OPT_N 0
 #define NL 1
 
-int	echo_new_line(char *s)
+static int	echo_new_line(char *s)
 {
 	int i;
 
@@ -27,10 +27,30 @@ int	echo_new_line(char *s)
 			i++;
 		if (s[i] && s[i] != 'n')
 			return (NL);
-		g_ms->newline = 0;
+		g_ms->newline = OPT_N;
 		return (OPT_N);
 	}
 	return (NL);
+}
+
+static int	echo_tmp_check(t_token	*tmp, int fd)
+{
+	if (!tmp)
+	{
+		ft_putchar_fd('\n', fd);
+		return (-1);
+	}
+	if (echo_new_line(tmp->word) == OPT_N && !tmp->next)
+		return (-1);
+	return (0);
+}
+
+static int	loop_nl(t_token	*tmp)
+{
+	g_ms->newline = OPT_N;
+	if (!tmp->next)
+		return (-1);
+	return (0);
 }
 
 void	echo_builtin(t_cmd *cmd, int fd)
@@ -39,20 +59,18 @@ void	echo_builtin(t_cmd *cmd, int fd)
 
 	tmp = cmd->args;
 	if (fd == 0)
-		fd = 1;
-	if (!tmp)
-	{
-		ft_putchar_fd('\n', fd);
+		fd = STDOUT_FILENO;
+	if (echo_tmp_check(tmp, fd) == -1)
 		return ;
-	}
 	g_ms->newline = NL;
+	while (echo_new_line(tmp->word) == OPT_N)
+	{
+		if (loop_nl(tmp) == -1)
+			return ;
+		tmp = tmp->next;
+	}
 	while (tmp)
 	{
-		while (echo_new_line(tmp->word) == OPT_N)
-		{
-			g_ms->newline = OPT_N;
-			tmp = tmp->next;
-		}
 		if (tmp->type == EXIT_STATUS)
 			ft_putnbr_fd(g_ms->status, STDOUT_FILENO);
 		ft_putstr_fd(tmp->word, fd);
