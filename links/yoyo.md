@@ -3,6 +3,7 @@
 ## Leaks
 
 
+
 ## Ok
 - [x] echo $PWD; echo $OLDPWD; cd .; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd ..; pwd; echo $PWD; echo $OLDPWD
@@ -80,53 +81,40 @@ mkdir -m 6777 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 7777 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 0000 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 
-export PATH='/bin:/usr/bin'; Cd .
-export PATH='/bin:/usr/bin'; cD .
-echo
-echo bonjour
-echo lalalala lalalalal alalalalal alalalala
+- [x] echo
+- [x] echo bonjour
+- [x] echo bonjour | cat -e
+- [x] echo lalalala lalalalal alalalalal alalalala
 echo lalalala                lalalalal      alalalalal alalalala          
-echo -n
-echo -n bonjour
-echo -n lalalala lalalalal alalalalal alalalala
-echo -n lalalala                lalalalal      alalalalal alalalala
-echo bonjour -n
-echo -n bonjour -n
-                        echo                     bonjour             je
-                        echo       -n            bonjour             je
-echo a '' b '' c '' d
-echo a "" b "" c "" d
-echo -n a '' b '' c '' d
-echo -n a "" b "" c "" d
-echo '' '' ''                                                             
-Echo bonjour                                                              
+- [x] echo -n
+- [x] echo -n bonjour
+- [x] echo -n lalalala lalalalal alalalalal alalalala
+- [x] echo -n lalalala                lalalalal      alalalalal alalalala
+- [x] echo bonjour -n
+- [x] echo -n bonjour -n
+- [x]                         echo                     bonjour             je
+- [x]                         echo       -n            bonjour             je
+- [x] echo a '' b '' c '' d
+- [x] echo a "" b "" c "" d
+- [x] echo -n a '' b '' c '' d
+- [x] echo -n a "" b "" c "" d
+- [x] echo '' '' ''                                                             
+- [x] Echo bonjour                                                              
 eCho bonjour                                                              
 ecHo bonjour                                                              
 echO bonjour                                                              
 EchO bonjour                                                              
 eCHo bonjour                                                              
 EcHo bonjour                                                              
-eChO bonjour                                                              
-export PATH='/bin:/usr/bin'; Echo bonjour                               
-export PATH='/bin:/usr/bin'; eCho bonjour                               
-export PATH='/bin:/usr/bin'; ecHo bonjour                               
-export PATH='/bin:/usr/bin'; echO bonjour                               
-export PATH='/bin:/usr/bin'; EchO bonjour                               
-export PATH='/bin:/usr/bin'; eCHo bonjour                               
-export PATH='/bin:/usr/bin'; EcHo bonjour                               
-export PATH='/bin:/usr/bin'; eChO bonjour                               
-export PATH='/bin:/usr/bin'; eChO -e 'bonjo\nur'                        
+- [x] eChO bonjour                                                              
+
+
+
 echo -n -n -n -n bonjour                                                  
 echo -nnnnnnnnnnnnnnnnnnnnn bonjour                                       
 echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n                        
-env                                                                       
-export A=a; env                                                    
-export A=a B=b C=c; env                                            
-export A=a B=b C=c; env | cat -e                                   
-Env                                                                       
-enV                                                                       
-export PATH='/bin:/usr/bin'; Env                                        
-export PATH='/bin:/usr/bin'; enV                                        
+
+
 exit                                                                      
 exit 1                                                                    
 exit 2                                                                    
@@ -199,115 +187,16 @@ exit bonjoru; echo should have exited
 exit 9999; echo should have exited                                        
 Exit; echo a                                                              
 exiT; echo a                                                              
-export PATH='/bin:/usr/bin'; Exit; echo a                               
-export PATH='/bin:/usr/bin'; exiT; echo a                               
-export                                                                    
-export A=''; export                                                     
-export A='"'; export                                                    
-export A='\'; export                                                    
-export A='$'; export                                                    
-export A='\t'; export                                                   
-export A='''; export                                                    
-export A='a'; export                                                    
-export A=a; echo $A                                                       
-export A=a B=b C=c; echo $A$B$C                                           
-export BONJOURJESUIS=a; echo $BONJOURJESUIS                               
-export bonjourjesuis=a; echo $bonjourjesuis                               
-export bonjour_je_suis=a; echo $bonjour_je_suis                           
-export BONJOURJESUIS1=a; echo $BONJOURJESUIS1                             
-export bO_nJq123o__1ju_je3234sui__a=a; echo $bO_nJq123o__1ju_je3234sui__a 
-export a0123456789=a; echo $a0123456789                                   
-export abcdefghijklmnopqrstuvwxyz=a; echo $abcdefghijklmnopqrstuvwxyz     
-export ABCDEFGHIJKLMNOPQRSTUVWXYZ=a; echo $ABCDEFGHIJKLMNOPQRSTUVWXYZ     
-export __________________________=a; echo $__________________________     
-export _bonjour_=a; echo $_bonjour_                                       
-export _=a; echo $_a                                                      
-export 1=a                                                                
-export BONJOURJESUIS =a                                                   
-export BONJOURJESUIS= a                                                   
-export BONJOUR\\JESUIS=a                                                  
-export BONJOUR\'JESUIS=a                                                  
-export BONJOUR\"JESUIS=a                                                  
-export BONJOUR\$JESUIS=a                                                  
-export BONJOUR\&JESUIS=a                                                  
-export BONJOUR\|JESUIS=a                                                  
-export BONJOUR\;JESUIS=a                                                  
-export BONJOUR\_JESUIS=a                                                  
-export BONJOUR\0JESUIS=a                                                  
-export \B\O\N\ \ \ \ \ \ \ JOURJESUIS=a                                   
-export A=\B\O\N\ \ \ \ \ \ \ JOURJESUIS; echo $A                          
-export A='bonjour je suis charles'; echo $A                               
-export A="bonjour je suis charles"; echo $A                               
-export A==a; echo $A                                                      
-export A===a; echo $A                                                     
-export A====a; echo $A                                                    
-export A=====a; echo $A                                                   
-export A======a; echo $A                                                  
-export A=a=a=a=a=a; echo $A                                               
-export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C  
-export 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C; echo $A$B$C    
-export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '; echo $A$B$C    
-export A B C; echo $A$B$C                                                 
-export A B C; env                                                         
-export 'AH@'=nop                                                          
-export "AH'"=nop                                                          
-export 'AH"'=nop                                                          
-export 'AH$'=nop                                                          
-export 'AH!'=nop                                                          
-export 'AH|'=nop                                                          
-export 'AH;'=nop                                                          
-export 'AH&'=nop                                                          
-export 'AH\'=nop                                                          
-export TEST='A=a'; export $TEST                                         
-export BONJOUR\\JESUIS                                                    
-export BONJOUR\'JESUIS                                                    
-export BONJOUR\"JESUIS                                                    
-export BONJOUR\$JESUIS                                                    
-export BONJOUR\&JESUIS                                                    
-export BONJOUR\|JESUIS                                                    
-export BONJOUR\;JESUIS                                                    
-export BONJOUR\_JESUIS                                                    
-export BONJOUR\0JESUIS                                                    
-Export B=bonjour                                                          
-exporT B=bonjour                                                          
-export PATH='/bin:/usr/bin'; Export B=bonjour                           
-export PATH='/bin:/usr/bin'; exporT B=bonjour                           
+
+
+
 pwd                                                                       
 cd ..; pwd                                                         
 cd ../..; pwd                                                      
 cd ../../..; pwd                                                   
 cd /; pwd                                                          
 cd $HOME; pwd                                                      
-pwd | cat -e                                                              
-export PWD='/etc'; pwd                                                  
-unset PWD; pwd; echo $PWD                                                 
-export PWD=foo; pwd; echo $PWD                                            
-Pwd                                                                       
-pwD                                                                       
-export PATH='/bin:/usr/bin'; Pwd                                        
-export PATH='/bin:/usr/bin'; pwD                                        
-unset                                                                     
-export A='a'; unset A; echo $A                                          
-export A='a'; unset 'A '; echo $A                                       
-export A='a'; unset 'A='; echo $A                                       
-export A='a' B='b' C='c'; unset A B C; echo $A$B$C                      
-export A='a' B='b' C='c'; unset A; echo $A$B$C                          
-export A='a' B='b' C='c'; unset C; echo $A$B$C                          
-export A='a' B='b' C='c'; unset A B C                                   
-export A='a' B='b' C='c'; unset A                                       
-unset 'AH@'=nop                                                           
-unset "AH'"=nop                                                           
-unset 'AH"'=nop                                                           
-unset 'AH$'=nop                                                           
-unset 'AH!'=nop                                                           
-unset 'AH|'=nop                                                           
-unset 'AH;'=nop                                                           
-unset 'AH&'=nop                                                           
-unset 'AH\'=nop                                                           
-Unset TERM                                                                
-unseT TERM                                                                
-export PATH='/bin:/usr/bin'; Unset TERM                                 
-export PATH='/bin:/usr/bin'; unseT TERM                                 
+
 notfound                                                                  
 notfound a b c                                                            
 echo "\"" >>a"b""c"                                                       
@@ -538,109 +427,7 @@ echo a; echo "$_"
 echo a; echo '$_'                                                         
 echo a; echo "@$_@"                                                       
 echo $SHLVL                                                               
-export SHLVL=''; echo $SHLVL                                            
-export SHLVL=' 1'; echo $SHLVL                                          
-export SHLVL=' 2'; echo $SHLVL                                          
-export SHLVL=' 3'; echo $SHLVL                                          
-export SHLVL=' ' 3''; echo $SHLVL                                       
-export SHLVL=' '\t3''; echo $SHLVL                                      
-export SHLVL=' '\t\f\r 3''; echo $SHLVL                                 
-export SHLVL=' '3 ''; echo $SHLVL                                       
-export SHLVL=' '3\t''; echo $SHLVL                                      
-export SHLVL=' '3\r''; echo $SHLVL                                      
-export SHLVL=' '3\t\f\r ''; echo $SHLVL                                 
-export SHLVL=' '3     a''; echo $SHLVL                                  
-export SHLVL=' '3\t\t\ta''; echo $SHLVL                                 
-export SHLVL=' 0'; echo $SHLVL                                          
-export SHLVL=' -0'; echo $SHLVL                                         
-export SHLVL=' -1'; echo $SHLVL                                         
-export SHLVL=' 255'; echo $SHLVL                                        
-export SHLVL=' 256'; echo $SHLVL                                        
-export SHLVL=' 2000000'; echo $SHLVL                                    
-export SHLVL=' -2000000'; echo $SHLVL                                   
-export SHLVL=' 2147483647'; echo $SHLVL                                 
-export SHLVL=' -2147483648'; echo $SHLVL                                
-export SHLVL=' 2147483648'; echo $SHLVL                                 
-export SHLVL=' -2147483649'; echo $SHLVL                                
-export SHLVL=' 3147483648'; echo $SHLVL                                 
-export SHLVL=' -3147483649'; echo $SHLVL                                
-export SHLVL=' 4294967295'; echo $SHLVL                                 
-export SHLVL=' 4294967296'; echo $SHLVL                                 
-export SHLVL=' -9223372036854775808'; echo $SHLVL                       
-export SHLVL=' 9223372036854775807'; echo $SHLVL                        
-export SHLVL=' -9223372036854775809'; echo $SHLVL                       
-export SHLVL=' 9223372036854775808'; echo $SHLVL                        
-export SHLVL=' 18446744073709551615'; echo $SHLVL                       
-export SHLVL=' 18446744073709551616'; echo $SHLVL                       
-export SHLVL=' +1'; echo $SHLVL                                         
-export SHLVL=' +2'; echo $SHLVL                                         
-export SHLVL=' +3'; echo $SHLVL                                         
-export SHLVL=' +0'; echo $SHLVL                                         
-export SHLVL=' +255'; echo $SHLVL                                       
-export SHLVL=' +256'; echo $SHLVL                                       
-export SHLVL=' +2000000'; echo $SHLVL                                   
-export SHLVL=' +2147483647'; echo $SHLVL                                
-export SHLVL=' ++1'; echo $SHLVL                                        
-export SHLVL=' ++2'; echo $SHLVL                                        
-export SHLVL=' ++3'; echo $SHLVL                                        
-export SHLVL=' ++0'; echo $SHLVL                                        
-export SHLVL=' ++255'; echo $SHLVL                                      
-export SHLVL=' ++256'; echo $SHLVL                                      
-export SHLVL=' ++2000000'; echo $SHLVL                                  
-export SHLVL=' ++2147483647'; echo $SHLVL                               
-export SHLVL=' --1'; echo $SHLVL                                        
-export SHLVL=' --2'; echo $SHLVL                                        
-export SHLVL=' --3'; echo $SHLVL                                        
-export SHLVL=' --0'; echo $SHLVL                                        
-export SHLVL=' --255'; echo $SHLVL                                      
-export SHLVL=' --256'; echo $SHLVL                                      
-export SHLVL=' --2000000'; echo $SHLVL                                  
-export SHLVL=' --2147483647'; echo $SHLVL                               
-export SHLVL=' bonjour'; echo $SHLVL                                    
-export SHLVL=' 0_'; echo $SHLVL                                         
-export SHLVL=' _0'; echo $SHLVL                                         
-export SHLVL=' 0123456789'; echo $SHLVL                                 
-export SHLVL=' -0123456789'; echo $SHLVL                                
-mkdir path && mkfifo path/a; a                                     
-mkdir path && mkfifo path/a && chmod 777 path/a; a                 
-export PATH='doesnotexits'; echo $PATH                                  
-export PATH='doesnotexits:asdfasdfas'; echo $PATH                       
-export PATH='________'; echo $PATH                                      
-export PATH='        '; echo $PATH                                      
-export PATH='   :    '; echo $PATH                                      
-export PATH='     /bin      '; echo $PATH                               
-export PATH='     /sbin      '; echo $PATH                              
-export PATH='/bin:/bin:/bin:/bin'; echo $PATH                           
-export PATH='/sbin:/sbin:/sbin:/sbin'; echo $PATH                       
-export PATH=''; echo $PATH                                              
-export PATH=':'; echo $PATH                                             
-export PATH=':::::::::::::::::::'; echo $PATH                           
-export PATH='/asdfasdf'; echo $PATH                                     
-export PATH='/usr/asdf:/usr/lib/asdfasdf'; echo $PATH                   
-export PATH='doesnotexits'; whoami                                      
-export PATH='doesnotexits:asdfasdfas'; whoami                           
-export PATH='________'; whoami                                          
-export PATH='        '; whoami                                          
-export PATH='   :    '; whoami                                          
-export PATH='     /usr/bin      '; whoami                               
-export PATH='/usr/bin:/usr/bin:/usr/bin:/usr/bin'; whoami               
-export PATH='     /sbin      '; whoami                                  
-export PATH='/sbin:/sbin:/sbin:/sbin'; whoami                           
-export PATH=''; whoami                                                  
-unset PATH; whoami                                                        
-export PATH=':'; whoami                                                 
-export PATH=':::::::::::::::::::'; whoami                               
-export PATH='/asdfasdf'; whoami                                         
-export PATH='/usr/asdf:/usr/lib/asdfasdf'; whoami                       
-unset PATH; whoami                                                 
-export PATH='/usr/bin'; Whoami                                          
-export PATH='/usr/bin'; wHoAMi                                          
-export PATH='/usr/bIn'; whoami                                          
-export PATH='/Usr/bin'; whoami                                          
-export PATH='/usr/bIn'; Whoami                                          
-export PATH='/Usr/bin'; wHoami                                          
-export PATH=''; Whoami                                                  
-export PATH=''; wHoami                                                  
+
 echo \a                                                                   
 \e\c\h\o bonjour                                                          
 echo charles\                                                             
@@ -692,100 +479,12 @@ echo\ bonjour
 /bin/echo ' \\\ '                                                         
 echo \                                                                    
 echo "\""'bonjour'                                                        
-export TEST='bonjour'; echo $TEST                                       
-export TEST='bonjour'; echo $TES                                        
-export TEST='bonjour'; echo $TEST_                                      
-export TEST='bonjour'; echo "|$TEST|"                                   
-export TEST='bonjour'; echo "|$TES|"                                    
-export TEST='bonjour'; echo "|$TEST_|"                                  
-export TEST='bonjour'; echo '|$TEST|'                                   
-export TEST='bonjour'; echo '|$TES|'                                    
-export TEST='bonjour'; echo '|$TEST_|'                                  
-export A='foo' B='bar' C='baz'; echo $A$B$C                             
-export A='foo' B='bar' C='baz'; echo "$A$B$C"                           
-export A='foo' B='bar' C='baz'; echo '$A$B$C'                           
-export A='foo' B='bar' C='baz'; echo $A,$B,$C                           
-export A='foo' B='bar' C='baz'; echo "$A,$B,$C"                         
-export A='foo' B='bar' C='baz'; echo '$A,$B,$C'                         
-export A='foo' B='bar' C='baz'; echo $A"$B"$C"A"$B"$C"                  
-export A='foo' B='bar' C='baz'; echo $A'$B'$C'A'$B'$C'                  
-export A='foo ' B=' bar  ' C='baz '; echo $A"$B"$C"A"$B"$C"             
-export A='foo ' B=' bar  ' C='baz '; echo $A'$B'$C'A'$B'$C'             
-echo $A                                                                   
-echo $A$B                                                                 
-echo $A$B$C                                                               
-echo $A$B$C$D                                                             
-export A='bonjour\je'; echo [$A]                                        
-export A='\b\\o\\\nj\\\\\\\our\\je\\\\'; echo [$A]                      
-export A='   \b\\o\\\nj\\\\\\\our\\je\\\\'; echo [$A]                   
-export A='\b\\o\\\nj\\\\\\\our\\je\\\\   '; echo [$A]                   
-export A='  \b\\o\\\nj\\\\\\\our\\je\\\\ '; echo [$A]                   
-export A='a  \b\\o\\\nj\\\\\\\our\\je\\\\ b'; echo [$A]                 
-export A=' a  \b\\o\\\nj\\\\\\\our\\je\\\\ b '; echo [$A]               
-export A=' '; echo [$A]                                                 
-export A='    '; echo [$A]                                              
-export A='\ '; echo [$A]                                                
-export A=' \  '; echo [$A]                                              
-export A='bonjour'; echo \ \ \ \ \ \ \ $A\ \ \ \ \ \                    
-export A='bonjour je suis'; echo \ \ \ \ \ \ \ $A\ \ \ \ \ \            
-export A='  bonjour je suis  '; echo \ \ \ \ \ \ \ $A\ \ \ \ \ \        
-export A='bonjour je suis splited'; echo $A                             
-export A='bonjour     je     suis    splited'; echo $A                  
-export A='   bonjour     je     suis    splited   '; echo $A            
-export A='bonjour je suis splited'; echo [$A]                           
-export A='bonjour     je     suis    splited'; echo [$A]                
-export A='   bonjour     je     suis    splited   '; echo [$A]          
-export A='bonjour je suis splited'; echo "[$A]"                         
-export A='bonjour     je     suis    splited'; echo "[$A]"              
-export A='   bonjour     je     suis    splited   '; echo "[$A]"        
-export A='bonjour je suis splited'; echo \ $A                           
-export A='bonjour     je     suis    splited'; echo \ $A                
-export A='   bonjour     je     suis    splited   '; echo \ $A          
-export A='bonjour je suis splited'; echo $A\                            
-export A='bonjour     je     suis    splited'; echo $A\                 
-export A='   bonjour     je     suis    splited   '; echo $A\           
-export A='   bonjour     je     suis    splited   '; echo $A$A$A        
-export ECHO='echo'; $ECHO $ECHO                                         
-export A='ec' B='ho'; $A$B bonjour                                      
-touch a b c; [EXPORTS LS='ls -l'] $LS                              
-echo $                                                                    
-echo \$                                                                   
-echo \$\$\$\$                                                             
-echo \$$\$$                                                               
-export A='a' B='b'; echo $\A $\B                                        
-export A='a' B='b'; echo $\A$\B                                         
-export A=' '; echo $A                                                   
-export A='  '; echo $A                                                  
-export A='   '; echo $A                                                 
-export A='    '; echo $A                                                
-export A='  a '; echo $A                                                
-export A='                                '; echo $A                    
-export A='                     a          '; echo $A                    
-export A=' '; echo @$A@                                                 
-export A=' '; echo @ $A@                                                
-export A=' '; echo @$A @                                                
-export A='       '; echo @$A@                                           
-export A=' '; echo '@'$A'@'                                             
-export A=' '; echo '@' $A'@'                                            
-export A=' '; echo '@'$A '@'                                            
-export A=' '; echo "@"$A"@"                                             
-export A=' '; echo "@" $A"@"                                            
-export A=' '; echo "@"$A "@"                                            
-export A=' '; echo @"$A"@                                               
-export A=' '; echo @ "$A"@                                              
-export A=' '; echo @"$A" @                                              
-export A='       '; echo @"$A"@                                         
-export A=' '; echo '@'"$A"'@'                                           
-export A=' '; echo '@' "$A"'@'                                          
-export A=' '; echo '@'"$A" '@'                                          
-export A=' '; echo "@""$A""@"                                           
-export A=' '; echo "@" "$A""@"                                          
-export A=' '; echo "@""$A" "@"                                          
-export A='' B='' C=''; echo $A$B$C                                      
-export A='file'; echo bonjour > $A                                      
-export A='fi le'; echo bonjour > $A                                     
-export A='fi le'; echo bonjour > "$A"                                   
-export A='fi le'; echo bonjour > '$A'                                   
+
+
+
+
+
+
 'echo' 'bonjour'                                                          
 'echo' 'je' 'suis' 'charles'                                              
 "echo" "bonjour"                                                          
