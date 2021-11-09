@@ -6,13 +6,13 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/05 23:42:37 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/08 11:15:32 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	export_errors(char *res)
+int	export_errors(char *res)
 {
 	int	i;
 
@@ -25,47 +25,54 @@ static int	export_errors(char *res)
 	return (0);
 }
 
-void	export_builtin2(char **res)
+void	export_builtin2(char **identifier, char *content)
 {
 	t_env	*tmp_env;
 
-	tmp_env = get_env(g_ms->env, res[0]);
+	tmp_env = get_env(g_ms->env, identifier[0]);
 	if (tmp_env)
 	{
 		free(tmp_env->value);
-		tmp_env->value = ft_strdup(res[1]);
+		tmp_env->value = ft_strdup(content);
 	}
 	else
-		add_env(&g_ms->env, lst_new_env(ft_strdup(res[0]),
-				ft_strdup(res[1])));
+		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier[0]),
+				ft_strdup(content)));
 }
 
 void	export_builtin(t_cmd *cmd)
 {
 	t_token	*tmp;
-	char	**res;
+	char	*content;
+	char	**identifier;
 
 	tmp = cmd->args;
 	while (tmp)
 	{
 		if (tmp && tmp->word)
 		{
-			res = ft_split(tmp->word, "=");
-			if (res[0] && res[1])
+			identifier = ft_split(tmp->word, "=");
+			content = ft_strchr(tmp->word, '=');
+			
+			if (identifier[0] && content && content[0] == '=')
 			{
-				if (!ft_isalpha(res[0][0]))
+				if (content && ft_strcmp(content, "") != 0)
 				{
-					error("not a valid identifier", "export", tmp->word, 1);
-					break ;
+					content++;
+					if (!ft_isalpha(identifier[0][0]) && identifier[0][0] != '_')
+					{
+						error("not a valid identifier", "export", tmp->word, 1);
+						break ;
+					}
+					if (export_errors(identifier[0]))
+						error("not a valid identifier", "export", tmp->word, 1);
+					else
+						export_builtin2(identifier, content);
 				}
-				if (export_errors(res[0]))
-					error("not a valid identifier", "export", tmp->word, 1);
 				else
-					export_builtin2(res);
-				ft_free_tab(res);
+					error("not a valid identifier", "export", tmp->word, 1);
 			}
-			else
-				free(res);
+			ft_free_tab(identifier);
 		}
 		tmp = tmp->next;
 	}

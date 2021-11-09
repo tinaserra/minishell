@@ -77,6 +77,7 @@ typedef struct		s_minishell
 	struct s_cmd	*cmds;
 	t_env			*env;
 	char			*term;
+	char			*hd_tmp;
 	int				count;
 	int				exit;
 	int				end;

@@ -3,7 +3,6 @@
 ## Leaks
 
 
-
 ## Ok
 - [x] echo $PWD; echo $OLDPWD; cd .; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd ..; pwd; echo $PWD; echo $OLDPWD
@@ -31,6 +30,35 @@
 - [x] echo $PWD; echo $OLDPWD; cd //home; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd ' //home'; pwd; echo $PWD; echo $OLDPWD
 
+- [x] echo
+- [x] echo bonjour
+- [x] echo bonjour | cat -e
+- [x] echo lalalala lalalalal alalalalal alalalala
+- [x] echo lalalala                lalalalal      alalalalal alalalala          
+- [x] echo -n
+- [x] echo -n bonjour
+- [x] echo -n lalalala lalalalal alalalalal alalalala
+- [x] echo -n lalalala                lalalalal      alalalalal alalalala
+- [x] echo bonjour -n
+- [x] echo -n bonjour -n
+- [x]                         echo                     bonjour             je
+- [x]                         echo       -n            bonjour             je
+- [x] echo a '' b '' c '' d
+- [x] echo a "" b "" c "" d
+- [x] echo -n a '' b '' c '' d
+- [x] echo -n a "" b "" c "" d
+- [x] echo '' '' ''                                                             
+- [x] Echo bonjour                                                              
+eCho bonjour                                                              
+ecHo bonjour                                                              
+echO bonjour                                                              
+EchO bonjour                                                              
+eCHo bonjour                                                              
+EcHo bonjour                                                              
+- [x] eChO bonjour                                                              
+- [x] echo -n -n -n -n bonjour                                                  
+- [x] echo -nnnnnnnnnnnnnnnnnnnnn bonjour                                       
+- [x] echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n                        
 - [x] mkdir -m 000 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 001 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 002 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
@@ -46,10 +74,12 @@ mkdir -m 040 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 050 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 060 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 - [x] mkdir -m 070 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
+
 Cd .
 cD .
 
-## Non testé
+## Strange cases
+
 mkdir -m 100 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD [pas ok](prout)
 mkdir -m 200 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 300 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD [pas ok](prout)
@@ -81,112 +111,79 @@ mkdir -m 6777 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 7777 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 mkdir -m 0000 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 
-- [x] echo
-- [x] echo bonjour
-- [x] echo bonjour | cat -e
-- [x] echo lalalala lalalalal alalalalal alalalala
-echo lalalala                lalalalal      alalalalal alalalala          
-- [x] echo -n
-- [x] echo -n bonjour
-- [x] echo -n lalalala lalalalal alalalalal alalalala
-- [x] echo -n lalalala                lalalalal      alalalalal alalalala
-- [x] echo bonjour -n
-- [x] echo -n bonjour -n
-- [x]                         echo                     bonjour             je
-- [x]                         echo       -n            bonjour             je
-- [x] echo a '' b '' c '' d
-- [x] echo a "" b "" c "" d
-- [x] echo -n a '' b '' c '' d
-- [x] echo -n a "" b "" c "" d
-- [x] echo '' '' ''                                                             
-- [x] Echo bonjour                                                              
-eCho bonjour                                                              
-ecHo bonjour                                                              
-echO bonjour                                                              
-EchO bonjour                                                              
-eCHo bonjour                                                              
-EcHo bonjour                                                              
-- [x] eChO bonjour                                                              
+## Non testé
 
-
-
-echo -n -n -n -n bonjour                                                  
-echo -nnnnnnnnnnnnnnnnnnnnn bonjour                                       
-echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n                        
-
-
-exit                                                                      
-exit 1                                                                    
-exit 2                                                                    
-exit 3                                                                    
-exit ' 3'                                                                 
-exit '\t3'                                                                
-exit '\t\f\r 3'                                                           
-exit '3 '                                                                 
-exit '3\t'                                                                
-exit '3\r'                                                                
-exit '3\t\f\r '                                                           
-exit '3     a'                                                            
-exit '3\t\t\ta'                                                           
-exit 0                                                                    
-exit -0                                                                   
-exit -1                                                                   
-exit 255                                                                  
-exit 256                                                                  
-exit 2000000                                                              
-exit -2000000                                                             
-exit 2147483647                                                           
-exit -2147483648                                                          
-exit 2147483648                                                           
-exit -2147483649                                                          
-exit 3147483648                                                           
-exit -3147483649                                                          
-exit 4294967295                                                           
-exit 4294967296                                                           
-exit -9223372036854775808                                                 
-exit 9223372036854775807                                                  
-exit -9223372036854775809                                                 
-exit 9223372036854775808                                                  
-exit 18446744073709551615                                                 
-exit 18446744073709551616                                                 
-exit +1                                                                   
-exit +2                                                                   
-exit +3                                                                   
-exit +0                                                                   
-exit +255                                                                 
-exit +256                                                                 
-exit +2000000                                                             
-exit +2147483647                                                          
-exit ++1                                                                  
-exit ++2                                                                  
-exit ++3                                                                  
-exit ++0                                                                  
-exit ++255                                                                
-exit ++256                                                                
-exit ++2000000                                                            
-exit ++2147483647                                                         
-exit --1                                                                  
-exit --2                                                                  
-exit --3                                                                  
-exit --0                                                                  
-exit --255                                                                
-exit --256                                                                
-exit --2000000                                                            
-exit --2147483647                                                         
-exit bonjour                                                              
-exit 0_                                                                   
-exit _0                                                                   
-exit 0123456789                                                           
-exit -0123456789                                                          
-exit 00000000000000000000000000000000000000000000001                      
-exit 0 bonjour                                                            
-exit bonjour 0                                                            
-exit 0 1                                                                  
-exit 0 1 2 3 4 5 6 7 8 9                                                  
-exit bonjoru; echo should have exited                                     
-exit 9999; echo should have exited                                        
-Exit; echo a                                                              
-exiT; echo a                                                              
+exit
+exit 2
+exit 3
+exit ' 3'         
+exit '\t3'        
+exit '\t\f\r 3'   
+exit '3 '         
+exit '3\t'        
+exit '3\r'        
+exit '3\t\f\r '   
+exit '3     a'    
+exit '3\t\t\ta'   
+exit 0            
+exit -0           
+exit -1           
+exit 255          
+exit 256          
+exit 2000000      
+exit -2000000     
+exit 2147483647
+exit -2147483648           
+exit 2147483648            
+exit -2147483649           
+exit 3147483648            
+exit -3147483649           
+exit 4294967295            
+exit 4294967296            
+exit -9223372036854775808  
+exit 9223372036854775807   
+exit -9223372036854775809  
+exit 9223372036854775808   
+exit 18446744073709551615  
+exit 18446744073709551616  
+exit +1                    
+exit +2                    
+exit +3                    
+exit +0                    
+exit +255                  
+exit +256                  
+exit +2000000              
+exit +2147483647           
+exit ++1                   
+exit ++2                   
+exit ++3                   
+exit ++0                   
+exit ++255                 
+exit ++256                 
+exit ++2000000             
+exit ++2147483647          
+exit --1                   
+exit --2                   
+exit --3                   
+exit --0                   
+exit --255                 
+exit --256                 
+exit --2000000             
+exit --2147483647          
+exit bonjour               
+exit 0_                    
+exit _0                    
+exit 0123456789            
+exit -0123456789  
+exit 00000000000000000000000000000000000000000000001 
+exit 0 bonjour 
+exit bonjour 0    
+exit 0 1     
+exit 0 1 2 3 4 5 6 7 8 9              
+exit bonjoru; echo should have exited 
+exit 9999; echo should have exited    
+Exit; echo a 
+exiT; echo a  
 
 
 

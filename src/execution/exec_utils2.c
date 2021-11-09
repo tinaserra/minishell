@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:44 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/25 23:05:35 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/08 08:17:52 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	status_child(int status)
 
 char	*find_binary(t_cmd *cmd, int show)
 {
+	(void)show;
 	struct stat	stats;
 	char		*binary;
 
@@ -67,8 +68,8 @@ char	*find_binary(t_cmd *cmd, int show)
 	{
 		if (lstat(cmd->cmd, &stats))
 		{
-			if (show && !is_builtin(cmd->cmd))
-				error("command not found", cmd->cmd, NULL, 127);
+			//if (show && !is_builtin(cmd->cmd))
+			//	error("command not found", cmd->cmd, NULL, 127);
 			free(binary);
 			return (NULL);
 		}

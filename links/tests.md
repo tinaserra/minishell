@@ -3,10 +3,10 @@
 - [ ] cat diufosgid # check exit code
 
 <!-- plus double message d'erreur "Cd: command not found" -->
-export PATH='/bin:/usr/bin'; Cd .
-export PATH='/bin:/usr/bin'; cD .
+- [x] export PATH='/bin:/usr/bin'; Cd .
+- [x] export PATH='/bin:/usr/bin'; cD .
 
-export PATH='/bin:/usr/bin'; Echo bonjour                               
+- [x] export PATH='/bin:/usr/bin'; Echo bonjour                               
 export PATH='/bin:/usr/bin'; eCho bonjour                               
 export PATH='/bin:/usr/bin'; ecHo bonjour                               
 export PATH='/bin:/usr/bin'; echO bonjour                               
@@ -16,36 +16,35 @@ export PATH='/bin:/usr/bin'; EcHo bonjour
 export PATH='/bin:/usr/bin'; eChO bonjour                               
 export PATH='/bin:/usr/bin'; eChO -e 'bonjo\nur'                        
 env                                                                       
-export A=a; env                                                    
-export A=a B=b C=c; env                                            
-export A=a B=b C=c; env | cat -e                                   
-Env                                                                       
-enV                                                                       
-export PATH='/bin:/usr/bin'; Env                                        
+- [x] export A=a; env                                                    
+- [x] export A=a B=b C=c; env                                            
+- [x] export A=a B=b C=c; env | cat -e                                   
+- [x] Env                                                                       
+- [x] enV                                                                       
+- [x] export PATH='/bin:/usr/bin'; Env                                        
 export PATH='/bin:/usr/bin'; enV                                        
-export PATH='/bin:/usr/bin'; Exit; echo a                               
-export PATH='/bin:/usr/bin'; exiT; echo a                               
+- [x] export PATH='/bin:/usr/bin'; Exit; echo a                               
+- [x] export PATH='/bin:/usr/bin'; exiT; echo a                               
 export                                                                    
-export A=''; export                                                     
+- [x] export A=''; export                                                     
 export A='"'; export                                                    
-export A='\'; export                                                    
 export A='$'; export                                                    
 export A='\t'; export                                                   
 export A='''; export                                                    
 export A='a'; export                                                    
 export A=a; echo $A                                                       
-export A=a B=b C=c; echo $A$B$C                                           
+- [x] export A=a B=b C=c; echo $A$B$C                                           
 export BONJOURJESUIS=a; echo $BONJOURJESUIS                               
 export bonjourjesuis=a; echo $bonjourjesuis                               
 export bonjour_je_suis=a; echo $bonjour_je_suis                           
 export BONJOURJESUIS1=a; echo $BONJOURJESUIS1                             
-export bO_nJq123o__1ju_je3234sui__a=a; echo $bO_nJq123o__1ju_je3234sui__a 
-export a0123456789=a; echo $a0123456789                                   
+- [x] export bO_nJq123o__1ju_je3234sui__a=a; echo $bO_nJq123o__1ju_je3234sui__a 
+- [x] export a0123456789=a; echo $a0123456789                                   
 export abcdefghijklmnopqrstuvwxyz=a; echo $abcdefghijklmnopqrstuvwxyz     
 export ABCDEFGHIJKLMNOPQRSTUVWXYZ=a; echo $ABCDEFGHIJKLMNOPQRSTUVWXYZ     
-export __________________________=a; echo $__________________________     
-export _bonjour_=a; echo $_bonjour_                                       
-export _=a; echo $_a                                                      
+- [x] export __________________________=a; echo $__________________________     
+- [x] export _bonjour_=a; echo $_bonjour_                                       
+- [x] export _=a; echo $_a                                                      
 export 1=a                                                                
 export BONJOURJESUIS =a                                                   
 export BONJOURJESUIS= a                                                   
@@ -58,11 +57,10 @@ export BONJOUR\|JESUIS=a
 export BONJOUR\;JESUIS=a                                                  
 export BONJOUR\_JESUIS=a                                                  
 export BONJOUR\0JESUIS=a                                                  
-export \B\O\N\ \ \ \ \ \ \ JOURJESUIS=a                                   
-export A=\B\O\N\ \ \ \ \ \ \ JOURJESUIS; echo $A                          
-export A='bonjour je suis charles'; echo $A                               
-export A="bonjour je suis charles"; echo $A                               
-export A==a; echo $A                                                      
+                       
+- [x] export A='bonjour je suis charles'; echo $A                               
+- [x] export A="bonjour je suis charles"; echo $A                               
+- [x] export A==a; echo $A                                                      
 export A===a; echo $A                                                     
 export A====a; echo $A                                                    
 export A=====a; echo $A                                                   
@@ -425,8 +423,8 @@ export A='fi le'; echo bonjour > '$A'
 - [x] echo bonjour > $test w/ t
 - [x] sleep 5 | exit
 - [x] cat | cat | cat | ls # check outputs order
-- [ ] export var ="cat Makefile | grep >"
-- [ ] export "test=ici"=coucou
+- [x] export var ="cat Makefile | grep >"
+- [x] export "test=ici"=coucou
 - [ ] c$var Makefile # with var=at
 
 # Mauvais message d'erreur

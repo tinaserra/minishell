@@ -1,1 +1,1 @@
-EXEC=minishell;ARGS=;valgrind --tool=memcheck --leak-check=full --leak-resolution=high --show-reachable=yes --suppressions=supress_readline_error --log-file=truc ./$EXEC $ARGS
+EXEC=minishell;ARGS=;valgrind --tool=memcheck --leak-check=full --leak-resolution=high --show-reachable=yes --suppressions=supress_readline_error --log-file=truc.txt ./$EXEC $ARGS

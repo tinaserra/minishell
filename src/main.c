@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:37 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/26 14:29:56 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/08 09:35:16 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_all(void)
 {
 	free_env();
 	free_commands();
+	if (g_ms->hd_tmp)
+		free(g_ms->hd_tmp);
 	if (g_ms->line)
 		free(g_ms->line);
 	if (g_ms->term)
@@ -41,7 +43,6 @@ int	main(int ac, char **av, char **env)
 	g_ms->line = readline(g_ms->term);
 	while (g_ms->line != NULL)
 	{
-		
 		g_ms->fork = 0;
 		g_ms->end = 0;
 		signal(SIGINT, quit_process);

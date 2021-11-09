@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/26 15:25:10 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/08 09:37:39 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ static void execute(t_cmd *cmd)
 		exit(0);
 	else if (cmd->cmd && g_ms->env && cmd->argss)
 	{
-		execve(cmd->bin, cmd->argss, NULL);
-		error("command not found", cmd->cmd, NULL, 127);
-		exit(g_ms->exit);
+		if (cmd->bin)
+			execve(cmd->bin, cmd->argss, NULL);
+		else
+			error("command not found", cmd->cmd, NULL, 127);
+		free_all();
+		exit(0);
 	}
 	free_all();
 	exit(0);
@@ -97,7 +100,8 @@ void exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
 {
 	pid_t	pid;
 
-	g_ms->fork = 1;
+	if (!is_builtin(cmd->cmd))
+		g_ms->fork = 1;
 	cmd->bin = find_binary(cmd, 1);
 	cmd->argss = list_to_tab(cmd);
 	pid = fork();
