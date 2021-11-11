@@ -2,6 +2,15 @@
 
 ## Leaks
 
+## PAS OK
+
+touch a b c; /usr/bin/ls                                           
+touch a b c; /usr/bin/ls -l                                        
+touch a b c; cp /usr/bin/ls bonjour; ./bonjour                     
+touch a b c; cp /usr/bin/ls bonjour; ./bonjour -l                  
+touch a b c; echo bonjour > a; cp /usr/bin/cat ls; ./ls . a b c    
+touch a b c; echo bonjour > a; cp /usr/bin/cat ls; ls . a b c      
+echo > somefile
 
 ## Ok
 - [x] echo $PWD; echo $OLDPWD; cd .; pwd; echo $PWD; echo $OLDPWD
@@ -9,7 +18,6 @@
 - [x] echo $PWD; echo $OLDPWD; cd ../..; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd ../../..; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd ../../../..; pwd; echo $PWD; echo $OLDPWD
-
 - [x] echo $PWD; echo $OLDPWD; cd ''; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd /; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd ../../../../..; pwd; echo $PWD; echo $OLDPWD
@@ -29,7 +37,6 @@
 - [x] echo $PWD; echo $OLDPWD; cd ' // '; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd //home; pwd; echo $PWD; echo $OLDPWD
 - [x] echo $PWD; echo $OLDPWD; cd ' //home'; pwd; echo $PWD; echo $OLDPWD
-
 - [x] echo
 - [x] echo bonjour
 - [x] echo bonjour | cat -e
@@ -78,6 +85,82 @@ mkdir -m 060 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 Cd .
 cD .
 
+- [x] exit
+- [x] exit 2
+- [x] exit 3
+- [x] exit ' 3'         
+- [x] exit '\t3'
+- [x] exit '\t\f\r 3'   
+- [x] exit '3 '         
+- [x] exit '3\t'        
+exit '3\r'        
+exit '3\t\f\r '   
+exit '3     a'    
+exit '3\t\t\ta' 
+- [x] exit 0            
+- [x] exit -0           
+- [x] exit -1           
+- [x] exit 255          
+- [x] exit 256   
+- [x] exit 2000000      
+- [x] exit -2000000  
+- [x] exit 2147483647
+- [x] exit -2147483648
+- [x] exit 2147483648            
+- [x] exit -2147483649
+- [x] exit 3147483648            
+- [x] exit -3147483649   
+- [x] exit 4294967295            
+- [x] exit 4294967296            
+- [x] exit -9223372036854775808  
+- [x] exit 9223372036854775807  
+
+<!-- bash: exit: 9223372036854775808: numeric argument required -->
+- [x] exit -9223372036854775809  
+- [x] exit 9223372036854775808   
+- [x] exit 18446744073709551615  
+- [x] exit 18446744073709551616
+
+- [x] exit +1                    
+- [x] exit +2                    
+- [x] exit +3                    
+- [x] exit +0   
+- [x] exit +255                  
+- [x] exit +256                  
+- [x] exit +2000000              
+- [x] exit +2147483647   
+- [x] exit ++1                   
+- [x] exit ++2                   
+- [x] exit ++3                   
+- [x] exit ++0                   
+- [x] exit ++255                 
+- [x] exit ++256                 
+- [x] exit ++2000000             
+- [x] exit ++2147483647          
+- [x] exit --1                   
+- [x] exit --2                   
+- [x] exit --3                   
+- [x] exit --0                   
+- [x] exit --255                 
+- [x] exit --256                 
+- [x] exit --2000000             
+- [x] exit --2147483647
+- [x] exit bonjour    
+- [x] exit 0_                    
+- [x] exit _0  
+- [x] exit 0123456789            
+- [x] exit -0123456789  
+- [x] exit 00000000000000000000000000000000000000000000001 
+- [x] exit 0 bonjour 
+- [x] exit bonjour 0    
+- [x] exit 0 1     
+- [x] exit 0 1 2 3 4 5 6 7 8 9              
+- [x] exit bonjoru; echo should have exited 
+- [x] exit 9999; echo should have exited    
+- [x] Exit; echo a 
+- [x] exiT; echo a  
+
+
 ## Strange cases
 
 mkdir -m 100 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD [pas ok](prout)
@@ -113,133 +196,25 @@ mkdir -m 0000 d; echo $PWD; echo $OLDPWD; cd d; echo $OLDPWD
 
 ## Non testé
 
-exit
-exit 2
-exit 3
-exit ' 3'         
-exit '\t3'        
-exit '\t\f\r 3'   
-exit '3 '         
-exit '3\t'        
-exit '3\r'        
-exit '3\t\f\r '   
-exit '3     a'    
-exit '3\t\t\ta'   
-exit 0            
-exit -0           
-exit -1           
-exit 255          
-exit 256          
-exit 2000000      
-exit -2000000     
-exit 2147483647
-exit -2147483648           
-exit 2147483648            
-exit -2147483649           
-exit 3147483648            
-exit -3147483649           
-exit 4294967295            
-exit 4294967296            
-exit -9223372036854775808  
-exit 9223372036854775807   
-exit -9223372036854775809  
-exit 9223372036854775808   
-exit 18446744073709551615  
-exit 18446744073709551616  
-exit +1                    
-exit +2                    
-exit +3                    
-exit +0                    
-exit +255                  
-exit +256                  
-exit +2000000              
-exit +2147483647           
-exit ++1                   
-exit ++2                   
-exit ++3                   
-exit ++0                   
-exit ++255                 
-exit ++256                 
-exit ++2000000             
-exit ++2147483647          
-exit --1                   
-exit --2                   
-exit --3                   
-exit --0                   
-exit --255                 
-exit --256                 
-exit --2000000             
-exit --2147483647          
-exit bonjour               
-exit 0_                    
-exit _0                    
-exit 0123456789            
-exit -0123456789  
-exit 00000000000000000000000000000000000000000000001 
-exit 0 bonjour 
-exit bonjour 0    
-exit 0 1     
-exit 0 1 2 3 4 5 6 7 8 9              
-exit bonjoru; echo should have exited 
-exit 9999; echo should have exited    
-Exit; echo a 
-exiT; echo a  
+- [x] pwd                                                                       
+- [x] cd ..; pwd                                                         
+- [x] cd ../..; pwd                                                      
+- [x] cd ../../..; pwd                                                   
+- [x] cd /; pwd                                                          
+- [x] cd $HOME; pwd                                                      
+- [x] notfound                                                                  
+- [x] notfound a b c    
+- [x] echo foo>bar
+- [x] echo foo >bar                                                             
+- [x] echo foo> bar 
+- [x] echo foo > bar 
+- [x] mkdir somedir; somedir
 
-
-
-pwd                                                                       
-cd ..; pwd                                                         
-cd ../..; pwd                                                      
-cd ../../..; pwd                                                   
-cd /; pwd                                                          
-cd $HOME; pwd                                                      
-
-notfound                                                                  
-notfound a b c                                                            
-echo "\"" >>a"b""c"                                                       
-echo foo>bar                                                              
-echo foo >bar                                                             
-echo foo> bar                                                             
-echo foo > bar                                                            
-touch a b c; /usr/bin/ls                                           
-touch a b c; /usr/bin/ls -l                                        
-touch a b c; cp /usr/bin/ls bonjour; ./bonjour                     
-touch a b c; cp /usr/bin/ls bonjour; ./bonjour -l                  
-touch a b c; echo bonjour > a; cp /usr/bin/cat ls; ./ls . a b c    
-touch a b c; echo bonjour > a; cp /usr/bin/cat ls; ls . a b c      
-echo > somefile
-chmod 000 somefile; ./somefile                    
-chmod 001 somefile; ./somefile                    
-chmod 002 somefile; ./somefile                    
-chmod 003 somefile; ./somefile                    
-chmod 004 somefile; ./somefile                    
-chmod 005 somefile; ./somefile                    
-chmod 006 somefile; ./somefile                    
-chmod 007 somefile; ./somefile                    
-chmod 010 somefile; ./somefile                    
-chmod 020 somefile; ./somefile                    
-chmod 030 somefile; ./somefile                    
-chmod 040 somefile; ./somefile                    
-chmod 050 somefile; ./somefile                    
-chmod 060 somefile; ./somefile                    
-chmod 070 somefile; ./somefile                    
-chmod 100 somefile; ./somefile                    
-chmod 200 somefile; ./somefile                    
-chmod 300 somefile; ./somefile                    
-chmod 400 somefile; ./somefile                    
-chmod 500 somefile; ./somefile                    
-chmod 600 somefile; ./somefile                    
-chmod 700 somefile; ./somefile                    
-chmod 755 somefile; ./somefile                    
-chmod 644 somefile; ./somefile                    
-chmod 311 somefile; ./somefile                    
-chmod 111 somefile; ./somefile                    
-chmod 222 somefile; ./somefile                    
-chmod 333 somefile; ./somefile
 mkdir somedir; somedir/ 
+
 .mkdir somedir; /somedir/                                          
-mkdir somedir; somedir
-mkdir somedir; ./somedir                                           
+mkdir somedir; ./somedir  
+
 mkdir somedir; somedir
 ln -s somedir somedirsoftlink; somedirsoftlink/     
 ln -s somedir somedirsoftlink; ./somedirsoftlink/   
@@ -252,21 +227,7 @@ touch _; ./_
 touch a; mv a ./-; ./-                                             
 touch .; ./.                                                       
 touch ..; ./..                                                     
-mkdir -m 0777 somedir; ./somedir                                   
-mkdir -m 1000 somedir; ./somedir                                   
-mkdir -m 2000 somedir; ./somedir                                   
-mkdir -m 3000 somedir; ./somedir                                   
-mkdir -m 4000 somedir; ./somedir                                   
-mkdir -m 5000 somedir; ./somedir                                   
-mkdir -m 6000 somedir; ./somedir                                   
-mkdir -m 7000 somedir; ./somedir                                   
-mkdir -m 1777 somedir; ./somedir                                   
-mkdir -m 2777 somedir; ./somedir                                   
-mkdir -m 3777 somedir; ./somedir                                   
-mkdir -m 4777 somedir; ./somedir                                   
-mkdir -m 5777 somedir; ./somedir                                   
-mkdir -m 6777 somedir; ./somedir                                   
-mkdir -m 0000 somedir; ./somedir                                   
+                    
 echo > somefile && chmod 000 somefile; ./Somefile                  
 echo > somefile && chmod 000 somefile; ./someFILE                  
 echo bonjour > test                                                       
