@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 06:51:46 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/08 08:39:20 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:09:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	hd_2(char *tmp, char *line, int fd[2])
+{
+	free(tmp);
+	ft_putstr_fd(line, fd[1]);
+	free(line);
+	close(fd[1]);
+}
 
 void	heredoc(t_cmd *cmd, t_token **token)
 {
@@ -36,8 +44,5 @@ void	heredoc(t_cmd *cmd, t_token **token)
 			line = ft_strjoin_free(line, "\n", 'L');
 		}
 	}
-	free(tmp);
-	ft_putstr_fd(line, fd[1]);
-	free(line);
-	close(fd[1]);
+	hd_2(tmp, line, fd);
 }

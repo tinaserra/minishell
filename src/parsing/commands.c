@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 01:30:56 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/26 15:24:47 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:13:51 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*static void	clear(void *data)
+void	free_commands_2(t_token *tmp2)
 {
-	if (data)
-		free(data);
-}*/
+	while (g_ms->cmds->args)
+	{
+		tmp2 = g_ms->cmds->args->next;
+		free(g_ms->cmds->args->word);
+		free(g_ms->cmds->args);
+		g_ms->cmds->args = tmp2;
+	}
+}
 
 void	free_commands(void)
 {
@@ -24,6 +29,7 @@ void	free_commands(void)
 	t_token	*tmp2;
 	t_list	*tmp3;
 
+	tmp2 = NULL;
 	while (g_ms->cmds)
 	{
 		while (g_ms->cmds->env)
@@ -32,18 +38,12 @@ void	free_commands(void)
 			free(g_ms->cmds->env);
 			g_ms->cmds->env = tmp3;
 		}
-		while (g_ms->cmds->args)
-		{
-			tmp2 = g_ms->cmds->args->next;
-			free(g_ms->cmds->args->word);
-			free(g_ms->cmds->args);
-			g_ms->cmds->args = tmp2;
-		}
+		free_commands_2(tmp2);
 		ft_free_tab(g_ms->cmds->argss);
 		tmp = g_ms->cmds->next;
-		if (g_ms->cmds->cmd)	
+		if (g_ms->cmds->cmd)
 			free(g_ms->cmds->cmd);
-		if (g_ms->cmds->bin)	
+		if (g_ms->cmds->bin)
 			free(g_ms->cmds->bin);
 		if (g_ms->cmds)
 			free(g_ms->cmds);

@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 23:41:36 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/09/20 14:53:02 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/11 15:15:24 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_token	*create_token(int i)
-{
-	t_token	*new;
-
-	if (!g_ms->count)
-		return (NULL);
-	new = ft_calloc(1, sizeof(t_token));
-	new->word = ft_substr(g_ms->line, i - g_ms->count,
-			g_ms->count);
-	g_ms->count = 0;
-	return (new);
-}
 
 void	free_token(void)
 {
@@ -71,6 +58,27 @@ t_token	*create_token2(char *word, int type)
 	return (new);
 }
 
+static void	checkkk(t_token *tmp)
+{
+	if (ft_strcmp(tmp->word, ";") == 0)
+		tmp->type = POINT_V;
+	else if (ft_strcmp(tmp->word, "|") == 0)
+		tmp->type = PIPE;
+	else if (ft_strcmp(tmp->word, "<") == 0
+		|| ft_strcmp(tmp->word, "<<") == 0
+		|| ft_strcmp(tmp->word, ">") == 0
+		|| ft_strcmp(tmp->word, ">>") == 0)
+		tmp->type = REDIR;
+	else if (is_valid_env_var(tmp->word) == 1)
+		tmp->type = ENV;
+	else if (is_valid_env_var(tmp->word) == 2)
+		tmp->type = EXIT_STATUS;
+	else if (ft_strcmp(tmp->word, "\n") == 0)
+		tmp->type = NEWL;
+	else
+		tmp->type = TXT;
+}
+
 int	get_token_type(void)
 {
 	t_token	*tmp;
@@ -78,23 +86,7 @@ int	get_token_type(void)
 	tmp = g_ms->tokens;
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->word, ";") == 0)
-			tmp->type = POINT_V;
-		else if (ft_strcmp(tmp->word, "|") == 0)
-			tmp->type = PIPE;
-		else if (ft_strcmp(tmp->word, "<") == 0
-			|| ft_strcmp(tmp->word, "<<") == 0
-			|| ft_strcmp(tmp->word, ">") == 0
-			|| ft_strcmp(tmp->word, ">>") == 0)
-			tmp->type = REDIR;
-		else if (is_valid_env_var(tmp->word) == 1)
-			tmp->type = ENV;
-		else if (is_valid_env_var(tmp->word) == 2)
-			tmp->type = EXIT_STATUS;
-		else if (ft_strcmp(tmp->word, "\n") == 0)
-			tmp->type = NEWL;
-		else
-			tmp->type = TXT;
+		checkkk(tmp);
 		if (have_error(tmp))
 		{
 			g_ms->exit = 258;

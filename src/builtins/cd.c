@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/08 08:50:58 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:00:05 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	update_pwd(void)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = ft_strdup(g_ms->curdir);
 	free(g_ms->curdir);
@@ -51,6 +51,19 @@ int	have_permission(t_cmd *cmd)
 	return (1);
 }
 
+int	cd_2(t_cmd *cmd, t_token *tmp)
+{
+	if (tmp->word[0] == '\0')
+		return (0);
+	if (have_permission(cmd) && chdir(tmp->word) != 0)
+	{
+		error(strerror(errno), "cd", tmp->word, 1);
+		g_ms->exit = 1;
+		return (0);
+	}
+	return (1);
+}
+
 void	cd_builtin(t_cmd *cmd)
 {
 	t_token	*tmp;
@@ -74,14 +87,8 @@ void	cd_builtin(t_cmd *cmd)
 	}
 	else
 	{
-		if (tmp->word[0] == '\0')
+		if (!cd_2(cmd, tmp))
 			return ;
-		if (have_permission(cmd) && chdir(tmp->word) != 0)
-		{
-			error(strerror(errno), "cd", tmp->word, 1);
-			g_ms->exit = 1;
-			return ;
-		}
 	}
 	update_pwd();
 }

@@ -3,14 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:30 by vserra            #+#    #+#             */
-/*   Updated: 2021/10/25 23:07:23 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/11 15:21:36 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	execute2(t_cmd *cmd)
+{
+	int	exitt;
+
+	exitt = g_ms->exit;
+	if (cmd->bin)
+		execve(cmd->bin, cmd->argss, NULL);
+	else
+		error("command not found", cmd->cmd, NULL, 127);
+	free_all();
+	exit(exitt);
+}
+
+void	execute(t_cmd *cmd)
+{
+	if (!ft_strcmp(cmd->cmd, "echo"))
+		echo_builtin(cmd, cmd->out);
+	else if (!ft_strcmp(cmd->cmd, "env"))
+		env_builtin(cmd->out);
+	else if (!ft_strcmp(cmd->cmd, "pwd"))
+		pwd_builtin(cmd);
+	else if (!ft_strcmp(cmd->cmd, "cd"))
+		cd_builtin(cmd);
+	else if (!ft_strcmp(cmd->cmd, "exit"))
+		exit_builtin(cmd);
+	else if (!ft_strcmp(cmd->cmd, "export"))
+		export_builtin(cmd);
+	else if (!ft_strcmp(cmd->cmd, "unset"))
+		exit(0);
+	else if (cmd->cmd && g_ms->env && cmd->argss)
+		execute2(cmd);
+	free_all();
+	exit(0);
+}
 
 int	is_builtin(char *s)
 {
@@ -29,7 +64,7 @@ int	is_builtin(char *s)
 	if (ft_strcmp(s, "unset") == 0)
 		return (1);
 	return (0);
-} 
+}
 
 char	**list_to_tab(t_cmd *cmd)
 {
@@ -40,8 +75,8 @@ char	**list_to_tab(t_cmd *cmd)
 	i = 1;
 	if (!cmd->cmd)
 		return (NULL);
-	if (!(args = (char **)ft_calloc(1, sizeof(char *) *
-		(tokens_list_size(cmd->args) + 2))))
+	args = ft_calloc(1, sizeof(char *) *(tokens_list_size(cmd->args) + 2));
+	if (!args)
 		exit(0);
 	args[0] = ft_strdup(cmd->cmd);
 	tmp = cmd->args;

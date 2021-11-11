@@ -19,9 +19,9 @@ SRCS            =		src/main.c									\
 						$(addprefix ${BUILTINS}, exit.c)			\
 						$(addprefix ${BUILTINS}, utils.c)			\
 						$(addprefix ${EXEC}, exec_start.c)			\
-						$(addprefix ${EXEC}, exec_pipe.c)			\
 						$(addprefix ${EXEC}, exec_utils.c)			\
 						$(addprefix ${EXEC}, exec_utils2.c)			\
+						$(addprefix ${EXEC}, exec_utils3.c)			\
 						$(addprefix ${EXEC}, heredoc.c)				\
 						$(addprefix ${PARSING}, commands.c)			\
 						$(addprefix ${PARSING}, quotes.c)			\
@@ -31,6 +31,7 @@ SRCS            =		src/main.c									\
 						$(addprefix ${PARSING}, start.c)			\
 						$(addprefix ${PARSING}, tokens.c)			\
 						$(addprefix ${PARSING}, tokens2.c)			\
+						$(addprefix ${PARSING}, tokens3.c)			\
 						$(addprefix ${PARSING}, utils.c)			\
 						$(addprefix ${PROMPT}, env.c)				\
 						$(addprefix ${PROMPT}, signal.c)			\

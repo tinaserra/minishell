@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:58 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/26 15:28:16 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:53:37 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*redirect3(t_token *args, t_token **start)
+static t_token	*checkk(t_token **start, t_token *args, t_token *next)
 {
-	t_token	*tmp;
-	t_token	*next;
-
-	tmp = *start;
 	if (*start == args)
 	{
 		next = (*start)->next;
@@ -28,6 +24,20 @@ t_token	*redirect3(t_token *args, t_token **start)
 			next->prev = NULL;
 		return (next);
 	}
+	return (NULL);
+}
+
+t_token	*redirect3(t_token *args, t_token **start)
+{
+	t_token	*tmp;
+	t_token	*next;
+	t_token	*tmp2;
+
+	tmp = *start;
+	next = NULL;
+	tmp2 = checkk(start, args, next);
+	if (tmp2)
+		return (tmp2);
 	while (tmp)
 	{
 		if (tmp == args && tmp->prev)
@@ -45,10 +55,19 @@ t_token	*redirect3(t_token *args, t_token **start)
 	return (NULL);
 }
 
+void	close_fds(t_cmd *cmd, t_token **args)
+{
+	if ((ft_strcmp((*args)->word, ">") == 0
+			|| ft_strcmp((*args)->word, ">>") == 0) && cmd->out > 0)
+		close(cmd->out);
+	if (ft_strcmp((*args)->word, "<") == 0 && cmd->in > 0)
+		close(cmd->in);
+}
+
 int	redirect2(t_cmd *cmd, t_token **args, int flags)
 {
-	int	fd;
-	char *tmp;
+	int		fd;
+	char	*tmp;
 
 	tmp = find_binary(cmd, 0);
 	if (!tmp)
@@ -67,11 +86,7 @@ int	redirect2(t_cmd *cmd, t_token **args, int flags)
 			error("No such file or directory", (*args)->next->word, NULL, 1);
 		return (-1);
 	}
-	if ((ft_strcmp((*args)->word, ">") == 0
-			|| ft_strcmp((*args)->word, ">>") == 0) && cmd->out > 0)
-		close(cmd->out);
-	if (ft_strcmp((*args)->word, "<") == 0 && cmd->in > 0)
-		close(cmd->in);
+	close_fds(cmd, args);
 	*args = redirect3(*args, &cmd->args);
 	*args = redirect3(*args, &cmd->args);
 	return (fd);

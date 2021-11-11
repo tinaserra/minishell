@@ -1,17 +1,20 @@
-#ifndef	MINISHELL_H
-#define MINISHELL_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/11 14:50:05 by admin             #+#    #+#             */
+/*   Updated: 2021/11/11 15:21:56 by admin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-** HEADERS ------------------------------------------------------------------ **
-*/
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include "libft.h"
 # include "struct.h"
-
-/*
-** LIBRARIES ---------------------------------------------------------------- **
-*/
-
 # include <limits.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -49,12 +52,12 @@ void	free_commands(void);
 ** PARSING ------------------------------------------------------------------ **
 */
 
-void	parsing();
+void	parsing(void);
 int		get_env_content(char *line, char **env_content);
 char	*replace_env(char *str, int pos_dollar);
 void	split_minishell(char *command);
 int		is_in_str(char *s, char c);
-int 	is_in_quote(char *s, int pos);
+int		is_in_quote(char *s, int pos);
 int		is_escaped(char *s, int pos);
 int		get_token_type(void);
 int		is_valid_env_var(char *s);
@@ -64,7 +67,7 @@ void	free_token(void);
 t_token	*create_token(int i);
 t_token	*create_token2(char *word, int type);
 void	parse_token(t_token	**token);
-void	set_env(char* env, char *value);
+void	set_env(char *env, char *value);
 void	redirect(t_cmd *cmd);
 char	*handle_quotes(char *src, int env);
 char	*replace_env2(char *str, int *i);
@@ -72,10 +75,12 @@ int		env_size(char *src, int i);
 t_env	*lst_new_env(char *name, char *value);
 void	add_env(t_env **alst, t_env *new);
 t_env	*get_env(t_env *env, char *name);
-void	free_all();
+void	free_all(void);
 int		tokens_list_size(t_token *token);
 int		is_builtin(char *s);
-
+t_token	*create_token(int i);
+char	*simple_quotes(char *src, int *i);
+int		quote_size(char *src, int type, int env);
 /*
 ** BUILTINS ----------------------------------------------------------------- **
 */
@@ -104,6 +109,10 @@ void	status_child(int status);
 char	*find_binary(t_cmd *cmd, int show);
 int		find_all_binary(t_cmd *cmd);
 void	heredoc(t_cmd *cmd, t_token **token);
+void	handle_fds(t_cmd *cmd, int pipe1[2], int pipe2[2]);
+void	execute2(t_cmd *cmd);
+void	execute(t_cmd *cmd);
+void	close_all(int pipe1[2], int pipe2[2]);
 
 /*
 ** ERROR -------------------------------------------------------------------- **

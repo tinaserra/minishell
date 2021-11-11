@@ -3,62 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:27 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:56:28 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/11 15:16:33 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	quote_size(char *src, int type, int env)
-{
-	int	i;
-	int	j;
-	int	esc;
-
-	i = -1;
-	j = 0;
-	esc = 0;
-	while (src[++i])
-	{
-		if (!esc && src[i] == '\'' && type == 2)
-			return (i);
-		if (!esc && src[i] == '\'' && type == 0)
-			return (i + j);
-		if (!esc && src[i] == '$' && (type == 0 || type == 1 || type == 4)
-			&& env)
-			j += env_size(src, i);
-		if (!esc && src[i] == '\"' && (type == 0 || type == 1))
-			return (i + j);
-		esc = 0;
-		if (src[i] == '\\' && type != 2)
-			esc = 1;
-		else
-			esc = 0;
-	}
-	return (i + j);
-}
-
-char	*simple_quotes(char *src, int *i)
-{
-	char	*dest;
-	int		j;
-
-	(*i)++;
-	j = quote_size(src + *i, 2, 0);
-	dest = (char *)ft_calloc(1, j + 1);
-	j = 0;
-	while (src[*i] && src[*i] != '\'')
-	{
-		dest[j] = src[*i];
-		*i = *i + 1;
-		j++;
-	}
-	dest[j] = '\0';
-	return (dest);
-}
 
 char	*double_quotes(char *src, int *i, int j, int env)
 {
@@ -117,14 +69,20 @@ char	*no_quotes(char *src, int *i, int j, int env)
 	return (dest);
 }
 
+static	void	uselesstruc(char *src, int *i)
+{
+	if (src[*i])
+		i++;
+}
+
 char	*handle_quotes(char *src, int env)
 {
 	int		i;
 	char	*dest;
 
+	i = 0;
 	if (src == NULL)
 		return (src);
-	i = 0;
 	dest = ft_strdup("");
 	while (src[i])
 	{
@@ -140,10 +98,8 @@ char	*handle_quotes(char *src, int env)
 			dest = ft_strjoin_free(dest, no_quotes(src, &i, 0, env), 'B');
 			continue ;
 		}
-		if (src[i])
-			i++;
+		uselesstruc(src, &i);
 	}
 	free(src);
-	src = NULL;
 	return (dest);
 }

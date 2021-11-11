@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:37 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/08 09:35:16 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/11 13:06:06 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,20 @@ void	free_all(void)
 		free(g_ms);
 }
 
+void	init(void)
+{
+	g_ms->curdir = getcwd(NULL, 0);
+	signal(SIGINT, quit_process);
+	signal(SIGQUIT, quit_process);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	(void)av;
 	(void)ac;
 	g_ms = malloc(sizeof(t_minishell));
 	ft_bzero(g_ms, sizeof(t_minishell));
-	g_ms->curdir = getcwd(NULL, 0);
-	signal(SIGINT, quit_process);
-	signal(SIGQUIT, quit_process);
+	init();
 	if (!init_env(env))
 		exit(EXIT_FAILURE);
 	g_ms->term = print_prompt();

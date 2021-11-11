@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+         #
+#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 13:59:05 by vserra            #+#    #+#              #
-#    Updated: 2021/10/12 09:24:59 by jode-vri         ###   ########.fr        #
+#    Updated: 2021/11/11 14:44:27 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRCS			=	ft_putstr_fd.c				\
 					ft_substr.c					\
 					ft_strlen.c					\
 					ft_strlcat.c				\
-					ft_get_next_line.c			\
 					ft_itoa.c					\
 					ft_strs_tab_size.c			\
 					ft_strncmp.c				\
@@ -79,7 +78,7 @@ NAME			=	libft.a
 
 $(OBJ_DIR)/%o	:	%c
 				@mkdir -p $(OBJ_DIR)
-				@gcc -Wall -Wextra -Werror -c $< -o $@
+				@gcc -g -Wall -Wextra -Werror -c $< -o $@
 
 $(NAME)			:	${OBJS}
 				@ar -rcs ${NAME} ${OBJS}
