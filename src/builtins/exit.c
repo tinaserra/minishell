@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/11 14:55:38 by admin            ###   ########.fr       */
+/*   Updated: 2021/11/12 14:43:36 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define SUCCESS 0
 #define FAILURE -1
 
-static void exit_error(char *word)
+static void	exit_error(char *word)
 {
 	error("numeric argument required", "exit", word, 2);
 	g_ms->status = 2;
@@ -25,7 +25,7 @@ static void exit_error(char *word)
 static double long	exit_arg(char *arg, t_cmd *cmd)
 {
 	int		i;
-	int 	len;
+	int		len;
 
 	i = 0;
 	len = ft_strlen(arg);

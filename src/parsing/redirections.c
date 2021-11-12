@@ -3,41 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:58 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/11 13:53:37 by admin            ###   ########.fr       */
+/*   Updated: 2021/11/12 16:03:29 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_token	*checkk(t_token **start, t_token *args, t_token *next)
+static t_token	*checkk(t_token *tmp, t_token *args, t_token *next)
 {
-	if (*start == args)
-	{
-		next = (*start)->next;
-		free((*start)->word);
-		free(*start);
-		*start = next;
-		if (next)
-			next->prev = NULL;
-		return (next);
-	}
-	return (NULL);
-}
-
-t_token	*redirect3(t_token *args, t_token **start)
-{
-	t_token	*tmp;
-	t_token	*next;
-	t_token	*tmp2;
-
-	tmp = *start;
-	next = NULL;
-	tmp2 = checkk(start, args, next);
-	if (tmp2)
-		return (tmp2);
 	while (tmp)
 	{
 		if (tmp == args && tmp->prev)
@@ -55,6 +31,26 @@ t_token	*redirect3(t_token *args, t_token **start)
 	return (NULL);
 }
 
+t_token	*redirect3(t_token *args, t_token **start)
+{
+	t_token	*tmp;
+	t_token	*next;
+
+	tmp = *start;
+	next = NULL;
+	if (*start == args)
+	{
+		next = (*start)->next;
+		free((*start)->word);
+		free(*start);
+		*start = next;
+		if (next)
+			next->prev = NULL;
+		return (next);
+	}
+	return (checkk(tmp, args, next));
+}
+
 void	close_fds(t_cmd *cmd, t_token **args)
 {
 	if ((ft_strcmp((*args)->word, ">") == 0
@@ -66,8 +62,8 @@ void	close_fds(t_cmd *cmd, t_token **args)
 
 int	redirect2(t_cmd *cmd, t_token **args, int flags)
 {
-	int		fd;
-	char	*tmp;
+	int			fd;
+	char		*tmp;
 
 	tmp = find_binary(cmd, 0);
 	if (!tmp)
@@ -80,10 +76,7 @@ int	redirect2(t_cmd *cmd, t_token **args, int flags)
 	fd = open((*args)->next->word, flags, 0644);
 	if (fd < 0)
 	{
-		if (!ft_strcmp((*args)->next->word, ""))
-			error("ambiguous redirect", NULL, NULL, -1);
-		else
-			error("No such file or directory", (*args)->next->word, NULL, 1);
+		checkkk(args);
 		return (-1);
 	}
 	close_fds(cmd, args);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/11 15:30:45 by admin            ###   ########.fr       */
+/*   Updated: 2021/11/12 14:43:01 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	export_errors(char *res)
 	i = -1;
 	while (res[++i])
 	{
-		if (ft_strchr(" ,.%~@^*/", res[i]))
+		if (ft_strchr(" ,.%~@!\\|;&'$\"^*/", res[i]))
 			return (1);
 	}
 	return (0);
@@ -55,13 +55,10 @@ int	export_2(t_token *tmp, char **id, char *content)
 	return (1);
 }
 
-void	export_builtin(t_cmd *cmd)
+void	exportt(t_token *tmp, char *content)
 {
-	t_token	*tmp;
-	char	*content;
 	char	**id;
 
-	tmp = cmd->args;
 	while (tmp)
 	{
 		if (tmp && tmp->word)
@@ -85,4 +82,14 @@ void	export_builtin(t_cmd *cmd)
 		}
 		tmp = tmp->next;
 	}
+}
+
+void	export_builtin(t_cmd *cmd)
+{
+	t_token	*tmp;
+	char	*content;
+
+	tmp = cmd->args;
+	content = NULL;
+	exportt(tmp, content);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/11 15:21:47 by admin            ###   ########.fr       */
+/*   Updated: 2021/11/12 15:47:09 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	exec_bin_check(t_cmd *cmd)
 		g_ms->fork = 1;
 	cmd->bin = find_binary(cmd, 1);
 	cmd->argss = list_to_tab(cmd);
+	if ((access(cmd->cmd, F_OK) == 0 && access(cmd->cmd, X_OK) == -1))
+		error("Permission denied", cmd->cmd, NULL, 1);
 }
 
 void	exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])

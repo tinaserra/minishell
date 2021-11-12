@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:27 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/11 15:16:33 by admin            ###   ########.fr       */
+/*   Updated: 2021/11/12 16:04:04 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,11 @@ char	*no_quotes(char *src, int *i, int j, int env)
 	return (dest);
 }
 
-static	void	uselesstruc(char *src, int *i)
-{
-	if (src[*i])
-		i++;
-}
-
-char	*handle_quotes(char *src, int env)
+char	*handle_quotes2(char *src, int env, char *dest)
 {
 	int		i;
-	char	*dest;
 
 	i = 0;
-	if (src == NULL)
-		return (src);
-	dest = ft_strdup("");
 	while (src[i])
 	{
 		if (src[i] == '\'' && !is_escaped(src, i - 1))
@@ -98,8 +88,31 @@ char	*handle_quotes(char *src, int env)
 			dest = ft_strjoin_free(dest, no_quotes(src, &i, 0, env), 'B');
 			continue ;
 		}
-		uselesstruc(src, &i);
+		if (src[i])
+			i++;
 	}
+	return (dest);
+}
+
+char	*handle_quotes(char *src, int env)
+{
+	char	*dest;
+
+	if (src == NULL)
+		return (src);
+	dest = ft_strdup("");
+	dest = handle_quotes2(src, env, dest);
 	free(src);
 	return (dest);
+}
+
+void	checkkk(t_token **args)
+{
+	if (!ft_strcmp((*args)->next->word, ""))
+		error("ambiguous redirect", NULL, NULL, -1);
+	else if ((access((*args)->next->word, F_OK) == 0
+			&& access((*args)->next->word, X_OK) == -1))
+		error("Permission denied", (*args)->next->word, NULL, 1);
+	else if (access((*args)->next->word, F_OK))
+		error("No such file or directory", (*args)->next->word, NULL, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:06:09 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:49:34 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:27:14 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,20 @@ void	unset_builtin(t_cmd *cmd)
 
 	(void)cmd;
 	tmp = cmd->args;
-	pos = lstfind_pos(g_ms->env, tmp->word);
-	while (tmp)
+	if (tmp)
 	{
-		if (is_valid_envv(tmp->word))
+		pos = lstfind_pos(g_ms->env, tmp->word);
+		while (tmp)
 		{
-			env = get_env(g_ms->env, tmp->word);
-			if (env)
-				g_ms->env = lstfree_at(g_ms->env, pos);
+			if (is_valid_envv(tmp->word))
+			{
+				env = get_env(g_ms->env, tmp->word);
+				if (env)
+					g_ms->env = lstfree_at(g_ms->env, pos);
+			}
+			else
+				error("not a valid identifier", "unset", tmp->word, 1);
+			tmp = tmp->next;
 		}
-		else
-			error("not a valid identifier", "unset", tmp->word, 1);
-		tmp = tmp->next;
 	}
 }
