@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 14:50:05 by admin             #+#    #+#             */
-/*   Updated: 2021/11/12 16:03:46 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:15:39 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	handle_fds(t_cmd *cmd, int pipe1[2], int pipe2[2]);
 void	execute2(t_cmd *cmd);
 void	execute(t_cmd *cmd);
 void	close_all(int pipe1[2], int pipe2[2]);
-void	checkkk(t_token **args);
+void	checkkkkk(t_token **args);
 /*
 ** ERROR -------------------------------------------------------------------- **
 */

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:58 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/12 16:03:29 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:15:38 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	redirect2(t_cmd *cmd, t_token **args, int flags)
 	fd = open((*args)->next->word, flags, 0644);
 	if (fd < 0)
 	{
-		checkkk(args);
+		checkkkkk(args);
 		return (-1);
 	}
 	close_fds(cmd, args);

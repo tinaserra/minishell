@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:27 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/12 16:04:04 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:15:00 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*handle_quotes(char *src, int env)
 	return (dest);
 }
 
-void	checkkk(t_token **args)
+void	checkkkkk(t_token **args)
 {
 	if (!ft_strcmp((*args)->next->word, ""))
 		error("ambiguous redirect", NULL, NULL, -1);
