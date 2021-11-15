@@ -66,7 +66,7 @@ static int	ft_count_word(char *str, char *charset)
 
 	i = 0;
 	nbr_word = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		if ((ft_strchr(charset, str[i]) == NULL) && (i == 0))
 		{
@@ -88,12 +88,14 @@ char	**ft_split(char *str, char *charset)
 	int		nbr_word;
 
 	nbr_word = ft_count_word(str, charset);
+	if (nbr_word == 0)
+		return (NULL);
 	tab = malloc(sizeof(char *) * (nbr_word + 1));
 	if (tab == NULL)
 		return (NULL);
 	tab[nbr_word] = NULL;
 	i = 0;
-	while (*str)
+	while (str && *str)
 	{
 		if (ft_strchr(charset, *str) == NULL)
 		{

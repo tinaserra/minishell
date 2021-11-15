@@ -19,17 +19,26 @@ int	init_env(char **env)
 	int		i;
 
 	i = -1;
-	while (env[++i])
+	if (env && !env[0])
 	{
-		array = ft_split(env[i], "=");
-		if (!array)
-			return (0);
-		if (!array[1])
-			tmp = "";
-		else
-			tmp = ft_strdup(array[1]);
-		add_env(&g_ms->env, lst_new_env(ft_strdup(array[0]), tmp));
-		ft_free_tab(array);
+		add_env(&g_ms->env, lst_new_env(ft_strdup("PWD"), getcwd(NULL, 0)));
+		add_env(&g_ms->env, lst_new_env(ft_strdup("PATH"), ft_strdup("/bin")));
+		return (1);
+	}	
+	while (env && env[++i])
+	{
+		if (env[i][0] != '\0')
+		{
+			array = ft_split(env[i], "=");
+			if (!array)
+				return (0);
+			if (!array[1])
+				tmp = "";
+			else
+				tmp = ft_strdup(array[1]);
+			add_env(&g_ms->env, lst_new_env(ft_strdup(array[0]), tmp));
+			ft_free_tab(array);
+		}			
 	}
 	return (1);
 }
@@ -44,7 +53,8 @@ void	free_env(void)
 	{
 		tmp = g_ms->env->next;
 		free(g_ms->env->name);
-		free(g_ms->env->value);
+		if (ft_strcmp(g_ms->env->value, "") != 0)
+			free(g_ms->env->value);
 		free(g_ms->env);
 		g_ms->env = tmp;
 	}

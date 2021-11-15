@@ -99,7 +99,7 @@ char	*check_path(t_cmd *cmd)
 
 	path = ft_split(find_env(g_ms->env, "PATH"), ":");
 	i = 0;
-	while (path[i])
+	while (path && path[i])
 	{
 		binary = ft_strjoin_free(ft_strdup(path[i]), "/", 'L');
 		binary = ft_strjoin_free(binary, cmd->cmd, 'L');
