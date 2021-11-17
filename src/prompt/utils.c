@@ -78,15 +78,18 @@ char	*print_prompt(void)
 	res = ft_strjoin_free(res, find_env(g_ms->env, "USER"), 'L');
 	res = ft_strjoin_free(res, "\x1b[31m ➜ ", 'L');
 	res = ft_strjoin_free(res, "\x1b[34m ", 'L');
-	if (!pwd[0])
+	if (pwd && !pwd[0])
 	{
 		free(pwd);
 		res = ft_strjoin_free(res, "/", 'L');
 	}
 	else
 	{
-		res = ft_strjoin_free(res, pwd[ft_strs_tab_size(pwd) - 1], 'L');
-		ft_free_tab(pwd);
+		if (pwd)
+		{
+			res = ft_strjoin_free(res, pwd[ft_strs_tab_size(pwd) - 1], 'L');
+			ft_free_tab(pwd);
+		}
 	}
 	res = ft_strjoin_free(res, " \x1b[0m", 'L');
 	return (res);
