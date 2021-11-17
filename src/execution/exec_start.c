@@ -12,6 +12,39 @@
 
 #include "minishell.h"
 
+/*
+** Connaître le code erreur d’un appel à une commande / d'un signal :
+** waitpid(pid_t pid, int *status, int options);
+**
+** WIFEXITED(status) = renvoie vrai si le fils s'est terminé normalement,
+** c'est-à-dire par un appel à exit(3) ou _exit(2), ou bien par un retour de 
+** main().
+** Et dans ce cas on peut appeller : WEXITSTATUS(status) = renvoie le code
+** de sortie du fils. Ce code est constitué par les 8 bits de poids faibles de
+** l'argument status que le fils a fourni à exit(3) ou à _exit(2) ou l'argument
+** d'une commande de retour dans main(). "Cette macro ne peut être évaluée
+** que si WIFEXITED a renvoyé vrai".
+**
+** WIFSIGNALED(status) = renvoie vrai si le fils s'est terminé à cause d'un 
+** signal.
+** Et dans ce cas on peut appeller : WTERMSIG(status) = renvoie le numéro du 
+** signal
+** qui a causé la fin du fils. "Cette macro ne peut être évaluée
+** que si WIFSIGNALED a renvoyé vrai".
+**
+** void		status_child(void)
+** {
+** 	if (WIFEXITED(g_pid))
+** 		g_status = WEXITSTATUS(g_pid);
+** 	if (WIFSIGNALED(g_pid))
+** 	{
+** 		g_status = WTERMSIG(g_pid);
+** 		if (g_status != 131)
+** 			g_status += 128;
+** 	}
+** }
+*/
+
 static void	exec_binary2(t_cmd *cmd, pid_t pid, int pipe1[2])
 {
 	int	status;
@@ -34,11 +67,7 @@ static void	exec_binary2(t_cmd *cmd, pid_t pid, int pipe1[2])
 	}
 	close_all(pipe1, pipe2);
 	waitpid(pid, &status, WUNTRACED);
-	while (!WIFEXITED(status))
-		if (!WIFSIGNALED(status) || g_ms->end != 0 || cmd->type == PIPE)
-			break ;
-	if (WIFEXITED(status) && cmd->type != PIPE)
-		g_ms->exit = WEXITSTATUS(status);
+	status_child(cmd, status);
 }
 
 void	exec_bin_check(t_cmd *cmd)
@@ -53,13 +82,11 @@ void	exec_bin_check(t_cmd *cmd)
 
 void	exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
 {
-	pid_t	pid;
-
 	exec_bin_check(cmd);
-	pid = fork();
-	if (pid < 0)
+	g_ms->pid = fork();
+	if (g_ms->pid < 0)
 		error("error forking", NULL, NULL, -1);
-	else if (pid == 0)
+	else if (g_ms->pid == 0)
 	{
 		if (cmd->in == -1 || cmd->out == -1)
 			exit(1);
@@ -72,9 +99,9 @@ void	exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
 	{
 		if (cmd->type == PIPE && cmd->prev && cmd->prev->type == PIPE
 			&& !close(pipe1[1]) && !close(pipe1[0]))
-			exec_binary2(cmd, pid, pipe2);
+			exec_binary2(cmd, g_ms->pid, pipe2);
 		else
-			exec_binary2(cmd, pid, pipe1);
+			exec_binary2(cmd, g_ms->pid, pipe1);
 	}
 }
 

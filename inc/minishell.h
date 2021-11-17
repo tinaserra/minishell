@@ -105,7 +105,7 @@ void	exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2]);
 int		edit_args(t_cmd *cmd);
 char	**list_to_tab(t_cmd *cmd);
 char	*check_path(t_cmd *cmd);
-void	status_child(int status);
+void	status_child(t_cmd *cmd, int status);
 char	*find_binary(t_cmd *cmd, int show);
 int		find_all_binary(t_cmd *cmd);
 void	heredoc(t_cmd *cmd, t_token **token);

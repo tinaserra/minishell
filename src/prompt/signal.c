@@ -20,7 +20,7 @@ void	quit_process(int c)
 	{
 		if (g_ms->fork)
 		{
-			g_ms->exit = 131;
+			g_ms->status = 131;
 			printf("Quit\n");
 		}
 		g_ms->fork = 0;
@@ -29,7 +29,7 @@ void	quit_process(int c)
 	{
 		printf("\n");
 		if (g_ms->fork)
-			g_ms->exit = 130;
+			g_ms->status = 130;
 		else
 		{
 			rl_on_new_line();

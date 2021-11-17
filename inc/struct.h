@@ -91,7 +91,6 @@ typedef struct s_minishell
 	char			*term;
 	char			*hd_tmp;
 	int				count;
-	int				exit;
 	int				end;
 	int				newline;
 }					t_minishell;

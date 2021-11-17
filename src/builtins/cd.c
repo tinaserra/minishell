@@ -58,7 +58,7 @@ int	cd_2(t_cmd *cmd, t_token *tmp)
 	if (have_permission(cmd) && chdir(tmp->word) != 0)
 	{
 		error(strerror(errno), "cd", tmp->word, 1);
-		g_ms->exit = 1;
+		g_ms->status = 1;
 		return (0);
 	}
 	return (1);
@@ -81,7 +81,7 @@ void	cd_builtin(t_cmd *cmd)
 		if (!s || chdir(s) != 0)
 		{
 			error("HOME not set", "cd", NULL, 1);
-			g_ms->exit = 1;
+			g_ms->status = 1;
 			return ;
 		}
 	}

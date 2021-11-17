@@ -89,7 +89,7 @@ int	get_token_type(void)
 		checkkk(tmp);
 		if (have_error(tmp))
 		{
-			g_ms->exit = 258;
+			g_ms->status = 258;
 			return (0);
 		}
 		tmp = tmp->next;

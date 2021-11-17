@@ -16,11 +16,11 @@ void	execute2(t_cmd *cmd)
 {
 	int	exitt;
 
-	exitt = g_ms->exit;
 	if (cmd->bin)
 		execve(cmd->bin, cmd->argss, NULL);
 	else
 		error("command not found", cmd->cmd, NULL, 127);
+	exitt = g_ms->status;
 	free_all();
 	exit(exitt);
 }

@@ -43,13 +43,16 @@ void	close_all(int pipe1[2], int pipe2[2])
 	close(pipe2[1]);
 }
 
-void	status_child(int status)
+void	status_child(t_cmd *cmd, int status)
 {
-	if (WIFEXITED(status))
+	while (!WIFEXITED(status))
+		if (!WIFSIGNALED(status) || g_ms->end != 0 || cmd->type == PIPE)
+			break ;
+	if (WIFEXITED(status) && cmd->type != PIPE)
 		g_ms->status = WEXITSTATUS(status);
-	if (WIFSIGNALED(g_ms->pid))
+	if (WIFSIGNALED(status))
 	{
-		g_ms->status = WTERMSIG(g_ms->pid);
+		g_ms->status = WTERMSIG(status);
 		if (g_ms->status != 131)
 			g_ms->status += 128;
 	}

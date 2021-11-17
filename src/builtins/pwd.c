@@ -24,4 +24,11 @@ void	pwd_builtin(t_cmd *cmd)
 		ft_putstr_fd(pwd, cmd->out);
 		ft_putchar_fd('\n', cmd->out);
 	}
+	else
+	{
+		pwd = getcwd(NULL, 0);
+		ft_putstr_fd(pwd, cmd->out);
+		ft_putchar_fd('\n', cmd->out);
+		free(pwd);
+	}
 }
