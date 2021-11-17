@@ -12,6 +12,17 @@
 
 #include "minishell.h"
 
+static int	check_env(char **env)
+{
+	if (env && !env[0])
+	{
+		add_env(&g_ms->env, lst_new_env(ft_strdup("PWD"), getcwd(NULL, 0)));
+		add_env(&g_ms->env, lst_new_env(ft_strdup("PATH"), ft_strdup("/bin")));
+		return (1);
+	}
+	return (0);
+}
+
 int	init_env(char **env)
 {
 	char	**array;
@@ -19,12 +30,8 @@ int	init_env(char **env)
 	int		i;
 
 	i = -1;
-	if (env && !env[0])
-	{
-		add_env(&g_ms->env, lst_new_env(ft_strdup("PWD"), getcwd(NULL, 0)));
-		add_env(&g_ms->env, lst_new_env(ft_strdup("PATH"), ft_strdup("/bin")));
+	if (check_env(env))
 		return (1);
-	}	
 	while (env && env[++i])
 	{
 		if (env[i][0] != '\0')
