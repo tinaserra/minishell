@@ -82,9 +82,13 @@ char	**list_to_tab(t_cmd *cmd)
 	tmp = cmd->args;
 	while (tmp)
 	{
-		args[i] = ft_strdup(tmp->word);
-		tmp = tmp->next;
-		i++;
+		if (ft_strcmp(cmd->cmd, tmp->word) == 0)
+			tmp = tmp->next;
+		if (tmp){
+			args[i] = ft_strdup(tmp->word);
+			i++;
+			tmp = tmp->next;
+		}
 	}
 	args[i] = NULL;
 	return (args);

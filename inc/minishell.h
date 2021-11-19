@@ -53,7 +53,6 @@ void	free_commands(void);
 */
 
 void	parsing(void);
-int		get_env_content(char *line, char **env_content);
 char	*replace_env(char *str, int pos_dollar);
 void	split_minishell(char *command);
 int		is_in_str(char *s, char c);
@@ -114,6 +113,8 @@ void	execute2(t_cmd *cmd);
 void	execute(t_cmd *cmd);
 void	close_all(int pipe1[2], int pipe2[2]);
 void	checkkkkk(t_token **args);
+void	hd_signal(int c);
+int		get_next_line(int fd, char **line);
 /*
 ** ERROR -------------------------------------------------------------------- **
 */

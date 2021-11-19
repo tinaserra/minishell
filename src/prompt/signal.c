@@ -39,3 +39,10 @@ void	quit_process(int c)
 		g_ms->fork = 0;
 	}
 }
+
+void	hd_signal(int c)
+{
+	(void)c;
+	printf("\n");
+	g_ms->hd_quit = 1;
+}

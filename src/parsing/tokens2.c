@@ -35,7 +35,10 @@ static int	parse_token2(t_token **token, t_cmd *cmd)
 	if ((*token)->type == EXIT_STATUS)
 		add_token(&cmd->args, create_token3((*token)->word, (*token)->type));
 	if ((*token)->type == ENV && !cmd->cmd)
-		ft_lstadd_back(&cmd->env, ft_lstcreate((*token)->word));
+	{
+		cmd->cmd = ft_strdup((*token)->word);
+		cmd->cmd = handle_quotes(cmd->cmd, 1);
+	}
 	if ((*token)->type == PIPE)
 	{
 		cmd->type = PIPE;

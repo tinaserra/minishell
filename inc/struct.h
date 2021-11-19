@@ -92,6 +92,7 @@ typedef struct s_minishell
 	char			*hd_tmp;
 	int				count;
 	int				end;
+	int				hd_quit;
 	int				newline;
 }					t_minishell;
 t_minishell	*g_ms;

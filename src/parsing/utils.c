@@ -67,7 +67,7 @@ int	is_valid_env_var(char *s)
 	int	j;
 
 	i = -1;
-	while (s[++i])
+	while (s && s[++i])
 	{
 		if (s[i] == '$' && s[i + 1] == '?')
 			return (2);
