@@ -65,6 +65,7 @@ void	add_token(t_token **start, t_token *new);
 void	free_token(void);
 t_token	*create_token(int i);
 t_token	*create_token2(char *word, int type);
+void	parse_token3(t_token **token, t_cmd *cmd);
 void	parse_token(t_token	**token);
 void	set_env(char *env, char *value);
 void	redirect(t_cmd *cmd);

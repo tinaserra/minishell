@@ -72,3 +72,20 @@ t_token	*create_token(int i)
 	g_ms->count = 0;
 	return (new);
 }
+
+void	parse_token3(t_token **token, t_cmd *cmd)
+{
+	if ((*token)->type == PIPE)
+	{
+		cmd->type = PIPE;
+		*token = (*token)->next;
+		return (0);
+	}
+	if ((*token)->type == POINT_V)
+	{
+		cmd->type = POINT_V;
+		*token = (*token)->next;
+		return (0);
+	}
+	return (1);
+}

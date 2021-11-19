@@ -12,7 +12,7 @@
 
 #ifndef STRUCT_H
 # define STRUCT_H
-#include <readline/readline.h>
+# include <readline/readline.h>
 /*
 ** ERRORS ------------------------------------------------------------------- **
 */
@@ -95,7 +95,7 @@ typedef struct s_minishell
 	int				hd_quit;
 	int				hd_start;
 	int				newline;
-	rl_getc_func_t *getc_func;
+	rl_getc_func_t	*getc_func;
 }					t_minishell;
 t_minishell	*g_ms;
 

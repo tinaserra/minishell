@@ -39,19 +39,7 @@ static int	parse_token2(t_token **token, t_cmd *cmd)
 		cmd->cmd = ft_strdup((*token)->word);
 		cmd->cmd = handle_quotes(cmd->cmd, 1);
 	}
-	if ((*token)->type == PIPE)
-	{
-		cmd->type = PIPE;
-		*token = (*token)->next;
-		return (0);
-	}
-	if ((*token)->type == POINT_V)
-	{
-		cmd->type = POINT_V;
-		*token = (*token)->next;
-		return (0);
-	}
-	return (1);
+	return (parse_token3());
 }
 
 static void	add_list(t_cmd **begin, t_cmd *new)
