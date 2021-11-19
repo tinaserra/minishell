@@ -84,7 +84,8 @@ char	**list_to_tab(t_cmd *cmd)
 	{
 		if (ft_strcmp(cmd->cmd, tmp->word) == 0)
 			tmp = tmp->next;
-		if (tmp){
+		if (tmp)
+		{
 			args[i] = ft_strdup(tmp->word);
 			i++;
 			tmp = tmp->next;

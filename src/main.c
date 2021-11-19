@@ -30,7 +30,10 @@ void	free_all(void)
 
 void	init(void)
 {
+	g_ms = malloc(sizeof(t_minishell));
+	ft_bzero(g_ms, sizeof(t_minishell));
 	g_ms->curdir = getcwd(NULL, 0);
+	g_ms->getc_func = rl_getc_function;
 	signal(SIGINT, quit_process);
 	signal(SIGQUIT, quit_process);
 }
@@ -39,11 +42,10 @@ int	main(int ac, char **av, char **env)
 {
 	(void)av;
 	(void)ac;
-	g_ms = malloc(sizeof(t_minishell));
-	ft_bzero(g_ms, sizeof(t_minishell));
 	init();
 	if (!init_env(env))
 		exit(EXIT_FAILURE);
+	rl_getc_function = g_ms->getc_func;
 	g_ms->term = print_prompt();
 	g_ms->line = readline(g_ms->term);
 	while (g_ms->line != NULL)
@@ -52,9 +54,11 @@ int	main(int ac, char **av, char **env)
 		g_ms->end = 0;
 		signal(SIGINT, quit_process);
 		signal(SIGQUIT, quit_process);
-		add_history(g_ms->line);
-		if (g_ms->line)
+		if (g_ms->line && ft_strcmp(g_ms->line, "") != 0)
+		{
+			add_history(g_ms->line);
 			parsing();
+		}
 		free(g_ms->line);
 		g_ms->line = NULL;
 		g_ms->line = readline(g_ms->term);

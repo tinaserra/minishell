@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 static int	get_env_content(char *line, char **env_content)
 {
 	char			*pos;

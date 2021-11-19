@@ -12,6 +12,26 @@
 
 #include "minishell.h"
 
+void	quit_process2(void)
+{
+	if (g_ms->fork)
+		g_ms->status = 130;
+	else if (g_ms->fork && g_ms->hd_start)
+	{
+		g_ms->hd_start = 0;
+		g_ms->fork = 0;
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
 void	quit_process(int c)
 {
 	if (g_ms->fork)
@@ -28,14 +48,7 @@ void	quit_process(int c)
 	if (c == SIGINT)
 	{
 		printf("\n");
-		if (g_ms->fork)
-			g_ms->status = 130;
-		else
-		{
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
+		quit_process2();
 		g_ms->fork = 0;
 	}
 }
@@ -44,5 +57,4 @@ void	hd_signal(int c)
 {
 	(void)c;
 	printf("\n");
-	g_ms->hd_quit = 1;
 }
