@@ -24,7 +24,7 @@ void	hd_2(char *tmp, char *line, int fd[2])
 	signal(SIGQUIT, quit_process);
 }
 
-int	my_getc(FILE *file)
+int	gettc(FILE *file)
 {
 	int	c;
 
@@ -70,7 +70,7 @@ void	heredoc(t_cmd *cmd, t_token **token)
 		free(tmp);
 		signal(SIGINT, hd_signal);
 		signal(SIGQUIT, hd_signal);
-		rl_getc_function = my_getc;
+		rl_getc_function = gettc;
 		tmp = readline("> ");
 		if (!tmp || g_ms->hd_quit != 0)
 			break ;
