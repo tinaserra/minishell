@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+void	jgj(t_token *args)
+{
+	t_token *tmp;
+
+	tmp = args;
+	while (tmp)
+	{
+		printf("[%s]\n", tmp->word);
+		tmp = tmp->next;
+	}
+}
+
 void	execute2(t_cmd *cmd)
 {
 	int	exitt;
@@ -78,8 +90,8 @@ char	**list_to_tab(t_cmd *cmd)
 	args = ft_calloc(1, sizeof(char *) *(tokens_list_size(cmd->args) + 2));
 	if (!args)
 		exit(0);
+	tmp = cmd->args;		
 	args[0] = ft_strdup(cmd->cmd);
-	tmp = cmd->args;
 	while (tmp)
 	{
 		if (ft_strcmp(cmd->cmd, tmp->word) == 0)

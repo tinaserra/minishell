@@ -39,7 +39,7 @@ static int	parse_token2(t_token **token, t_cmd *cmd)
 		cmd->cmd = ft_strdup((*token)->word);
 		cmd->cmd = handle_quotes(cmd->cmd, 1);
 	}
-	return (parse_token3());
+	return (parse_token3(token, cmd));
 }
 
 static void	add_list(t_cmd **begin, t_cmd *new)

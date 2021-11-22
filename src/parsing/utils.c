@@ -53,7 +53,7 @@ int	is_in_str(char *s, char c)
 	int	i;
 
 	i = -1;
-	while (s[++i])
+	while (s && s[++i])
 	{
 		if (s[i] == c)
 			return (1);

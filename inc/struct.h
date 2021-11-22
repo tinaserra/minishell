@@ -95,6 +95,8 @@ typedef struct s_minishell
 	int				hd_quit;
 	int				hd_start;
 	int				newline;
+	int				ign_array;
+	int				no_cmd_arg;
 	rl_getc_func_t	*getc_func;
 }					t_minishell;
 t_minishell	*g_ms;

@@ -73,7 +73,7 @@ t_token	*create_token(int i)
 	return (new);
 }
 
-void	parse_token3(t_token **token, t_cmd *cmd)
+int	parse_token3(t_token **token, t_cmd *cmd)
 {
 	if ((*token)->type == PIPE)
 	{

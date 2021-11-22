@@ -72,12 +72,17 @@ static void	exec_binary2(t_cmd *cmd, pid_t pid, int pipe1[2])
 
 void	exec_bin_check(t_cmd *cmd)
 {
-	if (!is_builtin(cmd->cmd))
-		g_ms->fork = 1;
-	cmd->bin = find_binary(cmd, 1);
-	cmd->argss = list_to_tab(cmd);
-	if ((access(cmd->cmd, F_OK) == 0 && access(cmd->cmd, X_OK) == -1))
-		error("Permission denied", cmd->cmd, NULL, 1);
+	if (ft_strcmp(cmd->cmd, "") == 0)
+		error("command not found", cmd->cmd, NULL, 127);
+	else
+	{
+		if (!is_builtin(cmd->cmd))
+			g_ms->fork = 1;
+		cmd->bin = find_binary(cmd, 1);
+		cmd->argss = list_to_tab(cmd);
+		//if ((access(cmd->cmd, F_OK) == 0 && access(cmd->cmd, X_OK) == -1))
+		//	error("Permission denied", cmd->cmd, NULL, 1);
+	}	
 }
 
 void	exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])
@@ -121,6 +126,49 @@ static void	exec_switch(t_cmd *cmd, int pipe1[2])
 		exec_binary(cmd, pipe1, NULL);
 }
 
+t_token	*lstcreate(char *data, t_token *next)
+{
+	t_token	*cell;
+
+	cell = malloc(sizeof(t_token));
+	if (cell == NULL)
+		return (NULL);
+	cell->word = ft_strdup(data);
+	cell->type = 5;
+	cell->next = next;
+	return (cell);
+}
+
+void test(t_cmd *cmd)
+{
+	char	**res;
+	t_token	*tmp;
+	t_token *tmp2;
+	int		i;
+
+	if (is_in_str(cmd->cmd, ' '))
+	{
+		i = 0;
+		res = ft_split(cmd->cmd, " ");
+		free(cmd->cmd);
+		cmd->cmd = ft_strdup(res[0]);
+		tmp = cmd->args->next;
+		while (cmd->args)
+		{
+			tmp2 = cmd->args->next;
+			free(cmd->args->word);
+			free(cmd->args);
+			cmd->args = tmp2;
+		}
+		cmd->args = lstcreate(res[1], tmp);
+		free(cmd->bin);
+		free(cmd->cmd);
+		cmd->cmd = ft_strdup(res[0]);
+		ft_free_tab(res);
+	}
+	g_ms->no_cmd_arg = 1;
+}
+
 void	exec_start(void)
 {
 	t_cmd	*cmd;
@@ -129,6 +177,7 @@ void	exec_start(void)
 	cmd = g_ms->cmds;
 	while (cmd)
 	{
+		test(cmd);
 		edit_args(cmd);
 		redirect(cmd);
 		if (cmd->cmd && cmd->in != -1 && cmd->out != -1)

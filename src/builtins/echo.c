@@ -60,6 +60,8 @@ void	echo_builtin(t_cmd *cmd, int fd)
 	tmp = cmd->args;
 	if (fd == 0)
 		fd = STDOUT_FILENO;
+	if (ft_strcmp(cmd->cmd, tmp->word) == 0)
+		tmp = tmp->next;
 	if (echo_tmp_check(tmp, fd) == -1)
 		return ;
 	g_ms->newline = NL;
