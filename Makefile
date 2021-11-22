@@ -26,7 +26,6 @@ SRCS            =		src/main.c									\
 						$(addprefix ${PARSING}, commands.c)			\
 						$(addprefix ${PARSING}, quotes.c)			\
 						$(addprefix ${PARSING}, env.c)				\
-						$(addprefix ${PARSING}, env_replace.c)		\
 						$(addprefix ${PARSING}, redirections.c)		\
 						$(addprefix ${PARSING}, start.c)			\
 						$(addprefix ${PARSING}, tokens.c)			\
@@ -50,12 +49,12 @@ $(NAME)			:		$(OBJS) $(HEADER)
 						@echo "\033[1;31m$(NAME)\033[0;33m created\033[0m"
 
 clean			:
-						rm -rf $(OBJS)
+						@rm -rf $(OBJS)
 						@make clean -C $(LIBFT)
 						@echo "\033[0;33mCleaning minishell: \033[1;31m.o\033[0;33m files\033[0m"
 
 fclean			:		clean
-						rm -f $(NAME)
+						@rm -f $(NAME)
 						@echo "\033[0;33mCleaning minishell: \033[1;31m$(NAME)\033[0m"
 						@make fclean -C $(LIBFT)
 
