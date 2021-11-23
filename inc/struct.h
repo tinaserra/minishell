@@ -53,6 +53,13 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+typedef struct s_env2
+{
+	char			*name;
+	char			*value;
+	int				tmp;
+}					t_env2;
+
 typedef struct s_token
 {
 	char			*word;
@@ -85,6 +92,7 @@ typedef struct s_minishell
 	char			*line;
 	char			*curdir;
 	t_list			*commands;
+	t_list			*env_list;
 	t_token			*tokens;
 	struct s_cmd	*cmds;
 	t_env			*env;

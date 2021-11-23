@@ -30,7 +30,12 @@ void	execute2(t_cmd *cmd)
 			error(strerror(errno), cmd->cmd, NULL, errno);
 	}
 	else
-		error("command not found", cmd->cmd, NULL, 127);
+	{
+		if (!cmd->cmd)
+			error("command not found", NULL, NULL, 127);
+		else
+			error("command not found", cmd->cmd, NULL, 127);
+	}
 	status = g_ms->status;
 	free_all();
 	exit(status);
@@ -88,11 +93,13 @@ char	**list_to_tab(t_cmd *cmd)
 		return (NULL);
 	args = (char **)ft_calloc(1, sizeof(char *) *
 		(tokens_list_size(cmd->args) + 2));	
-	args[0] = ft_strdup(cmd->cmd);
+	args[0] = ft_strtrim(cmd->bin, " ");
 	tmp = cmd->args;
+	if (tmp && ft_strcmp(cmd->cmd, tmp->word) == 0)
+		tmp = tmp->next;
 	while (tmp)
 	{
-		args[i] = ft_strdup(tmp->word);
+		args[i] = ft_strtrim(tmp->word, " ");
 		tmp = tmp->next;
 		i++;
 	}

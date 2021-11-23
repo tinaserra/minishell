@@ -81,6 +81,7 @@ int		is_builtin(char *s);
 t_token	*create_token(int i);
 char	*simple_quotes(char *src, int *i);
 int		quote_size(char *src, int type, int env);
+t_token	*redirect3(t_token *args, t_token **start);
 /*
 ** BUILTINS ----------------------------------------------------------------- **
 */
@@ -116,6 +117,7 @@ void	close_all(int pipe1[2], int pipe2[2]);
 void	checkkkkk(t_token **args);
 void	hd_signal(int c);
 int		get_next_line(int fd, char **line);
+void	add_cmd_env(t_cmd *cmd);
 /*
 ** ERROR -------------------------------------------------------------------- **
 */

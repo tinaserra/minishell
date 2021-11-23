@@ -80,14 +80,11 @@ char	*print_prompt(void)
 	res = ft_strjoin_free(res, "\x1b[34m ", 'L');
 	if (pwd && !pwd[0])
 	{
-		printf("a\n");
 		free(pwd);
 		res = ft_strjoin_free(res, "/", 'L');
 	}
 	else
 	{
-		printf("b\n");
-
 		if (pwd)
 		{
 			res = ft_strjoin_free(res, pwd[ft_strs_tab_size(pwd) - 1], 'L');

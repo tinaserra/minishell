@@ -23,6 +23,7 @@ SRCS            =		src/main.c									\
 						$(addprefix ${EXEC}, exec_utils2.c)			\
 						$(addprefix ${EXEC}, exec_utils3.c)			\
 						$(addprefix ${EXEC}, heredoc.c)				\
+						$(addprefix ${EXEC}, env.c)					\
 						$(addprefix ${PARSING}, commands.c)			\
 						$(addprefix ${PARSING}, quotes.c)			\
 						$(addprefix ${PARSING}, env.c)				\

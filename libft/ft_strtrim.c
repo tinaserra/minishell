@@ -34,6 +34,5 @@ char	*ft_strtrim(char *s1, char *set)
 	while (--i > j && ft_strchr(set, s1[i]))
 		len--;
 	result = ft_substr(s1, j, len);
-	free(s1);
 	return (result);
 }

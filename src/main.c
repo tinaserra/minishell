@@ -28,7 +28,7 @@ void	free_all(void)
 		free(g_ms);
 }
 
-void	init(void)
+void	init(char **env)
 {
 	g_ms = malloc(sizeof(t_minishell));
 	ft_bzero(g_ms, sizeof(t_minishell));
@@ -36,13 +36,6 @@ void	init(void)
 	g_ms->getc_func = rl_getc_function;
 	signal(SIGINT, quit_process);
 	signal(SIGQUIT, quit_process);
-}
-
-int	main(int ac, char **av, char **env)
-{
-	(void)av;
-	(void)ac;
-	init();
 	if (!init_env(env))
 		exit(EXIT_FAILURE);
 	rl_getc_function = g_ms->getc_func;
@@ -52,6 +45,14 @@ int	main(int ac, char **av, char **env)
 		g_ms->line = readline(get_env(g_ms->env, "PS1")->value);
 	else
 		g_ms->line = readline(g_ms->term);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	(void)av;
+	(void)ac;
+	init(env);
+	
 	while (g_ms->line != NULL)
 	{
 		g_ms->fork = 0;
