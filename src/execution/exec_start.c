@@ -12,39 +12,6 @@
 
 #include "minishell.h"
 
-/*
-** Connaître le code erreur d’un appel à une commande / d'un signal :
-** waitpid(pid_t pid, int *status, int options);
-**
-** WIFEXITED(status) = renvoie vrai si le fils s'est terminé normalement,
-** c'est-à-dire par un appel à exit(3) ou _exit(2), ou bien par un retour de 
-** main().
-** Et dans ce cas on peut appeller : WEXITSTATUS(status) = renvoie le code
-** de sortie du fils. Ce code est constitué par les 8 bits de poids faibles de
-** l'argument status que le fils a fourni à exit(3) ou à _exit(2) ou l'argument
-** d'une commande de retour dans main(). "Cette macro ne peut être évaluée
-** que si WIFEXITED a renvoyé vrai".
-**
-** WIFSIGNALED(status) = renvoie vrai si le fils s'est terminé à cause d'un 
-** signal.
-** Et dans ce cas on peut appeller : WTERMSIG(status) = renvoie le numéro du 
-** signal
-** qui a causé la fin du fils. "Cette macro ne peut être évaluée
-** que si WIFSIGNALED a renvoyé vrai".
-**
-** void		status_child(void)
-** {
-** 	if (WIFEXITED(g_pid))
-** 		g_status = WEXITSTATUS(g_pid);
-** 	if (WIFSIGNALED(g_pid))
-** 	{
-** 		g_status = WTERMSIG(g_pid);
-** 		if (g_status != 131)
-** 			g_status += 128;
-** 	}
-** }
-*/
-
 static void	exec_binary2(t_cmd *cmd, pid_t pid, int pipe1[2])
 {
 	int	status;
@@ -80,8 +47,6 @@ void	exec_bin_check(t_cmd *cmd)
 			g_ms->fork = 1;
 		cmd->bin = find_binary(cmd, 1);
 		cmd->argss = list_to_tab(cmd);
-		//if ((access(cmd->cmd, F_OK) == 0 && access(cmd->cmd, X_OK) == -1))
-		//	error("Permission denied", cmd->cmd, NULL, 1);
 	}	
 }
 
@@ -166,7 +131,7 @@ void test(t_cmd *cmd)
 		cmd->cmd = ft_strdup(res[0]);
 		ft_free_tab(res);
 	}
-	g_ms->no_cmd_arg = 1;
+	g_ms->double_chk = 1;
 }
 
 void	exec_start(void)

@@ -25,23 +25,31 @@ int	export_errors(char *res)
 	return (0);
 }
 
-void	export_builtin2(char **identifier, char *content)
+void	export_builtin2(char **identifier, char *content, int is_plus)
 {
 	t_env	*tmp_env;
 
 	tmp_env = get_env(g_ms->env, identifier[0]);
 	if (tmp_env)
 	{
-		free(tmp_env->value);
-		tmp_env->value = ft_strdup(content);
+		if (is_plus)
+			tmp_env->value = ft_strjoin_free(tmp_env->value, content, 'L');
+		else
+		{
+			free(tmp_env->value);
+			tmp_env->value = ft_strdup(content);
+		}
 	}
 	else
 		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier[0]),
 				ft_strdup(content)));
 }
 
-int	export_2(t_token *tmp, char **id, char *content)
+int	export_check(t_token *tmp, char **id, char *content)
 {
+	int		is_plus;
+
+	is_plus = 0;
 	content++;
 	if (!ft_isalpha(id[0][0]) && id[0][0] != '_')
 	{
@@ -49,13 +57,21 @@ int	export_2(t_token *tmp, char **id, char *content)
 		return (0);
 	}
 	if (export_errors(id[0]))
+	{
 		error("not a valid identifier", "export", tmp->word, 1);
-	else
-		export_builtin2(id, content);
+		return (0);
+	}
+	if (ft_strchr(id[0], '+') != NULL)
+		is_plus = 1;
+	if (is_plus)
+		id = ft_split(id[0], "+");
+	export_builtin2(id, content, is_plus);
+	if (is_plus)
+		ft_free_tab(id);
 	return (1);
 }
 
-void	exportt(t_token *tmp, char *content)
+void	export_start(t_token *tmp, char *content)
 {
 	char	**id;
 
@@ -71,7 +87,7 @@ void	exportt(t_token *tmp, char *content)
 				{
 					if (content && ft_strcmp(content, "") != 0)
 					{
-						if (!export_2(tmp, id, content))
+						if (!export_check(tmp, id, content))
 							break ;
 					}
 					else
@@ -91,5 +107,5 @@ void	export_builtin(t_cmd *cmd)
 
 	tmp = cmd->args;
 	content = NULL;
-	exportt(tmp, content);
+	export_start(tmp, content);
 }

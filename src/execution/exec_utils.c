@@ -12,29 +12,28 @@
 
 #include "minishell.h"
 
-void	jgj(t_token *args)
-{
-	t_token *tmp;
-
-	tmp = args;
-	while (tmp)
-	{
-		printf("[%s]\n", tmp->word);
-		tmp = tmp->next;
-	}
-}
 
 void	execute2(t_cmd *cmd)
 {
-	int	exitt;
+	int	status;
 
 	if (cmd->bin)
+	{
 		execve(cmd->bin, cmd->argss, NULL);
+		if (errno == 14)
+			error("command not found", cmd->cmd, NULL, 127);
+		else if (errno == 13)
+			error(strerror(errno), cmd->cmd, NULL, 126);
+		else if (errno == 2)
+			error(strerror(errno), cmd->cmd, NULL, 127);
+		else
+			error(strerror(errno), cmd->cmd, NULL, errno);
+	}
 	else
 		error("command not found", cmd->cmd, NULL, 127);
-	exitt = g_ms->status;
+	status = g_ms->status;
 	free_all();
-	exit(exitt);
+	exit(status);
 }
 
 void	execute(t_cmd *cmd)
@@ -87,21 +86,15 @@ char	**list_to_tab(t_cmd *cmd)
 	i = 1;
 	if (!cmd->cmd)
 		return (NULL);
-	args = ft_calloc(1, sizeof(char *) *(tokens_list_size(cmd->args) + 2));
-	if (!args)
-		exit(0);
-	tmp = cmd->args;		
+	args = (char **)ft_calloc(1, sizeof(char *) *
+		(tokens_list_size(cmd->args) + 2));	
 	args[0] = ft_strdup(cmd->cmd);
+	tmp = cmd->args;
 	while (tmp)
 	{
-		if (ft_strcmp(cmd->cmd, tmp->word) == 0)
-			tmp = tmp->next;
-		if (tmp)
-		{
-			args[i] = ft_strdup(tmp->word);
-			i++;
-			tmp = tmp->next;
-		}
+		args[i] = ft_strdup(tmp->word);
+		tmp = tmp->next;
+		i++;
 	}
 	args[i] = NULL;
 	return (args);

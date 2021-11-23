@@ -94,6 +94,9 @@ typedef struct s_minishell
 	int				end;
 	int				hd_quit;
 	int				hd_start;
+	char			*hd_line;
+	char			*ps1;
+	int				double_chk;
 	int				newline;
 	int				ign_array;
 	int				no_cmd_arg;

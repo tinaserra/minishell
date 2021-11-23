@@ -12,48 +12,47 @@
 
 #include "minishell.h"
 
-char	*find_binary(t_cmd *cmd, int show)
+char	*openndir(char *path, char *cmd)
 {
-	struct stat	stats;
-	char		*binary;
+	DIR				*dir;
+	struct dirent	*dirr;
 
-	(void)show;
-	if (!cmd)
-		return (NULL);
-	binary = check_path(cmd);
-	if (!binary)
+	dir = opendir(path);
+	if (dir)
 	{
-		if (lstat(cmd->cmd, &stats))
+		while ((dirr = readdir(dir)))
 		{
-			free(binary);
-			return (NULL);
+			if (ft_strcmp(dirr->d_name, cmd) == 0)
+			{
+				if (dir)
+					closedir(dir);
+				return (ft_strjoin(path, cmd));
+			}
 		}
-		free(binary);
-		if (S_ISDIR(stats.st_mode) != 0)
-			return (NULL);
-		binary = ft_strdup(cmd->cmd);
 	}
-	return (binary);
+	if (dir)
+		closedir(dir);
+	return (NULL);
 }
 
-int	find_all_binary(t_cmd *cmd)
+char	*find_binary(t_cmd *cmd, int show)
 {
-	t_cmd	*tmpp;
-	char	*bin;
+	(void)show;
+	char	*t;
+	int		i;
 
-	tmpp = cmd;
-	while (tmpp)
+	i = 0;
+	if (!cmd)
+		return (NULL);
+	if (is_in_str(cmd->cmd, '/') > 0)
+		return (ft_strdup(cmd->cmd));
+	if (cmd->bin)
 	{
-		bin = find_binary(tmpp, 1);
-		if (!bin)
-		{
-			free(bin);
-			return (0);
-		}
-		free(bin);
-		tmpp = tmpp->next;
+		t = openndir(cmd->bin, cmd->cmd);
+		if (t)
+			return (t);
 	}
-	return (1);
+	return (check_path(cmd));
 }
 
 static void	count_quote2(char *s, int *i, int *d_quote, int *s_quote)
