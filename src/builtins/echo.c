@@ -73,13 +73,22 @@ void	echo_builtin(t_cmd *cmd, int fd)
 	}
 	while (tmp)
 	{
-		if (tmp->type == EXIT_STATUS)
-			ft_putnbr_fd(g_ms->status, STDOUT_FILENO);
-		ft_putstr_fd(tmp->word, fd);
-		if (tmp->next)
+		if (!ft_strcmp(tmp->word, "~"))
+		{
+			ft_putstr_fd(get_env(g_ms->env, "HOME")->value, fd);
+			tmp = tmp->next;
+		}
+		if (tmp)
+		{
+			if (tmp->type == EXIT_STATUS)
+				ft_putnbr_fd(g_ms->status, STDOUT_FILENO);
+			ft_putstr_fd(tmp->word, fd);
+		}
+		if (tmp && tmp->next)
 			ft_putchar_fd(' ', fd);
 		else if (g_ms->newline == NL)
 			ft_putchar_fd('\n', fd);
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 }
