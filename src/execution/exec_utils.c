@@ -19,6 +19,7 @@ void	execute2(t_cmd *cmd)
 
 	if (cmd->bin)
 	{
+		printf("bin: %s \nargs[%s] [%s] [%s]\n", cmd->bin, cmd->argss[0], cmd->argss[1], cmd->argss[2]);
 		execve(cmd->bin, cmd->argss, NULL);
 		if (errno == 14)
 			error("command not found", cmd->cmd, NULL, 127);
@@ -95,7 +96,7 @@ char	**list_to_tab(t_cmd *cmd)
 		(tokens_list_size(cmd->args) + 2));	
 	args[0] = ft_strtrim(cmd->bin, " ");
 	tmp = cmd->args;
-	if (tmp && ft_strcmp(cmd->cmd, tmp->word) == 0)
+	if (tmp && ft_strcmp(cmd->cmd, tmp->word) == 0 && cmd->args->type == ENV)
 		tmp = tmp->next;
 	while (tmp)
 	{
