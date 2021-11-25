@@ -84,14 +84,15 @@ void	cd_builtin(t_cmd *cmd)
 	{
 		s = find_env(g_ms->env, "HOME");
 		if (!s || chdir(s) != 0)
-		{
-			error("HOME not set", "cd", NULL, 1);
-			g_ms->status = 1;
 			return ;
-		}
 	}
 	else
 	{
+		if (tmp->type == EXIT_STATUS)
+		{
+			free(tmp->word);
+			tmp->word = ft_itoa(g_ms->status);
+		}
 		if (!cd_2(cmd, tmp))
 			return ;
 	}
