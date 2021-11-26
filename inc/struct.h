@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 14:47:38 by admin             #+#    #+#             */
-/*   Updated: 2021/11/11 14:49:26 by admin            ###   ########.fr       */
+/*   Updated: 2021/11/26 17:57:42 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct s_minishell
 	int				hd_quit;
 	int				hd_start;
 	char			*hd_line;
-	int				double_chk;
 	int				newline;
 	int				ign_array;
 	int				no_cmd_arg;

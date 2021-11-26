@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/12 15:04:11 by vserra           ###   ########.fr       */
+/*   Updated: 2021/11/26 17:58:57 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,24 @@ int	cd_2(t_cmd *cmd, t_token *tmp)
 	return (1);
 }
 
+int	cd_check(t_token *tmp)
+{
+	if (tmp && tmp->next)
+	{
+		error("too many arguments", "cd", NULL, 1);
+		return (0);
+	}
+	return (1);
+}
+
 void	cd_builtin(t_cmd *cmd)
 {
 	t_token	*tmp;
 	char	*s;
 
 	tmp = cmd->args;
-	if (tmp && tmp->next)
-	{
-		error("too many arguments", "cd", NULL, 1);
+	if (!cd_check(tmp))
 		return ;
-	}
 	if (!tmp)
 	{
 		s = find_env(g_ms->env, "HOME");

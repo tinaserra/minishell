@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:44 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/12 15:46:48 by vserra           ###   ########.fr       */
+/*   Updated: 2021/11/26 17:56:57 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*openndir(char *path, char *cmd)
 	dir = opendir(path);
 	if (dir)
 	{
-		while ((dirr = readdir(dir)))
+		dirr = readdir(dir);
+		while (dirr)
 		{
 			if (ft_strcmp(dirr->d_name, cmd) == 0)
 			{
@@ -37,10 +38,10 @@ char	*openndir(char *path, char *cmd)
 
 char	*find_binary(t_cmd *cmd, int show)
 {
-	(void)show;
 	char	*t;
 	int		i;
 
+	(void)show;
 	i = 0;
 	if (!cmd)
 		return (NULL);

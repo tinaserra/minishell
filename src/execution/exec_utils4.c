@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_utils4.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/26 17:55:26 by jode-vri          #+#    #+#             */
+/*   Updated: 2021/11/26 17:57:40 by jode-vri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_token	*lstcreate(char *data, t_token *next)
@@ -13,11 +25,11 @@ t_token	*lstcreate(char *data, t_token *next)
 	return (cell);
 }
 
-void test(t_cmd *cmd)
+void	test(t_cmd *cmd)
 {
 	char	**res;
 	t_token	*tmp;
-	t_token *tmp2;
+	t_token	*tmp2;
 	int		i;
 
 	if (is_in_str(cmd->cmd, ' '))
@@ -40,5 +52,4 @@ void test(t_cmd *cmd)
 		cmd->cmd = ft_strdup(res[0]);
 		ft_free_tab(res);
 	}
-	g_ms->double_chk = 1;
 }

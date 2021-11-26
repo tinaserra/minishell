@@ -6,12 +6,11 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:30 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/12 15:42:28 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:57:17 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	execute2(t_cmd *cmd)
 {
@@ -91,8 +90,8 @@ char	**list_to_tab(t_cmd *cmd)
 	i = 1;
 	if (!cmd->cmd)
 		return (NULL);
-	args = ft_calloc(1, sizeof(char *) *
-		(tokens_list_size(cmd->args) + 2));	
+	args = ft_calloc(1, sizeof(char *)
+			* (tokens_list_size(cmd->args) + 2));
 	args[0] = ft_strdup(cmd->cmd);
 	tmp = cmd->args;
 	if (tmp && ft_strcmp(cmd->cmd, tmp->word) == 0 && cmd->args->type == ENV)
