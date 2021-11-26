@@ -65,7 +65,7 @@ void	add_token(t_token **start, t_token *new);
 void	free_token(void);
 t_token	*create_token(int i);
 t_token	*create_token2(char *word, int type);
-int 	parse_token3(t_token **token, t_cmd *cmd);
+int		parse_token3(t_token **token, t_cmd *cmd);
 void	parse_token(t_token	**token);
 void	set_env(char *env, char *value);
 void	redirect(t_cmd *cmd);
@@ -118,6 +118,7 @@ void	checkkkkk(t_token **args);
 void	hd_signal(int c);
 int		get_next_line(int fd, char **line);
 void	add_cmd_env(t_cmd *cmd);
+void	test(t_cmd *cmd);
 /*
 ** ERROR -------------------------------------------------------------------- **
 */
