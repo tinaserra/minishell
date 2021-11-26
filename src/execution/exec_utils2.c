@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:44 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/26 17:56:57 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:37:23 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	edit_args(t_cmd *cmd)
 	if (count_quote(cmd->cmd) == -1)
 	{
 		printf("minishell: Unclosed quote\n");
+		g_ms->unclosed = 1;
 		return (0);
 	}
 	cmd->cmd = handle_quotes(cmd->cmd, 1);
@@ -107,6 +108,7 @@ int	edit_args(t_cmd *cmd)
 		if (count_quote(tmp->word) == -1)
 		{
 			printf("minishell: Unclosed quote\n");
+			g_ms->unclosed = 1;
 			return (0);
 		}
 		tmp->word = handle_quotes(tmp->word, 1);

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 14:47:38 by admin             #+#    #+#             */
-/*   Updated: 2021/11/26 17:57:42 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:37:35 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_minishell
 	int				hd_start;
 	char			*hd_line;
 	int				newline;
+	int				unclosed;
 	int				ign_array;
 	int				no_cmd_arg;
 	rl_getc_func_t	*getc_func;
