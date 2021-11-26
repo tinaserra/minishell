@@ -110,9 +110,4 @@ void	checkkkkk(t_token **args)
 {
 	if (!ft_strcmp((*args)->next->word, ""))
 		error("ambiguous redirect", NULL, NULL, -1);
-	// else if ((access((*args)->next->word, F_OK) == 0
-	// 		&& access((*args)->next->word, X_OK) == -1))
-	// 	error("Permission denied", (*args)->next->word, NULL, 1);
-	else if (access((*args)->next->word, F_OK))
-		error("No such file or directory", (*args)->next->word, NULL, 1);
 }
