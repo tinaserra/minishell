@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/12 14:43:01 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:42:32 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	export_errors(char *res)
 	return (0);
 }
 
-void	export_builtin2(char **identifier, char *content, int is_plus)
+void	export_run(char **identifier, char *content, int is_plus)
 {
 	t_env	*tmp_env;
 
@@ -41,8 +41,7 @@ void	export_builtin2(char **identifier, char *content, int is_plus)
 		}
 	}
 	else
-		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier[0]),
-				ft_strdup(content)));
+		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier[0]), content));
 }
 
 int	export_check(t_token *tmp, char **id, char *content)
@@ -65,38 +64,36 @@ int	export_check(t_token *tmp, char **id, char *content)
 		is_plus = 1;
 	if (is_plus)
 		id = ft_split(id[0], "+");
-	export_builtin2(id, content, is_plus);
+	export_run(id, content, is_plus);
 	if (is_plus)
 		ft_free_tab(id);
 	return (1);
 }
 
-void	export_start(t_token *tmp, char *content)
+void	export_start(t_token *tmp, char *content, int *stop)
 {
 	char	**id;
 
-	while (tmp)
+	if (tmp && tmp->word)
 	{
-		if (tmp && tmp->word)
+		content = ft_strchr(tmp->word, '=');
+		if (content)
 		{
-			content = ft_strchr(tmp->word, '=');
-			if (content)
+			id = ft_split(tmp->word, "=");
+			if (id[0] && content && content[0] == '=')
 			{
-				id = ft_split(tmp->word, "=");
-				if (id[0] && content && content[0] == '=')
+				if (!id[1])
+					error("not a valid identifier", "export", content, 1);
+				else if (content && ft_strcmp(content, "") != 0)
 				{
-					if (content && ft_strcmp(content, "") != 0)
-					{
-						if (!export_check(tmp, id, content))
-							break ;
-					}
-					else
-						error("not a valid identifier", "export", tmp->word, 1);
+					if (!export_check(tmp, id, content))
+						*stop = 1;
 				}
-				ft_free_tab(id);
+				else
+					error("not a valid identifier", "export", tmp->word, 1);
 			}
+			ft_free_tab(id);
 		}
-		tmp = tmp->next;
 	}
 }
 
@@ -104,8 +101,19 @@ void	export_builtin(t_cmd *cmd)
 {
 	t_token	*tmp;
 	char	*content;
+	int		stop;
 
 	tmp = cmd->args;
+	stop = 0;
 	content = NULL;
-	export_start(tmp, content);
+	while (tmp && !stop)
+	{
+		if ((tmp && ft_strcmp(tmp->word, "") == 0))
+		{
+			error("not a valid identifier", "export", tmp->word, 1);
+			break ;
+		}
+		export_start(tmp, content, &stop);
+		tmp = tmp->next;
+	}
 }
