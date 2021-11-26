@@ -20,7 +20,7 @@ t_env	*lst_new_env(char *name, char *value)
 	if (!tmp)
 		return (NULL);
 	tmp->name = name;
-	tmp->value = value;
+	tmp->value = ft_strdup(value);
 	tmp->next = NULL;
 	return (tmp);
 }

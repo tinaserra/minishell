@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 02:08:05 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/21 10:01:37 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:41:38 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_env(char **env)
 	if (env && !env[0])
 	{
 		add_env(&g_ms->env, lst_new_env(ft_strdup("PWD"), getcwd(NULL, 0)));
-		add_env(&g_ms->env, lst_new_env(ft_strdup("PATH"), ft_strdup("/bin")));
+		add_env(&g_ms->env, lst_new_env(ft_strdup("PATH"), "/bin"));
 		return (1);
 	}
 	return (0);
@@ -42,7 +42,7 @@ int	init_env(char **env)
 			if (!array[1])
 				tmp = "";
 			else
-				tmp = ft_strdup(array[1]);
+				tmp = array[1];
 			add_env(&g_ms->env, lst_new_env(ft_strdup(array[0]), tmp));
 			ft_free_tab(array);
 		}			
@@ -60,8 +60,7 @@ void	free_env(void)
 	{
 		tmp = g_ms->env->next;
 		free(g_ms->env->name);
-		if (ft_strcmp(g_ms->env->value, "") != 0)
-			free(g_ms->env->value);
+		free(g_ms->env->value);
 		free(g_ms->env);
 		g_ms->env = tmp;
 	}
@@ -78,18 +77,10 @@ char	*print_prompt(void)
 	res = ft_strjoin_free(res, find_env(g_ms->env, "USER"), 'L');
 	res = ft_strjoin_free(res, "\x1b[31m ➜ ", 'L');
 	res = ft_strjoin_free(res, "\x1b[34m ", 'L');
-	if (pwd && !pwd[0])
+	if (pwd)
 	{
-		free(pwd);
-		res = ft_strjoin_free(res, "/", 'L');
-	}
-	else
-	{
-		if (pwd)
-		{
-			res = ft_strjoin_free(res, pwd[ft_strs_tab_size(pwd) - 1], 'L');
-			ft_free_tab(pwd);
-		}
+		res = ft_strjoin_free(res, pwd[ft_strs_tab_size(pwd) - 1], 'L');
+		ft_free_tab(pwd);
 	}
 	res = ft_strjoin_free(res, " \x1b[0m", 'L');
 	return (res);

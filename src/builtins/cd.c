@@ -30,11 +30,6 @@ void	update_pwd(void)
 	}
 	if (find_env(g_ms->env, "PWD"))
 		set_env("PWD", g_ms->curdir);
-	if (find_env(g_ms->env, "PS1"))
-	{
-		free(get_env(g_ms->env, "PS1")->value);
-		get_env(g_ms->env, "PS1")->value = print_prompt();
-	}
 	free(g_ms->term);
 	g_ms->term = print_prompt();
 	free(tmp);

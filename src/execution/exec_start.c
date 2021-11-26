@@ -47,7 +47,7 @@ void	exec_bin_check(t_cmd *cmd)
 			g_ms->fork = 1;
 		cmd->bin = find_binary(cmd, 1);
 		cmd->argss = list_to_tab(cmd);
-	}	
+	}
 }
 
 void	exec_binary(t_cmd *cmd, int pipe1[2], int pipe2[2])

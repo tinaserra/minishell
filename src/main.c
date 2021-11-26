@@ -40,11 +40,7 @@ void	init(char **env)
 		exit(EXIT_FAILURE);
 	rl_getc_function = g_ms->getc_func;
 	g_ms->term = print_prompt();
-	add_env(&g_ms->env, lst_new_env(ft_strdup("PS1"), print_prompt()));
-	if (get_env(g_ms->env, "PS1"))
-		g_ms->line = readline(get_env(g_ms->env, "PS1")->value);
-	else
-		g_ms->line = readline(g_ms->term);
+	g_ms->line = readline(g_ms->term);
 }
 
 int	main(int ac, char **av, char **env)
@@ -52,7 +48,6 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	(void)ac;
 	init(env);
-	
 	while (g_ms->line != NULL)
 	{
 		g_ms->fork = 0;
@@ -66,10 +61,7 @@ int	main(int ac, char **av, char **env)
 		}
 		free(g_ms->line);
 		g_ms->line = NULL;
-		if (get_env(g_ms->env, "PS1"))
-			g_ms->line = readline(get_env(g_ms->env, "PS1")->value);
-		else
-			g_ms->line = readline(g_ms->term);
+		g_ms->line = readline(g_ms->term);
 	}
 	printf("exit");
 	free_all();

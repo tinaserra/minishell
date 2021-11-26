@@ -71,6 +71,7 @@ typedef struct s_token
 typedef struct s_cmd
 {
 	char			*cmd;
+	char			*cmd_s;
 	char			*bin;
 	char			*tmp;
 	t_token			*args;
@@ -103,7 +104,6 @@ typedef struct s_minishell
 	int				hd_quit;
 	int				hd_start;
 	char			*hd_line;
-	char			*ps1;
 	int				double_chk;
 	int				newline;
 	int				ign_array;
