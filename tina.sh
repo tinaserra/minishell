@@ -1,1 +1,0 @@
-EXEC=minishell;ARGS=;valgrind --tool=memcheck --leak-check=full --leak-resolution=high --show-reachable=yes --suppressions=supress_readline_error --log-file=tinalaplusbelle.txt ./$EXEC $ARGS;grep -A1 "valgrind" tinalaplusbelle.txt|grep $EXEC
