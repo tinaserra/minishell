@@ -1,45 +1,150 @@
-==26614== Memcheck, a memory error detector
-==26614== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==26614== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
-==26614== Command: ./minishell
-==26614== Parent PID: 26613
-==26614== 
-==26819== 
-==26819== HEAP SUMMARY:
-==26819==     in use at exit: 139,081 bytes in 205 blocks
-==26819==   total heap usage: 791 allocs, 586 frees, 179,281 bytes allocated
-==26819== 
-==26819== LEAK SUMMARY:
-==26819==    definitely lost: 0 bytes in 0 blocks
-==26819==    indirectly lost: 0 bytes in 0 blocks
-==26819==      possibly lost: 0 bytes in 0 blocks
-==26819==    still reachable: 0 bytes in 0 blocks
-==26819==         suppressed: 139,081 bytes in 205 blocks
-==26819== 
-==26819== For counts of detected and suppressed errors, rerun with: -v
-==26819== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==27168== 
-==27168== HEAP SUMMARY:
-==27168==     in use at exit: 139,168 bytes in 215 blocks
-==27168==   total heap usage: 925 allocs, 710 frees, 214,905 bytes allocated
-==27168== 
-==27168== 16 bytes in 1 blocks are definitely lost in loss record 11 of 53
-==27168==    at 0x483577F: malloc (vg_replace_malloc.c:299)
-==27168==    by 0x4086CB: ft_calloc (ft_calloc.c:23)
-==27168==    by 0x403853: list_to_tab (exec_utils.c:94)
-==27168==    by 0x402CB1: exec_bin_check (exec_start.c:49)
-==27168==    by 0x402CDC: exec_binary (exec_start.c:55)
-==27168==    by 0x403351: exec_switch (exec_start.c:91)
-==27168==    by 0x40318E: exec_start (exec_start.c:152)
-==27168==    by 0x406294: parsing (start.c:89)
-==27168==    by 0x401620: main (main.c:65)
-==27168== 
-==27168== LEAK SUMMARY:
-==27168==    definitely lost: 16 bytes in 1 blocks
-==27168==    indirectly lost: 0 bytes in 0 blocks
-==27168==      possibly lost: 0 bytes in 0 blocks
-==27168==    still reachable: 0 bytes in 0 blocks
-==27168==         suppressed: 139,152 bytes in 214 blocks
-==27168== 
-==27168== For counts of detected and suppressed errors, rerun with: -v
-==27168== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==29549== Memcheck, a memory error detector
+==29549== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==29549== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==29549== Command: ./minishell
+==29549== Parent PID: 29548
+==29549== 
+==29751== 
+==29751== HEAP SUMMARY:
+==29751==     in use at exit: 139,089 bytes in 206 blocks
+==29751==   total heap usage: 771 allocs, 565 frees, 179,007 bytes allocated
+==29751== 
+==29751== 1 bytes in 1 blocks are definitely lost in loss record 1 of 50
+==29751==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29751==    by 0x407B4E: ft_strdup (ft_strdup.c:23)
+==29751==    by 0x40224C: export_run (export.c:40)
+==29751==    by 0x4023CE: export_check (export.c:68)
+==29751==    by 0x402522: export_start (export.c:95)
+==29751==    by 0x4025BC: export_builtin (export.c:115)
+==29751==    by 0x403192: exec_switch (exec_start.c:84)
+==29751==    by 0x40309E: exec_start (exec_start.c:109)
+==29751==    by 0x405E44: parsing (start.c:89)
+==29751==    by 0x401610: main (main.c:64)
+==29751== 
+==29751== LEAK SUMMARY:
+==29751==    definitely lost: 1 bytes in 1 blocks
+==29751==    indirectly lost: 0 bytes in 0 blocks
+==29751==      possibly lost: 0 bytes in 0 blocks
+==29751==    still reachable: 0 bytes in 0 blocks
+==29751==         suppressed: 139,088 bytes in 205 blocks
+==29751== 
+==29751== For counts of detected and suppressed errors, rerun with: -v
+==29751== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==30005== 
+==30005== HEAP SUMMARY:
+==30005==     in use at exit: 139,129 bytes in 209 blocks
+==30005==   total heap usage: 809 allocs, 600 frees, 180,259 bytes allocated
+==30005== 
+==30005== 1 bytes in 1 blocks are definitely lost in loss record 1 of 50
+==30005==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==30005==    by 0x407B4E: ft_strdup (ft_strdup.c:23)
+==30005==    by 0x40224C: export_run (export.c:40)
+==30005==    by 0x4023CE: export_check (export.c:68)
+==30005==    by 0x402522: export_start (export.c:95)
+==30005==    by 0x4025BC: export_builtin (export.c:115)
+==30005==    by 0x403192: exec_switch (exec_start.c:84)
+==30005==    by 0x40309E: exec_start (exec_start.c:109)
+==30005==    by 0x405E44: parsing (start.c:89)
+==30005==    by 0x401610: main (main.c:64)
+==30005== 
+==30005== LEAK SUMMARY:
+==30005==    definitely lost: 1 bytes in 1 blocks
+==30005==    indirectly lost: 0 bytes in 0 blocks
+==30005==      possibly lost: 0 bytes in 0 blocks
+==30005==    still reachable: 0 bytes in 0 blocks
+==30005==         suppressed: 139,128 bytes in 208 blocks
+==30005== 
+==30005== For counts of detected and suppressed errors, rerun with: -v
+==30005== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==29549== 
+==29549== Process terminating with default action of signal 1 (SIGHUP)
+==29549==    at 0x4AD0A97: kill (syscall-template.S:78)
+==29549==    by 0x4878AEA: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.7.0)
+==29549==    by 0x487B633: rl_read_key (in /usr/lib/x86_64-linux-gnu/libreadline.so.7.0)
+==29549==    by 0x48634F4: readline_internal_char (in /usr/lib/x86_64-linux-gnu/libreadline.so.7.0)
+==29549==    by 0x4863CD4: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.7.0)
+==29549==    by 0x40167A: main (main.c:69)
+==29549== 
+==29549== HEAP SUMMARY:
+==29549==     in use at exit: 141,859 bytes in 322 blocks
+==29549==   total heap usage: 811 allocs, 489 frees, 180,341 bytes allocated
+==29549== 
+==29549== 1 bytes in 1 blocks are still reachable in loss record 1 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x407B4E: ft_strdup (ft_strdup.c:23)
+==29549==    by 0x40224C: export_run (export.c:40)
+==29549==    by 0x4023CE: export_check (export.c:68)
+==29549==    by 0x402522: export_start (export.c:95)
+==29549==    by 0x4025BC: export_builtin (export.c:115)
+==29549==    by 0x403192: exec_switch (exec_start.c:84)
+==29549==    by 0x40309E: exec_start (exec_start.c:109)
+==29549==    by 0x405E44: parsing (start.c:89)
+==29549==    by 0x401610: main (main.c:64)
+==29549== 
+==29549== 4 bytes in 1 blocks are still reachable in loss record 2 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x407B4E: ft_strdup (ft_strdup.c:23)
+==29549==    by 0x40149E: init (main.c:43)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== 22 bytes in 1 blocks are still reachable in loss record 10 of 59
+==29549==    at 0x4837D7B: realloc (vg_replace_malloc.c:826)
+==29549==    by 0x4B843B7: getcwd (getcwd.c:84)
+==29549==    by 0x4013E8: init (main.c:35)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== 24 bytes in 1 blocks are still reachable in loss record 11 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x406F6E: lst_new_env (env.c:19)
+==29549==    by 0x4014B3: init (main.c:43)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== 41 bytes in 1 blocks are still reachable in loss record 14 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x40844C: ft_strjoin_free (ft_strjoin_free.c:21)
+==29549==    by 0x40779D: print_prompt (utils.c:94)
+==29549==    by 0x401473: init (main.c:42)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== 41 bytes in 1 blocks are still reachable in loss record 15 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x40844C: ft_strjoin_free (ft_strjoin_free.c:21)
+==29549==    by 0x40779D: print_prompt (utils.c:94)
+==29549==    by 0x4014A7: init (main.c:43)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== 144 bytes in 1 blocks are still reachable in loss record 26 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x4013BA: init (main.c:33)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== 406 bytes in 36 blocks are still reachable in loss record 30 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x407B4E: ft_strdup (ft_strdup.c:23)
+==29549==    by 0x407431: init_env (utils.c:46)
+==29549==    by 0x401444: init (main.c:39)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== 864 bytes in 36 blocks are still reachable in loss record 34 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x406F6E: lst_new_env (env.c:19)
+==29549==    by 0x40743D: init_env (utils.c:46)
+==29549==    by 0x401444: init (main.c:39)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== 1,184 bytes in 35 blocks are still reachable in loss record 41 of 59
+==29549==    at 0x483577F: malloc (vg_replace_malloc.c:299)
+==29549==    by 0x407B4E: ft_strdup (ft_strdup.c:23)
+==29549==    by 0x407411: init_env (utils.c:45)
+==29549==    by 0x401444: init (main.c:39)
+==29549==    by 0x401562: main (main.c:54)
+==29549== 
+==29549== LEAK SUMMARY:
+==29549==    definitely lost: 0 bytes in 0 blocks
+==29549==    indirectly lost: 0 bytes in 0 blocks
+==29549==      possibly lost: 0 bytes in 0 blocks
+==29549==    still reachable: 2,731 bytes in 114 blocks
+==29549==         suppressed: 139,128 bytes in 208 blocks
+==29549== 
+==29549== For counts of detected and suppressed errors, rerun with: -v
+==29549== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
