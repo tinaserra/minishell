@@ -50,23 +50,19 @@ void	exit_builtin(t_cmd *cmd)
 	nb = 0;
 	if (!(cmd->prev && cmd->prev->type == PIPE))
 		printf("exit\n");
-
 	if (cmd->args && exit_arg(cmd->args->word, cmd) == FAILURE)
 		return ;
-
 	if (tokens_list_size(cmd->args) > 1)
 	{
 		error("too many arguments", "exit", NULL, 1);
 		return ;
 	}
-
 	if (cmd->args && exit_arg(cmd->args->word, cmd) == SUCCESS)
 	{
 		nb = ft_atoi(cmd->args->word);
 		if (nb < LONG_MIN || nb > LONG_MAX)
 			exit_error(cmd->args->word);
 	}
-
 	g_ms->status = (int)nb % 256;
 	free_all();
 	exit(nb);
