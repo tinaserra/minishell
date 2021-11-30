@@ -102,9 +102,51 @@ On sépare notre input sur les caractères ```;```, ```|```, ```>```, ```<```, `
 
 *is commming...*
 
-## 4. Exécution avec ```execve``` 🌶
+### export, env et unset
 
-*is commming...*
+* ```env``` permet d'afficher toutes les variables d'environnement.
+
+* ```export``` permet de set des variables d'environnement (deja existante ou non).
+
+* ```unset``` permet de supprimer des variables.
+Unset peut supprimer plusieurs variables d'environement simultannement si on lui envoi plusieurs arguments. Si on unset une variable qui n'est pas présente dans les variables on n'a pas de message d'erreur et echo $? renvoi 0
+
+#### Quelques cas
+
+|Exemple|```export```|```env```|Commentaire|
+| :--- | :--- | :--- | :--- |
+|Sans argument|print la liste de toutes les variables d’environnement dans l’ordre ascii.</br>Sous la forme : ```declare -x NAME="VALUE"``` ou ```declare -x NAME```|print la liste des variables d’environnement dans un ordre random.</br>Sous la forme : ```NAME=VALUE```| |
+|Sans ```=```</br>```export maman```|declare -x maman|la variable n'apparait pas| |
+|Avec un ```=``` et rien apres</br>```export maman=```|declare -x maman=""| maman= | |
+|```export HOME=```|declare -x HOME=""| HOME= |si on fait ```cd``` apres, on ne doit pas avoir le message "HOME not set", il ne se passe rien</br>```echo $?``` renvoi 0|
+|cas classique </br>```export lol=mdr```|declare -x lol="mdr"|lol=mdr| |
+|Le export +=</br>```export a=b``` ; ```export a+=b``` ; ```export a+=b```|declare -x a="bbb"|a=bbb|On ajoute le nouveau contenu au contenu existant de la variable|
+|plusieurs arguments</br>```export var= omg```|declare -x omg declare -x var=""| var=| |
+
+
+#### Les cas tricky
+
+```sh
+➜ export y=ec
+➜ $yho a
+```
+
+en fait si tu tape dans bash simplement
+```$something``` mais la variable ```something``` n'est pas set, il ne se passe rien
+
+donc si je tape``` $something a```
+on doit rien faire pour le premier argument et ```a``` est interprete comme si on avait une commande (ici c'est commande not found)
+
+```sh
+➜ export var=a
+➜ unset var
+➜ export $var=test
+```
+
+il faut un message d'erreur : 
+bash: export: `=test': not a valid identifier
+
+## 4. Exécution avec ```execve``` 🌶
 
 ### Les processus
 
