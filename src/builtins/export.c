@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 13:33:04 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:55:44 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	export_errors(char *res)
 	return (0);
 }
 
-void	export_run(char **identifier, char *content, int is_plus)
+void	export_run(char *identifier, char *content, int show, int is_plus)
 {
 	t_env	*tmp_env;
 
-	tmp_env = get_env(g_ms->env, identifier[0]);
+	tmp_env = get_env(g_ms->env, identifier);
 	if (tmp_env)
 	{
 		if (is_plus)
@@ -41,7 +41,7 @@ void	export_run(char **identifier, char *content, int is_plus)
 		}
 	}
 	else
-		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier[0]), content));
+		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier), content, show));
 }
 
 int	export_check(t_token *tmp, char **id, char *content)
@@ -64,7 +64,7 @@ int	export_check(t_token *tmp, char **id, char *content)
 		is_plus = 1;
 	if (is_plus)
 		id = ft_split(id[0], "+");
-	export_run(id, content, is_plus);
+	export_run(id[0], content, 1, is_plus);
 	if (is_plus)
 		ft_free_tab(id);
 	return (1);
@@ -82,9 +82,8 @@ void	export_start(t_token *tmp, char *content, int *stop)
 			id = ft_split(tmp->word, "=");
 			if (id[0] && content && content[0] == '=')
 			{
-				if (!id[1])
-					error("not a valid identifier", "export", content, 1);
-				else if (content && ft_strcmp(content, "") != 0)
+				
+				if (content)
 				{
 					if (!export_check(tmp, id, content))
 						*stop = 1;
@@ -94,6 +93,8 @@ void	export_start(t_token *tmp, char *content, int *stop)
 			}
 			ft_free_tab(id);
 		}
+		else
+			export_run(tmp->word, ft_strdup(""), 0, 0);
 	}
 }
 

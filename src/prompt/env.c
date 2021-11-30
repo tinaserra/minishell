@@ -6,13 +6,13 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:51:28 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/26 20:24:35 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:55:09 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*lst_new_env(char *name, char *value)
+t_env	*lst_new_env(char *name, char *value, int show)
 {
 	t_env	*tmp;
 
@@ -20,6 +20,7 @@ t_env	*lst_new_env(char *name, char *value)
 	if (!tmp)
 		return (NULL);
 	tmp->name = name;
+	tmp->show = show;
 	tmp->value = ft_strdup(value);
 	tmp->next = NULL;
 	return (tmp);
