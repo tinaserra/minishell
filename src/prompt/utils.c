@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 02:08:05 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 14:56:53 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:02:39 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static int	check_env(char **env)
 {
 	if (env && !env[0])
 	{
-		add_env(&g_ms->env, lst_new_env(ft_strdup("PWD"), getcwd(NULL, 0), 1));
-		add_env(&g_ms->env, lst_new_env(ft_strdup("PATH"), "/bin", 1));
+		add_env(&g_ms->env, lst_new_env(ft_strdup("PWD"), getcwd(NULL, 0), 1, 1));
+		add_env(&g_ms->env, lst_new_env(ft_strdup("PATH"), "/bin", 1, 1));
 		return (1);
 	}
 	return (0);
@@ -43,7 +43,7 @@ int	init_env(char **env)
 				tmp = "";
 			else
 				tmp = array[1];
-			add_env(&g_ms->env, lst_new_env(ft_strdup(array[0]), tmp, 1));
+			add_env(&g_ms->env, lst_new_env(ft_strdup(array[0]), tmp, 1, 1));
 			ft_free_tab(array);
 		}			
 	}

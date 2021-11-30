@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 14:47:38 by admin             #+#    #+#             */
-/*   Updated: 2021/11/30 14:54:10 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:00:19 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_env
 	char			*name;
 	char			*value;
 	int				show;
+	int				show2;
 	struct s_env	*next;
 }					t_env;
 

@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 15:43:02 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:08:35 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,25 @@ int	export_errors(char *res)
 	return (0);
 }
 
+t_env	*get_env2(t_env *env, char *name)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->name, name) == 0)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
 void	export_run(char *identifier, char *content, int show, int is_plus)
 {
 	t_env	*tmp_env;
 
-	tmp_env = get_env(g_ms->env, identifier);
+	tmp_env = get_env2(g_ms->env, identifier);
 	if (tmp_env)
 	{
 		if (is_plus)
@@ -37,11 +51,16 @@ void	export_run(char *identifier, char *content, int show, int is_plus)
 		else
 		{
 			free(tmp_env->value);
-			tmp_env->value = ft_strjoin_free(content, NULL, 'L');
+			tmp_env->value = ft_strdup(content);
+			tmp_env->show = show;
+			tmp_env->show2 = show;
 		}
 	}
 	else
-		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier), content, show));
+	{
+		
+		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier), content, show, 1));
+	}
 }
 
 int	export_check(t_token *tmp, char **id, char *content)
@@ -94,7 +113,7 @@ void	export_start(t_token *tmp, char *content, int *stop)
 			ft_free_tab(id);
 		}
 		else
-			export_run(tmp->word, ft_strdup(""), 0, 0);
+			export_run(tmp->word, "", 0, 0);
 	}
 }
 

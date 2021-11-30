@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:06:09 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 15:41:06 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:12:26 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ void	unset_builtin(t_cmd *cmd)
 		{
 			if (is_valid_envv(tmp->word))
 			{
-				env = get_env(g_ms->env, tmp->word);
+				env = get_env2(g_ms->env, tmp->word);
 				if (env)
+				{
 					env->show = 0;
+					env->show2 = 0;
+				}
 			}
 			else
 				error("not a valid identifier", "unset", tmp->word, 1);
