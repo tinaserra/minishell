@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:06:09 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 07:46:09 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:41:06 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,42 +27,6 @@ static int	is_valid_envv(char *s)
 	return (1);
 }
 
-static t_env	*lstfree_first(t_env *l, t_env *cur)
-{
-	l = l->next;
-	free(cur->name);
-	free(cur->value);
-	free(cur);
-	return (l);
-}
-
-static t_env	*lstfree_at(t_env *l, int pos)
-{
-	t_env	*prec;
-	t_env	*cur;
-	int		i;
-
-	prec = l;
-	cur = l;
-	if (l == NULL)
-		return (NULL);
-	if (pos == 0)
-		return (lstfree_first(l, cur));
-	if (pos > lstsize(l))
-		return (NULL);
-	i = -1;
-	while (++i < pos)
-	{
-		prec = cur;
-		cur = cur->next;
-	}
-	prec->next = cur->next;
-	free(cur->name);
-	free(cur->value);
-	free(cur);
-	return (l);
-}
-
 void	unset_builtin(t_cmd *cmd)
 {
 	t_token	*tmp;
@@ -80,11 +44,11 @@ void	unset_builtin(t_cmd *cmd)
 			{
 				env = get_env(g_ms->env, tmp->word);
 				if (env)
-					g_ms->env = lstfree_at(g_ms->env, pos);
+					env->show = 0;
 			}
 			else
 				error("not a valid identifier", "unset", tmp->word, 1);
-			break ;
+			tmp = tmp->next;
 		}
 	}
 }

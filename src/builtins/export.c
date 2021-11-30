@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 14:55:44 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:43:02 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	export_run(char *identifier, char *content, int show, int is_plus)
 		else
 		{
 			free(tmp_env->value);
-			tmp_env->value = ft_strdup(content);
+			tmp_env->value = ft_strjoin_free(content, NULL, 'L');
 		}
 	}
 	else
