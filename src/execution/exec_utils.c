@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:30 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/26 19:39:09 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 13:42:24 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	execute(t_cmd *cmd)
 		if (!ft_strcmp(cmd->cmd, "echo"))
 			echo_builtin(cmd, cmd->out);
 		else if (!ft_strcmp(cmd->cmd, "env"))
-			env_builtin(cmd->out);
+			env_builtin(cmd->args, cmd->out);
 		else if (!ft_strcmp(cmd->cmd, "pwd"))
 			pwd_builtin(cmd);
 		else if (!ft_strcmp(cmd->cmd, "cd"))
