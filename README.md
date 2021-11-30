@@ -124,6 +124,7 @@ Unset peut supprimer plusieurs variables d'environement simultannement si on lui
 |plusieurs arguments</br>```export var= omg```|declare -x omg declare -x var=""| var=| |
 
 
+
 #### Les cas tricky
 
 ```sh
