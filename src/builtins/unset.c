@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:06:09 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/12 14:27:14 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 07:46:09 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	unset_builtin(t_cmd *cmd)
 			}
 			else
 				error("not a valid identifier", "unset", tmp->word, 1);
-			tmp = tmp->next;
+			break ;
 		}
 	}
 }
