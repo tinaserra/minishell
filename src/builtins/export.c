@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/26 18:42:32 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 13:33:04 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	export_builtin(t_cmd *cmd)
 	tmp = cmd->args;
 	stop = 0;
 	content = NULL;
+	if (!tmp)
+		export_x(cmd->out);
 	while (tmp && !stop)
 	{
 		if ((tmp && ft_strcmp(tmp->word, "") == 0))

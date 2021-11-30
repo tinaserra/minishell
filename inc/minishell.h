@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 14:50:05 by admin             #+#    #+#             */
-/*   Updated: 2021/11/12 16:15:39 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 13:33:12 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	hd_signal(int c);
 int		get_next_line(int fd, char **line);
 void	add_cmd_env(t_cmd *cmd);
 void	test(t_cmd *cmd);
+void	export_x(int fd);
 /*
 ** ERROR -------------------------------------------------------------------- **
 */
