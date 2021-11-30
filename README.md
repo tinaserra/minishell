@@ -19,8 +19,8 @@ make && ./minishell
 Liste non exaustive des [Failed tests](https://github.com/tinaserra/minishell/blob/master/links/tests.md)
 
 ### Introduction 🤓
-Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/minishell_en.pdf)</br>
-Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale)
+Sujet -> [EN](https://github.com/tinaserra/minishell/blob/master/links/sujet_minishell.pdf)</br>
+Scale de correction -> [EN](https://github.com/tinaserra/minishell/blob/master/links/scale_minishell.pdf)
 
 ## 1. Sujet
 L'objectif du projet est de creer notre propre shell.
@@ -103,6 +103,8 @@ On sépare notre input sur les caractères ```;```, ```|```, ```>```, ```<```, `
 *is commming...*
 
 ## 4. Exécution avec ```execve``` 🌶
+
+*is commming...*
 
 ### Les processus
 
