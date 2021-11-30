@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/26 17:58:57 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 07:42:22 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ void	update_pwd(void)
 	free(tmp);
 }
 
-int	have_permission(t_cmd *cmd)
+int	have_permission(t_token *token)
 {
 	DIR	*dir;
 
 	errno = 0;
-	dir = opendir(cmd->args->word);
+	dir = opendir(token->word);
 	if (dir == NULL || errno != 0)
 	{
-		error(strerror(errno), "cd", cmd->args->word, 1);
+		error(strerror(errno), "cd", token->word, 1);
 		return (0);
 	}
 	else
@@ -51,17 +51,21 @@ int	have_permission(t_cmd *cmd)
 	return (1);
 }
 
-int	cd_2(t_cmd *cmd, t_token *tmp)
+int	cd_2(t_token *tmp)
 {
-	if (tmp->word[0] == '\0')
-		return (0);
-	if (have_permission(cmd) && chdir(tmp->word) != 0)
+	if (tmp)
 	{
-		error(strerror(errno), "cd", tmp->word, 1);
-		g_ms->status = 1;
-		return (0);
+		if (tmp->word[0] == '\0')
+			return (0);
+		if (have_permission(tmp) && chdir(tmp->word) != 0)
+		{
+			error(strerror(errno), "cd", tmp->word, 1);
+			g_ms->status = 1;
+			return (0);
+		}
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int	cd_check(t_token *tmp)
@@ -80,6 +84,8 @@ void	cd_builtin(t_cmd *cmd)
 	char	*s;
 
 	tmp = cmd->args;
+	if (tmp && !ft_strcmp(cmd->cmd, tmp->word))
+		tmp = tmp->next;
 	if (!cd_check(tmp))
 		return ;
 	if (!tmp)
@@ -95,7 +101,7 @@ void	cd_builtin(t_cmd *cmd)
 			free(tmp->word);
 			tmp->word = ft_itoa(g_ms->status);
 		}
-		if (!cd_2(cmd, tmp))
+		if (!cd_2(tmp))
 			return ;
 	}
 	update_pwd();
