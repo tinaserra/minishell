@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 14:50:05 by admin             #+#    #+#             */
-/*   Updated: 2021/11/30 13:39:47 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:55:27 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	redirect(t_cmd *cmd);
 char	*handle_quotes(char *src, int env);
 char	*replace_env2(char *str, int *i);
 int		env_size(char *src, int i);
-t_env	*lst_new_env(char *name, char *value);
+t_env	*lst_new_env(char *name, char *value, int show);
 void	add_env(t_env **alst, t_env *new);
 t_env	*get_env(t_env *env, char *name);
 void	free_all(void);
