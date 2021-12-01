@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:38:47 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/26 19:36:43 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:39:50 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	exec_start(void)
 	cmd = g_ms->cmds;
 	while (cmd)
 	{
+		g_ms->unclosed = 0;
 		test(cmd);
 		edit_args(cmd);
 		redirect(cmd);

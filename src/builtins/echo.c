@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:21:24 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/26 18:03:58 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 13:14:46 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	echo_builtin(t_cmd *cmd, int fd)
 	tmp = cmd->args;
 	if (fd == 0)
 		fd = STDOUT_FILENO;
-	if (ft_strcmp(cmd->cmd, tmp->word) == 0)
+	if (tmp && ft_strcmp(cmd->cmd, tmp->word) == 0)
 		tmp = tmp->next;
 	if (echo_tmp_check(tmp, fd) == -1)
 		return ;

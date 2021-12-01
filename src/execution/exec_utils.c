@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:59:30 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/30 13:42:24 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:27:25 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	*check_path(t_cmd *cmd)
 	struct stat	stats;
 	int			i;
 
-	path = ft_split(find_env(g_ms->env, "PATH"), ":");
+	path = ft_split(find_env2(g_ms->env, "PATH"), ":");
 	i = 0;
 	while (path && path[i])
 	{

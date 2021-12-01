@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/12/01 12:50:42 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 13:04:31 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	update_pwd(void)
 	free(g_ms->term);
 	g_ms->term = print_prompt();
 	free(tmp);
+	g_ms->status = 0;
 }
 
 int	have_permission(t_token *token)
@@ -53,6 +54,7 @@ int	have_permission(t_token *token)
 
 int	cd_2(t_token *tmp)
 {
+	cd_3(tmp);
 	if (tmp)
 	{
 		if (tmp->word[0] == '\0')
@@ -100,15 +102,7 @@ void	cd_builtin(t_cmd *cmd)
 			return ;
 	}
 	else
-	{
-		if (tmp->type == EXIT_STATUS)
-		{
-			free(tmp->word);
-			tmp->word = ft_itoa(g_ms->status);
-		}
 		if (!cd_2(tmp))
 			return ;
-	}
 	update_pwd();
-	g_ms->status = 0;
 }

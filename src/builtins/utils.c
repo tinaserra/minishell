@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:40:55 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:41:02 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 13:05:08 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,27 @@ int	lstsize(t_env *l)
 		l = l->next;
 	}
 	return (len);
+}
+
+void	cd_3(t_token *tmp)
+{
+	if (tmp->type == EXIT_STATUS)
+	{
+		free(tmp->word);
+		tmp->word = ft_itoa(g_ms->status);
+	}
+}
+
+t_env	*get_env2(t_env *env, char *name)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->name, name) == 0)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

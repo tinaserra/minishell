@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:27 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/12 16:15:00 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 14:48:09 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*handle_quotes2(char *src, int env, char *dest)
 	int		i;
 
 	i = 0;
-	while (src[i])
+	while (src && src[i])
 	{
 		if (src[i] == '\'' && !is_escaped(src, i - 1))
 			dest = ft_strjoin_free(dest, simple_quotes(src, &i), 'B');

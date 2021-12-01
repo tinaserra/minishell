@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/12/01 12:58:37 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 13:06:04 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,6 @@ int	export_errors(char *res)
 			return (1);
 	}
 	return (0);
-}
-
-t_env	*get_env2(t_env *env, char *name)
-{
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		if (ft_strcmp(tmp->name, name) == 0)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
 }
 
 void	export_run(char *identifier, char *content, int show, int is_plus)
@@ -91,29 +77,26 @@ void	export_start(t_token *tmp, char *content, int *stop)
 {
 	char	**id;
 
-	if (tmp && tmp->word)
+	content = ft_strchr(tmp->word, '=');
+	if (content)
 	{
-		content = ft_strchr(tmp->word, '=');
-		if (content)
+		id = ft_split(tmp->word, "=");
+		if (id[0] && content && content[0] == '=')
 		{
-			id = ft_split(tmp->word, "=");
-			if (id[0] && content && content[0] == '=')
+			if (content)
 			{
-				if (content)
-				{
-					if (!export_check(tmp, id, content))
-						*stop = 1;
-				}
-				else
-					error("not a valid identifier", "export", tmp->word, 1);
+				if (!export_check(tmp, id, content))
+					*stop = 1;
 			}
-			ft_free_tab(id);
+			else
+				error("not a valid identifier", "export", tmp->word, 1);
 		}
-		else
-		{
-			if (!get_env2(g_ms->env, tmp->word))
-				export_run(tmp->word, "", 0, 0);
-		}
+		ft_free_tab(id);
+	}
+	else
+	{
+		if (!get_env2(g_ms->env, tmp->word))
+			export_run(tmp->word, "", 0, 0);
 	}
 }
 
@@ -135,7 +118,8 @@ void	export_builtin(t_cmd *cmd)
 			error("not a valid identifier", "export", tmp->word, 1);
 			break ;
 		}
-		export_start(tmp, content, &stop);
+		if (tmp && tmp->word)
+			export_start(tmp, content, &stop);
 		tmp = tmp->next;
 	}
 }

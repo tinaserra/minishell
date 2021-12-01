@@ -6,26 +6,11 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:51:28 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/12/01 11:09:08 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 13:04:13 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_env	*lst_new_env(char *name, char *value, int show, int show2)
-{
-	t_env	*tmp;
-
-	tmp = malloc(sizeof(t_env));
-	if (!tmp)
-		return (NULL);
-	tmp->name = name;
-	tmp->show = show;
-	tmp->show2 = show2;
-	tmp->value = ft_strdup(value);
-	tmp->next = NULL;
-	return (tmp);
-}
 
 void	add_env(t_env **alst, t_env *new)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:21 by vserra            #+#    #+#             */
-/*   Updated: 2021/11/12 14:43:36 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 14:35:52 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static double long	exit_arg(char *arg, t_cmd *cmd)
 
 void	exit_builtin(t_cmd *cmd)
 {
-	double long	nb;
+	long long int	nb;
 
 	nb = 0;
 	if (!(cmd->prev && cmd->prev->type == PIPE))
@@ -63,7 +63,7 @@ void	exit_builtin(t_cmd *cmd)
 		if (nb < LONG_MIN || nb > LONG_MAX)
 			exit_error(cmd->args->word);
 	}
-	g_ms->status = (int)nb % 256;
+	g_ms->status = nb % 256;
 	free_all();
 	exit(nb);
 }

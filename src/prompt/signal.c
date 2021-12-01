@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:53:27 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/11 13:25:17 by admin            ###   ########.fr       */
+/*   Updated: 2021/12/01 14:35:32 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	quit_process2(void)
 
 void	quit_process(int c)
 {
+	g_ms->line = NULL;
 	if (g_ms->fork)
 		g_ms->end = 4;
 	if (c == SIGQUIT)
