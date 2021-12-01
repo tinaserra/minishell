@@ -100,8 +100,6 @@ On sépare notre input sur les caractères ```;```, ```|```, ```>```, ```<```, `
 
 ## 3. Buildtins 👾
 
-*is commming...*
-
 ### export, env et unset
 
 * ```env``` permet d'afficher toutes les variables d'environnement.
