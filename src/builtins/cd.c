@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 08:24:33 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 07:42:22 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 12:50:42 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	update_pwd(void)
 	tmp = ft_strdup(g_ms->curdir);
 	free(g_ms->curdir);
 	g_ms->curdir = NULL;
-	if (find_env(g_ms->env, "PWD") && find_env(g_ms->env, "OLDPWD"))
-		set_env("OLDPWD", find_env(g_ms->env, "PWD"));
+	if (find_env2(g_ms->env, "PWD") && find_env2(g_ms->env, "OLDPWD"))
+		set_env("OLDPWD", find_env2(g_ms->env, "PWD"));
 	g_ms->curdir = getcwd(NULL, 0);
 	if (!g_ms->curdir)
 	{
@@ -28,7 +28,7 @@ void	update_pwd(void)
 		g_ms->curdir = ft_strjoin(tmp, "/");
 		return ;
 	}
-	if (find_env(g_ms->env, "PWD"))
+	if (find_env2(g_ms->env, "PWD"))
 		set_env("PWD", g_ms->curdir);
 	free(g_ms->term);
 	g_ms->term = print_prompt();
@@ -90,8 +90,13 @@ void	cd_builtin(t_cmd *cmd)
 		return ;
 	if (!tmp)
 	{
-		s = find_env(g_ms->env, "HOME");
-		if (!s || chdir(s) != 0)
+		s = find_env2(g_ms->env, "HOME");
+		if (!s)
+		{
+			error("HOME not set", "cd", NULL, 1);
+			return ;
+		}
+		if (chdir(s) != 0)
 			return ;
 	}
 	else
@@ -105,4 +110,5 @@ void	cd_builtin(t_cmd *cmd)
 			return ;
 	}
 	update_pwd();
+	g_ms->status = 0;
 }

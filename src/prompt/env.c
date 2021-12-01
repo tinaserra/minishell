@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:51:28 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 16:02:18 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 11:09:08 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ char	*find_env(t_env *env, char *name)
 	while (tmp)
 	{
 		if ((tmp->name && name) && ft_strcmp(tmp->name, name) == 0)
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+char	*find_env2(t_env *env, char *name)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if ((tmp->name && name) && ft_strcmp(tmp->name, name) == 0
+			&& tmp->show)
 			return (tmp->value);
 		tmp = tmp->next;
 	}

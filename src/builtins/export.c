@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 09:39:21 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/11/30 16:08:35 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 12:58:37 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ void	export_run(char *identifier, char *content, int show, int is_plus)
 		}
 	}
 	else
-	{
-		
-		add_env(&g_ms->env, lst_new_env(ft_strdup(identifier), content, show, 1));
-	}
+		add_env(&g_ms->env,
+			lst_new_env(ft_strdup(identifier), content, show, 1));
 }
 
 int	export_check(t_token *tmp, char **id, char *content)
@@ -101,7 +99,6 @@ void	export_start(t_token *tmp, char *content, int *stop)
 			id = ft_split(tmp->word, "=");
 			if (id[0] && content && content[0] == '=')
 			{
-				
 				if (content)
 				{
 					if (!export_check(tmp, id, content))
@@ -113,7 +110,10 @@ void	export_start(t_token *tmp, char *content, int *stop)
 			ft_free_tab(id);
 		}
 		else
-			export_run(tmp->word, "", 0, 0);
+		{
+			if (!get_env2(g_ms->env, tmp->word))
+				export_run(tmp->word, "", 0, 0);
+		}
 	}
 }
 

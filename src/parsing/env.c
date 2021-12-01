@@ -6,7 +6,7 @@
 /*   By: jode-vri <jode-vri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:56:09 by jode-vri          #+#    #+#             */
-/*   Updated: 2021/10/05 14:56:10 by jode-vri         ###   ########.fr       */
+/*   Updated: 2021/12/01 11:55:46 by jode-vri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char	*replace_env2(char *str, int *i)
 			return (new);
 		count++;
 	}
-	new = ft_strjoin_free(new, find_env(g_ms->env, buf), 'L');
+	if (find_env2(g_ms->env, buf))
+		new = ft_strjoin_free(new, find_env(g_ms->env, buf), 'L');
 	return (new);
 }
